@@ -3,7 +3,7 @@ package enumuration;
 /**
  * @author Negin Mousavi
  */
-public enum UserStatus {
+public enum UserRole {
     NEW,
     WAITING,
     CONFIRMED
