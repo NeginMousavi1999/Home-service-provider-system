@@ -14,5 +14,8 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <mapping class="model.members.User"/>
+        <mapping class="model.members.Expert"/>
+        <mapping class="model.members.Manager"/>
+        <mapping class="model.members.Customer"/>
     </session-factory>
 </hibernate-configuration>

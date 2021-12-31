@@ -1,11 +1,16 @@
 package view;
 
+import dao.UserDao;
+
 /**
  * @author Negin Mousavi
  */
 public class Main {
     public static void main(String[] args) {
         printHomeLogo();
+
+        UserView userView = new UserView();
+        userView.createUser();
 
     }
 
@@ -26,6 +31,6 @@ public class Main {
                 "||||  ////////////H%|   |- ||     |_|_|     ||____|\n" +
                 "|||| /////////////H/|   |  ||     |_|_|     ||  TT|       .   &\n" +
                 "|||| @@@@@@@@@@@@@H@|======||               ||====|  \"==='   (f\n" +
-                "|\\//|\\/|/\\//\\||//|\\|||/\\//|//\\||\\//||//|\\||\\||\\/|/\\//\\||////|//\\/||");
+                "|\\//|\\/|/\\//\\||//|\\|||/\\//|//\\||\\//||//|\\||\\||\\/|/\\//\\||////|//\\/||\n");
     }
 }
