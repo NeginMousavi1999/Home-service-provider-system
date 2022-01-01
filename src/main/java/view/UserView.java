@@ -6,6 +6,7 @@ import model.members.Expert;
 import model.members.User;
 import org.apache.commons.io.IOUtils;
 import util.CreateScanner;
+import validation.Validation;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,17 +19,39 @@ public class UserView {
     private final Scanner scanner = CreateScanner.getInstance();
 
     public void createUser() {
+        Validation validation = new Validation();//TODO: spring core!
+
         System.out.print("first name: ");
         String fName = scanner.nextLine();
         System.out.print("last name: ");
         String lName = scanner.nextLine();
-        System.out.print("email: ");
-        String email = scanner.nextLine(); //TODO: validate
-        System.out.print("password: ");
-        String password = scanner.nextLine(); //TODO: validate
+
+        String email;
+        while (true) {
+            System.out.print("email: ");
+            email = scanner.nextLine();
+            try {
+                validation.validateEmail(email);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getLocalizedMessage());
+            }
+        }
+
+        String password;
+        while (true) {
+            System.out.print("password: ");
+            password = scanner.nextLine();
+            try {
+                validation.validatePassword(password);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getLocalizedMessage());
+            }
+        }
+
         System.out.print("role(1.manager 2.customer 3.expert): ");
         String roleAnswer = scanner.nextLine();
-        UserStatus userStatus;
         User user = User.builder()
                 .firstName(fName)
                 .lastName(lName)
@@ -55,19 +78,40 @@ public class UserView {
     }
 
     private User createExpert(User expert) {
-        String fileName = "static-pictures/pic.jpg"; //TODO : ask what picture user wants
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(fileName);
-        if (inputStream == null)
-            throw new RuntimeException("Unable to get resources");
+        System.out.print("expertise: ");
+        String expertise = scanner.nextLine();//TODO
+        String fileName;
+        whileLoop:
+        while (true) {
+            System.out.print("which avatar picture do you want for your profile?(1-10): ");
+            String avatarNumber = scanner.nextLine();
+            switch (avatarNumber) {
+                case "1":
+                case "2":
+                case "3":
+                case "4":
+                case "5":
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "10":
+                    fileName = String.format("static-pictures/%s.png", avatarNumber);
+                    break whileLoop;
+                default:
+                    System.out.println("invalid input!");
+            }
+        }
+
+        InputStream picStream = getStreamOfPicture(fileName);
         try {
             expert = Expert.builder()
                     .firstName(expert.getFirstName())
                     .lastName(expert.getLastName())
                     .email(expert.getEmail())
                     .password(expert.getPassword())
-                    .expertise("")//TODO
-                    .picture(IOUtils.toByteArray(inputStream))
+                    .expertise(expertise)
+                    .picture(IOUtils.toByteArray(picStream))
                     .score(0)
                     .userStatus(UserStatus.WAITING)
                     .userRole(UserRole.EXPERT)
@@ -84,5 +128,13 @@ public class UserView {
 
     private User createManager(User manager) {
         return manager;
+    }
+
+    public InputStream getStreamOfPicture(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        if (inputStream == null)
+            throw new RuntimeException("unable to get resources");
+        return inputStream;
     }
 }
