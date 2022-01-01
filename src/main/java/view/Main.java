@@ -9,7 +9,6 @@ public class Main {
 
         UserView userView = new UserView();
         userView.createUser();
-
     }
 
     private static void printHomeLogo() {

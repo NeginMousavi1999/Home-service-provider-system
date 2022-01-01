@@ -15,4 +15,12 @@ public class UserDao extends BaseDao {
         transaction.commit();
         session.close();
     }
+
+    public void delete(User user) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.remove(user);
+        transaction.commit();
+        session.close();
+    }
 }
