@@ -1,7 +1,5 @@
 package view;
 
-import dao.UserDao;
-
 /**
  * @author Negin Mousavi
  */

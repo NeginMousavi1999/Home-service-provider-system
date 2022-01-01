@@ -1,6 +1,7 @@
 package model.members;
 
 import enumuration.UserRole;
+import enumuration.UserStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -29,6 +30,9 @@ public class User {
     protected String email;
     @Column(unique = true)
     protected String password;
+    @Column(name = "user_status")
+    @Enumerated(value = EnumType.STRING)
+    protected UserStatus userStatus;
     @Column(name = "user_role")
     @Enumerated(value = EnumType.STRING)
     protected UserRole userRole;

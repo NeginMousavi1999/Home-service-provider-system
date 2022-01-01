@@ -1,6 +1,7 @@
 package view;
 
 import enumuration.UserRole;
+import enumuration.UserStatus;
 import model.members.Expert;
 import model.members.User;
 import org.apache.commons.io.IOUtils;
@@ -27,12 +28,13 @@ public class UserView {
         String password = scanner.nextLine(); //TODO: validate
         System.out.print("role(1.manager 2.customer 3.expert): ");
         String roleAnswer = scanner.nextLine();
-        UserRole userRole;
+        UserStatus userStatus;
         User user = User.builder()
                 .firstName(fName)
                 .lastName(lName)
                 .email(email)
                 .password(password)
+                .userStatus(UserStatus.NEW)
                 .build();
 
         switch (roleAnswer) {
@@ -64,8 +66,11 @@ public class UserView {
                     .lastName(expert.getLastName())
                     .email(expert.getEmail())
                     .password(expert.getPassword())
+                    .expertise("")//TODO
                     .picture(IOUtils.toByteArray(inputStream))
                     .score(0)
+                    .userStatus(UserStatus.WAITING)
+                    .userRole(UserRole.EXPERT)
                     .build();
         } catch (IOException | NullPointerException exception) {
             exception.printStackTrace();

@@ -18,6 +18,7 @@ import javax.persistence.Lob;
 @Entity
 @NoArgsConstructor
 public class Expert extends User {
+    private String expertise;
     private int score;
     @Lob
     @Column(name = "picture", columnDefinition = "LONGBLOB")
@@ -32,7 +33,7 @@ public class Expert extends User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", userRole=" + userRole +
+                ", userRole=" + userStatus +
                 ", registrationDate=" + registrationDate +
                 '}';
     }
