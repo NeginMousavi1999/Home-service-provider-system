@@ -3,6 +3,7 @@ package service;
 import dao.ServiceDao;
 import lombok.Data;
 import model.services.Service;
+import validation.Validation;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 public class ServiceService {
     ServiceDao serviceDao;
+    Validation validation;
 
     public Service getServiceById(int id) {
         Service service = serviceDao.read(id);
@@ -25,9 +27,6 @@ public class ServiceService {
     }
 
     public boolean validateNewName(String name) {
-        List<String> allServiceName = getAllServiceName();
-        if (allServiceName.contains(name))
-            throw new RuntimeException("duplicate name!");
-        return true;
+        return validation.validateNewName(name, getAllServiceName());
     }
 }

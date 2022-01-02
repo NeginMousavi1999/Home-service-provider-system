@@ -2,6 +2,7 @@ package validation;
 
 import enumuration.UserRole;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,6 +32,12 @@ public class Validation {
     public boolean validateCorrectPassword(String oldPass, String newPass) {
         if (!oldPass.equals(newPass))
             throw new RuntimeException("password is wrong!");
+        return true;
+    }
+
+    public boolean validateNewName(String name, List<String> allName) {
+        if (allName.contains(name))
+            throw new RuntimeException("duplicate name!");
         return true;
     }
 }

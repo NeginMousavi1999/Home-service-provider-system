@@ -35,16 +35,18 @@ public class ServicesSpringConfig {
     }
 
     @Bean
-    public ServiceService serviceService(ServiceDao serviceDao) {
+    public ServiceService serviceService(ServiceDao serviceDao, Validation validation) {
         ServiceService serviceService = new ServiceService();
         serviceService.setServiceDao(serviceDao);
+        serviceService.setValidation(validation);
         return serviceService;
     }
 
     @Bean
-    public SubServiceService subServiceService(SubServiceDao subServiceDao) {
+    public SubServiceService subServiceService(SubServiceDao subServiceDao, Validation validation) {
         SubServiceService subServiceService = new SubServiceService();
         subServiceService.setSubServiceDao(subServiceDao);
+        subServiceService.setValidation(validation);
         return subServiceService;
     }
 }
