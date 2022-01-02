@@ -31,6 +31,7 @@ public class Order {
     private SubService subService;
     private String description;
     private double suggestedPrice;
+    private double finalPrice;
     @Enumerated(value = EnumType.STRING)
     private OrderStatus orderStatus;
     @CreationTimestamp

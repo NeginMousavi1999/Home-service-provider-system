@@ -2,6 +2,7 @@ package service;
 
 import dao.CustomerDao;
 import lombok.Data;
+import model.members.Customer;
 import model.members.User;
 
 /**
@@ -14,5 +15,9 @@ public class CustomerService {
     public void changePassword(User user, String newPass) {
         user.setPassword(newPass);
         customerDao.update(user);
+    }
+
+    public void updateCredit(Customer customer) {
+        customerDao.update(customer);
     }
 }
