@@ -12,6 +12,11 @@ import view.UserView;
 @Configuration
 public class SpringConfig {
     @Bean
+    public BaseDao baseDao() {
+        return new BaseDao();
+    }
+
+    @Bean
     public UserDao userDao() {
         return new UserDao();
     }
