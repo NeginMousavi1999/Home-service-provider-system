@@ -1,4 +1,4 @@
-package util;
+package validation;
 
 import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Negin Mousavi
  */
-public class validatePasswordTest {
+public class validateEmailTest {
     Validation validation;
 
     @BeforeEach
@@ -22,16 +22,16 @@ public class validatePasswordTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"123Nwn00", "Jack1w34", "roSee312"})
-    void givenValidPassword_WhenValidatePasswordCalls_ThenReturnTrueResponse(String password) {
-        boolean result = validation.validatePassword(password);
+    @CsvSource({"negin.s.mousavi@gmail.com", "masoud.saghar@gmail.com", "nargesi.SHima@gmail.com"})
+    void givenValidEmail_WhenValidateEmailCalls_ThenReturnTrueResponse(String email) {
+        boolean result = validation.validateEmail(email);
         assertTrue(result);
     }
 
     @ParameterizedTest
-    @CsvSource({"abc", "Nana123", "helloBye"})
-    void givenInvalidPassword_WhenValidatePasswordCalls_ThenExceptionResponseReturn(String password) {
-        Exception exception = assertThrows(RuntimeException.class, () -> validation.validatePassword(password));
-        assertEquals("the password must be at least 8 character, with a lower case, an upper case and no whitespace", exception.getMessage());
+    @CsvSource({".tmu.hashemi@gmail.com", "tmu.hashemi@gmail.com.", "tmu..hashemi@gmail.com"})
+    void givenInvalidEmail_WhenValidateEmailCalls_ThenExceptionResponseReturn(String email) {
+        Exception exception = assertThrows(RuntimeException.class, () -> validation.validateEmail(email));
+        assertEquals("invalid email!", exception.getMessage());
     }
 }
