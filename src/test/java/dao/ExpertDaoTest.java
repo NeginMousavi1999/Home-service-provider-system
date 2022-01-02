@@ -4,6 +4,7 @@ import config.SpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Expert;
+import model.members.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -21,6 +22,10 @@ public class ExpertDaoTest {
     void init() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         expertDao = (ExpertDao) context.getBean("expertDao");
+    }
+
+    @Test
+    void givenExpert_WhenCreateCalls_ThenReturnTrueResponse() {
         expert = Expert.builder()
                 .firstName("")
                 .lastName("")
@@ -32,13 +37,28 @@ public class ExpertDaoTest {
                 .email("")
                 .credit(0)
                 .build();
+
+        Long before = expertDao.getCountOfRecordsByEntityName("Expert");
+        expertDao.create(expert);
+        Long after = expertDao.getCountOfRecordsByEntityName("Expert");
+        assertEquals(before, after - 1);
     }
 
     @Test
-    void givenExpert_WhenCreateCalls_ThenReturnTrueResponse() {
+    void givenExpert_WhenDeleteCalls_ThenReturnTrueResponse() { //TODO: it is not completely correct!
+        expert = (Expert) expertDao.read(1L);
         Long before = expertDao.getCountOfRecordsByEntityName("Expert");
-        expertDao.create(this.expert);
+        expertDao.delete(expert);
         Long after = expertDao.getCountOfRecordsByEntityName("Expert");
-        assertEquals(before, after - 1);
+        assertEquals(before, after + 1);
+    }
+
+    @Test
+    void givenExpert_WhenUpdateCalls_ThenReturnTrueResponse() {
+        expert = (Expert) expertDao.read(1L);
+        expert.setUserStatus(UserStatus.CONFIRMED);
+        expertDao.update(expert);
+        User updatedExpert = expertDao.read(1L);
+        assertEquals(expert, updatedExpert);
     }
 }

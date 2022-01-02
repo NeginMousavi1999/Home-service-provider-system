@@ -16,13 +16,13 @@ public class UserDao extends BaseDao {
         session.close();
     }
 
-    public User read(User user) {
+    public User read(Long id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        User foundUser = session.get(User.class, user.getId());
+        User foundUser = session.get(User.class, id);
         transaction.commit();
         session.close();
-        return user;
+        return foundUser;
     }
 
     public void update(User user) {
