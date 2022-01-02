@@ -1,13 +1,13 @@
 package service.service;
 
 import config.ServicesSpringConfig;
+import model.services.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import service.ServiceService;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Negin Mousavi
@@ -29,6 +29,7 @@ public class GetServiceByIdTest {
 
     @Test
     void givenExistsService_WhenGetServiceByIdCalls_ThenReturnTrueResponse() {
-        //TODO
+        Service service = serviceService.getServiceById(1);
+        assertNotNull(service);
     }
 }
