@@ -11,7 +11,9 @@ import model.services.SubService;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Negin Mousavi
@@ -40,4 +42,6 @@ public class Order {
     private Customer customer;
     @ManyToOne
     private Expert expert;
+    @OneToMany(mappedBy = "order")
+    private List<Suggestion> suggestions = new ArrayList<>();
 }

@@ -19,6 +19,7 @@
         <mapping class="model.members.Customer"/>
         <mapping class="model.order.Comment"/>
         <mapping class="model.order.Order"/>
+        <mapping class="model.order.Suggestion"/>
         <mapping class="model.services.SubService"/>
         <mapping class="model.services.Service"/>
     </session-factory>
