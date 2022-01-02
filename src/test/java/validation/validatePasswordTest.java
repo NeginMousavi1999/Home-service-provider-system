@@ -1,6 +1,6 @@
 package validation;
 
-import config.SpringConfig;
+import config.ViewSpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +16,7 @@ public class validatePasswordTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Validation.class);
         validation = (Validation) context.getBean("validation");
     }
 

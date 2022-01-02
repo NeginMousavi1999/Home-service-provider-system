@@ -1,6 +1,6 @@
 package view;
 
-import config.SpringConfig;
+import config.ViewSpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Expert;
@@ -21,7 +21,7 @@ public class UserView {
     private final Scanner scanner = CreateScanner.getInstance();
 
     public void createUser() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
         Validation validation = (Validation) context.getBean("validation");
 
         System.out.print("first name: ");

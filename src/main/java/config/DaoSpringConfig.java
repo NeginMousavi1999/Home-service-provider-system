@@ -3,8 +3,6 @@ package config;
 import dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import service.CustomerService;
-import service.UserService;
 import validation.Validation;
 import view.UserView;
 
@@ -12,7 +10,7 @@ import view.UserView;
  * @author Negin Mousavi
  */
 @Configuration
-public class SpringConfig {
+public class DaoSpringConfig {
     @Bean
     public BaseDao baseDao() {
         return new BaseDao();
@@ -61,30 +59,5 @@ public class SpringConfig {
     @Bean
     public ManagerDao managerDao() {
         return new ManagerDao();
-    }
-
-    @Bean
-    public Validation validation() {
-        return new Validation();
-    }
-
-    @Bean
-    public UserView userView() {
-        return new UserView();
-    }
-
-    @Bean
-    public CustomerService customerService() {
-        CustomerService customerService = new CustomerService();
-        customerService.setCustomerDao(customerDao());
-        return customerService;
-    }
-
-    @Bean
-    public UserService userService() {
-        UserService userService = new UserService();
-        userService.setCustomerService(customerService());
-        userService.setValidation(validation());
-        return userService;
     }
 }

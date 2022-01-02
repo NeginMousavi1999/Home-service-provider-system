@@ -1,6 +1,6 @@
 package dao;
 
-import config.SpringConfig;
+import config.DaoSpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,7 +16,7 @@ public class BaseDaoTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
         baseDao = (BaseDao) context.getBean("baseDao");
     }
 

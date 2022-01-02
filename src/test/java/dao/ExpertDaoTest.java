@@ -1,6 +1,6 @@
 package dao;
 
-import config.SpringConfig;
+import config.DaoSpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Expert;
@@ -20,7 +20,7 @@ public class ExpertDaoTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
         expertDao = (ExpertDao) context.getBean("expertDao");
     }
 
