@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import model.order.Order;
-import model.services.SubService;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;

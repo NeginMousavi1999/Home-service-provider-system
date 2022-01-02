@@ -1,4 +1,8 @@
-package view;/**
+package view;
+
+/**
  * @author Negin Mousavi
- */public class CustomerView {
+ */
+public class CustomerView {
+
 }
