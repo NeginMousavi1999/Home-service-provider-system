@@ -1,8 +1,10 @@
 package util;
 
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import validation.Validation;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +17,8 @@ public class validatePasswordTest {
 
     @BeforeEach
     void init() {
-        validation = new Validation();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        validation = (Validation) context.getBean("validation");
     }
 
     @ParameterizedTest

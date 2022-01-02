@@ -1,10 +1,12 @@
 package view;
 
+import config.SpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Expert;
 import model.members.User;
 import org.apache.commons.io.IOUtils;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import util.CreateScanner;
 import validation.Validation;
 
@@ -19,7 +21,8 @@ public class UserView {
     private final Scanner scanner = CreateScanner.getInstance();
 
     public void createUser() {
-        Validation validation = new Validation();//TODO: spring core!
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        Validation validation = (Validation) context.getBean("validation");
 
         System.out.print("first name: ");
         String fName = scanner.nextLine();

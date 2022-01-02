@@ -1,8 +1,10 @@
 package view;
 
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.InputStream;
 
@@ -16,7 +18,8 @@ public class getStreamOfPictureTest {
 
     @BeforeEach
     void init() {
-        view = new UserView();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        view = (UserView) context.getBean("userView");
     }
 
     @ParameterizedTest
