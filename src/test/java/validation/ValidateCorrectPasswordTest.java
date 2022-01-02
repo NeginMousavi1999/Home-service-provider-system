@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Negin Mousavi
  */
-public class validateEmailTest {
+public class ValidateCorrectPasswordTest {
     Validation validation;
 
     @BeforeEach
@@ -21,16 +21,16 @@ public class validateEmailTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"negin.s.mousavi@gmail.com", "masoud.saghar@gmail.com", "nargesi.SHima@gmail.com"})
-    void givenValidEmail_WhenValidateEmailCalls_ThenReturnTrueResponse(String email) {
-        boolean result = validation.validateEmail(email);
+    @CsvSource({"1234, 1234", "abc, abc", "abc1234, abc1234"})
+    void givenEqualsPasswords_WhenValidateCorrectPasswordCalls_ThenReturnTrueResponse(String oldPass, String newPass) {
+        boolean result = validation.validateCorrectPassword(oldPass, newPass);
         assertTrue(result);
     }
 
     @ParameterizedTest
-    @CsvSource({".tmu.hashemi@gmail.com", "tmu.hashemi@gmail.com.", "tmu..hashemi@gmail.com"})
-    void givenInvalidEmail_WhenValidateEmailCalls_ThenExceptionResponseReturn(String email) {
-        Exception exception = assertThrows(RuntimeException.class, () -> validation.validateEmail(email));
-        assertEquals("invalid email!", exception.getMessage());
+    @CsvSource({"1234, 123456", "12abc, abc", "abc1234, 1234abc"})
+    void givenNotEqualsPasswords_WhenValidateCorrectPasswordCalls_ThenExceptionResponseReturn(String oldPass, String newPass) {
+        Exception exception = assertThrows(RuntimeException.class, () -> validation.validateCorrectPassword(oldPass, newPass));
+        assertEquals("password is wrong!", exception.getMessage());
     }
 }

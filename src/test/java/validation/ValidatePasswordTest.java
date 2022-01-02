@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Negin Mousavi
  */
-public class validateCorrectPasswordTest {
+public class ValidatePasswordTest {
     Validation validation;
 
     @BeforeEach
@@ -21,16 +21,16 @@ public class validateCorrectPasswordTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"1234, 1234", "abc, abc", "abc1234, abc1234"})
-    void givenEqualsPasswords_WhenValidateCorrectPasswordCalls_ThenReturnTrueResponse(String oldPass, String newPass) {
-        boolean result = validation.validateCorrectPassword(oldPass, newPass);
+    @CsvSource({"123Nwn00", "Jack1w34", "roSee312"})
+    void givenValidPassword_WhenValidatePasswordCalls_ThenReturnTrueResponse(String password) {
+        boolean result = validation.validatePassword(password);
         assertTrue(result);
     }
 
     @ParameterizedTest
-    @CsvSource({"1234, 123456", "12abc, abc", "abc1234, 1234abc"})
-    void givenNotEqualsPasswords_WhenValidateCorrectPasswordCalls_ThenExceptionResponseReturn(String oldPass, String newPass) {
-        Exception exception = assertThrows(RuntimeException.class, () -> validation.validateCorrectPassword(oldPass, newPass));
-        assertEquals("password is wrong!", exception.getMessage());
+    @CsvSource({"abc", "Nana123", "helloBye"})
+    void givenInvalidPassword_WhenValidatePasswordCalls_ThenExceptionResponseReturn(String password) {
+        Exception exception = assertThrows(RuntimeException.class, () -> validation.validatePassword(password));
+        assertEquals("the password must be at least 8 character, with a lower case, an upper case and no whitespace", exception.getMessage());
     }
 }

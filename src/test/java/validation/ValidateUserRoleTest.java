@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Negin Mousavi
  */
-public class validateUserRoleTest {
+public class ValidateUserRoleTest {
     Validation validation;
 
     @BeforeEach
