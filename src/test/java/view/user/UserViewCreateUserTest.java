@@ -23,7 +23,8 @@ public class UserViewCreateUserTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"jack, jack, jack@gmail.com, jacK0123, EXPERT"})
+    @CsvSource({"jack, jack, jack@gmail.com, jacK0123, EXPERT", "rose, rose, rose@gmail.com, Rose0123, CUSTOMER",
+            "sara, sara, sara@gmail.com, Sara0123, MANAGER"})
     void givenInputs_WhenCreateUserCalls_ThenReturnTrueResponse(String firstName, String lastName, String email,
                                                                 String password, String role) {
         User user = view.createUser(firstName, lastName, email, password, role);

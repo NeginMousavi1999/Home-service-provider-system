@@ -3,10 +3,7 @@ package config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import service.CustomerService;
-import service.ExpertService;
-import service.OrderService;
-import service.ServiceService;
+import service.*;
 import validation.Validation;
 import view.CustomerView;
 import view.ExpertView;
@@ -21,9 +18,10 @@ import view.UserView;
 public class ViewSpringConfig {
 
     @Bean
-    public ManagerView managerView(ServiceService serviceService) {
+    public ManagerView managerView(ServiceService serviceService, ManagerService managerService) {
         ManagerView managerView = new ManagerView();
         managerView.setServiceService(serviceService);
+        managerView.setManagerService(managerService);
         return managerView;
     }
 

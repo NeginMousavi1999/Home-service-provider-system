@@ -32,6 +32,8 @@ public class CustomerView {
                 .userStatus(UserStatus.WAITING)
                 .userRole(UserRole.CUSTOMER)
                 .build();
+
+        customerService.save(customer);
         return customer;
     }
 

@@ -29,6 +29,13 @@ public class ServicesSpringConfig {
     }
 
     @Bean
+    public ManagerService managerService(ManagerDao managerDao) {
+        ManagerService managerService = new ManagerService();
+        managerService.setManagerDao(managerDao);
+        return managerService;
+    }
+
+    @Bean
     public UserService userService(Validation validation, CustomerService customerService) {
         UserService userService = new UserService();
         userService.setCustomerService(customerService);

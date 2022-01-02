@@ -5,6 +5,7 @@ import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Manager;
 import model.members.User;
+import service.ManagerService;
 import service.ServiceService;
 
 /**
@@ -13,6 +14,7 @@ import service.ServiceService;
 @Data
 public class ManagerView {
     ServiceService serviceService;
+    ManagerService managerService;
 
     public User createManager(User manager) {
         manager = Manager.builder()
@@ -24,6 +26,8 @@ public class ManagerView {
                 .userStatus(UserStatus.WAITING)
                 .userRole(UserRole.MANAGER)
                 .build();
+
+        managerService.save(manager);
         return manager;
     }
 

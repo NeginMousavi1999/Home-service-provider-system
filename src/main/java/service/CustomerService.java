@@ -20,4 +20,8 @@ public class CustomerService {
     public void updateCredit(Customer customer) {
         customerDao.update(customer);
     }
+
+    public void save(User customer) {
+        customerDao.create(customer);
+    }
 }
