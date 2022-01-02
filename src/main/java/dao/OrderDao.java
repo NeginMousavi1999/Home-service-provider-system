@@ -1,42 +1,42 @@
 package dao;
 
-import model.members.User;
+import model.order.Order;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  * @author Negin Mousavi
  */
-public class UserDao extends BaseDao {
-    public void create(User user) {
+public class OrderDao extends BaseDao {
+    public void create(Order order) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(user);
+        session.save(order);
         transaction.commit();
         session.close();
     }
 
-    public User read(User user) {
+    public Order read(Order order) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        User foundUser = session.get(User.class, user.getId());
+        Order foundOrder = session.get(Order.class, order.getId());
         transaction.commit();
         session.close();
-        return user;
+        return foundOrder;
     }
 
-    public void update(User user) {
+    public void update(Order order) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(user);
+        session.update(order);
         transaction.commit();
         session.close();
     }
 
-    public void delete(User user) {
+    public void delete(Order order) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(user);
+        session.remove(order);
         transaction.commit();
         session.close();
     }

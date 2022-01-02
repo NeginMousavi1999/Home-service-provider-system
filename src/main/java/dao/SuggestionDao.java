@@ -1,42 +1,42 @@
 package dao;
 
-import model.members.User;
+import model.order.Suggestion;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  * @author Negin Mousavi
  */
-public class UserDao extends BaseDao {
-    public void create(User user) {
+public class SuggestionDao extends BaseDao {
+    public void create(Suggestion suggestion) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(user);
+        session.save(suggestion);
         transaction.commit();
         session.close();
     }
 
-    public User read(User user) {
+    public Suggestion read(Suggestion suggestion) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        User foundUser = session.get(User.class, user.getId());
+        Suggestion foundSuggestion = session.get(Suggestion.class, suggestion.getId());
         transaction.commit();
         session.close();
-        return user;
+        return foundSuggestion;
     }
 
-    public void update(User user) {
+    public void update(Suggestion suggestion) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(user);
+        session.update(suggestion);
         transaction.commit();
         session.close();
     }
 
-    public void delete(User user) {
+    public void delete(Suggestion suggestion) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(user);
+        session.remove(suggestion);
         transaction.commit();
         session.close();
     }

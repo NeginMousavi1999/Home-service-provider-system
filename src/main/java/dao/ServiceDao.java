@@ -1,42 +1,42 @@
 package dao;
 
-import model.members.User;
+import model.services.Service;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  * @author Negin Mousavi
  */
-public class UserDao extends BaseDao {
-    public void create(User user) {
+public class ServiceDao extends BaseDao {
+    public void create(Service service) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(user);
+        session.save(service);
         transaction.commit();
         session.close();
     }
 
-    public User read(User user) {
+    public Service read(Service service) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        User foundUser = session.get(User.class, user.getId());
+        Service foundService = session.get(Service.class, service.getId());
         transaction.commit();
         session.close();
-        return user;
+        return foundService;
     }
 
-    public void update(User user) {
+    public void update(Service service) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(user);
+        session.update(service);
         transaction.commit();
         session.close();
     }
 
-    public void delete(User user) {
+    public void delete(Service service) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(user);
+        session.remove(service);
         transaction.commit();
         session.close();
     }

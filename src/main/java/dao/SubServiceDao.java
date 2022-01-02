@@ -1,42 +1,42 @@
 package dao;
 
-import model.members.User;
+import model.services.SubService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  * @author Negin Mousavi
  */
-public class UserDao extends BaseDao {
-    public void create(User user) {
+public class SubServiceDao extends BaseDao {
+    public void create(SubService subService) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(user);
+        session.save(subService);
         transaction.commit();
         session.close();
     }
 
-    public User read(User user) {
+    public SubService read(SubService subService) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        User foundUser = session.get(User.class, user.getId());
+        SubService foundSubService = session.get(SubService.class, subService.getId());
         transaction.commit();
         session.close();
-        return user;
+        return foundSubService;
     }
 
-    public void update(User user) {
+    public void update(SubService subService) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.update(user);
+        session.update(subService);
         transaction.commit();
         session.close();
     }
 
-    public void delete(User user) {
+    public void delete(SubService subService) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.remove(user);
+        session.remove(subService);
         transaction.commit();
         session.close();
     }
