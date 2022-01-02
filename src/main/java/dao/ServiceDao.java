@@ -16,13 +16,13 @@ public class ServiceDao extends BaseDao {
         session.close();
     }
 
-    public Service read(Service service) {
+    public Service read(int id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        Service foundService = session.get(Service.class, service.getId());
+        Service service = session.get(Service.class, id);
         transaction.commit();
         session.close();
-        return foundService;
+        return service;
     }
 
     public void update(Service service) {

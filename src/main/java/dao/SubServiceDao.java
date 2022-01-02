@@ -16,13 +16,13 @@ public class SubServiceDao extends BaseDao {
         session.close();
     }
 
-    public SubService read(SubService subService) {
+    public SubService read(int id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        SubService foundSubService = session.get(SubService.class, subService.getId());
+        SubService subService = session.get(SubService.class, id);
         transaction.commit();
         session.close();
-        return foundSubService;
+        return subService;
     }
 
     public void update(SubService subService) {
