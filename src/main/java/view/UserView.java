@@ -1,11 +1,9 @@
 package view;
 
-import config.ViewSpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
 import model.members.User;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import validation.Validation;
 
 import static enumuration.UserRole.valueOf;
@@ -19,6 +17,7 @@ public class UserView {
     ExpertView expertView;
     CustomerView customerView;
     Validation validation;
+
     public User createUser(String firstName, String lastName, String email, String password, String role) {
 
         try {

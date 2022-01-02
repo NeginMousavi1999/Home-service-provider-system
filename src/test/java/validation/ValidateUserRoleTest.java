@@ -1,6 +1,5 @@
 package validation;
 
-import config.ViewSpringConfig;
 import enumuration.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

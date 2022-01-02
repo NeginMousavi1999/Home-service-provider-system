@@ -1,12 +1,10 @@
 package service.subservice;
 
 import config.ServicesSpringConfig;
-import model.services.SubService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import service.ServiceService;
 import service.SubServiceService;
 
 import static org.junit.jupiter.api.Assertions.*;
