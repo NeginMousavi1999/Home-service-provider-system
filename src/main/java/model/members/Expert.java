@@ -23,18 +23,5 @@ public class Expert extends User {
     @Lob
     @Column(name = "picture", columnDefinition = "LONGBLOB")
     private byte[] picture;
-
-    @Override
-    public String toString() {
-        return "Expert{" +
-                "score=" + score +
-                ", id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", userRole=" + userStatus +
-                ", registrationDate=" + registrationDate +
-                '}';
-    }
+    private double credit;
 }

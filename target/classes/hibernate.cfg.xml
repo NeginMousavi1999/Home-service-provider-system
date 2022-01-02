@@ -17,5 +17,9 @@
         <mapping class="model.members.Expert"/>
         <mapping class="model.members.Manager"/>
         <mapping class="model.members.Customer"/>
+        <mapping class="model.order.Comment"/>
+        <mapping class="model.order.Order"/>
+        <mapping class="model.services.SubService"/>
+        <mapping class="model.services.Service"/>
     </session-factory>
 </hibernate-configuration>

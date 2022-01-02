@@ -4,8 +4,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import model.order.Order;
+import model.services.SubService;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Negin Mousavi
@@ -16,5 +21,7 @@ import javax.persistence.Entity;
 @Entity
 @NoArgsConstructor
 public class Customer extends User {
-
+    private double credit;
+    @OneToMany(mappedBy = "customer")
+    private List<Order> orders = new ArrayList<>();
 }
