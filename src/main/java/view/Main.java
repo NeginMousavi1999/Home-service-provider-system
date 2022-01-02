@@ -6,9 +6,6 @@ package view;
 public class Main {
     public static void main(String[] args) {
         printHomeLogo();
-
-        UserView userView = new UserView();
-        userView.createUser();
     }
 
     private static void printHomeLogo() {

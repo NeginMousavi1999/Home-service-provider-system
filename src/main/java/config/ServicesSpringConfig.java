@@ -1,15 +1,10 @@
 package config;
 
-import dao.CustomerDao;
-import dao.ServiceDao;
-import dao.SubServiceDao;
+import dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import service.CustomerService;
-import service.ServiceService;
-import service.SubServiceService;
-import service.UserService;
+import service.*;
 import validation.Validation;
 
 /**
@@ -24,6 +19,13 @@ public class ServicesSpringConfig {
         CustomerService customerService = new CustomerService();
         customerService.setCustomerDao(customerDao);
         return customerService;
+    }
+
+    @Bean
+    public ExpertService expertService(ExpertDao expertDao) {
+        ExpertService expertService = new ExpertService();
+        expertService.setExpertDao(expertDao);
+        return expertService;
     }
 
     @Bean
@@ -48,5 +50,12 @@ public class ServicesSpringConfig {
         subServiceService.setSubServiceDao(subServiceDao);
         subServiceService.setValidation(validation);
         return subServiceService;
+    }
+
+    @Bean
+    public OrderService orderService(OrderDao orderDao) {
+        OrderService orderService = new OrderService();
+        orderService.setOrderDao(orderDao);
+        return orderService;
     }
 }

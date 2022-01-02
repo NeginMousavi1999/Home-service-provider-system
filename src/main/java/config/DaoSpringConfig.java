@@ -3,8 +3,6 @@ package config;
 import dao.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import validation.Validation;
-import view.UserView;
 
 /**
  * @author Negin Mousavi

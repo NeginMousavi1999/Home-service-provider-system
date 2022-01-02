@@ -1,10 +1,11 @@
-package view;
+package view.expert;
 
 import config.ViewSpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import view.ExpertView;
 
 import java.io.InputStream;
 
@@ -13,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Negin Mousavi
  */
-public class getStreamOfPictureTest {
-    UserView view;
+public class GetStreamOfPictureTest {
+    ExpertView view;
 
     @BeforeEach
     void init() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        view = (UserView) context.getBean("userView");
+        view = (ExpertView) context.getBean("expertView");
     }
 
     @ParameterizedTest
