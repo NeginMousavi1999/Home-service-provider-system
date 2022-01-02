@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author Negin Mousavi
  */
-@Entity
+@Entity(name = "System_Order")
 @Data
 @Builder
 @AllArgsConstructor
