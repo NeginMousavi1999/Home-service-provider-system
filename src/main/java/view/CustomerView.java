@@ -55,4 +55,8 @@ public class CustomerView {
         expertService.updateCredit(expert);
         orderService.updateStatus(order);
     }
+
+    public void showPanel(User user) {
+
+    }
 }

@@ -36,7 +36,7 @@ public class AddNewSubServiceTest {
 
     @Test
     void givenNotExistsSerName_WhenAddNewServiceCalls_ThenReturnTrueResponse() {
-        boolean result = managerView.addNewSubService("some thing", "some thing", 0, "");
+        boolean result = managerView.addNewSubService("something", "something", 0, "");
         assertFalse(result);
     }
 }

@@ -4,6 +4,7 @@ import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
 import model.members.User;
+import service.UserService;
 import validation.Validation;
 
 import static enumuration.UserRole.valueOf;
@@ -17,6 +18,7 @@ public class UserView {
     ExpertView expertView;
     CustomerView customerView;
     Validation validation;
+    UserService userService;
 
     public User createUser(String firstName, String lastName, String email, String password, String role) {
 
@@ -65,5 +67,26 @@ public class UserView {
                 System.out.println("invalid input!");
         }
         return user;
+    }
+
+    public void login(String username, String password) {
+        User user;
+        try {
+            user = userService.findUserByUserNameAndPassword(username, password);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return;
+        }
+        switch (user.getUserRole()) {
+            case EXPERT:
+                expertView.showPanel(user);
+                break;
+            case MANAGER:
+                managerView.showPanel(user);
+                break;
+            case CUSTOMER:
+                customerView.showPanel(user);
+                break;
+        }
     }
 }

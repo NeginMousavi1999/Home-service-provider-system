@@ -33,8 +33,8 @@ public class ExpertDaoTest {
                 .userStatus(UserStatus.WAITING)
                 .expertise("")
                 .score(0)
-                .password("")
-                .email("")
+                .password("Jack1234")
+                .email("jack@gmail.com")
                 .credit(0)
                 .build();
 

@@ -36,10 +36,11 @@ public class ServicesSpringConfig {
     }
 
     @Bean
-    public UserService userService(Validation validation, CustomerService customerService) {
+    public UserService userService(Validation validation, CustomerService customerService, UserDao userDao) {
         UserService userService = new UserService();
         userService.setCustomerService(customerService);
         userService.setValidation(validation);
+        userService.setUserDao(userDao);
         return userService;
     }
 

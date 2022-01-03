@@ -73,4 +73,8 @@ public class ManagerView {
 
         return subServiceService.addNewSubService(subService);
     }
+
+    public void showPanel(User user) {
+
+    }
 }

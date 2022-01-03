@@ -26,9 +26,9 @@ public class User {
     protected String firstName;
     @Column(name = "last_name")
     protected String lastName;
-    @Column(nullable = false)
-    protected String email;
     @Column(unique = true)
+    protected String email;
+    @Column(nullable = false)
     protected String password;
     @Column(name = "user_status")
     @Enumerated(value = EnumType.STRING)

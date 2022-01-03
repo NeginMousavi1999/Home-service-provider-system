@@ -64,6 +64,8 @@ public class ServiceDao extends BaseDao {
         List<Service> list = query.list();
         transaction.commit();
         session.close();
+        if (list.size() == 0)
+            return null;
         return list.get(0);
     }
 }

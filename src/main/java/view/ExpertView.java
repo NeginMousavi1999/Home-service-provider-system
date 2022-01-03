@@ -59,4 +59,8 @@ public class ExpertView {
             throw new RuntimeException("unable to get resources");
         return inputStream;
     }
+
+    public void showPanel(User user) {
+
+    }
 }

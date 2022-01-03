@@ -43,12 +43,14 @@ public class ViewSpringConfig {
     }
 
     @Bean
-    public UserView userView(CustomerView customerView, ManagerView managerView, ExpertView expertView, Validation validation) {
+    public UserView userView(CustomerView customerView, ManagerView managerView, ExpertView expertView, Validation validation,
+                             UserService userService) {
         UserView userView = new UserView();
         userView.setCustomerView(customerView);
         userView.setExpertView(expertView);
         userView.setManagerView(managerView);
         userView.setValidation(validation);
+        userView.setUserService(userService);
         return userView;
     }
 }
