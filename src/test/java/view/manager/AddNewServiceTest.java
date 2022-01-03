@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import view.ManagerView;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Negin Mousavi
@@ -22,12 +22,13 @@ public class AddNewServiceTest {
 
     @Test
     void givenNotDuplicateName_WhenAddNewServiceCalls_ThenReturnTrueResponse() {
-        boolean result = managerView.addNewService();
+        boolean result = managerView.addNewService("Cleaning and hygiene");
         assertTrue(result);
     }
 
     @Test
-    void givenDuplicateName_WhenAddNewServiceCalls_ThenExceptionResponseReturn() {
-        //TODO
+    void givenDuplicateName_WhenAddNewServiceCalls_ThenReturnTrueResponse() {
+        boolean result = managerView.addNewService("decoration");
+        assertFalse(result);
     }
 }

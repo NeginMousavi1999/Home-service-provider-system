@@ -29,4 +29,16 @@ public class ServiceService {
     public boolean validateNewName(String name) {
         return validation.validateNewName(name, getAllServiceName());
     }
+
+    public boolean addNewService(Service service) {
+        serviceDao.create(service);
+        return true;
+    }
+
+    public Service findServiceByName(String name) {
+        Service service = serviceDao.findByName(name);
+        if (service == null)
+            throw new RuntimeException("we have n't this service!");
+        return service;
+    }
 }

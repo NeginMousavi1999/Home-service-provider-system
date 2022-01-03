@@ -29,4 +29,9 @@ public class SubServiceService {
     public boolean validateNewName(String name) {
         return validation.validateNewName(name, getAllServiceName());
     }
+
+    public boolean addNewSubService(SubService subService) {
+        subServiceDao.create(subService);
+        return true;
+    }
 }

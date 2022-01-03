@@ -22,7 +22,8 @@ public class SubService {
     @Column(unique = true)
     private String name;
     @ManyToOne
-    private Service service;// TODO: check to be exist
+    //@Column(nullable = false) //TODO: uncomment this --> exception... why?
+    private Service service;
     private double cost;
     private String description;
 }

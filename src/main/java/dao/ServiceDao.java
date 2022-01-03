@@ -54,4 +54,16 @@ public class ServiceDao extends BaseDao {
         session.close();
         return list;
     }
+
+    public Service findByName(String name) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Service s where s.name=:name";
+        Query<Service> query = session.createQuery(hql, Service.class);
+        query.setParameter("name", name);
+        List<Service> list = query.list();
+        transaction.commit();
+        session.close();
+        return list.get(0);
+    }
 }

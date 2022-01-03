@@ -18,9 +18,10 @@ import view.UserView;
 public class ViewSpringConfig {
 
     @Bean
-    public ManagerView managerView(ServiceService serviceService, ManagerService managerService) {
+    public ManagerView managerView(ServiceService serviceService, ManagerService managerService, SubServiceService subServiceService) {
         ManagerView managerView = new ManagerView();
         managerView.setServiceService(serviceService);
+        managerView.setSubServiceService(subServiceService);
         managerView.setManagerService(managerService);
         return managerView;
     }
