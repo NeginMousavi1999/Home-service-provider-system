@@ -43,6 +43,6 @@ public class Order {
     private Customer customer;
     @ManyToOne
     private Expert expert;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<Suggestion> suggestions = new ArrayList<>();
 }

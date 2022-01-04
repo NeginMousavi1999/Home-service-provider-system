@@ -42,10 +42,11 @@ public class ViewSpringConfig {
     }
 
     @Bean
-    public ExpertView expertView(ExpertService expertService, ServiceService serviceService) {
+    public ExpertView expertView(ExpertService expertService, ServiceService serviceService, SuggestionService suggestionService) {
         ExpertView expertView = new ExpertView();
         expertView.setExpertService(expertService);
         expertView.setServiceService(serviceService);
+        expertView.setSuggestionService(suggestionService);
         return expertView;
     }
 

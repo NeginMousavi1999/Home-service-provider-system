@@ -2,6 +2,7 @@ package service;
 
 import dao.ExpertDao;
 import lombok.Data;
+import model.members.Customer;
 import model.members.Expert;
 import model.members.User;
 
@@ -35,5 +36,13 @@ public class ExpertService {
     public boolean updateExpert(Expert expert) {
         expertDao.update(expert);
         return true;
+    }
+
+    public Expert findById(int id) {
+        return expertDao.findById(id);
+    }
+
+    public Expert findByEmail(String email) {
+        return expertDao.findByEmail(email);
     }
 }

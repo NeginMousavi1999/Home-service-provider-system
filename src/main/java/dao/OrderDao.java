@@ -40,4 +40,13 @@ public class OrderDao extends BaseDao {
         transaction.commit();
         session.close();
     }
+
+    public Order findById(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        Order order = session.get(Order.class, id);
+        transaction.commit();
+        session.close();
+        return order;
+    }
 }

@@ -5,12 +5,16 @@ import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Expert;
 import model.members.User;
+import model.order.Order;
+import model.order.Suggestion;
 import org.apache.commons.io.IOUtils;
 import service.ExpertService;
 import service.ServiceService;
+import service.SuggestionService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 /**
  * @author Negin Mousavi
@@ -19,6 +23,7 @@ import java.io.InputStream;
 public class ExpertView {
     private ExpertService expertService;
     private ServiceService serviceService;
+    private SuggestionService suggestionService;
 
     public User createExpert(User expert) {
         String expertise = getExpertise("");
@@ -70,5 +75,17 @@ public class ExpertView {
 
     public void showPanel(User user) {
 
+    }
+
+    public void sendSuggestion(Expert expert, Order order, double price, int durationOfWork, Date startTime) {
+        Suggestion suggestion = Suggestion.builder()
+                .expert(expert)
+                .order(order)
+                .durationOfWork(durationOfWork)
+                .startTime(startTime)
+                .suggestedPrice(price)
+                .build();
+        order.getSuggestions().add(suggestion);
+        suggestionService.saveSuggestion(suggestion);
     }
 }

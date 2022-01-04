@@ -12,6 +12,7 @@ public class SuggestionDao extends BaseDao {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(suggestion);
+        session.saveOrUpdate(suggestion.getOrder());
         transaction.commit();
         session.close();
     }

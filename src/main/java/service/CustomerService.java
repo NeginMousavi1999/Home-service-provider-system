@@ -28,4 +28,8 @@ public class CustomerService {
     public Customer findByEmail(String email) {
         return customerDao.findByEmail(email);
     }
+
+    public Customer findById(int id) {
+        return customerDao.findById(id);
+    }
 }

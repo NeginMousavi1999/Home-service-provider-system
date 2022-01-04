@@ -19,4 +19,8 @@ public class OrderService {
         orderDao.create(order);
         return true;
     }
+
+    public Order findById(int id) {
+        return orderDao.findById(id);
+    }
 }
