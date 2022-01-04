@@ -24,7 +24,8 @@ public class UserView {
     private Validation validation;
     private UserService userService;
 
-    public User createUser(String firstName, String lastName, String email, String password, String role) {
+    public User createUser(String firstName, String lastName, String email, String password, String role,
+                           double credit, String expertise, String avatarName) {
 
         try {
             validation.validateEmail(email);
@@ -58,14 +59,11 @@ public class UserView {
                 .build();
 
         switch (userRole) {
-            case MANAGER:
-                user = managerView.createManager(user);
-                break;
             case CUSTOMER:
-                user = customerView.createCustomer(user);
+                user = customerView.createCustomer(user, credit);
                 break;
             case EXPERT:
-                user = expertView.createExpert(user);
+                user = expertView.createExpert(user, expertise, avatarName);
                 break;
             default:
                 System.out.println("invalid input!");

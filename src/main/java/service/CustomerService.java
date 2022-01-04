@@ -26,7 +26,10 @@ public class CustomerService {
     }
 
     public Customer findByEmail(String email) {
-        return customerDao.findByEmail(email);
+        Customer customer = customerDao.findByEmail(email);
+        if (customer == null)
+            throw new RuntimeException("we have not customer with this email");
+        return customer;
     }
 
     public Customer findById(int id) {

@@ -13,6 +13,7 @@ import service.CustomerService;
 import service.ExpertService;
 import service.OrderService;
 import service.SubServiceService;
+import validation.Validation;
 
 /**
  * @author Negin Mousavi
@@ -23,9 +24,9 @@ public class CustomerView {
     private OrderService orderService;
     private ExpertService expertService;
     private SubServiceService subServiceService;
+    private Validation validation;
 
-    public User createCustomer(User customer) {
-        double credit = getCredit();
+    public User createCustomer(User customer, double credit) {
         customer = Customer.builder()
                 .firstName(customer.getFirstName())
                 .lastName(customer.getLastName())
@@ -40,8 +41,8 @@ public class CustomerView {
         return customer;
     }
 
-    private double getCredit() {
-        return 0;
+    public void showPanel(User user) {
+
     }
 
     public void pay() {
@@ -59,12 +60,7 @@ public class CustomerView {
         orderService.updateStatus(order);
     }
 
-    public void showPanel(User user) {
-
-    }
-
-    private SubService getSubService() {
-        String name = getSubServiceName();
+    private SubService getSubService(String name) {
         SubService subService;
         try {
             subService = subServiceService.findSubServiceByName(name);
@@ -75,39 +71,35 @@ public class CustomerView {
         return subService;
     }
 
-    private String getSubServiceName() {
-        return "Kitchen appliances";//TODO
-    }
+    public boolean addNewOrder(String subServiceName, String address, String customerUsername, String description,
+                            double suggestedPrice) {
+        SubService subService = getSubService(subServiceName);
+        Customer customer = getOrderCustomer(customerUsername);
+        if (subService == null || customer == null)
+            return false;
 
-    public void addNewOrder() {
-        SubService subService = getSubService();
-        if (subService == null)
-            return;
+        if (!validation.validateSuggestedPrice(suggestedPrice, subService.getCost()))
+            return false;
 
         Order order = Order.builder()
-                .address(getOrderAddress())
-                .customer(getOrderCustomer())
-                .description(getOrderDescription())
+                .address(address)
+                .customer(customer)
+                .description(description)
                 .subService(subService)
-                .suggestedPrice(getSuggestedPrice())
+                .suggestedPrice(suggestedPrice)
                 .orderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)
                 .build();
-        orderService.saveOrder(order);
+        return orderService.saveOrder(order);
     }
 
-    private String getOrderDescription() {
-        return "this my order";
-    }
-
-    private Customer getOrderCustomer() {
-        return customerService.findByEmail("jack@gmail.com");
-    }
-
-    private String getOrderAddress() {
-        return "address";
-    }
-
-    private double getSuggestedPrice() {
-        return 120000;
+    private Customer getOrderCustomer(String email) {
+        Customer customer;
+        try {
+            customer = customerService.findByEmail(email);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return null;
+        }
+        return customer;
     }
 }

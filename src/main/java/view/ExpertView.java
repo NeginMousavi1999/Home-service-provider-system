@@ -14,6 +14,8 @@ import service.SuggestionService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -25,11 +27,13 @@ public class ExpertView {
     private ServiceService serviceService;
     private SuggestionService suggestionService;
 
-    public User createExpert(User expert) {
-        String expertise = getExpertise("");
-        String avatarNumber = getAvatarNumber("");
-        String fileName = String.format("static-pictures/%s.png", avatarNumber);
+    public User createExpert(User expert, String expertise, String avatarName) {
+        String fileName = String.format("static-pictures/%s.png", avatarName);
         InputStream picStream = getStreamOfPicture(fileName);
+
+        if (!isExpertExistsInDb(expertise))
+            return null;
+
         try {
             expert = Expert.builder()
                     .firstName(expert.getFirstName())
@@ -51,18 +55,14 @@ public class ExpertView {
         return expert;
     }
 
-    private String getAvatarNumber(String avatar) {
-        return avatar;//TODO
-    }
-
-    private String getExpertise(String expert) {
+    private boolean isExpertExistsInDb(String expert) {
         try {
             serviceService.findServiceByName(expert);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
-            return null;
+            return false;
         }
-        return expert;
+        return true;
     }
 
     public InputStream getStreamOfPicture(String fileName) {
@@ -87,5 +87,15 @@ public class ExpertView {
                 .build();
         order.getSuggestions().add(suggestion);
         suggestionService.saveSuggestion(suggestion);
+    }
+
+    public void getDate() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = null;
+        try {
+            Date requestDate = simpleDateFormat.parse(date);
+        } catch (ParseException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
     }
 }

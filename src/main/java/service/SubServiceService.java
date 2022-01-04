@@ -38,7 +38,7 @@ public class SubServiceService {
     public SubService findSubServiceByName(String name) {
         SubService subService = subServiceDao.findByName(name);
         if (subService == null)
-            throw new RuntimeException("we have n't this subService!");
+            throw new RuntimeException("we have n't this sub service!");
         return subService;
     }
 }

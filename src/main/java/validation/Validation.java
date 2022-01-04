@@ -40,4 +40,10 @@ public class Validation {
             throw new RuntimeException("duplicate name!");
         return true;
     }
+
+    public boolean validateSuggestedPrice(double suggestedPrice, double basePrice) {
+        if (suggestedPrice < basePrice)
+            throw new RuntimeException("suggested price is less than base price!");
+        return true;
+    }
 }
