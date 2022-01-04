@@ -78,7 +78,7 @@ public class UserDao extends BaseDao {
         addRestrictionIfNotNull(criteria, "u.lastName", request.getLastName());
         addRestrictionIfNotNull(criteria, "u.email", request.getEmail());
         addRestrictionIfNotNull(criteria, "u.userRole", request.getUserRole());
-        addRestrictionIfNotNull(criteria, "u.expertise", request.getExpertise());
+        addRestrictionIfNotNull(criteria, "u.services", request.getServiceName());//TODO
 
         List<User> list = criteria.list();
         transaction.commit();

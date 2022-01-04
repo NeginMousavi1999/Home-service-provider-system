@@ -6,12 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import model.services.Service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -22,12 +21,12 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class Expert extends User {
-    private String expertise;
+/*    private String expertise;*/
     private int score;
     @Lob
     @Column(name = "picture", columnDefinition = "LONGBLOB")
     private byte[] picture;
     private double credit;
-    @OneToMany
-    private List<Service> services = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Service> services = new HashSet<>();
 }

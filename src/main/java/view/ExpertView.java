@@ -8,6 +8,7 @@ import model.members.Expert;
 import model.members.User;
 import model.order.Order;
 import model.order.Suggestion;
+import model.services.Service;
 import org.apache.commons.io.IOUtils;
 import service.ExpertService;
 import service.OrderService;
@@ -18,7 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * @author Negin Mousavi
@@ -30,20 +31,25 @@ public class ExpertView {
     private SuggestionService suggestionService;
     private OrderService orderService;
 
-    public User createExpert(User expert, String expertise, String avatarName) {
+    public User createExpert(User expert, String serviceName, String avatarName) {
         String fileName = String.format("static-pictures/%s.png", avatarName);
         InputStream picStream = getStreamOfPicture(fileName);
 
-        if (!isExpertExistsInDb(expertise))
+        Service service = getService(serviceName);
+        if (service == null)
             return null;
-
+        HashSet<Service> services = new HashSet<>();
+        services.add(service);
         try {
             expert = Expert.builder()
                     .firstName(expert.getFirstName())
                     .lastName(expert.getLastName())
                     .email(expert.getEmail())
                     .password(expert.getPassword())
+/*
                     .expertise(expertise)
+*/
+                    .services(services)
                     .picture(IOUtils.toByteArray(picStream))
                     .score(0)
                     .userStatus(UserStatus.WAITING)
@@ -58,14 +64,15 @@ public class ExpertView {
         return expert;
     }
 
-    private boolean isExpertExistsInDb(String expert) {
+    private Service getService(String expert) {
+        Service service;
         try {
-            serviceService.findServiceByName(expert);
+            service = serviceService.findServiceByName(expert);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
-            return false;
+            return null;
         }
-        return true;
+        return service;
     }
 
     public InputStream getStreamOfPicture(String fileName) {
@@ -78,6 +85,18 @@ public class ExpertView {
 
     public void showPanel(User user) {
 
+    }
+
+    public List<Order> returnOrdersWithSameExpertiseExpert(Expert expert) {
+        Set<Service> services = expert.getServices();
+        List<Order> orderList = new ArrayList<>();
+        services.forEach(service -> service.getSubServices().stream()
+                .map(subService -> orderService.findBySubService(subService)).forEach(orderList::addAll));
+        return orderList;
+    }
+
+    public Order chooseOrderForSendingSuggestion(List<Order> orderList, int index) {
+        return orderList.get(index);
     }
 
     public void sendSuggestion(Expert expert, Order order, double price, int durationOfWork, Date startTime) {

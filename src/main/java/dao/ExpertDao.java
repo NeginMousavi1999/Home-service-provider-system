@@ -1,6 +1,5 @@
 package dao;
 
-import model.members.Customer;
 import model.members.Expert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,6 +11,15 @@ import java.util.List;
  * @author Negin Mousavi
  */
 public class ExpertDao extends UserDao {
+
+    public void createExpert(Expert expert) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(expert);
+        transaction.commit();
+        session.close();
+    }
+
     public void update(Expert expert) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

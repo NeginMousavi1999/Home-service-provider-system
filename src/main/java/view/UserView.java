@@ -102,7 +102,6 @@ public class UserView {
 /*                .firstName("jack")
                 .lastName("jack")
                 .email("jack@gmail.com")
-                .expertise("decorate")
                 .userRole(UserRole.EXPERT)*/
 
 
@@ -110,7 +109,7 @@ public class UserView {
                 .lastName("jack")
                 .email("jack@gmail.com")
 //                .userRole(CUSTOMER)
-                .expertise("decorate")
+
 
                 .build();
     }

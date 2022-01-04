@@ -23,6 +23,6 @@ public class Service {
     private int id;
     @Column(unique = true)
     private String name;
-    @OneToMany(mappedBy = "service")
+    @OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
     private List<SubService> subServices = new ArrayList<>();
 }

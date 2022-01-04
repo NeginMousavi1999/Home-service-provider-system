@@ -14,5 +14,5 @@ public class UserViewRequest {
     private String lastName;
     private String email;
     private UserRole userRole;
-    private String expertise;
+    private String serviceName;
 }

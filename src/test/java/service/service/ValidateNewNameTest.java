@@ -29,7 +29,7 @@ public class ValidateNewNameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"", "", ""})
+    @CsvSource({"Home Appliances"})
     void givenDuplicateName_WhenValidateNewNameCalls_ThenReturnTrueResponse(String name) {
         Exception exception = assertThrows(RuntimeException.class, () -> serviceService.validateNewName(name));
         assertEquals("duplicate name!", exception.getMessage());

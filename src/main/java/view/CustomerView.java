@@ -104,18 +104,21 @@ public class CustomerView {
 
     public Expert chooseSuggestionsForChoosingExpert(List<Suggestion> suggestionList, int index) {
         Suggestion suggestion = suggestionList.get(index);
+        Expert expert = suggestion.getExpert();
         Order order = suggestion.getOrder();
         order.setFinalPrice(suggestion.getSuggestedPrice());
         order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+        order.setExpert(expert);
+        order.setToBeDoneDate(suggestion.getStartTime());
         orderService.updateStatus(order);
-        return suggestion.getExpert();
+        return expert;
     }
 
     public List<Order> returnCustomerOrders(Customer customer) {
         return customer.getOrders();
     }
 
-    public List<Suggestion> chooseOrderForShowingSuggestions(/*Customer customer, */List<Order> orderList, int index) {
+    public List<Suggestion> chooseOrderForShowingSuggestions(List<Order> orderList, int index) {
         Order order = orderList.get(index);
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
         orderService.updateStatus(order);

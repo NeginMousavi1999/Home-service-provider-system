@@ -1,8 +1,13 @@
 package dao;
 
 import model.order.Order;
+import model.services.Service;
+import model.services.SubService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import java.util.List;
 
 /**
  * @author Negin Mousavi
@@ -49,5 +54,19 @@ public class OrderDao extends BaseDao {
         transaction.commit();
         session.close();
         return order;
+    }
+
+    public List<Order> findBySubService(SubService subService) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from System_Order o where o.subService=:subService";
+        Query<Order> query = session.createQuery(hql, Order.class);
+        query.setParameter("subService", subService);
+        List<Order> list = query.list();
+        transaction.commit();
+        session.close();
+        if (list.size() == 0)
+            return null;
+        return list;
     }
 }

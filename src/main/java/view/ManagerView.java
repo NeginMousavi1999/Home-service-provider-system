@@ -82,14 +82,14 @@ public class ManagerView {
     }
 
     public boolean deleteExpertByUsername(String username) {
-        User expert = expertService.findExpertByEmail(username);
+        Expert expert = expertService.findByEmail(username);
         return expertService.delete(expert);
     }
 
     public boolean editExpertByUsername(String username) {
         User expert;
         try {
-            expert = expertService.findExpertByEmail(username);
+            expert = expertService.findByEmail(username);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return false;
