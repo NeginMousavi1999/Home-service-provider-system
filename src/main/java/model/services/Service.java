@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.members.Expert;
 
 import javax.persistence.*;
 import java.util.ArrayList;
