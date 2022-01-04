@@ -1,5 +1,6 @@
 package view;
 
+import enumuration.OrderStatus;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
@@ -9,6 +10,7 @@ import model.order.Order;
 import model.order.Suggestion;
 import org.apache.commons.io.IOUtils;
 import service.ExpertService;
+import service.OrderService;
 import service.ServiceService;
 import service.SuggestionService;
 
@@ -26,6 +28,7 @@ public class ExpertView {
     private ExpertService expertService;
     private ServiceService serviceService;
     private SuggestionService suggestionService;
+    private OrderService orderService;
 
     public User createExpert(User expert, String expertise, String avatarName) {
         String fileName = String.format("static-pictures/%s.png", avatarName);
@@ -97,5 +100,15 @@ public class ExpertView {
         } catch (ParseException e) {
             System.out.println(e.getLocalizedMessage());
         }
+    }
+
+    public void finishOrder(Order order) {
+        order.setOrderStatus(OrderStatus.DONE);
+        orderService.updateStatus(order);
+    }
+
+    public void startOrder(Order order) {
+        order.setOrderStatus(OrderStatus.STARTED);
+        orderService.updateStatus(order);
     }
 }

@@ -8,12 +8,15 @@ import model.members.Customer;
 import model.members.Expert;
 import model.members.User;
 import model.order.Order;
+import model.order.Suggestion;
 import model.services.SubService;
 import service.CustomerService;
 import service.ExpertService;
 import service.OrderService;
 import service.SubServiceService;
 import validation.Validation;
+
+import java.util.List;
 
 /**
  * @author Negin Mousavi
@@ -45,12 +48,7 @@ public class CustomerView {
 
     }
 
-    public void pay() {
-        Order order = null;//TODO
-        Customer customer = order.getCustomer();
-        Expert expert = order.getExpert();
-        double price = order.getFinalPrice();
-
+    public void pay(Order order, Customer customer, Expert expert, double price) {
         customer.setCredit(customer.getCredit() - price);
         expert.setCredit(expert.getCredit() + price);
         order.setOrderStatus(OrderStatus.PAID);
@@ -72,7 +70,7 @@ public class CustomerView {
     }
 
     public boolean addNewOrder(String subServiceName, String address, String customerUsername, String description,
-                            double suggestedPrice) {
+                               double suggestedPrice) {
         SubService subService = getSubService(subServiceName);
         Customer customer = getOrderCustomer(customerUsername);
         if (subService == null || customer == null)
@@ -87,8 +85,9 @@ public class CustomerView {
                 .description(description)
                 .subService(subService)
                 .suggestedPrice(suggestedPrice)
-                .orderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)
+                .orderStatus(OrderStatus.NEW)
                 .build();
+        customer.getOrders().add(order);
         return orderService.saveOrder(order);
     }
 
@@ -101,5 +100,25 @@ public class CustomerView {
             return null;
         }
         return customer;
+    }
+
+    public Expert chooseSuggestionsForChoosingExpert(List<Suggestion> suggestionList, int index) {
+        Suggestion suggestion = suggestionList.get(index);
+        Order order = suggestion.getOrder();
+        order.setFinalPrice(suggestion.getSuggestedPrice());
+        order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+        orderService.updateStatus(order);
+        return suggestion.getExpert();
+    }
+
+    public List<Order> returnCustomerOrders(Customer customer) {
+        return customer.getOrders();
+    }
+
+    public List<Suggestion> chooseOrderForShowingSuggestions(/*Customer customer, */List<Order> orderList, int index) {
+        Order order = orderList.get(index);
+        order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
+        orderService.updateStatus(order);
+        return order.getSuggestions();
     }
 }

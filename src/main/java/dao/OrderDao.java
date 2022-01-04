@@ -12,6 +12,7 @@ public class OrderDao extends BaseDao {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(order);
+        session.saveOrUpdate(order.getCustomer());
         transaction.commit();
         session.close();
     }
