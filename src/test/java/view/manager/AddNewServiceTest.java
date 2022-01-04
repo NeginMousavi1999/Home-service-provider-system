@@ -23,7 +23,7 @@ public class AddNewServiceTest {
 
     @Test
     void givenNotDuplicateName_WhenAddNewServiceCalls_ThenReturnTrueResponse() {
-        boolean result = managerView.addNewService("Cleaning and hygiene");
+        boolean result = managerView.addNewService("decorate");
         assertTrue(result);
     }
 

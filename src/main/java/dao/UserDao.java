@@ -1,8 +1,11 @@
 package dao;
 
 import model.members.User;
+import model.members.UserViewRequest;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import java.util.List;
@@ -63,5 +66,29 @@ public class UserDao extends BaseDao {
         if (list.size() == 0)
             return null;
         return list.get(0);
+    }
+
+    public List<User> showUsersFiltering(UserViewRequest request) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        Criteria criteria = session.createCriteria(User.class, "u");
+
+        addRestrictionIfNotNull(criteria, "u.firstName", request.getFirstName());
+        addRestrictionIfNotNull(criteria, "u.lastName", request.getLastName());
+        addRestrictionIfNotNull(criteria, "u.email", request.getEmail());
+        addRestrictionIfNotNull(criteria, "u.userRole", request.getUserRole());
+        addRestrictionIfNotNull(criteria, "u.expertise", request.getExpertise());
+
+        List<User> list = criteria.list();
+        transaction.commit();
+        session.close();
+        return list;
+    }
+
+    private void addRestrictionIfNotNull(Criteria criteria, String propertyName, Object value) {
+        if (value != null) {
+            criteria.add(Restrictions.eq(propertyName, value));
+        }
     }
 }

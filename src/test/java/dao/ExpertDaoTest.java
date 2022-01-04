@@ -27,11 +27,11 @@ public class ExpertDaoTest {
     @Test
     void givenExpert_WhenCreateCalls_ThenReturnTrueResponse() {
         expert = Expert.builder()
-                .firstName("")
-                .lastName("")
+                .firstName("jack")
+                .lastName("jack")
                 .userRole(UserRole.EXPERT)
                 .userStatus(UserStatus.WAITING)
-                .expertise("")
+                .expertise("decorate")
                 .score(0)
                 .password("Jack1234")
                 .email("jack@gmail.com")

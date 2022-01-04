@@ -1,12 +1,17 @@
 package view;
 
+import dto.UserDto;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
 import model.members.User;
+import model.members.UserViewRequest;
 import service.UserService;
 import validation.Validation;
 
+import java.util.List;
+
+import static enumuration.UserRole.CUSTOMER;
 import static enumuration.UserRole.valueOf;
 
 /**
@@ -88,5 +93,29 @@ public class UserView {
                 customerView.showPanel(user);
                 break;
         }
+    }
+
+    public List<UserDto> showUsersFiltering() {
+        UserViewRequest request = getUserViewRequest();
+        return userService.showUsersFiltering(request);
+    }
+
+    private UserViewRequest getUserViewRequest() {
+        UserViewRequest request = UserViewRequest.builder()
+/*                .firstName("jack")
+                .lastName("jack")
+                .email("jack@gmail.com")
+                .expertise("decorate")
+                .userRole(UserRole.EXPERT)*/
+
+
+                .firstName("jack")
+                .lastName("jack")
+                .email("jack@gmail.com")
+//                .userRole(CUSTOMER)
+
+
+                .build();
+        return request;
     }
 }
