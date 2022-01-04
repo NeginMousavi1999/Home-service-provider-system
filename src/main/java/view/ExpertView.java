@@ -5,8 +5,10 @@ import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Expert;
 import model.members.User;
+import model.services.Service;
 import org.apache.commons.io.IOUtils;
 import service.ExpertService;
+import service.ServiceService;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,10 +19,11 @@ import java.io.InputStream;
 @Data
 public class ExpertView {
     ExpertService expertService;
+    ServiceService serviceService;
 
     public User createExpert(User expert) {
-        String expertise = getExpertise();
-        String avatarNumber = getAvatarNumber();
+        String expertise = getExpertise("");
+        String avatarNumber = getAvatarNumber("");
         String fileName = String.format("static-pictures/%s.png", avatarNumber);
         InputStream picStream = getStreamOfPicture(fileName);
         try {
@@ -44,12 +47,18 @@ public class ExpertView {
         return expert;
     }
 
-    private String getAvatarNumber() {
-        return "2";//TODO
+    private String getAvatarNumber(String avatar) {
+        return avatar;//TODO
     }
 
-    private String getExpertise() {
-        return "";
+    private String getExpertise(String expert) {
+        try {
+            serviceService.findServiceByName(expert);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return null;
+        }
+        return expert;
     }
 
     public InputStream getStreamOfPicture(String fileName) {

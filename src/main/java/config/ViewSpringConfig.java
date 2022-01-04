@@ -36,9 +36,10 @@ public class ViewSpringConfig {
     }
 
     @Bean
-    public ExpertView expertView(ExpertService expertService) {
+    public ExpertView expertView(ExpertService expertService, ServiceService serviceService) {
         ExpertView expertView = new ExpertView();
         expertView.setExpertService(expertService);
+        expertView.setServiceService(serviceService);
         return expertView;
     }
 
