@@ -1,6 +1,7 @@
 package config;
 
 import dao.*;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -10,7 +11,7 @@ import validation.Validation;
 /**
  * @author Negin Mousavi
  */
-@Import(value = {DaoSpringConfig.class, ValidationSpringConfig.class})
+@Import(value = {DaoSpringConfig.class, ValidationSpringConfig.class, MapperSpringConfig.class})
 @Configuration
 public class ServicesSpringConfig {
 
@@ -36,11 +37,12 @@ public class ServicesSpringConfig {
     }
 
     @Bean
-    public UserService userService(Validation validation, CustomerService customerService, UserDao userDao) {
+    public UserService userService(Validation validation, CustomerService customerService, UserDao userDao, ModelMapper modelMapper) {
         UserService userService = new UserService();
         userService.setCustomerService(customerService);
         userService.setValidation(validation);
         userService.setUserDao(userDao);
+        userService.setModelMapper(modelMapper);
         return userService;
     }
 

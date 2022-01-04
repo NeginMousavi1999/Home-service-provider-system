@@ -20,7 +20,7 @@ public class UserService {
     private Validation validation;
     private CustomerService customerService;
     private UserDao userDao;
-    private final ModelMapper modelMapper = new ModelMapper();
+    private ModelMapper modelMapper;
 
     public void changePassword(User user, String oldPass, String newPass) {
         try {
