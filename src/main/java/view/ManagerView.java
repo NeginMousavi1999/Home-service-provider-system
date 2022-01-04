@@ -16,11 +16,11 @@ import service.*;
  */
 @Data
 public class ManagerView {
-    ServiceService serviceService;
-    SubServiceService subServiceService;
-    ManagerService managerService;
-    ExpertService expertService;
-    CustomerService customerService;
+    private ServiceService serviceService;
+    private SubServiceService subServiceService;
+    private ManagerService managerService;
+    private ExpertService expertService;
+    private CustomerService customerService;
 
     public User createManager(User manager) {
         manager = Manager.builder()

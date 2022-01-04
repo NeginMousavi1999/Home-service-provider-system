@@ -11,7 +11,6 @@ import validation.Validation;
 
 import java.util.List;
 
-import static enumuration.UserRole.CUSTOMER;
 import static enumuration.UserRole.valueOf;
 
 /**
@@ -19,11 +18,11 @@ import static enumuration.UserRole.valueOf;
  */
 @Data
 public class UserView {
-    ManagerView managerView;
-    ExpertView expertView;
-    CustomerView customerView;
-    Validation validation;
-    UserService userService;
+    private ManagerView managerView;
+    private ExpertView expertView;
+    private CustomerView customerView;
+    private Validation validation;
+    private UserService userService;
 
     public User createUser(String firstName, String lastName, String email, String password, String role) {
 
@@ -101,7 +100,7 @@ public class UserView {
     }
 
     private UserViewRequest getUserViewRequest() {
-        UserViewRequest request = UserViewRequest.builder()
+        return UserViewRequest.builder()
 /*                .firstName("jack")
                 .lastName("jack")
                 .email("jack@gmail.com")
@@ -113,9 +112,8 @@ public class UserView {
                 .lastName("jack")
                 .email("jack@gmail.com")
 //                .userRole(CUSTOMER)
-
+                .expertise("decorate")
 
                 .build();
-        return request;
     }
 }

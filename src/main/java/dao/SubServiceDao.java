@@ -54,4 +54,18 @@ public class SubServiceDao extends BaseDao {
         session.close();
         return list;
     }
+
+    public SubService findByName(String name) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from SubService s where s.name=:name";
+        Query<SubService> query = session.createQuery(hql, SubService.class);
+        query.setParameter("name", name);
+        List<SubService> list = query.list();
+        transaction.commit();
+        session.close();
+        if (list.size() == 0)
+            return null;
+        return list.get(0);
+    }
 }

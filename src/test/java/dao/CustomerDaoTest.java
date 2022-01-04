@@ -4,8 +4,6 @@ import config.DaoSpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Customer;
-import model.members.Expert;
-import model.members.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

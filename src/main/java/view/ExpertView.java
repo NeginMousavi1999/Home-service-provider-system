@@ -5,7 +5,6 @@ import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Expert;
 import model.members.User;
-import model.services.Service;
 import org.apache.commons.io.IOUtils;
 import service.ExpertService;
 import service.ServiceService;
@@ -18,8 +17,8 @@ import java.io.InputStream;
  */
 @Data
 public class ExpertView {
-    ExpertService expertService;
-    ServiceService serviceService;
+    private ExpertService expertService;
+    private ServiceService serviceService;
 
     public User createExpert(User expert) {
         String expertise = getExpertise("");

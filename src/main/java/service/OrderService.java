@@ -14,4 +14,9 @@ public class OrderService {
     public void updateStatus(Order order) {
         orderDao.update(order);
     }
+
+    public boolean saveOrder(Order order) {
+        orderDao.create(order);
+        return true;
+    }
 }

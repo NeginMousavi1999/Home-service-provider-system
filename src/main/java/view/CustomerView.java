@@ -8,18 +8,21 @@ import model.members.Customer;
 import model.members.Expert;
 import model.members.User;
 import model.order.Order;
+import model.services.SubService;
 import service.CustomerService;
 import service.ExpertService;
 import service.OrderService;
+import service.SubServiceService;
 
 /**
  * @author Negin Mousavi
  */
 @Data
 public class CustomerView {
-    CustomerService customerService;
-    OrderService orderService;
-    ExpertService expertService;
+    private CustomerService customerService;
+    private OrderService orderService;
+    private ExpertService expertService;
+    private SubServiceService subServiceService;
 
     public User createCustomer(User customer) {
         double credit = getCredit();
@@ -42,7 +45,7 @@ public class CustomerView {
     }
 
     public void pay() {
-        Order order = null;
+        Order order = null;//TODO
         Customer customer = order.getCustomer();
         Expert expert = order.getExpert();
         double price = order.getFinalPrice();
@@ -58,5 +61,53 @@ public class CustomerView {
 
     public void showPanel(User user) {
 
+    }
+
+    private SubService getSubService() {
+        String name = getSubServiceName();
+        SubService subService;
+        try {
+            subService = subServiceService.findSubServiceByName(name);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            subService = null;
+        }
+        return subService;
+    }
+
+    private String getSubServiceName() {
+        return "Kitchen appliances";//TODO
+    }
+
+    public void addNewOrder() {
+        SubService subService = getSubService();
+        if (subService == null)
+            return;
+
+        Order order = Order.builder()
+                .address(getOrderAddress())
+                .customer(getOrderCustomer())
+                .description(getOrderDescription())
+                .subService(subService)
+                .suggestedPrice(getSuggestedPrice())
+                .orderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)
+                .build();
+        orderService.saveOrder(order);
+    }
+
+    private String getOrderDescription() {
+        return "this my order";
+    }
+
+    private Customer getOrderCustomer() {
+        return customerService.findByEmail("jack@gmail.com");
+    }
+
+    private String getOrderAddress() {
+        return "address";
+    }
+
+    private double getSuggestedPrice() {
+        return 120000;
     }
 }

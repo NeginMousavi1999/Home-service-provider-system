@@ -24,4 +24,8 @@ public class CustomerService {
     public void save(User customer) {
         customerDao.create(customer);
     }
+
+    public Customer findByEmail(String email) {
+        return customerDao.findByEmail(email);
+    }
 }

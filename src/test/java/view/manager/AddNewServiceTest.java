@@ -23,13 +23,13 @@ public class AddNewServiceTest {
 
     @Test
     void givenNotDuplicateName_WhenAddNewServiceCalls_ThenReturnTrueResponse() {
-        boolean result = managerView.addNewService("decorate");
+        boolean result = managerView.addNewService("Home Appliances");
         assertTrue(result);
     }
 
     @Test
     void givenDuplicateName_WhenAddNewServiceCalls_ThenReturnTrueResponse() {
-        boolean result = managerView.addNewService("decoration");
+        boolean result = managerView.addNewService("Home Appliances");
         assertFalse(result);
     }
 }
