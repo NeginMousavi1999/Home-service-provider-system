@@ -108,6 +108,7 @@ public class UserView {
                 .firstName("jack")
                 .lastName("jack")
                 .email("jack@gmail.com")
+                .serviceName("Home Appliances")
 //                .userRole(CUSTOMER)
 
 

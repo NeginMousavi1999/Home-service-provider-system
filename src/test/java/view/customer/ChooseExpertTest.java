@@ -15,7 +15,7 @@ import service.CustomerService;
 import service.OrderService;
 import view.CustomerView;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -37,9 +37,9 @@ public class ChooseExpertTest {
     @Test
     void test() {
         Customer customer = customerService.findByEmail("jack@gmail.com");
-        List<Order> orders = customerView.returnCustomerOrders(customer);
-        List<Suggestion> suggestions = customerView.chooseOrderForShowingSuggestions(orders, 0);
-        Expert expert = customerView.chooseSuggestionsForChoosingExpert(suggestions, 0);
+        Set<Order> orders = customerView.returnCustomerOrders(customer);
+        Set<Suggestion> suggestions = customerView.chooseOrderForShowingSuggestions(orders, 1);
+        Expert expert = customerView.chooseSuggestionsForChoosingExpert(suggestions, 1);
         Order order = orderService.findById(1);
         Assertions.assertEquals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE, order.getOrderStatus());
     }

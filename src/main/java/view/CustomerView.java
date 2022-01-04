@@ -16,7 +16,7 @@ import service.OrderService;
 import service.SubServiceService;
 import validation.Validation;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -102,8 +102,13 @@ public class CustomerView {
         return customer;
     }
 
-    public Expert chooseSuggestionsForChoosingExpert(List<Suggestion> suggestionList, int index) {
-        Suggestion suggestion = suggestionList.get(index);
+    public Expert chooseSuggestionsForChoosingExpert(Set<Suggestion> suggestionList, int id) {
+        Suggestion suggestion = null;
+        for (Suggestion s : suggestionList) {
+            if (s.getId() == id)
+                suggestion = s;
+        }
+        assert suggestion != null;
         Expert expert = suggestion.getExpert();
         Order order = suggestion.getOrder();
         order.setFinalPrice(suggestion.getSuggestedPrice());
@@ -114,12 +119,17 @@ public class CustomerView {
         return expert;
     }
 
-    public List<Order> returnCustomerOrders(Customer customer) {
+    public Set<Order> returnCustomerOrders(Customer customer) {
         return customer.getOrders();
     }
 
-    public List<Suggestion> chooseOrderForShowingSuggestions(List<Order> orderList, int index) {
-        Order order = orderList.get(index);
+    public Set<Suggestion> chooseOrderForShowingSuggestions(Set<Order> orderList, int id) {
+        Order order = null;
+        for (Order o : orderList) {
+            if (o.getId() == id)
+                order = o;
+        }
+        assert order != null;
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
         orderService.updateStatus(order);
         return order.getSuggestions();

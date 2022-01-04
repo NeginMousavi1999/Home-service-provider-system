@@ -11,9 +11,7 @@ import model.services.SubService;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Negin Mousavi
@@ -44,5 +42,5 @@ public class Order {
     @ManyToOne
     private Expert expert;
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private List<Suggestion> suggestions = new ArrayList<>();
+    private Set<Suggestion> suggestions = new HashSet<>();
 }

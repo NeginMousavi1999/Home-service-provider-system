@@ -73,12 +73,13 @@ public class UserDao extends BaseDao {
         Transaction transaction = session.beginTransaction();
 
         Criteria criteria = session.createCriteria(User.class, "u");
+        criteria.createAlias("u.services", "s");
 
         addRestrictionIfNotNull(criteria, "u.firstName", request.getFirstName());
         addRestrictionIfNotNull(criteria, "u.lastName", request.getLastName());
         addRestrictionIfNotNull(criteria, "u.email", request.getEmail());
         addRestrictionIfNotNull(criteria, "u.userRole", request.getUserRole());
-        addRestrictionIfNotNull(criteria, "u.services", request.getServiceName());//TODO
+        addRestrictionIfNotNull(criteria, "s.name", request.getServiceName());
 
         List<User> list = criteria.list();
         transaction.commit();

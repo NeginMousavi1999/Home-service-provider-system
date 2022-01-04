@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -24,5 +26,5 @@ public class Service {
     @Column(unique = true)
     private String name;
     @OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
-    private List<SubService> subServices = new ArrayList<>();
+    private Set<SubService> subServices = new HashSet<>();
 }
