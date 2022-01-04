@@ -28,14 +28,6 @@ public class UserDao extends BaseDao {
         return foundUser;
     }
 
-    public void update(User user) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(user);
-        transaction.commit();
-        session.close();
-    }
-
     public void delete(User user) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -51,6 +43,20 @@ public class UserDao extends BaseDao {
         Query<User> query = session.createQuery(hql, User.class);
         query.setParameter("email", email);
         query.setParameter("password", password);
+        List<User> list = query.list();
+        transaction.commit();
+        session.close();
+        if (list.size() == 0)
+            return null;
+        return list.get(0);
+    }
+
+    public User findByEmail(String email) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from User u where u.email=:email";
+        Query<User> query = session.createQuery(hql, User.class);
+        query.setParameter("email", email);
         List<User> list = query.list();
         transaction.commit();
         session.close();

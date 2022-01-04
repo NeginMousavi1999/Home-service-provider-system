@@ -14,7 +14,7 @@ public class CustomerService {
 
     public void changePassword(User user, String newPass) {
         user.setPassword(newPass);
-        customerDao.update(user);
+        customerDao.update((Customer) user);
     }
 
     public void updateCredit(Customer customer) {

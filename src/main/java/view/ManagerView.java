@@ -3,13 +3,13 @@ package view;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
+import model.members.Customer;
+import model.members.Expert;
 import model.members.Manager;
 import model.members.User;
 import model.services.Service;
 import model.services.SubService;
-import service.ManagerService;
-import service.ServiceService;
-import service.SubServiceService;
+import service.*;
 
 /**
  * @author Negin Mousavi
@@ -19,6 +19,8 @@ public class ManagerView {
     ServiceService serviceService;
     SubServiceService subServiceService;
     ManagerService managerService;
+    ExpertService expertService;
+    CustomerService customerService;
 
     public User createManager(User manager) {
         manager = Manager.builder()
@@ -76,5 +78,38 @@ public class ManagerView {
 
     public void showPanel(User user) {
 
+    }
+
+    public boolean deleteExpertByUsername(String username) {
+        User expert = expertService.findExpertByEmail(username);
+        return expertService.delete(expert);
+    }
+
+    public boolean editExpertByUsername(String username) {
+        User expert;
+        try {
+            expert = expertService.findExpertByEmail(username);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return false;
+        }
+        Expert editedExpert = getEditedExpert();
+        return expertService.updateExpert(editedExpert);
+    }
+
+    private Expert getEditedExpert() {
+        return null;
+    }
+
+    public boolean confirmExpert(Expert expert) {
+        expert.setUserStatus(UserStatus.CONFIRMED);
+        expertService.save(expert);
+        return true;
+    }
+
+    public boolean confirmCustomer(Customer customer) {
+        customer.setUserStatus(UserStatus.CONFIRMED);
+        customerService.save(customer);
+        return true;
     }
 }

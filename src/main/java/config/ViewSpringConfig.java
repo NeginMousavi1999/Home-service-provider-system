@@ -18,11 +18,15 @@ import view.UserView;
 public class ViewSpringConfig {
 
     @Bean
-    public ManagerView managerView(ServiceService serviceService, ManagerService managerService, SubServiceService subServiceService) {
+    public ManagerView managerView(ServiceService serviceService, ManagerService managerService,
+                                   SubServiceService subServiceService, ExpertService expertService
+            , CustomerService customerService) {
         ManagerView managerView = new ManagerView();
         managerView.setServiceService(serviceService);
         managerView.setSubServiceService(subServiceService);
         managerView.setManagerService(managerService);
+        managerView.setCustomerService(customerService);
+        managerView.setExpertService(expertService);
         return managerView;
     }
 

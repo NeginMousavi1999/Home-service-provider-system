@@ -19,4 +19,21 @@ public class ExpertService {
     public void save(User expert) {
         expertDao.create(expert);
     }
+
+    public boolean delete(User expert) {
+        expertDao.delete(expert);
+        return true;
+    }
+
+    public User findExpertByEmail(String email) {
+        User expert = expertDao.findByEmail(email);
+        if (expert == null)
+            throw new RuntimeException("we have not this expert!");
+        return expert;
+    }
+
+    public boolean updateExpert(Expert expert) {
+        expertDao.update(expert);
+        return true;
+    }
 }
