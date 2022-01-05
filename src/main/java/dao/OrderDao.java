@@ -1,7 +1,6 @@
 package dao;
 
 import model.order.Order;
-import model.services.Service;
 import model.services.SubService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;

@@ -1,9 +1,6 @@
 package model.order;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import model.members.Expert;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,7 +11,8 @@ import java.util.Date;
  * @author Negin Mousavi
  */
 @Entity
-@Data
+@Setter
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

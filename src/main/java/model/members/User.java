@@ -2,8 +2,9 @@ package model.members;
 
 import enumuration.UserRole;
 import enumuration.UserStatus;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,7 +15,8 @@ import java.util.Date;
  * @author Negin Mousavi
  */
 @Entity
-@Data
+@Setter
+@Getter
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

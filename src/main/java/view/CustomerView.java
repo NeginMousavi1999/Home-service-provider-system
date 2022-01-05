@@ -69,7 +69,7 @@ public class CustomerView {
                 filter(order -> order.getOrderStatus().equals(OrderStatus.DONE)).collect(Collectors.toSet());
     }
 
-    private SubService getSubService(String name) {
+    public SubService getSubService(String name) {
         SubService subService;
         try {
             subService = subServiceService.findSubServiceByName(name);
@@ -80,10 +80,8 @@ public class CustomerView {
         return subService;
     }
 
-    public boolean addNewOrder(String subServiceName, String address, String customerUsername, String description,
+    public boolean addNewOrder(SubService subService, String address, Customer customer, String description,
                                double suggestedPrice) {
-        SubService subService = getSubService(subServiceName);
-        Customer customer = getOrderCustomer(customerUsername);
         if (subService == null || customer == null)
             return false;
 
@@ -102,7 +100,7 @@ public class CustomerView {
         return orderService.saveOrder(order);
     }
 
-    private Customer getOrderCustomer(String email) {
+    public Customer getOrderCustomer(String email) {
         Customer customer;
         try {
             customer = customerService.findByEmail(email);

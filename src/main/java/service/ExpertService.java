@@ -2,7 +2,6 @@ package service;
 
 import dao.ExpertDao;
 import lombok.Data;
-import model.members.Customer;
 import model.members.Expert;
 import model.members.User;
 
