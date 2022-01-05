@@ -51,4 +51,16 @@ public class ExpertDao extends UserDao {
             return null;
         return list.get(0);
     }
+
+    public double getScore(Expert expert) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "select e.score from Expert e where e.id=:id";
+        Query<Double> query = session.createQuery(hql, Double.class);
+        query.setParameter("id", expert.getId());
+        List<Double> list = query.list();
+        transaction.commit();
+        session.close();
+        return list.get(0);
+    }
 }

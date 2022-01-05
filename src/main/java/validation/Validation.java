@@ -46,4 +46,10 @@ public class Validation {
             throw new RuntimeException("suggested price is less than base price!");
         return true;
     }
+
+    public boolean validateCustomerCredit(double credit, double price) {
+        if (credit < price)
+            throw new RuntimeException("you have not enough credit to pay!");
+        return true;
+    }
 }

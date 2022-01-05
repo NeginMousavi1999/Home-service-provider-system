@@ -21,8 +21,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 public class Expert extends User {
-    /*    private String expertise;*/
-    private int score;
+    private double score;
     @Lob
     @Column(name = "picture", columnDefinition = "LONGBLOB")
     private byte[] picture;

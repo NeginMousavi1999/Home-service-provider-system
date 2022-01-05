@@ -7,13 +7,11 @@ import lombok.Data;
 import model.members.Customer;
 import model.members.Expert;
 import model.members.User;
+import model.order.Comment;
 import model.order.Order;
 import model.order.Suggestion;
 import model.services.SubService;
-import service.CustomerService;
-import service.ExpertService;
-import service.OrderService;
-import service.SubServiceService;
+import service.*;
 import validation.Validation;
 
 import java.util.Set;
@@ -29,6 +27,7 @@ public class CustomerView {
     private ExpertService expertService;
     private SubServiceService subServiceService;
     private Validation validation;
+    private CommentService commentService;
 
     public User createCustomer(User customer, double credit) {
         customer = Customer.builder()
@@ -52,9 +51,15 @@ public class CustomerView {
     public void pay(Order order) {
         if (!order.getOrderStatus().equals(OrderStatus.DONE))
             return;
-        Customer customer = order.getCustomer();
-        Expert expert = order.getExpert();
         double price = order.getFinalPrice();
+        Customer customer = order.getCustomer();
+        try {
+            validation.validateCustomerCredit(customer.getCredit(), price);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return;
+        }
+        Expert expert = order.getExpert();
         customer.setCredit(customer.getCredit() - price);
         expert.setCredit(expert.getCredit() + price);
         order.setOrderStatus(OrderStatus.PAID);
@@ -148,5 +153,23 @@ public class CustomerView {
         if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
             return null;
         return order.getSuggestions();
+    }
+
+    public void addFeedback(Order order, String customerComment, double score) {
+        if (!order.getOrderStatus().equals(OrderStatus.PAID))
+            return;
+        Expert expert = order.getExpert();
+        double oldScore = expertService.getExpertScore(expert);
+        expert.setScore((oldScore + score) / 2);
+        if (customerComment.length() != 0) {
+            Comment comment = Comment.builder()
+                    .comment(customerComment)
+                    .expert(expert)
+                    .customer(order.getCustomer())
+                    .order(order)
+                    .build();
+            commentService.save(comment);
+        }
+        expertService.updateExpert(expert);
     }
 }

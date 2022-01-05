@@ -75,4 +75,11 @@ public class ServicesSpringConfig {
         suggestionService.setSuggestionDao(suggestionDao);
         return suggestionService;
     }
+
+    @Bean
+    public CommentService commentService(CommentDao commentDao) {
+        CommentService commentService = new CommentService();
+        commentService.setCommentDao(commentDao);
+        return commentService;
+    }
 }

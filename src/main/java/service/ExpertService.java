@@ -47,4 +47,8 @@ public class ExpertService {
             throw new RuntimeException("we have not this expert!");
         return expert;
     }
+
+    public double getExpertScore(Expert expert) {
+        return expertDao.getScore(expert);
+    }
 }

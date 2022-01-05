@@ -1,7 +1,6 @@
 package model.order;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import model.members.Customer;
 import model.members.Expert;
 
@@ -13,6 +12,9 @@ import javax.persistence.*;
 @Entity
 @Setter
 @Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,4 +24,6 @@ public class Comment {
     private Customer customer;
     @ManyToOne
     private Expert expert;
+    @OneToOne
+    private Order order;
 }
