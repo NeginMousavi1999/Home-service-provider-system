@@ -145,10 +145,8 @@ public class CustomerView {
                 order = o;
         }
         assert order != null;
-        if (!order.getOrderStatus().equals(OrderStatus.NEW))
+        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
             return null;
-        order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
-        orderService.updateStatus(order);
         return order.getSuggestions();
     }
 }

@@ -1,39 +1,46 @@
-package view.expert;
+package view.customer;
 
 import config.ServicesSpringConfig;
 import config.ViewSpringConfig;
+import enumuration.OrderStatus;
+import model.members.Customer;
 import model.members.Expert;
 import model.order.Order;
+import model.order.Suggestion;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import service.ExpertService;
+import service.CustomerService;
 import service.OrderService;
-import view.ExpertView;
+import view.CustomerView;
 
-import java.util.Date;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
  */
-public class SendSuggestionTest {
-    ExpertView view;
+public class PayTest {
+    CustomerView customerView;
+    CustomerService customerService;
     OrderService orderService;
-    ExpertService expertService;
 
     @BeforeEach
     void init() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
+        customerView = (CustomerView) context.getBean("customerView");
         AnnotationConfigApplicationContext context2 = new AnnotationConfigApplicationContext(ServicesSpringConfig.class);
-        view = (ExpertView) context.getBean("expertView");
+        customerService = (CustomerService) context2.getBean("customerService");
         orderService = (OrderService) context2.getBean("orderService");
-        expertService = (ExpertService) context2.getBean("expertService");
     }
 
     @Test
     void test() {
-        Order order = orderService.findById(1);
-        Expert expert = expertService.findByEmail("rachel@gmail.com");
-        view.sendSuggestion(expert, order, 150000, 12, new Date());
+        Customer customer = customerService.findByEmail("jack@gmail.com");
+        Set<Order> orders = customerView.getOrdersForPay(customer);
+        System.out.println(orders.size());
+        for (Order order : orders) {
+            customerView.pay(order);
+        }
     }
 }
