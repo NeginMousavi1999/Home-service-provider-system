@@ -20,7 +20,6 @@ public class SubService {
     @Column(unique = true)
     private String name;
     @ManyToOne
-    //@Column(nullable = false) //TODO: uncomment this --> exception... why?
     private Service service;
     private double cost;
     private String description;

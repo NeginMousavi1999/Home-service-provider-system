@@ -1,6 +1,7 @@
 package view;
 
 import enumuration.OrderStatus;
+import enumuration.SuggestionStatus;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class CustomerView {
     private SubServiceService subServiceService;
     private Validation validation;
     private CommentService commentService;
+    private SuggestionService suggestionService;
 
     public User createCustomer(User customer, double credit) {
         customer = Customer.builder()
@@ -66,7 +68,7 @@ public class CustomerView {
 
         customerService.updateCredit(customer);
         expertService.updateCredit(expert);
-        orderService.updateStatus(order);
+        orderService.update(order);
     }
 
     public Set<Order> getOrdersForPay(Customer customer) {
@@ -131,11 +133,14 @@ public class CustomerView {
         Order order = suggestion.getOrder();
         if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
             return null;
+        suggestion.setSuggestionStatus(SuggestionStatus.ACCEPTED);
         order.setExpert(expert);
         order.setFinalPrice(suggestion.getSuggestedPrice());
         order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
         order.setToBeDoneDate(suggestion.getStartTime());
-        orderService.updateStatus(order);
+//        orderService.update(order);
+        suggestion.setOrder(order);
+        suggestionService.update(suggestion);
         return expert;
     }
 

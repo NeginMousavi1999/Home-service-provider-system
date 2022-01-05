@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import service.ExpertService;
 import service.OrderService;
+import util.GenerateDate;
 import view.ExpertView;
 
 import java.util.Date;
@@ -32,8 +33,9 @@ public class SendSuggestionTest {
 
     @Test
     void test() {
-        Order order = orderService.findById(1);
+        Order order = orderService.findById(4);
         Expert expert = expertService.findByEmail("rachel@gmail.com");
-        view.sendSuggestion(expert, order, 150000, 12, new Date());
+        Date date = GenerateDate.generateByPattern("yyyy-MM-dd", "2022-01-06");
+        view.sendSuggestion(expert, order, 150000, 12, date);
     }
 }

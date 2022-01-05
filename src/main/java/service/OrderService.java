@@ -14,7 +14,7 @@ import java.util.List;
 public class OrderService {
     OrderDao orderDao;
 
-    public void updateStatus(Order order) {
+    public void update(Order order) {
         orderDao.update(order);
     }
 

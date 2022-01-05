@@ -32,7 +32,8 @@ public class ViewSpringConfig {
 
     @Bean
     public CustomerView customerView(CustomerService customerService, OrderService orderService, ExpertService expertService,
-                                     SubServiceService subServiceService, Validation validation, CommentService commentService) {
+                                     SubServiceService subServiceService, Validation validation, CommentService commentService,
+                                     SuggestionService suggestionService) {
         CustomerView customerView = new CustomerView();
         customerView.setCustomerService(customerService);
         customerView.setExpertService(expertService);
@@ -40,6 +41,7 @@ public class ViewSpringConfig {
         customerView.setSubServiceService(subServiceService);
         customerView.setValidation(validation);
         customerView.setCommentService(commentService);
+        customerView.setSuggestionService(suggestionService);
         return customerView;
     }
 

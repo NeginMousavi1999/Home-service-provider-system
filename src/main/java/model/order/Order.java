@@ -25,16 +25,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+//    @Column(name = "sub_service_id") TODO: uncomment this --> exception... why?
     @OneToOne
     private SubService subService;
     private String description;
+    @Column(name = "suggested_price")
     private double suggestedPrice;
+    @Column(name = "final_price")
     private double finalPrice;
     @Enumerated(value = EnumType.STRING)
+    @Column(name = "order_status")
     private OrderStatus orderStatus;
     @CreationTimestamp
+    @Column(name = "registration_date")
     private Date registrationDate;
     @CreationTimestamp
+    @Column(name = "to_be_done_date")
     private Date toBeDoneDate;
     private String address;
     @ManyToOne

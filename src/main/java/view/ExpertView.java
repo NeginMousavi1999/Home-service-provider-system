@@ -1,6 +1,7 @@
 package view;
 
 import enumuration.OrderStatus;
+import enumuration.SuggestionStatus;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
@@ -17,8 +18,6 @@ import service.SuggestionService;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -95,7 +94,7 @@ public class ExpertView {
         return orderList;
     }
 
-    public Order chooseOrderForSendingSuggestion(List<Order> orderList, int index) {// TODO: orders status must be NEW
+    public Order chooseOrderForSendingSuggestion(List<Order> orderList, int index) {
         return orderList.get(index);
     }
 
@@ -108,33 +107,32 @@ public class ExpertView {
                 .durationOfWork(durationOfWork)
                 .startTime(startTime)
                 .suggestedPrice(price)
+                .suggestionStatus(SuggestionStatus.NEW)
                 .build();
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
         order.getSuggestions().add(suggestion);
         suggestionService.saveSuggestion(suggestion);
     }
 
-    public void getDate() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String date = null;
-        try {
-            Date requestDate = simpleDateFormat.parse(date);
-        } catch (ParseException e) {
-            System.out.println(e.getLocalizedMessage());
-        }
-    }
-
     public void finishOrder(Order order) {
         if (!order.getOrderStatus().equals(OrderStatus.STARTED))
             return;
         order.setOrderStatus(OrderStatus.DONE);
-        orderService.updateStatus(order);
+        orderService.update(order);
     }
 
     public void startOrder(Order order) {
         if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE))
             return;
         order.setOrderStatus(OrderStatus.STARTED);
-        orderService.updateStatus(order);
+        orderService.update(order);
+    }
+
+    public List<Suggestion> getExpertSuggestions(Expert expert) {
+        return suggestionService.getAllSuggestions(expert);
+    }
+
+    public List<Suggestion> getAcceptedSuggestionsForStarting(Expert expert) {
+        return suggestionService.getByStatus(expert, SuggestionStatus.ACCEPTED);
     }
 }

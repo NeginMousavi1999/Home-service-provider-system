@@ -38,9 +38,9 @@ public class ChooseExpertTest {
     void test() {
         Customer customer = customerService.findByEmail("jack@gmail.com");
         Set<Order> orders = customerView.returnCustomerOrders(customer);
-        Set<Suggestion> suggestions = customerView.chooseOrderForShowingSuggestions(orders, 1);
+        Set<Suggestion> suggestions = customerView.chooseOrderForShowingSuggestions(orders, 3);
         Expert expert = customerView.chooseSuggestionsForChoosingExpert(suggestions, 1);
-        Order order = orderService.findById(1);
+        Order order = orderService.findById(3);
         Assertions.assertEquals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE, order.getOrderStatus());
     }
 }
