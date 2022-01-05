@@ -1,6 +1,7 @@
 package dto;
 
 import enumuration.OrderStatus;
+import lombok.Data;
 import model.members.Customer;
 import model.order.Suggestion;
 
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * @author Negin Mousavi
  */
+@Data
 public class OrderDto {
     private int id;
     private double suggestedPrice;
