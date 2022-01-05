@@ -36,7 +36,8 @@ public class AddNewOrderTest {
 
     @ParameterizedTest
     @CsvSource({"Kitchen appliances, address, jk@gmail.com, description, 1200000",
-            "something, address, jack@gmail.com, description, 1200000"})
+            "something, address, jack@gmail.com, description, 1200000",
+            "Kitchen appliances, address, jack@gmail.com, description, 120"})
     void addOrderTestWithInvalidValues_WhenAddNewOrderCalls_ThenReturnTrueResponse(String subServiceName, String address
             , String customerUsername, String description, double suggestedPrice) {
         SubService subService = customerView.getSubService(subServiceName);

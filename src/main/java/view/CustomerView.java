@@ -85,8 +85,12 @@ public class CustomerView {
         if (subService == null || customer == null)
             return false;
 
-        if (!validation.validateSuggestedPrice(suggestedPrice, subService.getCost()))
+        try {
+            validation.validateSuggestedPrice(suggestedPrice, subService.getCost());
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
             return false;
+        }
 
         Order order = Order.builder()
                 .address(address)
