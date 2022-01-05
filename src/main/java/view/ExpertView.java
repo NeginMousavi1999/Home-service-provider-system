@@ -95,11 +95,13 @@ public class ExpertView {
         return orderList;
     }
 
-    public Order chooseOrderForSendingSuggestion(List<Order> orderList, int index) {
+    public Order chooseOrderForSendingSuggestion(List<Order> orderList, int index) {// TODO: orders status must be NEW
         return orderList.get(index);
     }
 
     public void sendSuggestion(Expert expert, Order order, double price, int durationOfWork, Date startTime) {
+        if (!order.getOrderStatus().equals(OrderStatus.NEW))
+            return;
         Suggestion suggestion = Suggestion.builder()
                 .expert(expert)
                 .order(order)
@@ -107,6 +109,7 @@ public class ExpertView {
                 .startTime(startTime)
                 .suggestedPrice(price)
                 .build();
+        order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
         order.getSuggestions().add(suggestion);
         suggestionService.saveSuggestion(suggestion);
     }
@@ -122,11 +125,15 @@ public class ExpertView {
     }
 
     public void finishOrder(Order order) {
+        if (!order.getOrderStatus().equals(OrderStatus.STARTED))
+            return;
         order.setOrderStatus(OrderStatus.DONE);
         orderService.updateStatus(order);
     }
 
     public void startOrder(Order order) {
+        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE))
+            return;
         order.setOrderStatus(OrderStatus.STARTED);
         orderService.updateStatus(order);
     }

@@ -17,6 +17,7 @@ import service.SubServiceService;
 import validation.Validation;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -48,7 +49,12 @@ public class CustomerView {
 
     }
 
-    public void pay(Order order, Customer customer, Expert expert, double price) {
+    public void pay(Order order) {
+        if (!order.getOrderStatus().equals(OrderStatus.DONE))
+            return;
+        Customer customer = order.getCustomer();
+        Expert expert = order.getExpert();
+        double price = order.getFinalPrice();
         customer.setCredit(customer.getCredit() - price);
         expert.setCredit(expert.getCredit() + price);
         order.setOrderStatus(OrderStatus.PAID);
@@ -56,6 +62,11 @@ public class CustomerView {
         customerService.updateCredit(customer);
         expertService.updateCredit(expert);
         orderService.updateStatus(order);
+    }
+
+    public Set<Order> getOrdersForPay(Customer customer) {
+        return customer.getOrders().stream().
+                filter(order -> order.getOrderStatus().equals(OrderStatus.DONE)).collect(Collectors.toSet());
     }
 
     private SubService getSubService(String name) {
@@ -111,9 +122,11 @@ public class CustomerView {
         assert suggestion != null;
         Expert expert = suggestion.getExpert();
         Order order = suggestion.getOrder();
+        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
+            return null;
+        order.setExpert(expert);
         order.setFinalPrice(suggestion.getSuggestedPrice());
         order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
-        order.setExpert(expert);
         order.setToBeDoneDate(suggestion.getStartTime());
         orderService.updateStatus(order);
         return expert;
@@ -130,6 +143,8 @@ public class CustomerView {
                 order = o;
         }
         assert order != null;
+        if (!order.getOrderStatus().equals(OrderStatus.NEW))
+            return null;
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
         orderService.updateStatus(order);
         return order.getSuggestions();
