@@ -25,20 +25,9 @@ public class ExpertService {
         return true;
     }
 
-/*    public User findExpertByEmail(String email) {
-        User expert = expertDao.findByEmail(email);
-        if (expert == null)
-            throw new RuntimeException("we have not this expert!");
-        return expert;
-    }*/
-
     public boolean updateExpert(Expert expert) {
         expertDao.update(expert);
         return true;
-    }
-
-    public Expert findById(int id) {
-        return expertDao.findById(id);
     }
 
     public Expert findByEmail(String email) {

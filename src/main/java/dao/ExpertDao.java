@@ -28,15 +28,6 @@ public class ExpertDao extends UserDao {
         session.close();
     }
 
-    public Expert findById(int id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Expert expert = session.get(Expert.class, id);
-        transaction.commit();
-        session.close();
-        return expert;
-    }
-
     @Override
     public Expert findByEmail(String email) {
         Session session = sessionFactory.openSession();
