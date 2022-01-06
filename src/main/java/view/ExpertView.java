@@ -15,6 +15,7 @@ import service.ExpertService;
 import service.OrderService;
 import service.ServiceService;
 import service.SuggestionService;
+import validation.Validation;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +30,7 @@ public class ExpertView {
     private ServiceService serviceService;
     private SuggestionService suggestionService;
     private OrderService orderService;
+    private Validation validation;
 
     public User createExpert(User expert, String serviceName, String avatarName) {
         String fileName = String.format("static-pictures/%s.png", avatarName);
@@ -45,9 +47,6 @@ public class ExpertView {
                     .lastName(expert.getLastName())
                     .email(expert.getEmail())
                     .password(expert.getPassword())
-/*
-                    .expertise(expertise)
-*/
                     .services(services)
                     .picture(IOUtils.toByteArray(picStream))
                     .score(0)
@@ -86,7 +85,7 @@ public class ExpertView {
 
     }
 
-    public List<Order> returnOrdersWithSameExpertiseExpert(Expert expert) {
+    public List<Order> returnOrdersWithSameServiceExpert(Expert expert) {
         Set<Service> services = expert.getServices();
         List<Order> orderList = new ArrayList<>();
         services.forEach(service -> service.getSubServices().stream()
@@ -101,6 +100,12 @@ public class ExpertView {
     public void sendSuggestion(Expert expert, Order order, double price, int durationOfWork, Date startTime) {
         if (!order.getOrderStatus().equals(OrderStatus.NEW))
             return;
+        try {
+            validation.validateUserStatus(UserStatus.CONFIRMED, expert.getUserStatus());
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return;
+        }
         Suggestion suggestion = Suggestion.builder()
                 .expert(expert)
                 .order(order)

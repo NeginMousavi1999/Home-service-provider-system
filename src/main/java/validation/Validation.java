@@ -1,6 +1,7 @@
 package validation;
 
 import enumuration.UserRole;
+import enumuration.UserStatus;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -50,6 +51,12 @@ public class Validation {
     public boolean validateCustomerCredit(double credit, double price) {
         if (credit < price)
             throw new RuntimeException("you have not enough credit to pay!");
+        return true;
+    }
+
+    public boolean validateUserStatus(UserStatus expect, UserStatus actual) {
+        if (!expect.equals(actual))
+            throw new RuntimeException(String.format("your status is not %s!", expect.toString().toLowerCase()));
         return true;
     }
 }

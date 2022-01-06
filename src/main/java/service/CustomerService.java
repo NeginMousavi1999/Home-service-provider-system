@@ -17,7 +17,7 @@ public class CustomerService {
         customerDao.update((Customer) user);
     }
 
-    public void updateCredit(Customer customer) {
+    public void update(Customer customer) {
         customerDao.update(customer);
     }
 

@@ -15,13 +15,6 @@ public class SubServiceService {
     SubServiceDao subServiceDao;
     Validation validation;
 
-    public SubService getSubServiceById(int id) {
-        SubService subService = subServiceDao.read(id);
-        if (subService == null)
-            throw new RuntimeException("sub service not found!");
-        return subService;
-    }
-
     public List<String> getAllServiceName() {
         return subServiceDao.getAllName();
     }

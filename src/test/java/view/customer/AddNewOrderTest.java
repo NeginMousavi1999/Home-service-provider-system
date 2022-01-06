@@ -27,10 +27,10 @@ public class AddNewOrderTest {
 
     @Test
     void addOrderTestWithValidValues_WhenAddNewOrderCalls_ThenReturnTrueResponse() {
-        SubService subService = customerView.getSubService("Kitchen appliances");
-        Customer customer = customerView.getOrderCustomer("jack@gmail.com");
-        boolean result = customerView.addNewOrder(subService, "address",
-                customer, "description", 1100000);
+        SubService subService = customerView.getSubServiceByName("Kitchen appliances");
+        Customer customer = customerView.getCustomerByEmail("jack@gmail.com");
+        boolean result = customerView.addNewOrder(subService, "address2",
+                customer, "description2", 1330000);
         assertTrue(result);
     }
 
@@ -40,8 +40,8 @@ public class AddNewOrderTest {
             "Kitchen appliances, address, jack@gmail.com, description, 120"})
     void addOrderTestWithInvalidValues_WhenAddNewOrderCalls_ThenReturnTrueResponse(String subServiceName, String address
             , String customerUsername, String description, double suggestedPrice) {
-        SubService subService = customerView.getSubService(subServiceName);
-        Customer customer = customerView.getOrderCustomer(customerUsername);
+        SubService subService = customerView.getSubServiceByName(subServiceName);
+        Customer customer = customerView.getCustomerByEmail(customerUsername);
         boolean result = customerView.addNewOrder(subService, address,
                 customer, description, suggestedPrice);
         assertFalse(result);

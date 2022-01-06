@@ -81,35 +81,37 @@ public class ManagerView {
     }
 
     public boolean deleteExpertByUsername(String username) {
-        Expert expert = expertService.findByEmail(username);
-        return expertService.delete(expert);
-    }
-
-    public boolean editExpertByUsername(String username) {
-        User expert;
+        Expert expert;
         try {
             expert = expertService.findByEmail(username);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return false;
         }
-        Expert editedExpert = getEditedExpert();
-        return expertService.updateExpert(editedExpert);
+        return expertService.delete(expert);
     }
 
-    private Expert getEditedExpert() {
-        return null;
+    public boolean editExpertScoreByUsername(String username, double score) {
+        Expert expert;
+        try {
+            expert = expertService.findByEmail(username);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return false;
+        }
+        expert.setScore(score);
+        return expertService.update(expert);
     }
 
     public boolean confirmExpert(Expert expert) {
         expert.setUserStatus(UserStatus.CONFIRMED);
-        expertService.save(expert);
+        expertService.update(expert);
         return true;
     }
 
     public boolean confirmCustomer(Customer customer) {
         customer.setUserStatus(UserStatus.CONFIRMED);
-        customerService.save(customer);
+        customerService.update(customer);
         return true;
     }
 }

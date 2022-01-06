@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Negin Mousavi
  */
 public class GenerateDate {
-    public static Date generateByPattern(String pattern,String date) {//"yyyy-MM-dd"
+    public static Date generateByPattern(String pattern, String date) {//"yyyy-MM-dd"
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         Date requestDate = null;
         try {

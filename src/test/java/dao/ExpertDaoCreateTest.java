@@ -4,7 +4,6 @@ import config.DaoSpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Expert;
-import model.members.User;
 import model.services.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,14 +36,14 @@ public class ExpertDaoCreateTest {
         Set<Service> services = new HashSet<>();
         services.add(service);
         expert = Expert.builder()
-                .firstName("rachel")
-                .lastName("rachel")
+                .firstName("rose")
+                .lastName("rose")
                 .userRole(UserRole.EXPERT)
                 .userStatus(UserStatus.WAITING)
                 .services(services)
                 .score(0)
-                .password("Rachel34")
-                .email("rachel@gmail.com")
+                .password("Rose1234")
+                .email("rose@gmail.com")
                 .credit(0)
                 .build();
 

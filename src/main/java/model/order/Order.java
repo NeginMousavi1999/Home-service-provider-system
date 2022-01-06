@@ -39,7 +39,6 @@ public class Order {
     @CreationTimestamp
     @Column(name = "registration_date")
     private Date registrationDate;
-    @CreationTimestamp
     @Column(name = "to_be_done_date")
     private Date toBeDoneDate;
     private String address;

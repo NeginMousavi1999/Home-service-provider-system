@@ -103,15 +103,11 @@ public class UserView {
                 .lastName("jack")
                 .email("jack@gmail.com")
                 .userRole(UserRole.EXPERT)*/
-
-
                 .firstName("jack")
                 .lastName("jack")
                 .email("jack@gmail.com")
                 .serviceName("Home Appliances")
 //                .userRole(CUSTOMER)
-
-
                 .build();
     }
 }

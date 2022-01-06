@@ -12,10 +12,6 @@ import model.members.User;
 public class ExpertService {
     ExpertDao expertDao;
 
-    public void updateCredit(Expert expert) {
-        expertDao.update(expert);
-    }
-
     public void save(User expert) {
         expertDao.create(expert);
     }
@@ -25,7 +21,7 @@ public class ExpertService {
         return true;
     }
 
-    public boolean updateExpert(Expert expert) {
+    public boolean update(Expert expert) {
         expertDao.update(expert);
         return true;
     }

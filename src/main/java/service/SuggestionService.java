@@ -7,7 +7,6 @@ import model.members.Expert;
 import model.order.Suggestion;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Negin Mousavi

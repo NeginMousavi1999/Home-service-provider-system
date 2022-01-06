@@ -1,32 +1,41 @@
 package view.expert;
 
-import config.ServicesSpringConfig;
 import config.ViewSpringConfig;
+import enumuration.OrderStatus;
 import model.order.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import service.OrderService;
 import view.ExpertView;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * @author Negin Mousavi
  */
 public class FinishOrderTest {
     ExpertView view;
-    OrderService orderService;
 
     @BeforeEach
     void init() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        AnnotationConfigApplicationContext context2 = new AnnotationConfigApplicationContext(ServicesSpringConfig.class);
         view = (ExpertView) context.getBean("expertView");
-        orderService = (OrderService) context2.getBean("orderService");
     }
 
     @Test
-    void test() {
-        Order order = orderService.findById(1);
+    void giveValidOrder_WhenFinishOrderCall_ThenReturnTrueResponse() {
+        Order order = view.getOrderService().findById(1);
         view.finishOrder(order);
+        order = view.getOrderService().findById(1);
+        assertEquals(order.getOrderStatus(), OrderStatus.DONE);
+    }
+
+    @Test
+    void giveInvalidOrder_WhenFinishOrderCall_ThenReturnTrueResponse() {
+        Order order = view.getOrderService().findById(2);
+        view.startOrder(order);
+        order = view.getOrderService().findById(2);
+        assertNotEquals(order.getOrderStatus(), OrderStatus.DONE);
     }
 }

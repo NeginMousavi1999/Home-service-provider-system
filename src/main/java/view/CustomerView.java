@@ -15,7 +15,8 @@ import model.services.SubService;
 import service.*;
 import validation.Validation;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -66,17 +67,17 @@ public class CustomerView {
         expert.setCredit(expert.getCredit() + price);
         order.setOrderStatus(OrderStatus.PAID);
 
-        customerService.updateCredit(customer);
-        expertService.updateCredit(expert);
+        customerService.update(customer);
+        expertService.update(expert);
         orderService.update(order);
     }
 
-    public Set<Order> getOrdersForPay(Customer customer) {
+    public List<Order> getOrdersForPay(Customer customer) {
         return customer.getOrders().stream().
-                filter(order -> order.getOrderStatus().equals(OrderStatus.DONE)).collect(Collectors.toSet());
+                filter(order -> order.getOrderStatus().equals(OrderStatus.DONE)).collect(Collectors.toList());
     }
 
-    public SubService getSubService(String name) {
+    public SubService getSubServiceByName(String name) {
         SubService subService;
         try {
             subService = subServiceService.findSubServiceByName(name);
@@ -94,6 +95,7 @@ public class CustomerView {
 
         try {
             validation.validateSuggestedPrice(suggestedPrice, subService.getCost());
+            validation.validateUserStatus(UserStatus.CONFIRMED, customer.getUserStatus());
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return false;
@@ -111,7 +113,7 @@ public class CustomerView {
         return orderService.saveOrder(order);
     }
 
-    public Customer getOrderCustomer(String email) {
+    public Customer getCustomerByEmail(String email) {
         Customer customer;
         try {
             customer = customerService.findByEmail(email);
@@ -122,12 +124,10 @@ public class CustomerView {
         return customer;
     }
 
-    public Expert chooseSuggestionsForChoosingExpert(Set<Suggestion> suggestionList, int id) {
-        Suggestion suggestion = null;
-        for (Suggestion s : suggestionList) {
-            if (s.getId() == id)
-                suggestion = s;
-        }
+    public Expert returnChosenExpert(List<Suggestion> suggestionList, int index) {
+        if (suggestionList == null)
+            return null;
+        Suggestion suggestion = suggestionList.get(index);
         assert suggestion != null;
         Expert expert = suggestion.getExpert();
         Order order = suggestion.getOrder();
@@ -138,26 +138,23 @@ public class CustomerView {
         order.setFinalPrice(suggestion.getSuggestedPrice());
         order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
         order.setToBeDoneDate(suggestion.getStartTime());
-//        orderService.update(order);
         suggestion.setOrder(order);
         suggestionService.update(suggestion);
         return expert;
     }
 
-    public Set<Order> returnCustomerOrders(Customer customer) {
-        return customer.getOrders();
+    public List<Order> returnCustomerOrders(Customer customer) {
+        return new ArrayList<>(customer.getOrders());
     }
 
-    public Set<Suggestion> chooseOrderForShowingSuggestions(Set<Order> orderList, int id) {
-        Order order = null;
-        for (Order o : orderList) {
-            if (o.getId() == id)
-                order = o;
-        }
+    public List<Suggestion> returnChosenOrderSuggestions(List<Order> orderList, int index) {
+        if (orderList == null)
+            return null;
+        Order order = orderList.get(index);
         assert order != null;
         if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
             return null;
-        return order.getSuggestions();
+        return new ArrayList<>(order.getSuggestions());
     }
 
     public void addFeedback(Order order, String customerComment, double score) {
@@ -175,6 +172,6 @@ public class CustomerView {
                     .build();
             commentService.save(comment);
         }
-        expertService.updateExpert(expert);
+        expertService.update(expert);
     }
 }
