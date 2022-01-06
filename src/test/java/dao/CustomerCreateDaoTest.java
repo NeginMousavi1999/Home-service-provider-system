@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Negin Mousavi
  */
-public class CustomerDaoTest {
+public class CustomerCreateDaoTest {
     CustomerDao customerDao;
     Customer customer;
 

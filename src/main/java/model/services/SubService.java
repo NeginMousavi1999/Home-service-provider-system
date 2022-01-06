@@ -20,6 +20,7 @@ public class SubService {
     @Column(unique = true)
     private String name;
     @ManyToOne
+    @JoinColumn(nullable = false)
     private Service service;
     private double cost;
     private String description;

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Negin Mousavi
  */
-public class ExpertDaoTest {
+public class ExpertDaoCreateTest {
     ExpertDao expertDao;
     Expert expert;
     ServiceDao serviceDao;
@@ -52,23 +52,5 @@ public class ExpertDaoTest {
         expertDao.createExpert(expert);
         Long after = expertDao.getCountOfRecordsByEntityName("Expert");
         assertEquals(before, after - 1);
-    }
-
-    @Test
-    void givenExpert_WhenDeleteCalls_ThenReturnTrueResponse() { //TODO: it is not completely correct!
-        expert = (Expert) expertDao.read(1L);
-        Long before = expertDao.getCountOfRecordsByEntityName("Expert");
-        expertDao.delete(expert);
-        Long after = expertDao.getCountOfRecordsByEntityName("Expert");
-        assertEquals(before, after + 1);
-    }
-
-    @Test
-    void givenExpert_WhenUpdateCalls_ThenReturnTrueResponse() {
-        expert = (Expert) expertDao.read(1L);
-        expert.setUserStatus(UserStatus.CONFIRMED);
-        expertDao.update(expert);
-        User updatedExpert = expertDao.read(1L);
-        assertEquals(expert, updatedExpert);
     }
 }

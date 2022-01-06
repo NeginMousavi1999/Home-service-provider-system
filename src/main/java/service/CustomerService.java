@@ -31,8 +31,4 @@ public class CustomerService {
             throw new RuntimeException("we have not customer with this email");
         return customer;
     }
-
-    public Customer findById(int id) {
-        return customerDao.findById(id);
-    }
 }

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Negin Mousavi
  */
-public class BaseDaoTest {
+public class BaseDaoGetCountOfRecordsByEntityNameTest {
     BaseDao baseDao;
 
     @BeforeEach

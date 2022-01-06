@@ -33,13 +33,4 @@ public class CustomerDao extends UserDao {
             return null;
         return list.get(0);
     }
-
-    public Customer findById(int id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Customer customer = session.get(Customer.class, id);
-        transaction.commit();
-        session.close();
-        return customer;
-    }
 }
