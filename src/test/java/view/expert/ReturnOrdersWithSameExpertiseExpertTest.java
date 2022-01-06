@@ -29,6 +29,5 @@ public class ReturnOrdersWithSameExpertiseExpertTest {
         Expert expert = expertView.getExpertService().findByEmail("rachel@gmail.com");
         List<Order> orderList = expertView.returnOrdersWithSameServiceExpert(expert);
         assertNotNull(orderList);
-
     }
 }

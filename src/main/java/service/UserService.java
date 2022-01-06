@@ -2,7 +2,6 @@ package service;
 
 import dao.UserDao;
 import dto.UserDto;
-import enumuration.UserRole;
 import lombok.Data;
 import model.members.User;
 import model.members.UserViewRequest;
@@ -22,31 +21,6 @@ public class UserService {
     private UserDao userDao;
     private ModelMapper modelMapper;
 
-    public void changePassword(User user, String oldPass, String newPass) {
-        try {
-            validation.validateUserRole(UserRole.CUSTOMER, user.getUserRole());
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-            return;
-        }
-
-        try {
-            validation.validateCorrectPassword(oldPass, user.getPassword());
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-            return;
-        }
-
-        try {
-            validation.validatePassword(newPass);
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-            return;
-        }
-
-        customerService.changePassword(user, newPass);
-    }
-
     public User findUserByUserNameAndPassword(String email, String password) {
         User user = userDao.findByEmailAndPassword(email, password);
         if (user == null)
@@ -54,8 +28,8 @@ public class UserService {
         return user;
     }
 
-    public List<UserDto> showUsersFiltering(UserViewRequest request) {
-        return userDao.showUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList());
+    public List<UserDto> returnUsersFiltering(UserViewRequest request) {
+        return userDao.returnUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList());
     }
 
     private UserDto createUserDto(User user) {

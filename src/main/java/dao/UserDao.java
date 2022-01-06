@@ -68,7 +68,7 @@ public class UserDao extends BaseDao {
         return list.get(0);
     }
 
-    public List<User> showUsersFiltering(UserViewRequest request) {
+    public List<User> returnUsersFiltering(UserViewRequest request) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 

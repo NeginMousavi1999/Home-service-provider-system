@@ -7,6 +7,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import view.UserView;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * @author Negin Mousavi
  */
@@ -22,6 +24,7 @@ public class LoginTest {
     @ParameterizedTest
     @CsvSource({"jack@gmail.com, Jack1234"})
     void givenCorrectUsernamePasswords_WhenFindUserByUserNameAndPasswordCalls_ThenReturnTrueResponse(String username, String password) {
-        userView.login(username, password);
+        boolean result = userView.login(username, password);
+        assertTrue(result);
     }
 }

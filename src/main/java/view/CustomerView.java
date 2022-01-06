@@ -174,4 +174,10 @@ public class CustomerView {
         }
         expertService.update(expert);
     }
+
+    public boolean changePassword(Customer customer, String newPass) {
+        customer.setPassword(newPass);
+        customerService.update(customer);
+        return true;
+    }
 }

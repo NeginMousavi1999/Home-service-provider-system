@@ -4,6 +4,7 @@ import dto.UserDto;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
+import model.members.Customer;
 import model.members.User;
 import model.members.UserViewRequest;
 import service.UserService;
@@ -71,13 +72,13 @@ public class UserView {
         return user;
     }
 
-    public void login(String username, String password) {
+    public boolean login(String username, String password) {
         User user;
         try {
             user = userService.findUserByUserNameAndPassword(username, password);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
-            return;
+            return false;
         }
         switch (user.getUserRole()) {
             case EXPERT:
@@ -90,24 +91,34 @@ public class UserView {
                 customerView.showPanel(user);
                 break;
         }
+        return true;
     }
 
-    public List<UserDto> showUsersFiltering() {
-        UserViewRequest request = getUserViewRequest();
-        return userService.showUsersFiltering(request);
+    public List<UserDto> returnUsersWithFiltering(UserViewRequest request) {
+        return userService.returnUsersFiltering(request);
     }
 
-    private UserViewRequest getUserViewRequest() {
-        return UserViewRequest.builder()
-/*                .firstName("jack")
-                .lastName("jack")
-                .email("jack@gmail.com")
-                .userRole(UserRole.EXPERT)*/
-                .firstName("jack")
-                .lastName("jack")
-                .email("jack@gmail.com")
-                .serviceName("Home Appliances")
-//                .userRole(CUSTOMER)
-                .build();
+    public boolean changePassword(Customer customer, String oldPass, String newPass) {
+        try {
+            validation.validateUserRole(UserRole.CUSTOMER, customer.getUserRole());
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return false;
+        }
+
+        try {
+            validation.validateCorrectPassword(oldPass, customer.getPassword());
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return false;
+        }
+
+        try {
+            validation.validatePassword(newPass);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return false;
+        }
+        return customerView.changePassword(customer, newPass);
     }
 }

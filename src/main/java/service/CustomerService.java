@@ -12,11 +12,6 @@ import model.members.User;
 public class CustomerService {
     private CustomerDao customerDao;
 
-    public void changePassword(User user, String newPass) {
-        user.setPassword(newPass);
-        customerDao.update((Customer) user);
-    }
-
     public void update(Customer customer) {
         customerDao.update(customer);
     }
