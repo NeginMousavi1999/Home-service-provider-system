@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 /**
  * @author Negin Mousavi
  */
-public class CustomerDaoFindByEmail {
+public class CustomerDaoFindByEmailTest {
     CustomerDao customerDao;
 
     @BeforeEach

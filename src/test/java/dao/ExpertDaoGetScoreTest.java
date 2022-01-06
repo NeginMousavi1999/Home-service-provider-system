@@ -1,19 +1,18 @@
 package dao;
 
 import config.DaoSpringConfig;
-import model.members.Customer;
 import model.members.Expert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author Negin Mousavi
  */
-public class ExpertDaoFindByEmail {
+public class ExpertDaoGetScoreTest {
     ExpertDao expertDao;
 
     @BeforeEach
@@ -23,14 +22,9 @@ public class ExpertDaoFindByEmail {
     }
 
     @Test
-    void givenExistEmail_WhenFindByEmailCalls_ThenReturnTrueResponse() {
+    void givenExpert_WhenGetScoreCalls_ThenReturnTrueResponse() {
         Expert expert = expertDao.findByEmail("rachel@gmail.com");
-        assertNotNull(expert);
-    }
-
-    @Test
-    void givenNotExistEmail_WhenFindByEmailCalls_ThenReturnTrueResponse() {
-        Expert expert = expertDao.findByEmail("something@gmail.com");
-        assertNull(expert);
+        double score = expertDao.getScore(expert);
+        assertEquals(expert.getScore(), score);
     }
 }
