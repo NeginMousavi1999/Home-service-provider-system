@@ -1415,7 +1415,7 @@ services_id</ColNames>
       <Position>10</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="412" parent="314" name="subService_id">
+    <column id="412" parent="314" name="sub_service_id">
       <Position>11</Position>
       <DataType>int|0s</DataType>
     </column>
@@ -1427,8 +1427,8 @@ services_id</ColNames>
       <ColNames>expert_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="415" parent="314" name="FK9itc8ihvdxl4mt0evkcsqkr1e">
-      <ColNames>subService_id</ColNames>
+    <index id="415" parent="314" name="FKahmxlsolih6tsfojkxhggj3yr">
+      <ColNames>sub_service_id</ColNames>
       <Type>btree</Type>
     </index>
     <key id="416" parent="314" name="PRIMARY">
@@ -1446,8 +1446,8 @@ services_id</ColNames>
       <RefTableName>expert</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="419" parent="314" name="FK9itc8ihvdxl4mt0evkcsqkr1e">
-      <ColNames>subService_id</ColNames>
+    <foreign-key id="419" parent="314" name="FKahmxlsolih6tsfojkxhggj3yr">
+      <ColNames>sub_service_id</ColNames>
       <RefTableName>subservice</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>

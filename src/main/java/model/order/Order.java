@@ -25,8 +25,8 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    @Column(name = "sub_service_id") TODO: uncomment this --> exception... why?
     @OneToOne
+    @JoinColumn(name = "sub_service_id")
     private SubService subService;
     private String description;
     @Column(name = "suggested_price")
