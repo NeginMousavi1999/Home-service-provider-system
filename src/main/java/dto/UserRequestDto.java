@@ -1,4 +1,4 @@
-package model.members;
+package dto;
 
 import enumuration.UserRole;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class UserViewRequest {//TODO
+public class UserRequestDto {
     private String firstName;
     private String lastName;
     private String email;

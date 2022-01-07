@@ -2,7 +2,7 @@ package view.user;
 
 import config.ViewSpringConfig;
 import dto.UserDto;
-import model.members.UserViewRequest;
+import dto.UserRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -27,7 +27,7 @@ public class ReturnUsersWithFilteringTest {
     @Test
     void giveValidInputs_WhenReturnUsersWithFilteringCalls_ThenReturnTrueResponse() {
 
-        UserViewRequest request = UserViewRequest.builder()
+        UserRequestDto request = UserRequestDto.builder()
                 .firstName("rachel")
                 .lastName("rachel")
                 .email("rachel@gmail.com")

@@ -5,7 +5,7 @@ import dto.UserDto;
 import exception.HomeServiceException;
 import lombok.Data;
 import model.members.User;
-import model.members.UserViewRequest;
+import dto.UserRequestDto;
 import org.modelmapper.ModelMapper;
 import validation.Validation;
 
@@ -29,7 +29,7 @@ public class UserService {
         return user;
     }
 
-    public List<UserDto> returnUsersFiltering(UserViewRequest request) {//TODO must be dto
+    public List<UserDto> returnUsersFiltering(UserRequestDto request) {//TODO must be dto
         return userDao.returnUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList());
     }
 

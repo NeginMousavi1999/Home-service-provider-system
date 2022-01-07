@@ -2,7 +2,7 @@ package dao;
 
 import enumuration.UserRole;
 import model.members.User;
-import model.members.UserViewRequest;
+import dto.UserRequestDto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -69,7 +69,7 @@ public class UserDao extends BaseDao {
         return list.get(0);
     }
 
-    public List<User> returnUsersFiltering(UserViewRequest request) {
+    public List<User> returnUsersFiltering(UserRequestDto request) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
 

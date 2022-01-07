@@ -6,7 +6,7 @@ import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Customer;
 import model.members.User;
-import model.members.UserViewRequest;
+import dto.UserRequestDto;
 import service.UserService;
 import validation.Validation;
 
@@ -91,7 +91,7 @@ public class UserView {
         return true;
     }
 
-    public List<UserDto> returnUsersWithFiltering(UserViewRequest request) {
+    public List<UserDto> returnUsersWithFiltering(UserRequestDto request) {
         return userService.returnUsersFiltering(request);
     }
 
