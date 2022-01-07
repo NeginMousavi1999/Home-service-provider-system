@@ -41,4 +41,5 @@ public class User {
     @Column(name = "registration_date")
     @CreationTimestamp
     protected Date registrationDate;
+    private double credit;
 }

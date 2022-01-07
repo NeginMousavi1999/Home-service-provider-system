@@ -27,7 +27,7 @@ public class ValidateUserRoleTest {
 
     @Test
     void givenNotEqualsRole_WhenValidateUserRoleCalls_ThenExceptionResponseReturn() {
-        Exception exception = assertThrows(RuntimeException.class, () -> validation.validateUserRole(UserRole.CUSTOMER, UserRole.MANAGER));
+        Exception exception = assertThrows(RuntimeException.class, () -> validation.validateUserRole(UserRole.CUSTOMER, UserRole.EXPERT));
         assertEquals("your role is not customer!", exception.getMessage());
     }
 }

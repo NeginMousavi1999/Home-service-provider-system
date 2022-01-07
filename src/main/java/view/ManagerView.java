@@ -22,21 +22,6 @@ public class ManagerView {
     private ExpertService expertService;
     private CustomerService customerService;
 
-    public User createManager(User manager) {
-        manager = Manager.builder()
-                .firstName(manager.getFirstName())
-                .lastName(manager.getLastName())
-                .email(manager.getEmail())
-                .password(manager.getPassword())
-
-                .userStatus(UserStatus.WAITING)
-                .userRole(UserRole.MANAGER)
-                .build();
-
-        managerService.save(manager);
-        return manager;
-    }
-
     public boolean addNewService(String name) {
         try {
             serviceService.validateNewName(name);

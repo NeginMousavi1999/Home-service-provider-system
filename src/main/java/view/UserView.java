@@ -84,9 +84,6 @@ public class UserView {
             case EXPERT:
                 expertView.showPanel(user);
                 break;
-            case MANAGER:
-                managerView.showPanel(user);
-                break;
             case CUSTOMER:
                 customerView.showPanel(user);
                 break;

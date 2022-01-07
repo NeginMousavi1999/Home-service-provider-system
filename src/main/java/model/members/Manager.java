@@ -1,22 +1,25 @@
 package model.members;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * @author Negin Mousavi
  */
-@EqualsAndHashCode(callSuper = true)
 @Setter
 @Getter
 @SuperBuilder
 @Entity
 @NoArgsConstructor
-public class Manager extends User {
-
+public class Manager {
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    private long id;
+    @Column(unique = true)
+    private String email;
+    private String password;
 }

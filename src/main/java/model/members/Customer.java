@@ -23,7 +23,6 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 public class Customer extends User {
-    private double credit;
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private Set<Order> orders = new HashSet<>();
 }
