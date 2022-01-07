@@ -82,4 +82,10 @@ public class ServicesSpringConfig {
         commentService.setCommentDao(commentDao);
         return commentService;
     }
+
+    public AddressService addressService(AddressDao addressDao) {
+        AddressService addressService = new AddressService();
+        addressService.setAddressDao(addressDao);
+        return addressService;
+    }
 }

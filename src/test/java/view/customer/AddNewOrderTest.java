@@ -2,6 +2,7 @@ package view.customer;
 
 import config.ViewSpringConfig;
 import model.members.Customer;
+import model.order.Address;
 import model.services.SubService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,9 +28,11 @@ public class AddNewOrderTest {
 
     @Test
     void addOrderTestWithValidValues_WhenAddNewOrderCalls_ThenReturnTrueResponse() {
+        Address orderAddress = new Address();
+        orderAddress.setState("address");
         SubService subService = customerView.getSubServiceByName("Kitchen appliances");
         Customer customer = customerView.getCustomerByEmail("jack@gmail.com");
-        boolean result = customerView.addNewOrder(subService, "address2",
+        boolean result = customerView.addNewOrder(subService, orderAddress,
                 customer, "description2", 1330000);
         assertTrue(result);
     }
@@ -40,9 +43,11 @@ public class AddNewOrderTest {
             "Kitchen appliances, address, jack@gmail.com, description, 120"})
     void addOrderTestWithInvalidValues_WhenAddNewOrderCalls_ThenReturnTrueResponse(String subServiceName, String address
             , String customerUsername, String description, double suggestedPrice) {
+        Address orderAddress = new Address();
+        orderAddress.setState(address);
         SubService subService = customerView.getSubServiceByName(subServiceName);
         Customer customer = customerView.getCustomerByEmail(customerUsername);
-        boolean result = customerView.addNewOrder(subService, address,
+        boolean result = customerView.addNewOrder(subService, orderAddress,
                 customer, description, suggestedPrice);
         assertFalse(result);
     }

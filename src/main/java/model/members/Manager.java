@@ -17,7 +17,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Manager {
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(unique = true)
     private String email;

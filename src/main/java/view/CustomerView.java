@@ -8,6 +8,7 @@ import lombok.Data;
 import model.members.Customer;
 import model.members.Expert;
 import model.members.User;
+import model.order.Address;
 import model.order.Comment;
 import model.order.Order;
 import model.order.Suggestion;
@@ -88,7 +89,7 @@ public class CustomerView {
         return subService;
     }
 
-    public boolean addNewOrder(SubService subService, String address, Customer customer, String description,
+    public boolean addNewOrder(SubService subService, Address address, Customer customer, String description,
                                double suggestedPrice) {
         if (subService == null || customer == null)
             return false;

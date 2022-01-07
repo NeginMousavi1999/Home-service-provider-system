@@ -42,4 +42,5 @@ public class User {
     @CreationTimestamp
     protected Date registrationDate;
     private double credit;
+
 }

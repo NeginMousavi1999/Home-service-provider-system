@@ -58,4 +58,8 @@ public class DaoSpringConfig {
     public ManagerDao managerDao() {
         return new ManagerDao();
     }
+
+    public AddressDao addressDao() {
+        return new AddressDao();
+    }
 }

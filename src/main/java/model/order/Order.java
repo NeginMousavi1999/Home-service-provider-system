@@ -42,7 +42,8 @@ public class Order {
     @Column(name = "to_be_done_date")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date toBeDoneDate;
-    private String address;//TODO class
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Address address;
     @ManyToOne
     private Customer customer;
     @ManyToOne
