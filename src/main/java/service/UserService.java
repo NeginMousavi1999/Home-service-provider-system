@@ -29,7 +29,7 @@ public class UserService {
         return user;
     }
 
-    public List<UserDto> returnUsersFiltering(UserRequestDto request) {//TODO must be dto
+    public List<UserDto> returnUsersFiltering(UserRequestDto request) {
         return userDao.returnUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList());
     }
 

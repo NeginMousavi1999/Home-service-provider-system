@@ -7,6 +7,7 @@ import model.services.SubService;
 import validation.Validation;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -17,7 +18,7 @@ public class SubServiceService {
     Validation validation;
 
     public List<String> getAllServiceName() {
-        return subServiceDao.getAllName();
+        return subServiceDao.returnAll().stream().map(SubService::getName).collect(Collectors.toList());
     }
 
     public boolean validateNewName(String name) {
