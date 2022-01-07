@@ -21,7 +21,7 @@ public class Suggestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+    @ManyToOne
     private Expert expert;
     @ManyToOne
     private Order order;

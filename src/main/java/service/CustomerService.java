@@ -1,6 +1,7 @@
 package service;
 
 import dao.CustomerDao;
+import exception.HomeServiceException;
 import lombok.Data;
 import model.members.Customer;
 import model.members.User;
@@ -23,7 +24,7 @@ public class CustomerService {
     public Customer findByEmail(String email) {
         Customer customer = customerDao.findByEmail(email);
         if (customer == null)
-            throw new RuntimeException("we have not customer with this email");
+            throw new HomeServiceException("we have not customer with this email");
         return customer;
     }
 }

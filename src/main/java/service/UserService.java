@@ -2,6 +2,7 @@ package service;
 
 import dao.UserDao;
 import dto.UserDto;
+import exception.HomeServiceException;
 import lombok.Data;
 import model.members.User;
 import model.members.UserViewRequest;
@@ -24,11 +25,11 @@ public class UserService {
     public User findUserByUserNameAndPassword(String email, String password) {
         User user = userDao.findByEmailAndPassword(email, password);
         if (user == null)
-            throw new RuntimeException("username or password is incorrect");
+            throw new HomeServiceException("username or password is incorrect");
         return user;
     }
 
-    public List<UserDto> returnUsersFiltering(UserViewRequest request) {
+    public List<UserDto> returnUsersFiltering(UserViewRequest request) {//TODO must be dto
         return userDao.returnUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList());
     }
 

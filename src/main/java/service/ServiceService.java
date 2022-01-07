@@ -1,6 +1,7 @@
 package service;
 
 import dao.ServiceDao;
+import exception.HomeServiceException;
 import lombok.Data;
 import model.services.Service;
 import validation.Validation;
@@ -38,7 +39,7 @@ public class ServiceService {
     public Service findServiceByName(String name) {
         Service service = serviceDao.findByName(name);
         if (service == null)
-            throw new RuntimeException("we have n't this service!");
+            throw new HomeServiceException("we have n't this service!");
         return service;
     }
 }

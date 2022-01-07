@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @Builder
-public class UserViewRequest {
+public class UserViewRequest {//TODO
     private String firstName;
     private String lastName;
     private String email;

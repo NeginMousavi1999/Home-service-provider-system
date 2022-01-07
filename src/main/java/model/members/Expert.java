@@ -23,7 +23,7 @@ import java.util.Set;
 public class Expert extends User {
     private double score;
     @Lob
-    @Column(name = "picture", columnDefinition = "LONGBLOB")
+    @Column(columnDefinition = "BLOB")//TODO
     private byte[] picture;
     private double credit;
     @ManyToMany(fetch = FetchType.EAGER)

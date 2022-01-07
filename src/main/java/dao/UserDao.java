@@ -1,5 +1,6 @@
 package dao;
 
+import enumuration.UserRole;
 import model.members.User;
 import model.members.UserViewRequest;
 import org.hibernate.Criteria;
@@ -73,7 +74,8 @@ public class UserDao extends BaseDao {
         Transaction transaction = session.beginTransaction();
 
         Criteria criteria = session.createCriteria(User.class, "u");
-        criteria.createAlias("u.services", "s");
+        if (request.getUserRole().equals(UserRole.EXPERT) || request.getServiceName() != null)
+            criteria.createAlias("u.services", "s");
 
         addRestrictionIfNotNull(criteria, "u.firstName", request.getFirstName());
         addRestrictionIfNotNull(criteria, "u.lastName", request.getLastName());

@@ -1,6 +1,7 @@
 package service;
 
 import dao.ExpertDao;
+import exception.HomeServiceException;
 import lombok.Data;
 import model.members.Expert;
 import model.members.User;
@@ -29,7 +30,7 @@ public class ExpertService {
     public Expert findByEmail(String email) {
         Expert expert = expertDao.findByEmail(email);
         if (expert == null)
-            throw new RuntimeException("we have not this expert!");
+            throw new HomeServiceException("we have not this expert!");
         return expert;
     }
 

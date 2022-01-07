@@ -1,6 +1,7 @@
 package service;
 
 import dao.SubServiceDao;
+import exception.HomeServiceException;
 import lombok.Data;
 import model.services.SubService;
 import validation.Validation;
@@ -31,7 +32,7 @@ public class SubServiceService {
     public SubService findSubServiceByName(String name) {
         SubService subService = subServiceDao.findByName(name);
         if (subService == null)
-            throw new RuntimeException("we have n't this sub service!");
+            throw new HomeServiceException("we have n't this sub service!");
         return subService;
     }
 }
