@@ -30,8 +30,6 @@ public class Order {
     private SubService subService;
     @Column(length = 120)
     private String description;
-    @Column(name = "suggested_price")
-    private double suggestedPrice;//TODO delete
     @Column(name = "final_price")
     private double finalPrice;
     @Enumerated(value = EnumType.STRING)

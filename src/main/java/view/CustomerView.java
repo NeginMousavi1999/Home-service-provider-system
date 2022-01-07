@@ -107,7 +107,6 @@ public class CustomerView {
                 .customer(customer)
                 .description(description)
                 .subService(subService)
-                .suggestedPrice(suggestedPrice)
                 .orderStatus(OrderStatus.NEW)
                 .build();
         customer.getOrders().add(order);
