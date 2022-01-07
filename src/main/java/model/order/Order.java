@@ -28,7 +28,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "sub_service_id")
     private SubService subService;
-    private String description;//TODO len
+    @Column(length = 120)
+    private String description;
     @Column(name = "suggested_price")
     private double suggestedPrice;//TODO delete
     @Column(name = "final_price")
