@@ -19,8 +19,10 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(unique = true)
     private String name;
+
     @OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
     private Set<SubService> subServices = new HashSet<>();
 }

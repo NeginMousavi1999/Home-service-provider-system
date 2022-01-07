@@ -21,10 +21,12 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 public class Expert extends User {
-    private double score;
     @Lob
     @Column(columnDefinition = "BLOB", length = 3000)
     private byte[] picture;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Service> services = new HashSet<>();
+
+    private double score;
 }

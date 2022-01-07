@@ -33,7 +33,7 @@ public class Suggestion {
     @Column(name = "duration_of_work")
     private int durationOfWork;
     @Column(name = "start_time")
-    private Date startTime;//TODO: use calender!
+    private Date startTime;
     @Enumerated(value = EnumType.STRING)
     @Column(name = "suggested_status")
     private SuggestionStatus suggestionStatus;

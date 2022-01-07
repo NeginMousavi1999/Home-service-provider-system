@@ -19,11 +19,15 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String comment;
+
     @ManyToOne
     private Customer customer;
+
     @ManyToOne
     private Expert expert;
+
     @OneToOne
     private Order order;
 }
