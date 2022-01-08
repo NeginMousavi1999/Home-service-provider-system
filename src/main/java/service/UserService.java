@@ -2,10 +2,10 @@ package service;
 
 import dao.UserDao;
 import dto.UserDto;
+import dto.UserRequestDto;
 import exception.HomeServiceException;
 import lombok.Data;
 import model.members.User;
-import dto.UserRequestDto;
 import org.modelmapper.ModelMapper;
 import validation.Validation;
 
@@ -34,15 +34,7 @@ public class UserService {
     }
 
     private UserDto createUserDto(User user) {
-        UserDto userDto = modelMapper.map(user, UserDto.class);
-        userDto.setId(user.getId());
-        userDto.setFirstName(user.getFirstName());
-        userDto.setLastName(user.getLastName());
-        userDto.setEmail(user.getEmail());
-        userDto.setRegistrationDate(user.getRegistrationDate());
-        userDto.setUserRole(user.getUserRole());
-        userDto.setUserStatus(user.getUserStatus());
-        return userDto;
+        return modelMapper.map(user, UserDto.class);
     }
 
 }
