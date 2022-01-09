@@ -11,7 +11,6 @@ import java.util.Date;
  */
 @Data
 public class UserDto {
-    protected long id;
     protected String firstName;
     protected String lastName;
     protected String email;

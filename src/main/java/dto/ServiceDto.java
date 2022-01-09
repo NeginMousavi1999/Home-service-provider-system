@@ -7,6 +7,5 @@ import lombok.Data;
  */
 @Data
 public class ServiceDto {
-    private int id;
     private String name;
 }

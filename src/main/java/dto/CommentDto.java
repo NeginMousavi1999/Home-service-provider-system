@@ -10,7 +10,6 @@ import model.order.Order;
  */
 @Data
 public class CommentDto {
-    private int id;
     private String comment;
     private Customer customer;
     private Expert expert;

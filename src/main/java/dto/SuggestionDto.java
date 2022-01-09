@@ -11,7 +11,6 @@ import java.util.Date;
  */
 @Data
 public class SuggestionDto {
-    private int id;
     private Expert expert;
     private Order order;
     private Date registrationDate;

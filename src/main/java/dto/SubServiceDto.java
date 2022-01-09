@@ -8,7 +8,6 @@ import model.services.Service;
  */
 @Data
 public class SubServiceDto {
-    private int id;
     private String name;
     private Service service;
     private double cost;

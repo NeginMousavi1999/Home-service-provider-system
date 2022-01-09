@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Data
 public class OrderDto {
-    private int id;
     private double suggestedPrice;
     private double finalPrice;
     private OrderStatus orderStatus;
