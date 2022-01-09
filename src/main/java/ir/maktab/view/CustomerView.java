@@ -48,7 +48,12 @@ public class CustomerView {
                 .userRole(UserRole.CUSTOMER)
                 .build();
 
-        customerService.save((Customer) customer);
+        try {
+            customerService.save((Customer) customer);
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+            return null;
+        }
         return customer;
     }
 

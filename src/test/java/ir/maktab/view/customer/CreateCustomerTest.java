@@ -1,62 +1,57 @@
-package ir.maktab.dao;
+package ir.maktab.view.customer;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.enumuration.UserRole;
 import ir.maktab.enumuration.UserStatus;
 import ir.maktab.model.members.Customer;
+import ir.maktab.model.members.User;
+import ir.maktab.model.order.Order;
+import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Negin Mousavi
  */
-public class CustomerCreateDaoTest {
-    CustomerDao customerDao;
-    Customer customer;
+public class CreateCustomerTest {
+    CustomerView customerView;
 
     @BeforeEach
     void init() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-        customerDao = context.getBean(CustomerDao.class);
+        customerView = context.getBean(CustomerView.class);
     }
-
 
     @Test
     void givenCustomer_WhenCreateCalls_ThenReturnTrueResponse() {
-        customer = Customer.builder()
-                .firstName("jack2")
-                .lastName("jack2")
+        User user = User.builder()
+                .firstName("jack3")
+                .lastName("jack3")
                 .userRole(UserRole.CUSTOMER)
-                .userStatus(UserStatus.WAITING)
                 .password("Jack1234")
-                .email("jack2@gmail.com")
+                .email("jack3@gmail.com")
                 .credit(1000000)
+                .userStatus(UserStatus.NEW)
                 .build();
-
-        Long before = customerDao.count();
-        customerDao.save(customer);
-        long after = customerDao.count();
-        assertEquals(before, after - 1);
+        User customer = customerView.createCustomer(user, 1000000);
+        assertNotNull(customer);
     }
 
     @Test
     void givenDuplicateEmailCustomer_WhenCreateCalls_ThenReturnTrueResponse() {
-        customer = Customer.builder()
+        User user = User.builder()
                 .firstName("jack2")
                 .lastName("jack2")
                 .userRole(UserRole.CUSTOMER)
-                .userStatus(UserStatus.WAITING)
                 .password("Jack1234")
                 .email("jack2@gmail.com")
                 .credit(1000000)
+                .userStatus(UserStatus.NEW)
                 .build();
-
-        Long before = customerDao.count();
-        customerDao.save(customer);
-        long after = customerDao.count();
-        assertEquals(before, after - 1);
+        User customer = customerView.createCustomer(user, 1000000);
+        assertNull(customer);
     }
 }

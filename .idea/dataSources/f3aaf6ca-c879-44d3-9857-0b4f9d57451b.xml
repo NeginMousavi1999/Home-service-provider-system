@@ -1393,7 +1393,7 @@ services_id</ColNames>
     </column>
     <column id="406" parent="316" name="description">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(120)|0s</DataType>
     </column>
     <column id="407" parent="316" name="final_price">
       <Position>3</Position>
@@ -1407,121 +1407,117 @@ services_id</ColNames>
       <Position>5</Position>
       <DataType>datetime(6)|0s</DataType>
     </column>
-    <column id="410" parent="316" name="suggested_price">
+    <column id="410" parent="316" name="to_be_done_date">
       <Position>6</Position>
-      <DataType>double|0s</DataType>
-    </column>
-    <column id="411" parent="316" name="to_be_done_date">
-      <Position>7</Position>
       <DataType>datetime(6)|0s</DataType>
     </column>
-    <column id="412" parent="316" name="address_id">
-      <Position>8</Position>
+    <column id="411" parent="316" name="address_id">
+      <Position>7</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="413" parent="316" name="customer_id">
+    <column id="412" parent="316" name="customer_id">
+      <Position>8</Position>
+      <DataType>bigint|0s</DataType>
+    </column>
+    <column id="413" parent="316" name="expert_id">
       <Position>9</Position>
       <DataType>bigint|0s</DataType>
     </column>
-    <column id="414" parent="316" name="expert_id">
+    <column id="414" parent="316" name="sub_service_id">
       <Position>10</Position>
-      <DataType>bigint|0s</DataType>
-    </column>
-    <column id="415" parent="316" name="sub_service_id">
-      <Position>11</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="416" parent="316" name="FKhgyufim82avr4gn882kl9l6c1">
+    <index id="415" parent="316" name="FKhgyufim82avr4gn882kl9l6c1">
       <ColNames>address_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="417" parent="316" name="FK3mjq161gcp0d4eo06mdx3eb5k">
+    <index id="416" parent="316" name="FK3mjq161gcp0d4eo06mdx3eb5k">
       <ColNames>customer_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="418" parent="316" name="FK3tfmrpj3buos52ir86nsho14k">
+    <index id="417" parent="316" name="FK3tfmrpj3buos52ir86nsho14k">
       <ColNames>expert_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="419" parent="316" name="FKahmxlsolih6tsfojkxhggj3yr">
+    <index id="418" parent="316" name="FKahmxlsolih6tsfojkxhggj3yr">
       <ColNames>sub_service_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="420" parent="316" name="PRIMARY">
+    <key id="419" parent="316" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="421" parent="316" name="FKhgyufim82avr4gn882kl9l6c1">
+    <foreign-key id="420" parent="316" name="FKhgyufim82avr4gn882kl9l6c1">
       <ColNames>address_id</ColNames>
       <RefTableName>address</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="422" parent="316" name="FK3mjq161gcp0d4eo06mdx3eb5k">
+    <foreign-key id="421" parent="316" name="FK3mjq161gcp0d4eo06mdx3eb5k">
       <ColNames>customer_id</ColNames>
       <RefTableName>customer</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="423" parent="316" name="FK3tfmrpj3buos52ir86nsho14k">
+    <foreign-key id="422" parent="316" name="FK3tfmrpj3buos52ir86nsho14k">
       <ColNames>expert_id</ColNames>
       <RefTableName>expert</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="424" parent="316" name="FKahmxlsolih6tsfojkxhggj3yr">
+    <foreign-key id="423" parent="316" name="FKahmxlsolih6tsfojkxhggj3yr">
       <ColNames>sub_service_id</ColNames>
       <RefTableName>subservice</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="425" parent="317" name="id">
+    <column id="424" parent="317" name="id">
       <Position>1</Position>
       <DataType>bigint|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="426" parent="317" name="credit">
+    <column id="425" parent="317" name="credit">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="427" parent="317" name="email">
+    <column id="426" parent="317" name="email">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="428" parent="317" name="first_name">
+    <column id="427" parent="317" name="first_name">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="429" parent="317" name="last_name">
+    <column id="428" parent="317" name="last_name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="430" parent="317" name="password">
+    <column id="429" parent="317" name="password">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="431" parent="317" name="registration_date">
+    <column id="430" parent="317" name="registration_date">
       <Position>7</Position>
       <DataType>datetime(6)|0s</DataType>
     </column>
-    <column id="432" parent="317" name="user_role">
+    <column id="431" parent="317" name="user_role">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="433" parent="317" name="user_status">
+    <column id="432" parent="317" name="user_status">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <index id="434" parent="317" name="UK_e6gkqunxajvyxl5uctpl2vl2p">
+    <index id="433" parent="317" name="UK_e6gkqunxajvyxl5uctpl2vl2p">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="435" parent="317" name="PRIMARY">
+    <key id="434" parent="317" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="436" parent="317" name="UK_e6gkqunxajvyxl5uctpl2vl2p">
+    <key id="435" parent="317" name="UK_e6gkqunxajvyxl5uctpl2vl2p">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UK_e6gkqunxajvyxl5uctpl2vl2p</UnderlyingIndexName>
     </key>

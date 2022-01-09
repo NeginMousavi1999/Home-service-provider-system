@@ -25,7 +25,11 @@ public class CustomerService {
     }
 
     public void save(Customer customer) {
-        customerDao.save(customer);
+        try {
+            customerDao.save(customer);
+        } catch (Exception e) {
+            throw new HomeServiceException("we have this username, so you can't use it!");
+        }
     }
 
     public Customer findByEmail(String email) {
