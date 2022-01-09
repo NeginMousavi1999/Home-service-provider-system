@@ -1,7 +1,7 @@
 package ir.maktab.dto;
 
-import lombok.Data;
 import ir.maktab.model.services.Service;
+import lombok.Data;
 
 /**
  * @author Negin Mousavi

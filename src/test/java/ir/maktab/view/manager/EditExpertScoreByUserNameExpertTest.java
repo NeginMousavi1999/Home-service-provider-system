@@ -2,10 +2,10 @@ package ir.maktab.view.manager;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.model.members.Expert;
+import ir.maktab.view.ManagerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ir.maktab.view.ManagerView;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -2,20 +2,21 @@ package ir.maktab.service;
 
 import ir.maktab.dao.CustomerDao;
 import ir.maktab.exception.HomeServiceException;
-import lombok.Data;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.members.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Negin Mousavi
  */
-@Data
 @Service
+@RequiredArgsConstructor
+@Getter
 public class CustomerService {
-    @Autowired
-    private CustomerDao customerDao;
+
+    private final CustomerDao customerDao;
 
     public void update(Customer customer) {
         customerDao.update(customer);

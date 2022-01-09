@@ -1,32 +1,28 @@
 package ir.maktab.view;
 
 import ir.maktab.enumuration.UserStatus;
-import lombok.Data;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.members.User;
 import ir.maktab.model.services.Service;
 import ir.maktab.model.services.SubService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ir.maktab.service.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Component
+@Getter
 public class ManagerView {
-    @Autowired
-    private ServiceService serviceService;
-    @Autowired
-    private SubServiceService subServiceService;
-    @Autowired
-    private ManagerService managerService;
-    @Autowired
-    private ExpertService expertService;
-    @Autowired
-    private CustomerService customerService;
+    private final ServiceService serviceService;
+    private final SubServiceService subServiceService;
+    private final ManagerService managerService;
+    private final ExpertService expertService;
+    private final CustomerService customerService;
 
     public boolean addNewService(String name) {
         try {

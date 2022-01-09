@@ -1,11 +1,11 @@
 package ir.maktab.model.members;
 
+import ir.maktab.model.services.Service;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import ir.maktab.model.services.Service;
 
 import javax.persistence.*;
 import java.util.HashSet;

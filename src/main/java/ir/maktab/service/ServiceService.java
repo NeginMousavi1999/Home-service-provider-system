@@ -2,23 +2,22 @@ package ir.maktab.service;
 
 import ir.maktab.dao.ServiceDao;
 import ir.maktab.exception.HomeServiceException;
-import lombok.Data;
 import ir.maktab.model.services.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import ir.maktab.validation.Validation;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
-@Data
 @org.springframework.stereotype.Service
+@RequiredArgsConstructor
+@Getter
 public class ServiceService {
-    @Autowired
-    ServiceDao serviceDao;
-    @Autowired
-    Validation validation;
+    private final ServiceDao serviceDao;
+    private final Validation validation;
 
     public Service getServiceById(int id) {
         Service service = serviceDao.read(id);

@@ -1,8 +1,8 @@
 package ir.maktab.model.order;
 
-import lombok.*;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.members.Expert;
+import lombok.*;
 
 import javax.persistence.*;
 

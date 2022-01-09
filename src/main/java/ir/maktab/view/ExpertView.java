@@ -4,20 +4,20 @@ import ir.maktab.enumuration.OrderStatus;
 import ir.maktab.enumuration.SuggestionStatus;
 import ir.maktab.enumuration.UserRole;
 import ir.maktab.enumuration.UserStatus;
-import lombok.Data;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.members.User;
 import ir.maktab.model.order.Order;
 import ir.maktab.model.order.Suggestion;
 import ir.maktab.model.services.Service;
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ir.maktab.service.ExpertService;
 import ir.maktab.service.OrderService;
 import ir.maktab.service.ServiceService;
 import ir.maktab.service.SuggestionService;
 import ir.maktab.validation.Validation;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,19 +26,15 @@ import java.util.*;
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Component
+@Getter
 public class ExpertView {
-    @Autowired
-    private ExpertService expertService;
-    @Autowired
-    private ServiceService serviceService;
-    @Autowired
-    private SuggestionService suggestionService;
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private Validation validation;
+    private final ExpertService expertService;
+    private final ServiceService serviceService;
+    private final SuggestionService suggestionService;
+    private final OrderService orderService;
+    private final Validation validation;
 
     public User createExpert(User expert, String serviceName, String avatarName) {
         String fileName = String.format("static-pictures/%s.png", avatarName);
@@ -97,7 +93,7 @@ public class ExpertView {
         Set<Service> services = expert.getServices();
         List<Order> orderList = new ArrayList<>();
         services.forEach(service -> service.getSubServices().stream()
-                .map(subService -> orderService.findBySubService(subService)).forEach(orderList::addAll));
+                .map(orderService::findBySubService).forEach(orderList::addAll));
         return orderList;
     }
 

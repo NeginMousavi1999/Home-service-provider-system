@@ -1,10 +1,10 @@
 package ir.maktab.model.order;
 
 import ir.maktab.enumuration.OrderStatus;
-import lombok.*;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.services.SubService;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

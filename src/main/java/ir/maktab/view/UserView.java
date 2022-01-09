@@ -4,13 +4,13 @@ import ir.maktab.dto.UserDto;
 import ir.maktab.dto.UserRequestDto;
 import ir.maktab.enumuration.UserRole;
 import ir.maktab.enumuration.UserStatus;
-import lombok.Data;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.members.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ir.maktab.service.UserService;
 import ir.maktab.validation.Validation;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -19,19 +19,14 @@ import static ir.maktab.enumuration.UserRole.valueOf;
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Component
+@Getter
 public class UserView {
-    @Autowired
-    private ManagerView managerView;
-    @Autowired
-    private ExpertView expertView;
-    @Autowired
-    private CustomerView customerView;
-    @Autowired
-    private Validation validation;
-    @Autowired
-    private UserService userService;
+    private final ExpertView expertView;
+    private final CustomerView customerView;
+    private final Validation validation;
+    private final UserService userService;
 
     public User createUser(String firstName, String lastName, String email, String password, String role,
                            double credit, String expertise, String avatarName) {

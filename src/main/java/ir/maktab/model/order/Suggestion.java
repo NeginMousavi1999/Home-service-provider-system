@@ -1,8 +1,8 @@
 package ir.maktab.model.order;
 
 import ir.maktab.enumuration.SuggestionStatus;
-import lombok.*;
 import ir.maktab.model.members.Expert;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

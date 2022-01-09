@@ -2,10 +2,10 @@ package ir.maktab.service.service;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.model.services.Service;
+import ir.maktab.service.ServiceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ir.maktab.service.ServiceService;
 
 import static org.junit.jupiter.api.Assertions.*;
 

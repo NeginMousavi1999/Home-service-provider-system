@@ -2,11 +2,11 @@ package ir.maktab.service;
 
 import ir.maktab.dao.SubServiceDao;
 import ir.maktab.exception.HomeServiceException;
-import lombok.Data;
 import ir.maktab.model.services.SubService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import ir.maktab.validation.Validation;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +14,12 @@ import java.util.stream.Collectors;
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Service
+@Getter
 public class SubServiceService {
-    @Autowired
-    SubServiceDao subServiceDao;
-    @Autowired
-    Validation validation;
+    private final SubServiceDao subServiceDao;
+    private final Validation validation;
 
     public List<String> getAllServiceName() {
         return subServiceDao.returnAll().stream().map(SubService::getName).collect(Collectors.toList());

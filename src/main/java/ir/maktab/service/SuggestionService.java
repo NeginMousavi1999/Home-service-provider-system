@@ -3,10 +3,10 @@ package ir.maktab.service;
 import ir.maktab.dao.SuggestionDao;
 import ir.maktab.enumuration.SuggestionStatus;
 import ir.maktab.exception.HomeServiceException;
-import lombok.Data;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.order.Suggestion;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Service
+@Getter
 public class SuggestionService {
-    @Autowired
-    SuggestionDao suggestionDao;
+    private final SuggestionDao suggestionDao;
 
     public void saveSuggestion(Suggestion suggestion) {
         suggestionDao.create(suggestion);

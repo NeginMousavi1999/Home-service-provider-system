@@ -1,16 +1,16 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.AddressDao;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Service
+@Getter
 public class AddressService {
-    @Autowired
-    AddressDao addressDao;
+    private final AddressDao addressDao;
 }

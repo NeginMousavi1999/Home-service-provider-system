@@ -4,10 +4,10 @@ import ir.maktab.config.SpringConfig;
 import ir.maktab.enumuration.OrderStatus;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.order.Order;
+import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ir.maktab.view.CustomerView;
 
 import java.util.List;
 

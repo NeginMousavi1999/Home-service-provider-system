@@ -1,9 +1,9 @@
 package ir.maktab.dto;
 
 import ir.maktab.enumuration.OrderStatus;
-import lombok.Data;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.order.Suggestion;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Date;

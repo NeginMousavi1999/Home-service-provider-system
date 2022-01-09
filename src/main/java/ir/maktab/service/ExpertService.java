@@ -2,20 +2,20 @@ package ir.maktab.service;
 
 import ir.maktab.dao.ExpertDao;
 import ir.maktab.exception.HomeServiceException;
-import lombok.Data;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.members.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Service
+@Getter
 public class ExpertService {
-    @Autowired
-    ExpertDao expertDao;
+    private final ExpertDao expertDao;
 
     public void save(User expert) {
         expertDao.create(expert);

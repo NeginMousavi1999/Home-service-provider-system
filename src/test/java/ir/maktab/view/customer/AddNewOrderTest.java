@@ -4,12 +4,12 @@ import ir.maktab.config.SpringConfig;
 import ir.maktab.model.members.Customer;
 import ir.maktab.model.order.Address;
 import ir.maktab.model.services.SubService;
+import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ir.maktab.view.CustomerView;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

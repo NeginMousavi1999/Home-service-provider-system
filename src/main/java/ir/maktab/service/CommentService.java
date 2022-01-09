@@ -1,19 +1,19 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.CommentDao;
-import lombok.Data;
 import ir.maktab.model.order.Comment;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Service
+@Getter
 public class CommentService {
-    @Autowired
-    CommentDao commentDao;
+    private final CommentDao commentDao;
 
     public void save(Comment comment) {
         commentDao.create(comment);

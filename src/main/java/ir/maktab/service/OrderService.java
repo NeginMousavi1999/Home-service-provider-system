@@ -1,10 +1,10 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.OrderDao;
-import lombok.Data;
 import ir.maktab.model.order.Order;
 import ir.maktab.model.services.SubService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Service
+@Getter
 public class OrderService {
-    @Autowired
-    OrderDao orderDao;
+    private final OrderDao orderDao;
 
     public void update(Order order) {
         orderDao.update(order);

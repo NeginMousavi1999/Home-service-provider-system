@@ -2,10 +2,10 @@ package ir.maktab.view.customer;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.model.order.Order;
+import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ir.maktab.view.CustomerView;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

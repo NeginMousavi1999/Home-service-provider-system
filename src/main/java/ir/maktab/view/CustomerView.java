@@ -14,8 +14,8 @@ import ir.maktab.model.order.Suggestion;
 import ir.maktab.model.services.SubService;
 import ir.maktab.service.*;
 import ir.maktab.validation.Validation;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -25,23 +25,17 @@ import java.util.stream.Collectors;
 /**
  * @author Negin Mousavi
  */
-@Data
+@RequiredArgsConstructor
 @Component
+@Getter
 public class CustomerView {
-    @Autowired
-    private CustomerService customerService;
-    @Autowired
-    private OrderService orderService;
-    @Autowired
-    private ExpertService expertService;
-    @Autowired
-    private SubServiceService subServiceService;
-    @Autowired
-    private Validation validation;
-    @Autowired
-    private CommentService commentService;
-    @Autowired
-    private SuggestionService suggestionService;
+    private final CustomerService customerService;
+    private final OrderService orderService;
+    private final ExpertService expertService;
+    private final SubServiceService subServiceService;
+    private final Validation validation;
+    private final CommentService commentService;
+    private final SuggestionService suggestionService;
 
     public User createCustomer(User customer, double credit) {
         customer = Customer.builder()

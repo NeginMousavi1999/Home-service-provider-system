@@ -2,11 +2,11 @@ package ir.maktab.service.user;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.model.members.User;
+import ir.maktab.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import ir.maktab.service.UserService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
