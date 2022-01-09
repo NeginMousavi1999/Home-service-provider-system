@@ -21,19 +21,26 @@ public class Suggestion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @ManyToOne
     private Expert expert;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Order order;
+
     @CreationTimestamp
     @Column(name = "registration_date")
     private Date registrationDate;
+
     @Column(name = "suggested_price")
     private double suggestedPrice;
+
     @Column(name = "duration_of_work")
     private int durationOfWork;
+
     @Column(name = "start_time")
     private Date startTime;
+
     @Enumerated(value = EnumType.STRING)
     @Column(name = "suggested_status")
     private SuggestionStatus suggestionStatus;
