@@ -4,12 +4,14 @@ import model.services.Service;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class ServiceDao extends BaseDao {
     public void create(Service service) {
         Session session = sessionFactory.openSession();

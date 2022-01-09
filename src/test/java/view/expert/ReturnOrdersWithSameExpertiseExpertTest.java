@@ -1,6 +1,6 @@
 package view.expert;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.members.Expert;
 import model.order.Order;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +19,9 @@ public class ReturnOrdersWithSameExpertiseExpertTest {
     ExpertView expertView;
 
     @BeforeEach
-    public void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        expertView = (ExpertView) context.getBean("expertView");
+    void init() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        expertView = context.getBean(ExpertView.class);
     }
 
     @Test

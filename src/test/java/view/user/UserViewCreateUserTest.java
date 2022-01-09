@@ -1,6 +1,6 @@
 package view.user;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.members.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +18,8 @@ public class UserViewCreateUserTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        view = (UserView) context.getBean("userView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        view = context.getBean(UserView.class);
     }
 
     @ParameterizedTest

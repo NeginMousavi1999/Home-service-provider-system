@@ -4,12 +4,14 @@ import model.members.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class CustomerDao extends UserDao {
     public void update(Customer customer) {
         Session session = sessionFactory.openSession();

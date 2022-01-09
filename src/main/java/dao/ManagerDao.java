@@ -3,10 +3,12 @@ package dao;
 import model.members.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class ManagerDao extends UserDao {
     public void create(User user) {
         Session session = sessionFactory.openSession();

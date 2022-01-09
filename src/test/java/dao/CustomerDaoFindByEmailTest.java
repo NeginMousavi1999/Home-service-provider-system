@@ -1,6 +1,6 @@
 package dao;
 
-import config.DaoSpringConfig;
+import config.SpringConfig;
 import model.members.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,8 @@ public class CustomerDaoFindByEmailTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
-        customerDao = (CustomerDao) context.getBean("customerDao");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerDao = context.getBean(CustomerDao.class);
     }
 
     @Test

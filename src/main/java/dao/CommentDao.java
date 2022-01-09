@@ -3,10 +3,12 @@ package dao;
 import model.order.Comment;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class CommentDao extends BaseDao {
     public void create(Comment comment) {
         Session session = sessionFactory.openSession();

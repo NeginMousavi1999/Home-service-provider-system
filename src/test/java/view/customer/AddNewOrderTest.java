@@ -1,6 +1,6 @@
 package view.customer;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.members.Customer;
 import model.order.Address;
 import model.services.SubService;
@@ -22,8 +22,8 @@ public class AddNewOrderTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        customerView = (CustomerView) context.getBean("customerView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerView = context.getBean(CustomerView.class);
     }
 
     @Test

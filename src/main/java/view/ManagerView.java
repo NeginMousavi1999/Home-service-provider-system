@@ -1,25 +1,31 @@
 package view;
 
-import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Customer;
 import model.members.Expert;
-import model.members.Manager;
 import model.members.User;
 import model.services.Service;
 import model.services.SubService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import service.*;
 
 /**
  * @author Negin Mousavi
  */
 @Data
+@Component
 public class ManagerView {
+    @Autowired
     private ServiceService serviceService;
+    @Autowired
     private SubServiceService subServiceService;
+    @Autowired
     private ManagerService managerService;
+    @Autowired
     private ExpertService expertService;
+    @Autowired
     private CustomerService customerService;
 
     public boolean addNewService(String name) {

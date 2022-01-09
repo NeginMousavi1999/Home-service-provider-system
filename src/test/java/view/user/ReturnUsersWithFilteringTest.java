@@ -1,8 +1,9 @@
 package view.user;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import dto.UserDto;
 import dto.UserRequestDto;
+import enumuration.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -19,19 +20,19 @@ public class ReturnUsersWithFilteringTest {
     UserView userView;
 
     @BeforeEach
-    public void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        userView = (UserView) context.getBean("userView");
+    void init() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        userView = context.getBean(UserView.class);
     }
 
     @Test
     void giveValidInputs_WhenReturnUsersWithFilteringCalls_ThenReturnTrueResponse() {
 
         UserRequestDto request = UserRequestDto.builder()
-                .firstName("rachel")
-                .lastName("rachel")
-                .email("rachel@gmail.com")
-
+                .firstName("rose")
+                .lastName("rose")
+                .email("rose@gmail.com")
+               // .userRole(UserRole.EXPERT)
 /*                .firstName("jack")
                 .lastName("jack")
                 .email("jack@gmail.com")*/

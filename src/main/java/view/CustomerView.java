@@ -13,6 +13,8 @@ import model.order.Comment;
 import model.order.Order;
 import model.order.Suggestion;
 import model.services.SubService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import service.*;
 import validation.Validation;
 
@@ -24,13 +26,21 @@ import java.util.stream.Collectors;
  * @author Negin Mousavi
  */
 @Data
+@Component
 public class CustomerView {
+    @Autowired
     private CustomerService customerService;
+    @Autowired
     private OrderService orderService;
+    @Autowired
     private ExpertService expertService;
+    @Autowired
     private SubServiceService subServiceService;
+    @Autowired
     private Validation validation;
+    @Autowired
     private CommentService commentService;
+    @Autowired
     private SuggestionService suggestionService;
 
     public User createCustomer(User customer, double credit) {

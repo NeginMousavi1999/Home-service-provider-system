@@ -11,6 +11,8 @@ import model.order.Order;
 import model.order.Suggestion;
 import model.services.Service;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import service.ExpertService;
 import service.OrderService;
 import service.ServiceService;
@@ -25,11 +27,17 @@ import java.util.*;
  * @author Negin Mousavi
  */
 @Data
+@Component
 public class ExpertView {
+    @Autowired
     private ExpertService expertService;
+    @Autowired
     private ServiceService serviceService;
+    @Autowired
     private SuggestionService suggestionService;
+    @Autowired
     private OrderService orderService;
+    @Autowired
     private Validation validation;
 
     public User createExpert(User expert, String serviceName, String avatarName) {

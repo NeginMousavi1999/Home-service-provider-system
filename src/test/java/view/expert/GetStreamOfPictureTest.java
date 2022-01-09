@@ -1,6 +1,6 @@
 package view.expert;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -19,8 +19,8 @@ public class GetStreamOfPictureTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        view = (ExpertView) context.getBean("expertView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        view = context.getBean(ExpertView.class);
     }
 
     @ParameterizedTest

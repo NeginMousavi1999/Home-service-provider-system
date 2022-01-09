@@ -5,12 +5,16 @@ import exception.HomeServiceException;
 import lombok.Data;
 import model.members.Expert;
 import model.members.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Negin Mousavi
  */
 @Data
+@Service
 public class ExpertService {
+    @Autowired
     ExpertDao expertDao;
 
     public void save(User expert) {

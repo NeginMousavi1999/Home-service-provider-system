@@ -6,6 +6,8 @@ import exception.HomeServiceException;
 import lombok.Data;
 import model.members.Expert;
 import model.order.Suggestion;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -13,7 +15,9 @@ import java.util.List;
  * @author Negin Mousavi
  */
 @Data
+@Service
 public class SuggestionService {
+    @Autowired
     SuggestionDao suggestionDao;
 
     public void saveSuggestion(Suggestion suggestion) {

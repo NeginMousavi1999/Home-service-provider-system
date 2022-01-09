@@ -3,6 +3,7 @@ package validation;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import exception.HomeServiceException;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 /**
  * @author Negin Mousavi
  */
+@Component
 public class Validation {
     public boolean validateEmail(String email) {
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";

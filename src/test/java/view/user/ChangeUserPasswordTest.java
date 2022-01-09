@@ -1,6 +1,6 @@
 package view.user;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.members.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,9 +18,9 @@ public class ChangeUserPasswordTest {
     UserView userView;
 
     @BeforeEach
-    public void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        userView = (UserView) context.getBean("userView");
+    void init() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        userView = context.getBean(UserView.class);
     }
 
     @ParameterizedTest

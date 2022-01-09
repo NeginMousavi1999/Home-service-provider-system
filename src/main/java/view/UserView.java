@@ -1,12 +1,14 @@
 package view;
 
 import dto.UserDto;
+import dto.UserRequestDto;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import lombok.Data;
 import model.members.Customer;
 import model.members.User;
-import dto.UserRequestDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import service.UserService;
 import validation.Validation;
 
@@ -18,11 +20,17 @@ import static enumuration.UserRole.valueOf;
  * @author Negin Mousavi
  */
 @Data
+@Component
 public class UserView {
+    @Autowired
     private ManagerView managerView;
+    @Autowired
     private ExpertView expertView;
+    @Autowired
     private CustomerView customerView;
+    @Autowired
     private Validation validation;
+    @Autowired
     private UserService userService;
 
     public User createUser(String firstName, String lastName, String email, String password, String role,

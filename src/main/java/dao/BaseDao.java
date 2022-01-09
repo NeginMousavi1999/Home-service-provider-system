@@ -5,10 +5,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class BaseDao {
     protected static SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 

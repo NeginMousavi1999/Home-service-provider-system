@@ -1,5 +1,6 @@
 package validation;
 
+import config.SpringConfig;
 import enumuration.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,8 @@ public class ValidateUserRoleTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Validation.class);
-        validation = (Validation) context.getBean("validation");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        validation = context.getBean(Validation.class);
     }
 
     @Test

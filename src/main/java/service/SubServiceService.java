@@ -4,6 +4,8 @@ import dao.SubServiceDao;
 import exception.HomeServiceException;
 import lombok.Data;
 import model.services.SubService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import validation.Validation;
 
 import java.util.List;
@@ -13,8 +15,11 @@ import java.util.stream.Collectors;
  * @author Negin Mousavi
  */
 @Data
+@Service
 public class SubServiceService {
+    @Autowired
     SubServiceDao subServiceDao;
+    @Autowired
     Validation validation;
 
     public List<String> getAllServiceName() {

@@ -4,6 +4,8 @@ import dao.OrderDao;
 import lombok.Data;
 import model.order.Order;
 import model.services.SubService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -11,7 +13,9 @@ import java.util.List;
  * @author Negin Mousavi
  */
 @Data
+@Service
 public class OrderService {
+    @Autowired
     OrderDao orderDao;
 
     public void update(Order order) {

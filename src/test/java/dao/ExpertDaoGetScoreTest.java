@@ -1,6 +1,6 @@
 package dao;
 
-import config.DaoSpringConfig;
+import config.SpringConfig;
 import model.members.Expert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,8 +16,8 @@ public class ExpertDaoGetScoreTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
-        expertDao = (ExpertDao) context.getBean("expertDao");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        expertDao = context.getBean(ExpertDao.class);
     }
 
     @Test

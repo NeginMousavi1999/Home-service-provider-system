@@ -1,6 +1,6 @@
 package view.customer;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import enumuration.OrderStatus;
 import model.members.Customer;
 import model.order.Order;
@@ -21,8 +21,8 @@ public class PayTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        customerView = (CustomerView) context.getBean("customerView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerView = context.getBean(CustomerView.class);
     }
 
     @Test

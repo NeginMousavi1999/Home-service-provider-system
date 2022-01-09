@@ -1,6 +1,6 @@
 package view.user;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,9 +16,9 @@ public class LoginTest {
     UserView userView;
 
     @BeforeEach
-    public void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        userView = (UserView) context.getBean("userView");
+    void init() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        userView = context.getBean(UserView.class);
     }
 
     @ParameterizedTest

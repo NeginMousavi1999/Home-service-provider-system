@@ -1,5 +1,6 @@
 package validation;
 
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,8 +16,8 @@ public class ValidateEmailTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Validation.class);
-        validation = (Validation) context.getBean("validation");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        validation = context.getBean(Validation.class);
     }
 
     @ParameterizedTest

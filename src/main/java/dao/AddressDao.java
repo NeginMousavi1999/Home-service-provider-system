@@ -4,10 +4,12 @@ package dao;
 import model.order.Address;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class AddressDao extends BaseDao {
     public void create(Address address) {
         Session session = sessionFactory.openSession();

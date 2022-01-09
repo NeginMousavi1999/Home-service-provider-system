@@ -4,12 +4,14 @@ import model.members.Expert;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class ExpertDao extends UserDao {
 
     public void createExpert(Expert expert) {

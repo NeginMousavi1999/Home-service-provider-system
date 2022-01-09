@@ -1,6 +1,6 @@
 package service.service;
 
-import config.ServicesSpringConfig;
+import config.SpringConfig;
 import model.services.Service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,8 +17,8 @@ public class GetServiceByIdTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServicesSpringConfig.class);
-        serviceService = (ServiceService) context.getBean("serviceService");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        serviceService = context.getBean(ServiceService.class);
     }
 
     @Test

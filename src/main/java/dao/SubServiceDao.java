@@ -4,12 +4,14 @@ import model.services.SubService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class SubServiceDao extends BaseDao {
     public void create(SubService subService) {
         Session session = sessionFactory.openSession();
@@ -52,8 +54,6 @@ public class SubServiceDao extends BaseDao {
         List<SubService> list = query.list();
         transaction.commit();
         session.close();
-        if (list.size() == 0)
-            return null;
         return list;
     }
 

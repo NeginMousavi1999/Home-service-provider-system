@@ -1,6 +1,6 @@
 package service.user;
 
-import config.ServicesSpringConfig;
+import config.SpringConfig;
 import model.members.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +18,8 @@ public class FindUserByUserNameAndPasswordTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServicesSpringConfig.class);
-        userService = (UserService) context.getBean("userService");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        userService = context.getBean(UserService.class);
     }
 
     @ParameterizedTest

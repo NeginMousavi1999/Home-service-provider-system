@@ -1,6 +1,6 @@
 package dao;
 
-import config.DaoSpringConfig;
+import config.SpringConfig;
 import model.services.SubService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,8 @@ public class SubServiceDaoFGetAllNameTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
-        subServiceDao = (SubServiceDao) context.getBean("subServiceDao");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        subServiceDao = context.getBean(SubServiceDao.class);
     }
 
     @Test

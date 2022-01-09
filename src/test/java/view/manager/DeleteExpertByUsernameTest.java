@@ -1,6 +1,6 @@
 package view.manager;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,9 +16,9 @@ public class DeleteExpertByUsernameTest {
     ManagerView managerView;
 
     @BeforeEach
-    public void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        managerView = (ManagerView) context.getBean("managerView");
+    void init() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        managerView = context.getBean(ManagerView.class);
     }
 
     @Test

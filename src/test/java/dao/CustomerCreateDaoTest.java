@@ -1,6 +1,6 @@
 package dao;
 
-import config.DaoSpringConfig;
+import config.SpringConfig;
 import enumuration.UserRole;
 import enumuration.UserStatus;
 import model.members.Customer;
@@ -19,9 +19,10 @@ public class CustomerCreateDaoTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
-        customerDao = (CustomerDao) context.getBean("customerDao");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerDao = context.getBean(CustomerDao.class);
     }
+
 
     @Test
     void givenExpert_WhenCreateCalls_ThenReturnTrueResponse() {
@@ -32,7 +33,7 @@ public class CustomerCreateDaoTest {
                 .userStatus(UserStatus.WAITING)
                 .password("Jack1234")
                 .email("jack@gmail.com")
-                .credit(10000)
+                .credit(1000000)
                 .build();
 
         Long before = customerDao.getCountOfRecordsByEntityName("Customer");

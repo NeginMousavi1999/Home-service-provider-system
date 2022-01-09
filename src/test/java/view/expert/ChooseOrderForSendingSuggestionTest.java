@@ -1,6 +1,6 @@
 package view.expert;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.order.Order;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,8 @@ public class ChooseOrderForSendingSuggestionTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        view = (ExpertView) context.getBean("expertView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        view = context.getBean(ExpertView.class);
     }
 
     @Test

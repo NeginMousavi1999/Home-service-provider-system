@@ -1,6 +1,6 @@
 package view.manager;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import enumuration.UserStatus;
 import model.members.Expert;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,16 +18,16 @@ public class ConfirmExpertTest {
     ManagerView managerView;
 
     @BeforeEach
-    public void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        managerView = (ManagerView) context.getBean("managerView");
+    void init() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        managerView = context.getBean(ManagerView.class);
     }
 
     @Test
     void givenCustomer_WhenConfirmExpertCalls_ThenReturnTrueResponse() {
-        Expert expert = managerView.getExpertService().findByEmail("rachel@gmail.com");
+        Expert expert = managerView.getExpertService().findByEmail("rose@gmail.com");
         boolean result = managerView.confirmExpert(expert);
-        Expert confirmedExpert = managerView.getExpertService().findByEmail("rachel@gmail.com");
+        Expert confirmedExpert = managerView.getExpertService().findByEmail("rose@gmail.com");
         assertTrue(result);
         assertEquals(UserStatus.CONFIRMED, confirmedExpert.getUserStatus());
     }

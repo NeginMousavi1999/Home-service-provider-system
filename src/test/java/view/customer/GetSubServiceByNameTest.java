@@ -1,6 +1,6 @@
 package view.customer;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.services.SubService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,8 +18,8 @@ public class GetSubServiceByNameTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        customerView = (CustomerView) context.getBean("customerView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerView = context.getBean(CustomerView.class);
     }
 
     @Test

@@ -1,6 +1,6 @@
 package dao;
 
-import config.DaoSpringConfig;
+import config.SpringConfig;
 import model.order.Order;
 import model.services.SubService;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,9 +21,9 @@ public class OrderDaoFindBySubServiceTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoSpringConfig.class);
-        subServiceDao = (SubServiceDao) context.getBean("subServiceDao");
-        orderDao = (OrderDao) context.getBean("orderDao");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        orderDao = context.getBean(OrderDao.class);
+        subServiceDao = context.getBean(SubServiceDao.class);
     }
 
     @Test

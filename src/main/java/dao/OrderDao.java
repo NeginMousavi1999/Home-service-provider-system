@@ -5,12 +5,14 @@ import model.services.SubService;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
+@Component
 public class OrderDao extends BaseDao {
     public void create(Order order) {
         Session session = sessionFactory.openSession();

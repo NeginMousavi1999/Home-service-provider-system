@@ -1,6 +1,6 @@
 package view.customer;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import enumuration.OrderStatus;
 import model.members.Customer;
 import model.members.Expert;
@@ -24,8 +24,8 @@ public class ChooseSuggestionAndExpertTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        customerView = (CustomerView) context.getBean("customerView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerView = context.getBean(CustomerView.class);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class ChooseSuggestionAndExpertTest {
         List<Suggestion> suggestions = customerView.returnChosenOrderSuggestions(orders, 0);
         Expert expert = customerView.returnChosenExpert(suggestions, 0);
         assertNotNull(expert);
-        Order order = customerView.getOrderService().findById(2);
+        Order order = customerView.getOrderService().findById(1);
         assertEquals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE, order.getOrderStatus());
     }
 }

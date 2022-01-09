@@ -1,6 +1,6 @@
 package view.customer;
 
-import config.ViewSpringConfig;
+import config.SpringConfig;
 import model.members.Customer;
 import model.order.Order;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * @author Negin Mousavi
  */
-public class GetOrdersForPAyTest {
+public class GetOrdersForPayTest {
     CustomerView customerView;
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ViewSpringConfig.class);
-        customerView = (CustomerView) context.getBean("customerView");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerView = context.getBean(CustomerView.class);
     }
 
     @Test

@@ -4,6 +4,7 @@ import dao.ServiceDao;
 import exception.HomeServiceException;
 import lombok.Data;
 import model.services.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import validation.Validation;
 
 import java.util.List;
@@ -12,8 +13,11 @@ import java.util.List;
  * @author Negin Mousavi
  */
 @Data
+@org.springframework.stereotype.Service
 public class ServiceService {
+    @Autowired
     ServiceDao serviceDao;
+    @Autowired
     Validation validation;
 
     public Service getServiceById(int id) {

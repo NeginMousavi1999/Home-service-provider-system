@@ -1,6 +1,6 @@
 package service.customer;
 
-import config.ServicesSpringConfig;
+import config.SpringConfig;
 import model.members.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,8 +18,8 @@ public class FindByEmailTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServicesSpringConfig.class);
-        customerService = (CustomerService) context.getBean("customerService");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        customerService = context.getBean(CustomerService.class);
     }
 
     @ParameterizedTest

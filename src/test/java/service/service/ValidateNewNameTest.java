@@ -1,6 +1,6 @@
 package service.service;
 
-import config.ServicesSpringConfig;
+import config.SpringConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,8 +17,8 @@ public class ValidateNewNameTest {
 
     @BeforeEach
     void init() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ServicesSpringConfig.class);
-        serviceService = (ServiceService) context.getBean("serviceService");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+        serviceService = context.getBean(ServiceService.class);
     }
 
     @ParameterizedTest
