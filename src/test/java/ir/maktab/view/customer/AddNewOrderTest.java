@@ -33,22 +33,21 @@ public class AddNewOrderTest {
         SubService subService = customerView.getSubServiceByName("Kitchen appliances");
         Customer customer = customerView.getCustomerByEmail("jack@gmail.com");
         boolean result = customerView.addNewOrder(subService, orderAddress,
-                customer, "description2", 1330000);
+                customer, "description2");
         assertTrue(result);
     }
 
     @ParameterizedTest
-    @CsvSource({"Kitchen appliances, address, jk@gmail.com, description, 1200000",
-            "something, address, jack@gmail.com, description, 1200000",
-            "Kitchen appliances, address, jack@gmail.com, description, 120"})
+    @CsvSource({"Kitchen appliances, address, jk@gmail.com, description",
+            "something, address, jack@gmail.com, description"})
     void addOrderTestWithInvalidValues_WhenAddNewOrderCalls_ThenReturnTrueResponse(String subServiceName, String address
-            , String customerUsername, String description, double suggestedPrice) {
+            , String customerUsername, String description) {
         Address orderAddress = new Address();
         orderAddress.setState(address);
         SubService subService = customerView.getSubServiceByName(subServiceName);
         Customer customer = customerView.getCustomerByEmail(customerUsername);
         boolean result = customerView.addNewOrder(subService, orderAddress,
-                customer, description, suggestedPrice);
+                customer, description);
         assertFalse(result);
     }
 }

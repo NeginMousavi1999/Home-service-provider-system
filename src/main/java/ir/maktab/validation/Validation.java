@@ -45,12 +45,6 @@ public class Validation {
         return true;
     }
 
-    public boolean validateSuggestedPrice(double suggestedPrice, double basePrice) {
-        if (suggestedPrice < basePrice)
-            throw new HomeServiceException("suggested price is less than base price!");
-        return true;
-    }
-
     public boolean validateCustomerCredit(double credit, double price) {
         if (credit < price)
             throw new HomeServiceException("you have not enough credit to pay!");

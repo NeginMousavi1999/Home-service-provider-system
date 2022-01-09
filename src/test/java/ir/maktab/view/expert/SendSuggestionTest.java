@@ -32,7 +32,7 @@ public class SendSuggestionTest {
         Expert expert = view.getExpertService().findByEmail("rose@gmail.com");
         Date date = GenerateDate.generateByPattern("yyyy-MM-dd", "2022-01-12");
         view.sendSuggestion(expert, order, 150000, 12, date);
-        Long after = view.getSuggestionService().getSuggestionDao().count();
+        long after = view.getSuggestionService().getSuggestionDao().count();
         assertEquals(before, after - 1);
     }
 }

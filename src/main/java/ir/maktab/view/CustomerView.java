@@ -98,13 +98,11 @@ public class CustomerView {
         return subService;
     }
 
-    public boolean addNewOrder(SubService subService, Address address, Customer customer, String description,
-                               double suggestedPrice) {
+    public boolean addNewOrder(SubService subService, Address address, Customer customer, String description) {
         if (subService == null || customer == null)
             return false;
 
         try {
-            validation.validateSuggestedPrice(suggestedPrice, subService.getCost());
             validation.validateUserStatus(UserStatus.CONFIRMED, customer.getUserStatus());
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
