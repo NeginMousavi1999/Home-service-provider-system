@@ -36,9 +36,9 @@ public class CustomerCreateDaoTest {
                 .credit(1000000)
                 .build();
 
-        Long before = customerDao.getCountOfRecordsByEntityName("Customer");
-        customerDao.create(customer);
-        Long after = customerDao.getCountOfRecordsByEntityName("Customer");
+        Long before = customerDao.count();
+        customerDao.save(customer);
+        Long after = customerDao.count();
         assertEquals(before, after - 1);
     }
 

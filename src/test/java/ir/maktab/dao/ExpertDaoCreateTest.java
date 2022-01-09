@@ -32,7 +32,7 @@ public class ExpertDaoCreateTest {
     @Test
     void givenExpert_WhenCreateCalls_ThenReturnTrueResponse() {
         String serviceName = "Home Appliances";
-        Service service = serviceDao.findByName(serviceName);
+        Service service = serviceDao.findByName(serviceName).get();
         Set<Service> services = new HashSet<>();
         services.add(service);
         expert = Expert.builder()
@@ -47,9 +47,9 @@ public class ExpertDaoCreateTest {
                 .credit(0)
                 .build();
 
-        Long before = expertDao.getCountOfRecordsByEntityName("Expert");
-        expertDao.createExpert(expert);
-        Long after = expertDao.getCountOfRecordsByEntityName("Expert");
+        Long before = expertDao.count();
+        expertDao.save(expert);
+        Long after = expertDao.count();
         assertEquals(before, after - 1);
     }
 }

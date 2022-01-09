@@ -16,6 +16,10 @@ public class CommentService {
     private final CommentDao commentDao;
 
     public void save(Comment comment) {
-        commentDao.create(comment);
+        commentDao.save(comment);
+    }
+
+    public Long getCountOfRecords() {
+        return commentDao.count();
     }
 }

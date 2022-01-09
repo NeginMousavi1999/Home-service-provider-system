@@ -1,7 +1,7 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.ManagerDao;
-import ir.maktab.model.members.User;
+import ir.maktab.model.members.Manager;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class ManagerService {
     private final ManagerDao managerDao;
 
-    public void save(User manager) {
-        managerDao.create(manager);
+    public void save(Manager manager) {
+        managerDao.save(manager);
     }
 }

@@ -1,37 +1,13 @@
 package ir.maktab.dao;
 
-import ir.maktab.model.members.User;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.stereotype.Component;
+import ir.maktab.model.members.Manager;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Negin Mousavi
  */
-@Component
-public class ManagerDao extends UserDao {
-    public void create(User user) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(user);
-        transaction.commit();
-        session.close();
-    }
+@Repository
+public interface ManagerDao extends JpaRepository<Manager, Integer> {
 
-    public User read(Long id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        User foundUser = session.get(User.class, id);
-        transaction.commit();
-        session.close();
-        return foundUser;
-    }
-
-    public void delete(User user) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.remove(user);
-        transaction.commit();
-        session.close();
-    }
 }

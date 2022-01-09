@@ -23,13 +23,13 @@ public class ExpertDaoFindByEmailTest {
 
     @Test
     void givenExistEmail_WhenFindByEmailCalls_ThenReturnTrueResponse() {
-        Expert expert = expertDao.findByEmail("rachel@gmail.com");
+        Expert expert = expertDao.findByEmail("rachel@gmail.com").get();
         assertNotNull(expert);
     }
 
     @Test
     void givenNotExistEmail_WhenFindByEmailCalls_ThenReturnTrueResponse() {
-        Expert expert = expertDao.findByEmail("something@gmail.com");
+        Expert expert = expertDao.findByEmail("something@gmail.com").get();
         assertNull(expert);
     }
 }

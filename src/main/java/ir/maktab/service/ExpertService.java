@@ -3,10 +3,11 @@ package ir.maktab.service;
 import ir.maktab.dao.ExpertDao;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Expert;
-import ir.maktab.model.members.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * @author Negin Mousavi
@@ -17,28 +18,33 @@ import org.springframework.stereotype.Service;
 public class ExpertService {
     private final ExpertDao expertDao;
 
-    public void save(User expert) {
-        expertDao.create(expert);
+    public void save(Expert expert) {
+        expertDao.save(expert);
     }
 
-    public boolean delete(User expert) {
+    public boolean delete(Expert expert) {
         expertDao.delete(expert);
         return true;
     }
 
     public boolean update(Expert expert) {
-        expertDao.update(expert);
+//        expertDao.update(expert);
+        expertDao.save(expert);
         return true;
     }
 
     public Expert findByEmail(String email) {
-        Expert expert = expertDao.findByEmail(email);
-        if (expert == null)
+        Optional<Expert> expert = expertDao.findByEmail(email);
+        if (expert.isEmpty())
             throw new HomeServiceException("we have not this expert!");
-        return expert;
+        return expert.get();
     }
 
-    public double getExpertScore(Expert expert) {
+/*    public double getExpertScore(Expert expert) {
         return expertDao.getScore(expert);
+    }*/
+
+    public Long getCountOfRecords() {
+        return expertDao.count();
     }
 }

@@ -1,3 +1,4 @@
+/*
 package ir.maktab.dao;
 
 import ir.maktab.config.SpringConfig;
@@ -8,9 +9,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+*/
 /**
  * @author Negin Mousavi
- */
+ *//*
+
 public class ExpertDaoGetScoreTest {
     ExpertDao expertDao;
 
@@ -22,8 +25,9 @@ public class ExpertDaoGetScoreTest {
 
     @Test
     void givenExpert_WhenGetScoreCalls_ThenReturnTrueResponse() {
-        Expert expert = expertDao.findByEmail("rachel@gmail.com");
+        Expert expert = expertDao.findByEmail("rachel@gmail.com").get();
         double score = expertDao.getScore(expert);
         assertEquals(expert.getScore(), score);
     }
 }
+*/

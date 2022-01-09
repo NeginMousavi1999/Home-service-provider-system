@@ -24,14 +24,14 @@ public class ServiceDaoFindByNameTest {
     @Test
     void givenExistName_WhenFindByNameCalls_ThenReturnTrueResponse() {
         String serviceName = "Home Appliances";
-        Service service = serviceDao.findByName(serviceName);
+        Service service = serviceDao.findByName(serviceName).get();
         assertNotNull(service);
     }
 
     @Test
     void givenNotExistName_WhenFindByNameCalls_ThenReturnTrueResponse() {
         String serviceName = "something";
-        Service service = serviceDao.findByName(serviceName);
+        Service service = serviceDao.findByName(serviceName).get();
         assertNull(service);
     }
 }

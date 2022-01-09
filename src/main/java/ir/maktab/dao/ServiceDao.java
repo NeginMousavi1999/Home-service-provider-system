@@ -1,73 +1,19 @@
 package ir.maktab.dao;
 
 import ir.maktab.model.services.Service;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Negin Mousavi
  */
-@Component
-public class ServiceDao extends BaseDao {
-    public void create(Service service) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(service);
-        transaction.commit();
-        session.close();
-    }
+@Repository
+public interface ServiceDao extends JpaRepository<Service, Integer> {
 
-    public Service read(int id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Service service = session.get(Service.class, id);
-        transaction.commit();
-        session.close();
-        return service;
-    }
+    List<Service> findAll();
 
-    public void update(Service service) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(service);
-        transaction.commit();
-        session.close();
-    }
-
-    public void delete(Service service) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.remove(service);
-        transaction.commit();
-        session.close();
-    }
-
-    public List<String> getAllName() {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "select s.name from Service s";
-        Query<String> query = session.createQuery(hql, String.class);
-        List<String> list = query.list();
-        transaction.commit();
-        session.close();
-        return list;
-    }
-
-    public Service findByName(String name) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "from Service s where s.name=:name";
-        Query<Service> query = session.createQuery(hql, Service.class);
-        query.setParameter("name", name);
-        List<Service> list = query.list();
-        transaction.commit();
-        session.close();
-        if (list.size() == 0)
-            return null;
-        return list.get(0);
-    }
+    Optional<Service> findByName(String name);
 }

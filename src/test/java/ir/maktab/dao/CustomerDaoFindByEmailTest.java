@@ -23,13 +23,13 @@ public class CustomerDaoFindByEmailTest {
 
     @Test
     void givenExistEmail_WhenFindByEmailCalls_ThenReturnTrueResponse() {
-        Customer customer = customerDao.findByEmail("jack@gmail.com");
+        Customer customer = customerDao.findByEmail("jack@gmail.com").get();
         assertNotNull(customer);
     }
 
     @Test
     void givenNotExistEmail_WhenFindByEmailCalls_ThenReturnTrueResponse() {
-        Customer customer = customerDao.findByEmail("something@gmail.com");
+        Customer customer = customerDao.findByEmail("something@gmail.com").get();
         assertNull(customer);
     }
 }

@@ -48,7 +48,7 @@ public class CustomerView {
                 .userRole(UserRole.CUSTOMER)
                 .build();
 
-        customerService.save(customer);
+        customerService.save((Customer) customer);
         return customer;
     }
 
@@ -165,7 +165,7 @@ public class CustomerView {
         if (!order.getOrderStatus().equals(OrderStatus.PAID))
             return;
         Expert expert = order.getExpert();
-        double oldScore = expertService.getExpertScore(expert);
+        double oldScore = expert.getScore();
         expert.setScore((oldScore + score) / 2);
         if (customerComment.length() != 0) {
             Comment comment = Comment.builder()

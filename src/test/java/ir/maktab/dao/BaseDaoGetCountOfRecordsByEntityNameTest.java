@@ -1,3 +1,4 @@
+/*
 package ir.maktab.dao;
 
 import ir.maktab.config.SpringConfig;
@@ -8,9 +9,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+*/
 /**
  * @author Negin Mousavi
- */
+ *//*
+
 public class BaseDaoGetCountOfRecordsByEntityNameTest {
     BaseDao baseDao;
 
@@ -27,3 +30,4 @@ public class BaseDaoGetCountOfRecordsByEntityNameTest {
         assertEquals(expect, result);
     }
 }
+*/

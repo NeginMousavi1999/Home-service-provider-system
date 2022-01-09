@@ -25,7 +25,7 @@ public class SubServiceDaoFGetAllNameTest {
 
     @Test
     void callGetAllName_WhenTableIsNotEmpty_ThenReturnTrueResponse() {
-        List<String> allName = subServiceDao.returnAll().stream().map(SubService::getName).collect(Collectors.toList());
+        List<String> allName = subServiceDao.findAll().stream().map(SubService::getName).collect(Collectors.toList());
         assertTrue(allName.size() > 0);
     }
 }

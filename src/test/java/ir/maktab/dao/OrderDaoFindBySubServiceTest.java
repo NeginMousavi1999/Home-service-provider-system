@@ -28,14 +28,14 @@ public class OrderDaoFindBySubServiceTest {
 
     @Test
     void givenSubServiceAndTableIsEmpty_WhenFindBySubServiceCalls_ThenReturnTrueResponse() {
-        SubService subService = subServiceDao.findByName("Kitchen appliances");
+        SubService subService = subServiceDao.findByName("Kitchen appliances").get();
         List<Order> orderList = orderDao.findBySubService(subService);
         assertNull(orderList);
     }
 
     @Test
     void givenSubServiceAndTableIsNotEmpty_WhenFindBySubServiceCalls_ThenReturnTrueResponse() {
-        SubService subService = subServiceDao.findByName("Kitchen appliances");
+        SubService subService = subServiceDao.findByName("Kitchen appliances").get();
         List<Order> orderList = orderDao.findBySubService(subService);
         assertNotNull(orderList);
     }

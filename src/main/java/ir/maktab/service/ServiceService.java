@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -20,14 +22,14 @@ public class ServiceService {
     private final Validation validation;
 
     public Service getServiceById(int id) {
-        Service service = serviceDao.read(id);
-        if (service == null)
-            throw new RuntimeException("ir.maktab.service not found!");
-        return service;
+        Optional<Service> service = serviceDao.findById(id);
+        if (service.isEmpty())
+            throw new RuntimeException(" we have not service with this id");
+        return service.get();
     }
 
     public List<String> getAllServiceName() {
-        return serviceDao.getAllName();
+        return serviceDao.findAll().stream().map(Service::getName).collect(Collectors.toList());
     }
 
     public boolean validateNewName(String name) {
@@ -35,14 +37,15 @@ public class ServiceService {
     }
 
     public boolean addNewService(Service service) {
-        serviceDao.create(service);
+        serviceDao.save(service);
         return true;
     }
 
     public Service findServiceByName(String name) {
-        Service service = serviceDao.findByName(name);
-        if (service == null)
-            throw new HomeServiceException("we have n't this ir.maktab.service!");
-        return service;
+        Optional<Service> service = serviceDao.findByName(name);
+//        Service service = service;
+        if (service.isEmpty())
+            throw new HomeServiceException("we have n't this service!");
+        return service.get();
     }
 }

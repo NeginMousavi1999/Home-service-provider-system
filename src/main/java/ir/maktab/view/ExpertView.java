@@ -62,7 +62,7 @@ public class ExpertView {
             return null;
         }
 
-        expertService.save(expert);
+        expertService.save((Expert) expert);
         return expert;
     }
 

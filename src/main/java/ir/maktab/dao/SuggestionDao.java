@@ -3,75 +3,18 @@ package ir.maktab.dao;
 import ir.maktab.enumuration.SuggestionStatus;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.order.Suggestion;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
-@Component
-public class SuggestionDao extends BaseDao {
-    public void create(Suggestion suggestion) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(suggestion);
-        session.saveOrUpdate(suggestion.getOrder());
-        transaction.commit();
-        session.close();
-    }
+@Repository
+public interface SuggestionDao extends JpaRepository<Suggestion, Integer> {
+    List<Suggestion> findBySuggestionStatusAndExpert(SuggestionStatus suggestionStatus, Expert expert);
 
-    public Suggestion read(Suggestion suggestion) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Suggestion foundSuggestion = session.get(Suggestion.class, suggestion.getId());
-        transaction.commit();
-        session.close();
-        return foundSuggestion;
-    }
+    List<Suggestion> findByExpert(Expert expert);
 
-    public void update(Suggestion suggestion) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(suggestion);
-        session.saveOrUpdate(suggestion.getOrder());
-        transaction.commit();
-        session.close();
-    }
-
-    public void delete(Suggestion suggestion) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.remove(suggestion);
-        transaction.commit();
-        session.close();
-    }
-
-    public List<Suggestion> getByStatus(Expert expert, SuggestionStatus status) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "from Suggestion s where s.expert=:expert and s.suggestionStatus=:status";
-        Query<Suggestion> query = session.createQuery(hql, Suggestion.class);
-        query.setParameter("expert", expert);
-        query.setParameter("status", status);
-        List<Suggestion> list = query.list();
-        transaction.commit();
-        session.close();
-        return list;
-    }
-
-    public List<Suggestion> getAllSuggestions(Expert expert) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        String hql = "from Suggestion s where s.expert=:expert";
-        Query<Suggestion> query = session.createQuery(hql, Suggestion.class);
-        query.setParameter("expert", expert);
-        List<Suggestion> list = query.list();
-        transaction.commit();
-        session.close();
-        return list;
-    }
 }

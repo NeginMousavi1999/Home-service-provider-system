@@ -11,7 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 /**
  * @author Negin Mousavi
@@ -24,14 +24,15 @@ public class UserService {
     private final ModelMapper modelMapper = new ModelMapper();
 
     public User findUserByUserNameAndPassword(String email, String password) {
-        User user = userDao.findByEmailAndPassword(email, password);
-        if (user == null)
+        Optional<User> user = userDao.findByEmailAndPassword(email, password);
+//        User user = userDao.findByEmailAndPassword(email, password);
+        if (user.isEmpty())
             throw new HomeServiceException("username or password is incorrect");
-        return user;
+        return user.get();
     }
 
     public List<UserDto> returnUsersFiltering(UserRequestDto request) {
-        return userDao.returnUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList());
+        return null/*userDao.returnUsersFiltering(request).stream().map(this::createUserDto).collect(Collectors.toList())*/;
     }
 
     private UserDto createUserDto(User user) {

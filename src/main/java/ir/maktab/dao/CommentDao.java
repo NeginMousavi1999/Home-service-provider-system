@@ -1,45 +1,13 @@
 package ir.maktab.dao;
 
 import ir.maktab.model.order.Comment;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.springframework.stereotype.Component;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * @author Negin Mousavi
  */
-@Component
-public class CommentDao extends BaseDao {
-    public void create(Comment comment) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(comment);
-        transaction.commit();
-        session.close();
-    }
+@Repository
+public interface CommentDao extends JpaRepository<Comment, Integer> {
 
-    public Comment read(Comment comment) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Comment foundComment = session.get(Comment.class, comment.getId());
-        transaction.commit();
-        session.close();
-        return foundComment;
-    }
-
-    public void update(Comment comment) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.update(comment);
-        transaction.commit();
-        session.close();
-    }
-
-    public void delete(Comment comment) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.remove(comment);
-        transaction.commit();
-        session.close();
-    }
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +23,7 @@ public class SubServiceService {
     private final Validation validation;
 
     public List<String> getAllServiceName() {
-        return subServiceDao.returnAll().stream().map(SubService::getName).collect(Collectors.toList());
+        return subServiceDao.findAll().stream().map(SubService::getName).collect(Collectors.toList());
     }
 
     public boolean validateNewName(String name) {
@@ -30,14 +31,14 @@ public class SubServiceService {
     }
 
     public boolean addNewSubService(SubService subService) {
-        subServiceDao.create(subService);
+        subServiceDao.save(subService);
         return true;
     }
 
     public SubService findSubServiceByName(String name) {
-        SubService subService = subServiceDao.findByName(name);
-        if (subService == null)
-            throw new HomeServiceException("we have n't this sub ir.maktab.service!");
-        return subService;
+        Optional<SubService> subService = subServiceDao.findByName(name);
+        if (subService.isEmpty())
+            throw new HomeServiceException("we have n't this sub service!");
+        return subService.get();
     }
 }
