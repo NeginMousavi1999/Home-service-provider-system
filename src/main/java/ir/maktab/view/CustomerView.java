@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -83,10 +84,10 @@ public class CustomerView {
         orderService.update(order);
     }
 
-    public List<Order> getOrdersForPay(Customer customer) {
-        return customer.getOrders().stream().
+/*    public List<Order> getOrdersForPay(Customer customer) {
+        return orderService.getOrdersByCustomerAndStatus(customer, OrderStatus.DONE).stream().
                 filter(order -> order.getOrderStatus().equals(OrderStatus.DONE)).collect(Collectors.toList());
-    }
+    }*/
 
     public SubService getSubServiceByName(String name) {
         SubService subService;
@@ -117,7 +118,6 @@ public class CustomerView {
                 .subService(subService)
                 .orderStatus(OrderStatus.NEW)
                 .build();
-        customer.getOrders().add(order);
         return orderService.saveOrder(order);
     }
 
@@ -155,15 +155,16 @@ public class CustomerView {
         order.setFinalPrice(suggestion.getSuggestedPrice());
         order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
         order.setToBeDoneDate(suggestion.getStartTime());
-        suggestion.setOrder(order);
         order.setSuggestions(new HashSet<>(suggestionList));
+        suggestion.setOrder(order);
         orderService.update(order);
         suggestionService.update(suggestion);
         return expert;
     }
 
     public List<Order> returnOrdersByCustomer(Customer customer) {
-        return new ArrayList<>(customer.getOrders());
+        Set<Order> orders = orderService.getOrdersByCustomer(customer);
+        return new ArrayList<>(orders);
     }
 
     public List<Suggestion> returnSuggestionsByChosenOrder(List<Order> orderList, int index) {
@@ -171,9 +172,7 @@ public class CustomerView {
             return null;
         Order order = orderList.get(index);
         assert order != null;
-        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
-            return null;
-        return new ArrayList<>(order.getSuggestions());
+        return suggestionService.getByOrder(order);
     }
 
     public void addFeedback(Order order, String customerComment, double score) {
@@ -203,5 +202,9 @@ public class CustomerView {
     public List<Order> returnWatingForSpecialistSelectionOrders(List<Order> orders) {
         return orders.stream().filter(order -> order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
                 .collect(Collectors.toList());
+    }
+
+    public List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus) {
+        return orderService.getOrdersByCustomerAndStatus(customer, orderStatus);
     }
 }

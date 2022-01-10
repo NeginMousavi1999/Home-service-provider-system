@@ -3,11 +3,13 @@ package ir.maktab.service;
 import ir.maktab.dao.CustomerDao;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Customer;
+import ir.maktab.model.order.Order;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -42,4 +44,5 @@ public class CustomerService {
     public Long getCountOfRecords() {
         return customerDao.count();
     }
+
 }

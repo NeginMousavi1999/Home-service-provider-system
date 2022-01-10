@@ -23,6 +23,6 @@ public class Service {
     @Column(unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "service")
     private Set<SubService> subServices = new HashSet<>();
 }

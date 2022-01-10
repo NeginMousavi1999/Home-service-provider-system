@@ -4,6 +4,7 @@ import ir.maktab.dao.SuggestionDao;
 import ir.maktab.enumuration.SuggestionStatus;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Expert;
+import ir.maktab.model.order.Order;
 import ir.maktab.model.order.Suggestion;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +41,9 @@ public class SuggestionService {
 
     public void update(Suggestion suggestion) {
         suggestionDao.save(suggestion);
+    }
+
+    public List<Suggestion> getByOrder(Order order) {
+        return suggestionDao.findByOrder(order);
     }
 }

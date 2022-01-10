@@ -57,6 +57,6 @@ public class Order {
     @ManyToOne
     private Expert expert;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)//TODO lazy
+    @OneToMany(mappedBy = "order")
     private Set<Suggestion> suggestions = new HashSet<>();
 }

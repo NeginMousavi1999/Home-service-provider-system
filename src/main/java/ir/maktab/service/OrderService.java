@@ -1,15 +1,19 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.OrderDao;
+import ir.maktab.enumuration.OrderStatus;
 import ir.maktab.exception.HomeServiceException;
+import ir.maktab.model.members.Customer;
 import ir.maktab.model.order.Order;
 import ir.maktab.model.services.SubService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -21,7 +25,6 @@ public class OrderService {
     private final OrderDao orderDao;
 
     public void update(Order order) {
-//        orderDao.update(order);
         orderDao.save(order);
     }
 
@@ -39,5 +42,13 @@ public class OrderService {
 
     public List<Order> findBySubService(SubService subService) {
         return orderDao.findBySubService(subService);
+    }
+
+    public Set<Order> getOrdersByCustomer(Customer customer) {
+        return new HashSet<>(orderDao.findByCustomer(customer));
+    }
+
+    public List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus) {
+        return orderDao.findByCustomerAndOrderStatus(customer, orderStatus);
     }
 }

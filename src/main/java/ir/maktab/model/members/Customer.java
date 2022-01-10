@@ -23,6 +23,6 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 public class Customer extends User {
-    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "customer")
     private Set<Order> orders = new HashSet<>();
 }

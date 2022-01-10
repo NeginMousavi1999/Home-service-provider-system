@@ -24,10 +24,10 @@ public class GetOrdersForPayTest {
         customerView = context.getBean(CustomerView.class);
     }
 
-    @Test
+/*    @Test
     void givenExistOrderId_WhenAddFeedbackCalls_ThenReturnTrueResponse() {
         Customer customer = customerView.getCustomerByEmail("jack@gmail.com");
         List<Order> ordersForPay = customerView.getOrdersForPay(customer);
         assertNotNull(ordersForPay);
-    }
+    }*/
 }

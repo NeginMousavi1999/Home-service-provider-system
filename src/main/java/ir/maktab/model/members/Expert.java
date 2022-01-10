@@ -25,7 +25,7 @@ public class Expert extends User {
     @Column(columnDefinition = "BLOB", length = 3000)
     private byte[] picture;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<Service> services = new HashSet<>();
 
     private double score;

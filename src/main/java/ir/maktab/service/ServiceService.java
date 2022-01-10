@@ -43,7 +43,6 @@ public class ServiceService {
 
     public Service findServiceByName(String name) {
         Optional<Service> service = serviceDao.findByName(name);
-//        Service service = service;
         if (service.isEmpty())
             throw new HomeServiceException("we have n't this service!");
         return service.get();
