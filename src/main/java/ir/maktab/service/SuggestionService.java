@@ -39,7 +39,6 @@ public class SuggestionService {
     }
 
     public void update(Suggestion suggestion) {
-//        suggestionDao.update(suggestion);
         suggestionDao.save(suggestion);
     }
 }

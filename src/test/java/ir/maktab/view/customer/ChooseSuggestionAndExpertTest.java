@@ -31,9 +31,10 @@ public class ChooseSuggestionAndExpertTest {
     @Test
     void giveValidInputs_WhenChooseSuggestionsForChoosingExpertCalls_ThenReturnTrueResponse() {
         Customer customer = customerView.getCustomerService().findByEmail("jack@gmail.com");
-        List<Order> orders = customerView.returnCustomerOrders(customer);
-        List<Suggestion> suggestions = customerView.returnChosenOrderSuggestions(orders, 0);
-        Expert expert = customerView.returnChosenExpert(suggestions, 0);
+        List<Order> orders = customerView.returnOrdersByCustomer(customer);
+        List<Order> orderList =customerView.returnWatingForSpecialistSelectionOrders(orders);
+        List<Suggestion> suggestions = customerView.returnSuggestionsByChosenOrder(orderList, 0);
+        Expert expert = customerView.returnChosenExpert(suggestions, 5);
         assertNotNull(expert);
         Order order = customerView.getOrderService().findById(1);
         assertEquals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE, order.getOrderStatus());

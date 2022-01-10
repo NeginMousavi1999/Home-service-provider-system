@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -134,27 +135,38 @@ public class CustomerView {
     public Expert returnChosenExpert(List<Suggestion> suggestionList, int index) {
         if (suggestionList == null)
             return null;
-        Suggestion suggestion = suggestionList.get(index);
+
+        Suggestion suggestion = null;
+        for (int i = 0; i < suggestionList.size(); i++) {
+            if (i == index) {
+                suggestion = suggestionList.get(index);
+                suggestion.setSuggestionStatus(SuggestionStatus.ACCEPTED);
+                continue;
+            }
+            suggestionList.get(index).setSuggestionStatus(SuggestionStatus.REJECTED);
+        }
         assert suggestion != null;
         Expert expert = suggestion.getExpert();
         Order order = suggestion.getOrder();
-        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
+        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)) {
             return null;
-        suggestion.setSuggestionStatus(SuggestionStatus.ACCEPTED);
+        }
         order.setExpert(expert);
         order.setFinalPrice(suggestion.getSuggestedPrice());
         order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
         order.setToBeDoneDate(suggestion.getStartTime());
         suggestion.setOrder(order);
+        order.setSuggestions(new HashSet<>(suggestionList));
+        orderService.update(order);
         suggestionService.update(suggestion);
         return expert;
     }
 
-    public List<Order> returnCustomerOrders(Customer customer) {
+    public List<Order> returnOrdersByCustomer(Customer customer) {
         return new ArrayList<>(customer.getOrders());
     }
 
-    public List<Suggestion> returnChosenOrderSuggestions(List<Order> orderList, int index) {
+    public List<Suggestion> returnSuggestionsByChosenOrder(List<Order> orderList, int index) {
         if (orderList == null)
             return null;
         Order order = orderList.get(index);
@@ -186,5 +198,10 @@ public class CustomerView {
         customer.setPassword(newPass);
         customerService.update(customer);
         return true;
+    }
+
+    public List<Order> returnWatingForSpecialistSelectionOrders(List<Order> orders) {
+        return orders.stream().filter(order -> order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION))
+                .collect(Collectors.toList());
     }
 }

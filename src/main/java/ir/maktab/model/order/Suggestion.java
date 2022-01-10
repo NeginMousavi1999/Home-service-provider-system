@@ -25,7 +25,7 @@ public class Suggestion {
     @ManyToOne
     private Expert expert;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Order order;
 
     @CreationTimestamp

@@ -102,7 +102,8 @@ public class ExpertView {
     }
 
     public void sendSuggestion(Expert expert, Order order, double price, int durationOfWork, Date startTime) {
-        if (!order.getOrderStatus().equals(OrderStatus.NEW))
+        if (!(order.getOrderStatus().equals(OrderStatus.NEW) ||
+                order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)))
             return;
         try {
             validation.validateUserStatus(UserStatus.CONFIRMED, expert.getUserStatus());
@@ -120,6 +121,7 @@ public class ExpertView {
                 .build();
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
         order.getSuggestions().add(suggestion);
+        orderService.update(order);
         suggestionService.saveSuggestion(suggestion);
     }
 

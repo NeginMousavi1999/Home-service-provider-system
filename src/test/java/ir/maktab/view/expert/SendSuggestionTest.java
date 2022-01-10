@@ -28,10 +28,10 @@ public class SendSuggestionTest {
     @Test
     void givenValidInputs_WhenSendSuggestionCalls_ThenReturnTrueResponse() {
         Long before = view.getSuggestionService().getSuggestionDao().count();
-        Order order = view.getOrderService().findById(1);
-        Expert expert = view.getExpertService().findByEmail("rose@gmail.com");
+        Order order = view.getOrderService().findById(3);
+        Expert expert = view.getExpertService().findByEmail("rachel@gmail.com");
         Date date = GenerateDate.generateByPattern("yyyy-MM-dd", "2022-01-12");
-        view.sendSuggestion(expert, order, 150000, 12, date);
+        view.sendSuggestion(expert, order, 90, 12, date);
         long after = view.getSuggestionService().getSuggestionDao().count();
         assertEquals(before, after - 1);
     }
