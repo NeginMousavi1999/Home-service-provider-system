@@ -19,5 +19,4 @@ public interface SuggestionDao extends JpaRepository<Suggestion, Integer> {
     List<Suggestion> findByExpert(Expert expert);
 
     List<Suggestion> findByOrder(Order order);
-
 }

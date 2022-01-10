@@ -120,7 +120,9 @@ public class ExpertView {
                 .suggestionStatus(SuggestionStatus.NEW)
                 .build();
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
-        order.getSuggestions().add(suggestion);
+        List<Suggestion> suggestions = suggestionService.getByOrder(order);
+        suggestions.add(suggestion);
+        order.setSuggestions(new HashSet<>(suggestions));
         orderService.update(order);
         suggestionService.saveSuggestion(suggestion);
     }

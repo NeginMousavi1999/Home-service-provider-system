@@ -25,4 +25,6 @@ public interface SuggestionService {
     List<Suggestion> getByOrder(Order order);
 
     Long getCountOfRecords();
+
+    List<Suggestion> getSortedByOrder(Order order);
 }

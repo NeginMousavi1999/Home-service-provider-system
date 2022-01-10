@@ -9,6 +9,7 @@ import ir.maktab.model.order.Suggestion;
 import ir.maktab.service.SuggestionService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,5 +51,10 @@ public class SuggestionServiceImp implements SuggestionService {
 
     public Long getCountOfRecords() {
         return suggestionDao.count();
+    }
+
+    @Override
+    public List<Suggestion> getSortedByOrder(Order order) {
+        return suggestionDao.findAll(Sort.by("suggestedPrice", "expert").descending());
     }
 }

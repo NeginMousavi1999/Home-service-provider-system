@@ -49,7 +49,7 @@ public class ExpertDaoCreateTest {
 
         Long before = expertDao.count();
         expertDao.save(expert);
-        Long after = expertDao.count();
+        long after = expertDao.count();
         assertEquals(before, after - 1);
     }
 }

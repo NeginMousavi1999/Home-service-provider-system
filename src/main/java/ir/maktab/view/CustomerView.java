@@ -162,12 +162,12 @@ public class CustomerView {
         return new ArrayList<>(orders);
     }
 
-    public List<Suggestion> returnSuggestionsByChosenOrder(List<Order> orderList, int index) {
+    public List<Suggestion> returnSortedSuggestionsByChosenOrder(List<Order> orderList, int index) {
         if (orderList == null)
             return null;
         Order order = orderList.get(index);
         assert order != null;
-        return suggestionService.getByOrder(order);
+        return suggestionService.getSortedByOrder(order);
     }
 
     public void addFeedback(Order order, String customerComment, double score) {

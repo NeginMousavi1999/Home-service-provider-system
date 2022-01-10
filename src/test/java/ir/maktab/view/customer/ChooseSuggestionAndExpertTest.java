@@ -33,7 +33,7 @@ public class ChooseSuggestionAndExpertTest {
         Customer customer = customerView.getCustomerService().findByEmail("jack@gmail.com");
         List<Order> orderList = customerView.getOrdersByCustomerAndStatus(customer,
                 OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
-        List<Suggestion> suggestions = customerView.returnSuggestionsByChosenOrder(orderList, 0);
+        List<Suggestion> suggestions = customerView.returnSortedSuggestionsByChosenOrder(orderList, 0);
         Expert expert = customerView.returnChosenExpert(suggestions, 0);
         assertNotNull(expert);
         Order order = customerView.getOrderService().findById(1);
