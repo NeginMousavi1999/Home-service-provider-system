@@ -11,10 +11,12 @@ import java.util.Date;
  */
 @Data
 public class UserDto {
-    protected String firstName;
-    protected String lastName;
-    protected String email;
-    protected UserStatus userStatus;
-    protected UserRole userRole;
-    protected Date registrationDate;
+    private int random;
+    private Long identity;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private UserStatus userStatus;
+    private UserRole userRole;
+    private Date registrationDate;
 }

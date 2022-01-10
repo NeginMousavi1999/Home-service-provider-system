@@ -1,21 +1,13 @@
 package ir.maktab.util;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Random;
 
 /**
  * @author Negin Mousavi
  */
-public class GenerateDate {
-    public static Date generateByPattern(String pattern, String date) {//"yyyy-MM-dd"
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        Date requestDate = null;
-        try {
-            requestDate = simpleDateFormat.parse(date);
-        } catch (ParseException e) {
-            System.out.println(e.getLocalizedMessage());
-        }
-        return requestDate;
+public class GenerateRandomInt {
+    public static int generateNumber() {
+        Random random = new Random();
+        return random.nextInt(1000) + 1;
     }
 }
