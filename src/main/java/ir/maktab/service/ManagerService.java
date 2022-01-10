@@ -9,13 +9,6 @@ import org.springframework.stereotype.Service;
 /**
  * @author Negin Mousavi
  */
-@RequiredArgsConstructor
-@Service
-@Getter
-public class ManagerService {
-    private final ManagerDao managerDao;
-
-    public void save(Manager manager) {
-        managerDao.save(manager);
-    }
+public interface ManagerService {
+   void save(Manager manager);
 }

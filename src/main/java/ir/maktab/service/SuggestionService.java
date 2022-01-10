@@ -1,49 +1,28 @@
 package ir.maktab.service;
 
-import ir.maktab.dao.SuggestionDao;
 import ir.maktab.enumuration.SuggestionStatus;
-import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.order.Order;
 import ir.maktab.model.order.Suggestion;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author Negin Mousavi
  */
-@RequiredArgsConstructor
-@Service
-@Getter
-public class SuggestionService {
-    private final SuggestionDao suggestionDao;
 
-    public void saveSuggestion(Suggestion suggestion) {
-        suggestionDao.save(suggestion);
-    }
+public interface SuggestionService {
 
-    public List<Suggestion> getByStatus(Expert expert, SuggestionStatus suggestionStatus) {
-        List<Suggestion> suggestions = suggestionDao.findBySuggestionStatusAndExpert(suggestionStatus, expert);
-        if (suggestions.size() == 0)
-            throw new HomeServiceException("no suggestion to show!");
-        return suggestions;
-    }
 
-    public List<Suggestion> getAllSuggestions(Expert expert) {
-        List<Suggestion> suggestions = suggestionDao.findByExpert(expert);
-        if (suggestions.size() == 0)
-            throw new HomeServiceException("you have no suggestion!");
-        return suggestions;
-    }
+    void saveSuggestion(Suggestion suggestion);
 
-    public void update(Suggestion suggestion) {
-        suggestionDao.save(suggestion);
-    }
+    List<Suggestion> getByStatus(Expert expert, SuggestionStatus suggestionStatus);
 
-    public List<Suggestion> getByOrder(Order order) {
-        return suggestionDao.findByOrder(order);
-    }
+    List<Suggestion> getAllSuggestions(Expert expert);
+
+    void update(Suggestion suggestion);
+
+    List<Suggestion> getByOrder(Order order);
+
+    Long getCountOfRecords();
 }

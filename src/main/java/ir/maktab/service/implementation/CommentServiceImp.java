@@ -1,7 +1,8 @@
-package ir.maktab.service;
+package ir.maktab.service.implementation;
 
 import ir.maktab.dao.CommentDao;
 import ir.maktab.model.order.Comment;
+import ir.maktab.service.CommentService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
