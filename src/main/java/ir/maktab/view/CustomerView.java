@@ -84,11 +84,6 @@ public class CustomerView {
         orderService.update(order);
     }
 
-/*    public List<Order> getOrdersForPay(Customer customer) {
-        return orderService.getOrdersByCustomerAndStatus(customer, OrderStatus.DONE).stream().
-                filter(order -> order.getOrderStatus().equals(OrderStatus.DONE)).collect(Collectors.toList());
-    }*/
-
     public SubService getSubServiceByName(String name) {
         SubService subService;
         try {

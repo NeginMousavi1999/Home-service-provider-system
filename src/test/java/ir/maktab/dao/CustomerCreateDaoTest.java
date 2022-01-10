@@ -27,12 +27,12 @@ public class CustomerCreateDaoTest {
     @Test
     void givenCustomer_WhenCreateCalls_ThenReturnTrueResponse() {
         customer = Customer.builder()
-                .firstName("jack2")
-                .lastName("jack2")
+                .firstName("jack")
+                .lastName("jack")
                 .userRole(UserRole.CUSTOMER)
                 .userStatus(UserStatus.WAITING)
                 .password("Jack1234")
-                .email("jack2@gmail.com")
+                .email("jack@gmail.com")
                 .credit(1000000)
                 .build();
 
