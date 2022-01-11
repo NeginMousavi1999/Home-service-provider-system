@@ -1,6 +1,5 @@
 package ir.maktab.dto;
 
-import ir.maktab.model.services.Service;
 import lombok.Data;
 
 /**
@@ -9,7 +8,7 @@ import lombok.Data;
 @Data
 public class SubServiceDto {
     private String name;
-    private Service service;
+    private ServiceDto service;
     private double cost;
     private String description;
 }

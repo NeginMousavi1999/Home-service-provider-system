@@ -1,8 +1,5 @@
 package ir.maktab.dto;
 
-import ir.maktab.model.members.Customer;
-import ir.maktab.model.members.Expert;
-import ir.maktab.model.order.Order;
 import lombok.Data;
 
 /**
@@ -11,7 +8,7 @@ import lombok.Data;
 @Data
 public class CommentDto {
     private String comment;
-    private Customer customer;
-    private Expert expert;
-    private Order order;
+    private UserDto customer;
+    private UserDto expert;
+    private OrderDto order;
 }

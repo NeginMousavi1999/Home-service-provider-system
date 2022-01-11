@@ -1,8 +1,6 @@
 package ir.maktab.dto;
 
 import ir.maktab.enumuration.OrderStatus;
-import ir.maktab.model.members.Customer;
-import ir.maktab.model.order.Suggestion;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -19,6 +17,6 @@ public class OrderDto {
     private OrderStatus orderStatus;
     private Date registrationDate;
     private String address;
-    private Customer customer;
-    private List<Suggestion> suggestions = new ArrayList<>();
+    private UserDto customer;
+    private List<SuggestionDto> suggestions = new ArrayList<>();
 }

@@ -1,7 +1,5 @@
 package ir.maktab.dto;
 
-import ir.maktab.model.members.Expert;
-import ir.maktab.model.order.Order;
 import lombok.Data;
 
 import java.util.Date;
@@ -11,8 +9,8 @@ import java.util.Date;
  */
 @Data
 public class SuggestionDto {
-    private Expert expert;
-    private Order order;
+    private UserDto expert;
+    private OrderDto order;
     private Date registrationDate;
     private double suggestedPrice;
     private int durationOfWork;
