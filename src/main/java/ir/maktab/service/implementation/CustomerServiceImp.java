@@ -1,9 +1,9 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.CustomerDao;
 import ir.maktab.dto.UserDto;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Customer;
+import ir.maktab.repository.CustomerRepository;
 import ir.maktab.service.CustomerService;
 import ir.maktab.util.GenerateRandomInt;
 import lombok.Getter;
@@ -21,35 +21,36 @@ import java.util.Optional;
 @Getter
 public class CustomerServiceImp implements CustomerService {
 
-    private final CustomerDao customerDao;
+    private final CustomerRepository customerRepository;
 
     ModelMapper modelMapper = new ModelMapper();
+
     public void update(Customer customer) {
-        customerDao.save(customer);
+        customerRepository.save(customer);
     }
 
     public void save(Customer customer) {
         try {
-            customerDao.save(customer);
+            customerRepository.save(customer);
         } catch (Exception e) {
             throw new HomeServiceException("we have this username, so you can't use it!");
         }
     }
 
     public Customer findByEmail(String email) {
-        Optional<Customer> customer = customerDao.findByEmail(email);
+        Optional<Customer> customer = customerRepository.findByEmail(email);
         if (customer.isEmpty())
             throw new HomeServiceException("we have not customer with this email");
         return customer.get();
     }
 
     public Long getCountOfRecords() {
-        return customerDao.count();
+        return customerRepository.count();
     }
 
     @Override
-    public UserDto findByEmail2(String s) {
-        Customer customer = customerDao.findByEmail(s).get();
+    public UserDto findByEmailTestForDto(String s) {
+        Customer customer = customerRepository.findByEmail(s).get();
         UserDto userDto = modelMapper.map(customer, UserDto.class);
         userDto.setRandom(GenerateRandomInt.generateNumber());
         userDto.setIdentity(userDto.getRandom() + customer.getId());
@@ -57,10 +58,10 @@ public class CustomerServiceImp implements CustomerService {
     }
 
     @Override
-    public void update2(UserDto userDto) {
+    public void updateTestForDto(UserDto userDto) {
         Customer customer = modelMapper.map(userDto, Customer.class);
         customer.setId(userDto.getIdentity() - userDto.getRandom());
-        customerDao.save(customer);
+        customerRepository.save(customer);
     }
 
 }

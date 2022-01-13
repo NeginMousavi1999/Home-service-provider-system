@@ -1,7 +1,7 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.CommentDao;
 import ir.maktab.model.order.Comment;
+import ir.maktab.repository.CommentRepository;
 import ir.maktab.service.CommentService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service;
 @Getter
 @Service
 public class CommentServiceImp implements CommentService {
-    private final CommentDao commentDao;
+    private final CommentRepository commentRepository;
 
     public void save(Comment comment) {
-        commentDao.save(comment);
+        commentRepository.save(comment);
     }
 
     public Long getCountOfRecords() {
-        return commentDao.count();
+        return commentRepository.count();
     }
 }

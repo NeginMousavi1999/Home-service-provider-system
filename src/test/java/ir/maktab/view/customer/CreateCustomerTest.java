@@ -3,15 +3,14 @@ package ir.maktab.view.customer;
 import ir.maktab.config.SpringConfig;
 import ir.maktab.enumuration.UserRole;
 import ir.maktab.enumuration.UserStatus;
-import ir.maktab.model.members.Customer;
 import ir.maktab.model.members.User;
-import ir.maktab.model.order.Order;
 import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author Negin Mousavi

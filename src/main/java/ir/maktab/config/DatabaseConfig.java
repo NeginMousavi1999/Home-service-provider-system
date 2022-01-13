@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
-@EnableJpaRepositories(basePackages = "ir.maktab.dao")
+@EnableJpaRepositories(basePackages = "ir.maktab.repository")
 @PropertySource("classpath:database.properties")
 @Configuration
 @EnableTransactionManagement

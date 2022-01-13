@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.ExpertDao;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Expert;
+import ir.maktab.repository.ExpertRepository;
 import ir.maktab.service.ExpertService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -17,30 +17,30 @@ import java.util.Optional;
 @Service
 @Getter
 public class ExpertServiceImp implements ExpertService {
-    private final ExpertDao expertDao;
+    private final ExpertRepository expertRepository;
 
     public void save(Expert expert) {
-        expertDao.save(expert);
+        expertRepository.save(expert);
     }
 
     public boolean delete(Expert expert) {
-        expertDao.delete(expert);
+        expertRepository.delete(expert);
         return true;
     }
 
     public boolean update(Expert expert) {
-        expertDao.save(expert);
+        expertRepository.save(expert);
         return true;
     }
 
     public Expert findByEmail(String email) {
-        Optional<Expert> expert = expertDao.findByEmail(email);
+        Optional<Expert> expert = expertRepository.findByEmail(email);
         if (expert.isEmpty())
             throw new HomeServiceException("we have not this expert!");
         return expert.get();
     }
 
     public Long getCountOfRecords() {
-        return expertDao.count();
+        return expertRepository.count();
     }
 }

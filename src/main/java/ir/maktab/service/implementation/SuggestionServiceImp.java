@@ -1,11 +1,11 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.SuggestionDao;
 import ir.maktab.enumuration.SuggestionStatus;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.Expert;
 import ir.maktab.model.order.Order;
 import ir.maktab.model.order.Suggestion;
+import ir.maktab.repository.SuggestionRepository;
 import ir.maktab.service.SuggestionService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,40 +21,40 @@ import java.util.List;
 @Service
 @Getter
 public class SuggestionServiceImp implements SuggestionService {
-    private final SuggestionDao suggestionDao;
+    private final SuggestionRepository suggestionRepository;
 
     public void saveSuggestion(Suggestion suggestion) {
-        suggestionDao.save(suggestion);
+        suggestionRepository.save(suggestion);
     }
 
     public List<Suggestion> getByStatus(Expert expert, SuggestionStatus suggestionStatus) {
-        List<Suggestion> suggestions = suggestionDao.findBySuggestionStatusAndExpert(suggestionStatus, expert);
+        List<Suggestion> suggestions = suggestionRepository.findBySuggestionStatusAndExpert(suggestionStatus, expert);
         if (suggestions.size() == 0)
             throw new HomeServiceException("no suggestion to show!");
         return suggestions;
     }
 
     public List<Suggestion> getAllSuggestions(Expert expert) {
-        List<Suggestion> suggestions = suggestionDao.findByExpert(expert);
+        List<Suggestion> suggestions = suggestionRepository.findByExpert(expert);
         if (suggestions.size() == 0)
             throw new HomeServiceException("you have no suggestion!");
         return suggestions;
     }
 
     public void update(Suggestion suggestion) {
-        suggestionDao.save(suggestion);
+        suggestionRepository.save(suggestion);
     }
 
     public List<Suggestion> getByOrder(Order order) {
-        return suggestionDao.findByOrder(order);
+        return suggestionRepository.findByOrder(order);
     }
 
     public Long getCountOfRecords() {
-        return suggestionDao.count();
+        return suggestionRepository.count();
     }
 
     @Override
     public List<Suggestion> getSortedByOrder(Order order) {
-        return suggestionDao.findAll(Sort.by("suggestedPrice", "expert").descending());
+        return suggestionRepository.findAll(Sort.by("suggestedPrice", "expert").descending());
     }
 }

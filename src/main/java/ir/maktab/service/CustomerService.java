@@ -15,7 +15,7 @@ public interface CustomerService {
 
     Long getCountOfRecords();
 
-    UserDto findByEmail2(String s);
+    UserDto findByEmailTestForDto(String s);
 
-    void update2(UserDto user);
+    void updateTestForDto(UserDto user);
 }

@@ -1,10 +1,10 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.UserDao;
 import ir.maktab.dto.UserDto;
 import ir.maktab.dto.UserRequestDto;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.members.User;
+import ir.maktab.repository.UserRepository;
 import ir.maktab.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -22,11 +21,11 @@ import java.util.stream.Collectors;
 @Service
 @Getter
 public class UserServiceImp implements UserService {
-    private final UserDao userDao;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
     public User findUserByUserNameAndPassword(String email, String password) {
-        Optional<User> user = userDao.findByEmailAndPassword(email, password);
+        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
         if (user.isEmpty())
             throw new HomeServiceException("username or password is incorrect");
         return user.get();

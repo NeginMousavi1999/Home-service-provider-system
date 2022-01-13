@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.SubServiceDao;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.services.SubService;
+import ir.maktab.repository.SubServiceRepository;
 import ir.maktab.service.SubServiceService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -20,11 +20,11 @@ import java.util.stream.Collectors;
 @Service
 @Getter
 public class SubServiceServiceImp implements SubServiceService {
-    private final SubServiceDao subServiceDao;
+    private final SubServiceRepository subServiceRepository;
     private final Validation validation;
 
     public List<String> getAllServiceName() {
-        return subServiceDao.findAll().stream().map(SubService::getName).collect(Collectors.toList());
+        return subServiceRepository.findAll().stream().map(SubService::getName).collect(Collectors.toList());
     }
 
     public boolean validateNewName(String name) {
@@ -32,12 +32,12 @@ public class SubServiceServiceImp implements SubServiceService {
     }
 
     public boolean addNewSubService(SubService subService) {
-        subServiceDao.save(subService);
+        subServiceRepository.save(subService);
         return true;
     }
 
     public SubService findSubServiceByName(String name) {
-        Optional<SubService> subService = subServiceDao.findByName(name);
+        Optional<SubService> subService = subServiceRepository.findByName(name);
         if (subService.isEmpty())
             throw new HomeServiceException("we have n't this sub service!");
         return subService.get();

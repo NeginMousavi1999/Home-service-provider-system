@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dao.ServiceDao;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.model.services.Service;
+import ir.maktab.repository.ServiceRepository;
 import ir.maktab.service.ServiceService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -19,18 +19,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Getter
 public class ServiceServiceImp implements ServiceService {
-    private final ServiceDao serviceDao;
+    private final ServiceRepository serviceRepository;
     private final Validation validation;
 
     public Service getServiceById(int id) {
-        Optional<Service> service = serviceDao.findById(id);
+        Optional<Service> service = serviceRepository.findById(id);
         if (service.isEmpty())
             throw new RuntimeException(" we have not service with this id");
         return service.get();
     }
 
     public List<String> getAllServiceName() {
-        return serviceDao.findAll().stream().map(Service::getName).collect(Collectors.toList());
+        return serviceRepository.findAll().stream().map(Service::getName).collect(Collectors.toList());
     }
 
     public boolean validateNewName(String name) {
@@ -38,12 +38,12 @@ public class ServiceServiceImp implements ServiceService {
     }
 
     public boolean addNewService(Service service) {
-        serviceDao.save(service);
+        serviceRepository.save(service);
         return true;
     }
 
     public Service findServiceByName(String name) {
-        Optional<Service> service = serviceDao.findByName(name);
+        Optional<Service> service = serviceRepository.findByName(name);
         if (service.isEmpty())
             throw new HomeServiceException("we have n't this service!");
         return service.get();
