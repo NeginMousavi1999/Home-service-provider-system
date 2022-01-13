@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -32,8 +33,8 @@ public class UserServiceImp implements UserService {
     }
 
     public List<UserDto> returnUsersFiltering(UserRequestDto request) {
-        return null;
-//        return userDao.findByCondition(request).stream().map(this::createUserDto).collect(Collectors.toList());
+        return userRepository.findAll(UserRepository.selectByConditions(request))
+                .stream().map(this::createUserDto).collect(Collectors.toList());
     }
 
     public UserDto createUserDto(User user) {
