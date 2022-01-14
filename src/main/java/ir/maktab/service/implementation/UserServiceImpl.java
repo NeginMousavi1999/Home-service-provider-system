@@ -1,5 +1,6 @@
 package ir.maktab.service.implementation;
 
+import ir.maktab.data.dto.LoginDto;
 import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.dto.UserRequestDto;
 import ir.maktab.data.entity.members.User;
@@ -25,8 +26,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
-    public User findUserByUserNameAndPassword(String email, String password) {
-        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
+    public User findUserByUserNameAndPassword(LoginDto loginDto) {
+        Optional<User> user = userRepository.findByEmailAndPassword(loginDto.getUsername(), loginDto.getPassword());
         if (user.isEmpty())
             throw new HomeServiceException("username or password is incorrect");
         return user.get();

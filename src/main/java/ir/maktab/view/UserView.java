@@ -76,7 +76,7 @@ public class UserView {
     }
 
     public boolean login(String username, String password) {
-        User user;
+        /*User user;
         try {
             user = userService.findUserByUserNameAndPassword(username, password);
         } catch (Exception e) {
@@ -90,7 +90,7 @@ public class UserView {
             case CUSTOMER:
                 customerView.showPanel(user);
                 break;
-        }
+        }*/
         return true;
     }
 

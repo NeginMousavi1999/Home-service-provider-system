@@ -1,6 +1,7 @@
 package ir.maktab.service.user;
 
 import ir.maktab.config.SpringConfig;
+import ir.maktab.data.dto.LoginDto;
 import ir.maktab.data.entity.members.User;
 import ir.maktab.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,14 +26,14 @@ public class FindUserByUserNameAndPasswordTest {
     @ParameterizedTest
     @CsvSource({"jack@gmail.com, Jack1234"})
     void givenCorrectUsernamePasswords_WhenFindUserByUserNameAndPasswordCalls_ThenReturnTrueResponse(String email, String password) {
-        User user = userService.findUserByUserNameAndPassword(email, password);
+        User user = userService.findUserByUserNameAndPassword(new LoginDto()/*email, password*/);
         assertNotNull(user);
     }
 
     @ParameterizedTest
     @CsvSource({"something, something"})
     void givenIncorrectUsernamePasswords_WhenFindUserByUserNameAndPasswordCalls_ThenExceptionResponseReturn(String email, String password) {
-        Exception exception = assertThrows(RuntimeException.class, () -> userService.findUserByUserNameAndPassword(email, password));
+        Exception exception = assertThrows(RuntimeException.class, () -> userService.findUserByUserNameAndPassword(new LoginDto()/*email, password*/));
         assertEquals("username or password is incorrect", exception.getMessage());
     }
 }

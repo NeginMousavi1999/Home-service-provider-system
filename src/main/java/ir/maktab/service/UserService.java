@@ -1,5 +1,6 @@
 package ir.maktab.service;
 
+import ir.maktab.data.dto.LoginDto;
 import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.dto.UserRequestDto;
 import ir.maktab.data.entity.members.User;
@@ -15,5 +16,5 @@ public interface UserService {
 
     UserDto createUserDto(User user);
 
-    User findUserByUserNameAndPassword(String email, String password);
+    User findUserByUserNameAndPassword(LoginDto loginDto);
 }

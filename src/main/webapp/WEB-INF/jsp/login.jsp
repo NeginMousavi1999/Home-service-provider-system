@@ -1,16 +1,17 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: ASUS
-  Date: 1/15/2022
-  Time: 12:44 AM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
 </head>
+<h3>Login Form</h3>
 <body>
-<h3>login!</h3>
+<form:form action="doLogin" modelAttribute="loginData">
+    user name: <form:input path="username"/>
+    <br><br>
+    password: <form:input path="password" type="password"/>
+    <br><br>
+    <input type="submit" value="Submit"/>
+</form:form>
 </body>
 </html>
