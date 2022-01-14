@@ -29,14 +29,14 @@ public class OrderRepositoryFindBySubServiceTest {
     @Test
     void givenSubServiceAndTableIsEmpty_WhenFindBySubServiceCalls_ThenReturnTrueResponse() {
         SubService subService = subServiceRepository.findByName("Kitchen appliances").get();
-        List<Order> orderList = orderRepository.findBySubService(subService);
+        List<Order> orderList = orderRepository.findBySubService(subService).get();
         assertNull(orderList);
     }
 
     @Test
     void givenSubServiceAndTableIsNotEmpty_WhenFindBySubServiceCalls_ThenReturnTrueResponse() {
         SubService subService = subServiceRepository.findByName("Kitchen appliances").get();
-        List<Order> orderList = orderRepository.findBySubService(subService);
+        List<Order> orderList = orderRepository.findBySubService(subService).get();
         assertNotNull(orderList);
     }
 }

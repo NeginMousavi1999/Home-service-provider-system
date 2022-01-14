@@ -8,17 +8,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Negin Mousavi
  */
 @Repository
 public interface SuggestionRepository extends JpaRepository<Suggestion, Integer> {
-    List<Suggestion> findBySuggestionStatusAndExpert(SuggestionStatus suggestionStatus, Expert expert);
+    Optional<List<Suggestion>> findBySuggestionStatusAndExpert(SuggestionStatus suggestionStatus, Expert expert);
 
-    List<Suggestion> findByExpert(Expert expert);
+    Optional<List<Suggestion>> findByExpert(Expert expert);
 
-    List<Suggestion> findByOrder(Order order);
-
-    // todo: Optional<List<Suggestion>>
+    Optional<List<Suggestion>> findByOrder(Order order);
 }

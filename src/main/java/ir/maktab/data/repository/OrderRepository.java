@@ -18,9 +18,9 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
 
     Optional<Order> findById(int id);
 
-    List<Order> findBySubService(SubService subService);
+    Optional<List<Order>> findBySubService(SubService subService);
 
-    List<Order> findByCustomer(Customer customer);
+    Optional<List<Order>> findByCustomer(Customer customer);
 
-    List<Order> findByCustomerAndOrderStatus(Customer customer, OrderStatus orderStatus);
+    Optional<List<Order>> findByCustomerAndOrderStatus(Customer customer, OrderStatus orderStatus);
 }

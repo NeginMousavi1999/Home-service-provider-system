@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @org.springframework.stereotype.Service
 @RequiredArgsConstructor
 @Getter
-public class ServiceServiceImpl implements ServiceService {//todo: impl
+public class ServiceServiceImpl implements ServiceService {
     private final ServiceRepository serviceRepository;
     private final Validation validation;
 

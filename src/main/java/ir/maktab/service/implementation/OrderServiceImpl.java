@@ -42,14 +42,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public List<Order> findBySubService(SubService subService) {
-        return orderRepository.findBySubService(subService);
+        Optional<List<Order>> orders = orderRepository.findBySubService(subService);
+        if (orders.isEmpty())
+            throw new HomeServiceException("we have not order with this sub service!");
+        return orders.get();
     }
 
     public Set<Order> getOrdersByCustomer(Customer customer) {
-        return new HashSet<>(orderRepository.findByCustomer(customer));
+        Optional<List<Order>> orders = orderRepository.findByCustomer(customer);
+        if (orders.isEmpty())
+            throw new HomeServiceException("we have not order with this customer!");
+        return new HashSet<>(orders.get());
     }
 
     public List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus) {
-        return orderRepository.findByCustomerAndOrderStatus(customer, orderStatus);
+        Optional<List<Order>> orders = orderRepository.findByCustomerAndOrderStatus(customer, orderStatus);
+        if (orders.isEmpty())
+            throw new HomeServiceException("we have not order with this conditions!");
+        return orders.get();
     }
 }

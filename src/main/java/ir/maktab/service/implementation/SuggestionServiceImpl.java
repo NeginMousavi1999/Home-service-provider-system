@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Negin Mousavi
@@ -28,17 +29,17 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     public List<Suggestion> getByStatus(Expert expert, SuggestionStatus suggestionStatus) {
-        List<Suggestion> suggestions = suggestionRepository.findBySuggestionStatusAndExpert(suggestionStatus, expert);
-        if (suggestions.size() == 0)
+        Optional<List<Suggestion>> suggestions = suggestionRepository.findBySuggestionStatusAndExpert(suggestionStatus, expert);
+        if (suggestions.isEmpty())
             throw new HomeServiceException("no suggestion to show!");
-        return suggestions;
+        return suggestions.get();
     }
 
     public List<Suggestion> getAllSuggestions(Expert expert) {
-        List<Suggestion> suggestions = suggestionRepository.findByExpert(expert);
-        if (suggestions.size() == 0)
+        Optional<List<Suggestion>> suggestions = suggestionRepository.findByExpert(expert);
+        if (suggestions.isEmpty())
             throw new HomeServiceException("you have no suggestion!");
-        return suggestions;
+        return suggestions.get();
     }
 
     public void update(Suggestion suggestion) {
@@ -46,7 +47,10 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     public List<Suggestion> getByOrder(Order order) {
-        return suggestionRepository.findByOrder(order);
+        Optional<List<Suggestion>> suggestions = suggestionRepository.findByOrder(order);
+        if (suggestions.isEmpty())
+            throw new HomeServiceException("nothing to show!!");
+        return suggestions.get();
     }
 
     public Long getCountOfRecords() {
