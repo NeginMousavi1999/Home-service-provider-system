@@ -2,10 +2,10 @@ package ir.maktab.view;
 
 import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.dto.UserRequestDto;
-import ir.maktab.data.enumuration.UserRole;
-import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.entity.members.User;
+import ir.maktab.data.enumuration.UserRole;
+import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.UserService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;

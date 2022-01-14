@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.exception.HomeServiceException;
 import ir.maktab.data.entity.services.SubService;
 import ir.maktab.data.repository.SubServiceRepository;
+import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.SubServiceService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class SubServiceServiceImp implements SubServiceService {
+public class SubServiceServiceImpl implements SubServiceService {
     private final SubServiceRepository subServiceRepository;
     private final Validation validation;
 

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class ManagerServiceImp implements ManagerService {
+public class ManagerServiceImpl implements ManagerService {
     private final ManagerRepository managerRepository;
 
     public void save(Manager manager) {

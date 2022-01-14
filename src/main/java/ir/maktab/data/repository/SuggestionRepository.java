@@ -1,9 +1,9 @@
 package ir.maktab.data.repository;
 
-import ir.maktab.data.enumuration.SuggestionStatus;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.order.Suggestion;
+import ir.maktab.data.enumuration.SuggestionStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

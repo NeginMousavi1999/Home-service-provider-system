@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.exception.HomeServiceException;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.repository.ExpertRepository;
+import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.ExpertService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class ExpertServiceImp implements ExpertService {
+public class ExpertServiceImpl implements ExpertService {
     private final ExpertRepository expertRepository;
 
     public void save(Expert expert) {

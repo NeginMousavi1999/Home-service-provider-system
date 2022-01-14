@@ -1,11 +1,11 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.data.enumuration.OrderStatus;
-import ir.maktab.exception.HomeServiceException;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.services.SubService;
+import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.repository.OrderRepository;
+import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.OrderService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class OrderServiceImp implements OrderService {
+public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     public void update(Order order) {

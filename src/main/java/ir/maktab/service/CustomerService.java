@@ -1,6 +1,5 @@
 package ir.maktab.service;
 
-import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.entity.members.Customer;
 
 /**

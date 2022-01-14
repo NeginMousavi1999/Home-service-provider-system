@@ -1,9 +1,9 @@
 package ir.maktab.data.repository;
 
-import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.services.SubService;
+import ir.maktab.data.enumuration.OrderStatus;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

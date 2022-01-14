@@ -1,9 +1,9 @@
 package ir.maktab.data.repository;
 
 import ir.maktab.config.SpringConfig;
+import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.enumuration.UserStatus;
-import ir.maktab.data.entity.members.Customer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

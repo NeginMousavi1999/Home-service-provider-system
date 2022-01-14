@@ -2,9 +2,9 @@ package ir.maktab.service.implementation;
 
 import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.dto.UserRequestDto;
-import ir.maktab.exception.HomeServiceException;
 import ir.maktab.data.entity.members.User;
 import ir.maktab.data.repository.UserRepository;
+import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 

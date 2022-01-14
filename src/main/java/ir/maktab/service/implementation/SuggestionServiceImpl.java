@@ -1,11 +1,11 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.data.enumuration.SuggestionStatus;
-import ir.maktab.exception.HomeServiceException;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.order.Suggestion;
+import ir.maktab.data.enumuration.SuggestionStatus;
 import ir.maktab.data.repository.SuggestionRepository;
+import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.SuggestionService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class SuggestionServiceImp implements SuggestionService {
+public class SuggestionServiceImpl implements SuggestionService {
     private final SuggestionRepository suggestionRepository;
 
     public void saveSuggestion(Suggestion suggestion) {

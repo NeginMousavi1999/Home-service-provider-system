@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 @Getter
-public class AddressServiceImp implements AddressService {
+public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
 }
