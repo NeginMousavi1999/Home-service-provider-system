@@ -25,7 +25,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Expert extends User implements Comparable<Expert> {
     @Lob
-    @Column(columnDefinition = "BLOB", length = 3000)
+    @Column(columnDefinition = "BLOB", length = 300000)
     private byte[] picture;
 
     @ManyToMany
