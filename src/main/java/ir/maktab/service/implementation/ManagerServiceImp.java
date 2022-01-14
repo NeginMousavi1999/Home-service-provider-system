@@ -1,7 +1,7 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.model.members.Manager;
-import ir.maktab.repository.ManagerRepository;
+import ir.maktab.data.entity.members.Manager;
+import ir.maktab.data.repository.ManagerRepository;
 import ir.maktab.service.ManagerService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

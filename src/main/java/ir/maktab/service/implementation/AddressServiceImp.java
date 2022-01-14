@@ -1,6 +1,6 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.repository.AddressRepository;
+import ir.maktab.data.repository.AddressRepository;
 import ir.maktab.service.AddressService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

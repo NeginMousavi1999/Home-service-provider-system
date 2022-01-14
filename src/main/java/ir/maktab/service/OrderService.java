@@ -1,9 +1,9 @@
 package ir.maktab.service;
 
-import ir.maktab.enumuration.OrderStatus;
-import ir.maktab.model.members.Customer;
-import ir.maktab.model.order.Order;
-import ir.maktab.model.services.SubService;
+import ir.maktab.data.enumuration.OrderStatus;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.order.Order;
+import ir.maktab.data.entity.services.SubService;
 
 import java.util.List;
 import java.util.Set;

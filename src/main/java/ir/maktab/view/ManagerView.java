@@ -1,11 +1,11 @@
 package ir.maktab.view;
 
-import ir.maktab.enumuration.UserStatus;
-import ir.maktab.model.members.Customer;
-import ir.maktab.model.members.Expert;
-import ir.maktab.model.members.User;
-import ir.maktab.model.services.Service;
-import ir.maktab.model.services.SubService;
+import ir.maktab.data.enumuration.UserStatus;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.members.Expert;
+import ir.maktab.data.entity.members.User;
+import ir.maktab.data.entity.services.Service;
+import ir.maktab.data.entity.services.SubService;
 import ir.maktab.service.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

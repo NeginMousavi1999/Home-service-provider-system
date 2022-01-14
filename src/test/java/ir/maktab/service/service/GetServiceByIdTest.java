@@ -1,7 +1,7 @@
 package ir.maktab.service.service;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.model.services.Service;
+import ir.maktab.data.entity.services.Service;
 import ir.maktab.service.ServiceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

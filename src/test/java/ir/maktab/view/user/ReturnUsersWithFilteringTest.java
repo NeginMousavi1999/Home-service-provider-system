@@ -1,8 +1,8 @@
 package ir.maktab.view.user;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.dto.UserDto;
-import ir.maktab.dto.UserRequestDto;
+import ir.maktab.data.dto.UserDto;
+import ir.maktab.data.dto.UserRequestDto;
 import ir.maktab.view.UserView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

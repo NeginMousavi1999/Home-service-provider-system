@@ -1,6 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.model.members.Expert;
+import ir.maktab.data.entity.members.Expert;
 
 /**
  * @author Negin Mousavi

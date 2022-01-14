@@ -1,11 +1,9 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dto.UserDto;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.repository.CustomerRepository;
 import ir.maktab.exception.HomeServiceException;
-import ir.maktab.model.members.Customer;
-import ir.maktab.repository.CustomerRepository;
 import ir.maktab.service.CustomerService;
-import ir.maktab.util.GenerateRandomInt;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -46,22 +44,6 @@ public class CustomerServiceImp implements CustomerService {
 
     public Long getCountOfRecords() {
         return customerRepository.count();
-    }
-
-    @Override
-    public UserDto findByEmailTestForDto(String s) {
-        Customer customer = customerRepository.findByEmail(s).get();
-        UserDto userDto = modelMapper.map(customer, UserDto.class);
-        userDto.setRandom(GenerateRandomInt.generateNumber());
-        userDto.setIdentity(userDto.getRandom() + customer.getId());
-        return userDto;
-    }
-
-    @Override
-    public void updateTestForDto(UserDto userDto) {
-        Customer customer = modelMapper.map(userDto, Customer.class);
-        customer.setId(userDto.getIdentity() - userDto.getRandom());
-        customerRepository.save(customer);
     }
 
 }

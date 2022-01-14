@@ -1,8 +1,8 @@
 package ir.maktab.view.expert;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.enumuration.OrderStatus;
-import ir.maktab.model.order.Order;
+import ir.maktab.data.enumuration.OrderStatus;
+import ir.maktab.data.entity.order.Order;
 import ir.maktab.view.ExpertView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

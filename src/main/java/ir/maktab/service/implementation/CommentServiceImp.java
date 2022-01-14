@@ -1,7 +1,7 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.model.order.Comment;
-import ir.maktab.repository.CommentRepository;
+import ir.maktab.data.entity.order.Comment;
+import ir.maktab.data.repository.CommentRepository;
 import ir.maktab.service.CommentService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

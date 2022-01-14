@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
 import ir.maktab.exception.HomeServiceException;
-import ir.maktab.model.services.Service;
-import ir.maktab.repository.ServiceRepository;
+import ir.maktab.data.entity.services.Service;
+import ir.maktab.data.repository.ServiceRepository;
 import ir.maktab.service.ServiceService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @org.springframework.stereotype.Service
 @RequiredArgsConstructor
 @Getter
-public class ServiceServiceImp implements ServiceService {
+public class ServiceServiceImp implements ServiceService {//todo: impl
     private final ServiceRepository serviceRepository;
     private final Validation validation;
 
@@ -37,7 +37,7 @@ public class ServiceServiceImp implements ServiceService {
         return validation.validateNewName(name, getAllServiceName());
     }
 
-    public boolean addNewService(Service service) {
+    public boolean addNewService(Service service) {//todo: inputs and outputs are dto
         serviceRepository.save(service);
         return true;
     }

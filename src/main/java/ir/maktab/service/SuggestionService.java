@@ -1,9 +1,9 @@
 package ir.maktab.service;
 
-import ir.maktab.enumuration.SuggestionStatus;
-import ir.maktab.model.members.Expert;
-import ir.maktab.model.order.Order;
-import ir.maktab.model.order.Suggestion;
+import ir.maktab.data.enumuration.SuggestionStatus;
+import ir.maktab.data.entity.members.Expert;
+import ir.maktab.data.entity.order.Order;
+import ir.maktab.data.entity.order.Suggestion;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.enumuration.OrderStatus;
+import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.exception.HomeServiceException;
-import ir.maktab.model.members.Customer;
-import ir.maktab.model.order.Order;
-import ir.maktab.model.services.SubService;
-import ir.maktab.repository.OrderRepository;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.order.Order;
+import ir.maktab.data.entity.services.SubService;
+import ir.maktab.data.repository.OrderRepository;
 import ir.maktab.service.OrderService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

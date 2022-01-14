@@ -1,7 +1,7 @@
 package ir.maktab.service;
 
-import ir.maktab.dto.UserDto;
-import ir.maktab.model.members.Customer;
+import ir.maktab.data.dto.UserDto;
+import ir.maktab.data.entity.members.Customer;
 
 /**
  * @author Negin Mousavi
@@ -14,8 +14,4 @@ public interface CustomerService {
     Customer findByEmail(String email);
 
     Long getCountOfRecords();
-
-    UserDto findByEmailTestForDto(String s);
-
-    void updateTestForDto(UserDto user);
 }

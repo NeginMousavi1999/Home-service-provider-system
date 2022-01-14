@@ -1,9 +1,9 @@
 package ir.maktab.view.customer;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.enumuration.UserRole;
-import ir.maktab.enumuration.UserStatus;
-import ir.maktab.model.members.User;
+import ir.maktab.data.enumuration.UserRole;
+import ir.maktab.data.enumuration.UserStatus;
+import ir.maktab.data.entity.members.User;
 import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

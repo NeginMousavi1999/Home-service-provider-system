@@ -1,8 +1,8 @@
 package ir.maktab.service;
 
-import ir.maktab.dto.UserDto;
-import ir.maktab.dto.UserRequestDto;
-import ir.maktab.model.members.User;
+import ir.maktab.data.dto.UserDto;
+import ir.maktab.data.dto.UserRequestDto;
+import ir.maktab.data.entity.members.User;
 
 import java.util.List;
 

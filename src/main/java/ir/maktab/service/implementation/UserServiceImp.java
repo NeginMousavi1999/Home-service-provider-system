@@ -1,10 +1,10 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.dto.UserDto;
-import ir.maktab.dto.UserRequestDto;
+import ir.maktab.data.dto.UserDto;
+import ir.maktab.data.dto.UserRequestDto;
 import ir.maktab.exception.HomeServiceException;
-import ir.maktab.model.members.User;
-import ir.maktab.repository.UserRepository;
+import ir.maktab.data.entity.members.User;
+import ir.maktab.data.repository.UserRepository;
 import ir.maktab.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,11 +1,11 @@
 package ir.maktab.view;
 
-import ir.maktab.dto.UserDto;
-import ir.maktab.dto.UserRequestDto;
-import ir.maktab.enumuration.UserRole;
-import ir.maktab.enumuration.UserStatus;
-import ir.maktab.model.members.Customer;
-import ir.maktab.model.members.User;
+import ir.maktab.data.dto.UserDto;
+import ir.maktab.data.dto.UserRequestDto;
+import ir.maktab.data.enumuration.UserRole;
+import ir.maktab.data.enumuration.UserStatus;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.members.User;
 import ir.maktab.service.UserService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static ir.maktab.enumuration.UserRole.valueOf;
+import static ir.maktab.data.enumuration.UserRole.valueOf;
 
 /**
  * @author Negin Mousavi

@@ -1,6 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.model.order.Comment;
+import ir.maktab.data.entity.order.Comment;
 
 /**
  * @author Negin Mousavi

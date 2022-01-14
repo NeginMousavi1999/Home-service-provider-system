@@ -1,7 +1,7 @@
 package ir.maktab.validation;
 
-import ir.maktab.enumuration.UserRole;
-import ir.maktab.enumuration.UserStatus;
+import ir.maktab.data.enumuration.UserRole;
+import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.exception.HomeServiceException;
 import org.springframework.stereotype.Component;
 

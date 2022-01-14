@@ -1,14 +1,14 @@
 package ir.maktab.view;
 
-import ir.maktab.enumuration.OrderStatus;
-import ir.maktab.enumuration.SuggestionStatus;
-import ir.maktab.enumuration.UserRole;
-import ir.maktab.enumuration.UserStatus;
-import ir.maktab.model.members.Expert;
-import ir.maktab.model.members.User;
-import ir.maktab.model.order.Order;
-import ir.maktab.model.order.Suggestion;
-import ir.maktab.model.services.Service;
+import ir.maktab.data.enumuration.OrderStatus;
+import ir.maktab.data.enumuration.SuggestionStatus;
+import ir.maktab.data.enumuration.UserRole;
+import ir.maktab.data.enumuration.UserStatus;
+import ir.maktab.data.entity.members.Expert;
+import ir.maktab.data.entity.members.User;
+import ir.maktab.data.entity.order.Order;
+import ir.maktab.data.entity.order.Suggestion;
+import ir.maktab.data.entity.services.Service;
 import ir.maktab.service.ExpertService;
 import ir.maktab.service.OrderService;
 import ir.maktab.service.ServiceService;

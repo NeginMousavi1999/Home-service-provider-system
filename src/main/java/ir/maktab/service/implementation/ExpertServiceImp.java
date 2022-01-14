@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
 import ir.maktab.exception.HomeServiceException;
-import ir.maktab.model.members.Expert;
-import ir.maktab.repository.ExpertRepository;
+import ir.maktab.data.entity.members.Expert;
+import ir.maktab.data.repository.ExpertRepository;
 import ir.maktab.service.ExpertService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

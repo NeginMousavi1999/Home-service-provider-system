@@ -1,8 +1,8 @@
 package ir.maktab.service.implementation;
 
 import ir.maktab.exception.HomeServiceException;
-import ir.maktab.model.services.SubService;
-import ir.maktab.repository.SubServiceRepository;
+import ir.maktab.data.entity.services.SubService;
+import ir.maktab.data.repository.SubServiceRepository;
 import ir.maktab.service.SubServiceService;
 import ir.maktab.validation.Validation;
 import lombok.Getter;

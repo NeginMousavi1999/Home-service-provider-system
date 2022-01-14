@@ -1,7 +1,7 @@
 package ir.maktab.view.customer;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.model.services.SubService;
+import ir.maktab.data.entity.services.SubService;
 import ir.maktab.view.CustomerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

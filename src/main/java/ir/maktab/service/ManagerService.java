@@ -1,6 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.model.members.Manager;
+import ir.maktab.data.entity.members.Manager;
 
 /**
  * @author Negin Mousavi

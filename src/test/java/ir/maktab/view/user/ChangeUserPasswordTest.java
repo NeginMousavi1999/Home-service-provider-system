@@ -1,7 +1,7 @@
 package ir.maktab.view.user;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.model.members.Customer;
+import ir.maktab.data.entity.members.Customer;
 import ir.maktab.view.UserView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;

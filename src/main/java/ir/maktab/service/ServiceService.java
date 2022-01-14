@@ -1,6 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.model.services.Service;
+import ir.maktab.data.entity.services.Service;
 
 import java.util.List;
 

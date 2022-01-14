@@ -17,7 +17,7 @@ import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
-@EnableJpaRepositories(basePackages = "ir.maktab.repository")
+@EnableJpaRepositories(basePackages = "ir.maktab.data.repository")
 @PropertySource("classpath:database.properties")
 @Configuration
 @EnableTransactionManagement
@@ -41,7 +41,7 @@ public class DatabaseConfig {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        entityManagerFactoryBean.setPackagesToScan("ir.maktab.model");
+        entityManagerFactoryBean.setPackagesToScan("ir.maktab.data.entity");
         entityManagerFactoryBean.setJpaProperties(hibernateProperties());
 
         return entityManagerFactoryBean;

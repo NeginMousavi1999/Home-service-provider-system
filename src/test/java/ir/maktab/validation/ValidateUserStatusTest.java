@@ -1,7 +1,7 @@
 package ir.maktab.validation;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.enumuration.UserStatus;
+import ir.maktab.data.enumuration.UserStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
