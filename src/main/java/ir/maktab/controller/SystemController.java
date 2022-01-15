@@ -1,9 +1,9 @@
 package ir.maktab.controller;
 
 import ir.maktab.data.dto.CustomerDto;
+import ir.maktab.data.dto.ExpertDto;
 import ir.maktab.data.dto.LoginDto;
 import ir.maktab.data.dto.UserDto;
-import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.members.User;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.enumuration.UserStatus;
@@ -14,10 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,8 +53,8 @@ public class SystemController {
                     model.addAttribute("customer", customerDto);
                     return "customer_dashboard";
                 case EXPERT:
-                    Expert expert = expertService.findByEmail(user.getEmail());
-                    model.addAttribute("expert", expert);
+                    ExpertDto expertDto = expertService.findByEmail(user.getEmail());
+                    model.addAttribute("expert", expertDto);
                     return "expert_dashboard";
                 default:
                     return "login";
@@ -74,14 +74,33 @@ public class SystemController {
     }
 
     @PostMapping("/doRegister")
-    public String doRegister(@ModelAttribute("registerData") UserDto userDto, Model model) {
+    public String doRegister(@RequestParam("file") MultipartFile file, @ModelAttribute("registerData") UserDto userDto,
+                             Model model) {
+
         userDto.setUserStatus(UserStatus.WAITING);
         if (userDto.getUserRole().equals(UserRole.EXPERT)) {
-
+            byte[] pictureBytes;
+            ExpertDto expertDto;
+            try {
+                pictureBytes = file.getBytes();
+                userDto.setPicture(pictureBytes);
+                expertDto = modelMapper.map(userDto, ExpertDto.class);
+                expertService.save(expertDto);
+            } catch (Exception e) {
+                model.addAttribute("massage", e.getLocalizedMessage());
+                return "error";
+            }
+            model.addAttribute("expert", expertDto);
             return "expert_dashboard";
         }
-        CustomerDto customerDto = modelMapper.map(userDto, CustomerDto.class);
-        customerService.save(customerDto);
+        CustomerDto customerDto;
+        try {
+            customerDto = modelMapper.map(userDto, CustomerDto.class);
+            customerService.save(customerDto);
+        } catch (Exception e) {
+            model.addAttribute("massage", e.getLocalizedMessage());
+            return "error";
+        }
         model.addAttribute("customer", customerDto);
         return "customer_dashboard";
     }

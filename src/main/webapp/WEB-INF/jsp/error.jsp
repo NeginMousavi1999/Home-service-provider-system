@@ -6,6 +6,6 @@
 <body>
 error massage: ${massage}
 <br/>
-<a href="/service/login">go to login</a>
+<a href="/">go to first page</a>
 </body>
 </html>

@@ -6,7 +6,7 @@
 </head>
 <h3>Register Form</h3>
 <body>
-<form:form action="doRegister" modelAttribute="registerData" method="post">
+<form:form action="doRegister" modelAttribute="registerData" method="post" enctype="multipart/form-data">
     register as:
     customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole" onclick="customerFunction()"/>
     expert <form:radiobutton id="expert" value="EXPERT" path="userRole" onclick="expertFunction()"/>
@@ -20,7 +20,7 @@
     password: <form:input path="password" type="password"/>
     <br><br>
     <div id="expert_info" style="display: none">
-        picture: <input type="file">
+        picture: <input type="file" name="file">
         <br><br>
     </div>
     <input type="submit" value="Submit"/>

@@ -80,7 +80,7 @@ public class CustomerView {
         order.setOrderStatus(OrderStatus.PAID);
 
         customerService.update(customer);
-        expertService.update(expert);
+//        expertService.update(expert);
         orderService.update(order);
     }
 
@@ -185,7 +185,7 @@ public class CustomerView {
                     .build();
             commentService.save(comment);
         }
-        expertService.update(expert);
+//        expertService.update(expert);
     }
 
     public boolean changePassword(Customer customer, String newPass) {
