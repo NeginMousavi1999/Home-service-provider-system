@@ -6,5 +6,6 @@
 <body>
 <h2>Home service provider system</h2>
 <a href="/service/login">login</a>
+<a href="/service/register">register</a>
 </body>
 </html>

@@ -1,7 +1,12 @@
 package ir.maktab.controller;
 
 import ir.maktab.data.dto.LoginDto;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.members.User;
+import ir.maktab.service.CustomerService;
+import ir.maktab.service.ExpertService;
+import ir.maktab.service.ManagerService;
 import ir.maktab.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -19,6 +24,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class SystemController {
 
     private final UserService userService;
+    private final CustomerService customerService;
+    private final ExpertService expertService;
+    private final ManagerService managerService;
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -33,11 +41,22 @@ public class SystemController {
         User user;
         try {
             user = userService.findUserByUserNameAndPassword(loginDto);
-            model.addAttribute("user", user);
-            return "dashboard";
+            switch (user.getUserRole()) {
+                case CUSTOMER:
+                    Customer customer = customerService.findByEmail(user.getEmail());
+                    model.addAttribute("customer", customer);
+                    return "customer_dashboard";
+                case EXPERT:
+                    Expert expert = expertService.findByEmail(user.getEmail());
+                    model.addAttribute("expert", expert);
+                    return "expert_dashboard";
+                default:
+                    return "login";
+            }
         } catch (Exception e) {
             model.addAttribute("massage", e.getLocalizedMessage());
             return "error";
         }
     }
+    //TODO: register
 }
