@@ -9,9 +9,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.PropertyMap;
+import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
-import javax.xml.transform.Source;
 import java.util.Optional;
 
 /**
@@ -25,7 +25,8 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     ModelMapper modelMapper = new ModelMapper();
 
-    public void update(Customer customer) {
+    public void update(CustomerDto customerDto) {
+        Customer customer = modelMapper.map(customerDto, Customer.class);
         customerRepository.save(customer);
     }
 
@@ -42,12 +43,15 @@ public class CustomerServiceImpl implements CustomerService {
         Optional<Customer> customer = customerRepository.findByEmail(email);
         if (customer.isEmpty())
             throw new HomeServiceException("we have not customer with this email");
-        modelMapper.addMappings(new PropertyMap<Customer, CustomerDto>() {
+        PropertyMap<Customer, CustomerDto> propertyMap = new PropertyMap<>() {
             @Override
             protected void configure() {
                 skip(destination.getOrders());
             }
-        });
+        };
+        TypeMap<Customer, CustomerDto> typeMap = modelMapper.getTypeMap(Customer.class, CustomerDto.class);
+        if (typeMap == null)
+            modelMapper.addMappings(propertyMap);
         return modelMapper.map(customer.get(), CustomerDto.class);
     }
 

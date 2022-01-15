@@ -98,7 +98,7 @@ public class ManagerView {
 
     public boolean confirmCustomer(Customer customer) {
         customer.setUserStatus(UserStatus.CONFIRMED);
-        customerService.update(customer);
+//        customerService.update(customer);
         return true;
     }
 }

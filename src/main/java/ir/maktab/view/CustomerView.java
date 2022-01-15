@@ -79,7 +79,7 @@ public class CustomerView {
         expert.setCredit(expert.getCredit() + price);
         order.setOrderStatus(OrderStatus.PAID);
 
-        customerService.update(customer);
+//        customerService.update(customer);
 //        expertService.update(expert);
         orderService.update(order);
     }
@@ -190,7 +190,7 @@ public class CustomerView {
 
     public boolean changePassword(Customer customer, String newPass) {
         customer.setPassword(newPass);
-        customerService.update(customer);
+//        customerService.update(customer);
         return true;
     }
 

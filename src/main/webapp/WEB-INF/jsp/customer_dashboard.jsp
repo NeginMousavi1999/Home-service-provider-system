@@ -9,6 +9,8 @@
 <body>
 This is ${customer.email} dashboard
 <br/>
+<a href="/customer/change_password">change password</a>
+<br/>
 <a href="/">logout</a>
 </body>
 </html>
