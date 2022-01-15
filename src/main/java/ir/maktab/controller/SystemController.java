@@ -1,18 +1,24 @@
 package ir.maktab.controller;
 
+import ir.maktab.data.dto.CustomerDto;
 import ir.maktab.data.dto.LoginDto;
-import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.members.User;
+import ir.maktab.data.enumuration.UserRole;
+import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.CustomerService;
 import ir.maktab.service.ExpertService;
-import ir.maktab.service.ManagerService;
 import ir.maktab.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -26,7 +32,7 @@ public class SystemController {
     private final UserService userService;
     private final CustomerService customerService;
     private final ExpertService expertService;
-    private final ManagerService managerService;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -43,8 +49,8 @@ public class SystemController {
             user = userService.findUserByUserNameAndPassword(loginDto);
             switch (user.getUserRole()) {
                 case CUSTOMER:
-                    Customer customer = customerService.findByEmail(user.getEmail());
-                    model.addAttribute("customer", customer);
+                    CustomerDto customerDto = customerService.findByEmail(user.getEmail());
+                    model.addAttribute("customer", customerDto);
                     return "customer_dashboard";
                 case EXPERT:
                     Expert expert = expertService.findByEmail(user.getEmail());
@@ -58,5 +64,25 @@ public class SystemController {
             return "error";
         }
     }
-    //TODO: register
+
+    @RequestMapping("/register")
+    public ModelAndView register() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register");
+        modelAndView.getModelMap().addAttribute("registerData", new UserDto());
+        return modelAndView;
+    }
+
+    @PostMapping("/doRegister")
+    public String doRegister(@ModelAttribute("registerData") UserDto userDto, Model model) {
+        userDto.setUserStatus(UserStatus.WAITING);
+        if (userDto.getUserRole().equals(UserRole.EXPERT)) {
+
+            return "expert_dashboard";
+        }
+        CustomerDto customerDto = modelMapper.map(userDto, CustomerDto.class);
+        customerService.save(customerDto);
+        model.addAttribute("customer", customerDto);
+        return "customer_dashboard";
+    }
 }

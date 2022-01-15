@@ -49,13 +49,13 @@ public class CustomerView {
                 .userStatus(UserStatus.WAITING)
                 .userRole(UserRole.CUSTOMER)
                 .build();
-
-        try {
+//todo
+        /*try {
             customerService.save((Customer) customer);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return null;
-        }
+        }*/
         return customer;
     }
 
@@ -116,14 +116,14 @@ public class CustomerView {
         return orderService.saveOrder(order);
     }
 
-    public Customer getCustomerByEmail(String email) {
-        Customer customer;
-        try {
+    public Customer getCustomerByEmail(String email) {//todo
+        Customer customer = null;
+        /*try {
             customer = customerService.findByEmail(email);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return null;
-        }
+        }*/
         return customer;
     }
 

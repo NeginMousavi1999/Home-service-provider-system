@@ -5,13 +5,13 @@ import ir.maktab.data.enumuration.UserStatus;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
  * @author Negin Mousavi
  */
 @Data
-@SuperBuilder
 public class UserDto {
     private Long identity;
     private String firstName;
@@ -22,4 +22,5 @@ public class UserDto {
     private UserRole userRole;
     private Date registrationDate;
     private double credit;
+    private byte[] picture;
 }

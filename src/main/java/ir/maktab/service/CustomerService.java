@@ -1,5 +1,6 @@
 package ir.maktab.service;
 
+import ir.maktab.data.dto.CustomerDto;
 import ir.maktab.data.entity.members.Customer;
 
 /**
@@ -8,9 +9,9 @@ import ir.maktab.data.entity.members.Customer;
 public interface CustomerService {
     void update(Customer customer);
 
-    void save(Customer customer);
+    void save(CustomerDto customer);
 
-    Customer findByEmail(String email);
+    CustomerDto findByEmail(String email);
 
     Long getCountOfRecords();
 }

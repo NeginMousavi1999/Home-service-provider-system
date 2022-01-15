@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,7 +12,6 @@ import java.util.Set;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@SuperBuilder
 public class CustomerDto extends UserDto {
-    private Set<OrderDto> orders;
+    private List<OrderDto> orders;
 }

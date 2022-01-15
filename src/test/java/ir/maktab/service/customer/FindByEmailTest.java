@@ -1,6 +1,7 @@
 package ir.maktab.service.customer;
 
 import ir.maktab.config.SpringConfig;
+import ir.maktab.data.dto.CustomerDto;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -24,9 +25,9 @@ public class FindByEmailTest {
 
     @ParameterizedTest
     @CsvSource({"jack@gmail.com"})
-    void givenValidEmail_WhenFindSubServiceByNameCalls_ThenReturnTrueResponse(String email) {
-        Customer result = customerService.findByEmail(email);
-        assertNotNull(result);
+    void givenValidEmail_WhenFindSubServiceByNameCalls_ThenReturnTrueResponse(String email) {//todo
+        CustomerDto customerDto = customerService.findByEmail(email);
+        System.out.println(customerDto);
     }
 
     @ParameterizedTest
