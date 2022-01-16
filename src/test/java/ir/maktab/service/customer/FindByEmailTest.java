@@ -2,14 +2,14 @@ package ir.maktab.service.customer;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.data.dto.CustomerDto;
-import ir.maktab.data.entity.members.Customer;
 import ir.maktab.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Negin Mousavi

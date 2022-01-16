@@ -1,13 +1,12 @@
 package ir.maktab.view.manager;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.data.entity.members.Expert;
 import ir.maktab.view.ManagerView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * @author Negin Mousavi

@@ -3,15 +3,17 @@ package ir.maktab.data.dto;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.enumuration.UserStatus;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.Arrays;
 import java.util.Date;
 
 /**
  * @author Negin Mousavi
  */
+@NoArgsConstructor
 @Data
+@SuperBuilder
 public class UserDto {
     private Long identity;
     private String firstName;
