@@ -1,7 +1,6 @@
 package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
-import ir.maktab.data.entity.services.Service;
 import ir.maktab.service.ManagerService;
 import ir.maktab.service.ServiceService;
 import ir.maktab.service.SubServiceService;
@@ -43,7 +42,7 @@ public class ManagerController {
         try {
             managerDto = managerService.findByUserNameAndPassword(loginDto);
             model.addAttribute("managerDto", managerDto);
-            return "manager_dashboard";
+            return "manager/manager_dashboard";
         } catch (Exception e) {
             model.addAttribute("massage", e.getLocalizedMessage());
             return "login";
@@ -53,20 +52,20 @@ public class ManagerController {
     @GetMapping("/dashboard/search")
     public String search(Model model) {
         model.addAttribute("filterData", new UserRequestDto());
-        return "search";
+        return "manager/search";
     }
 
     @PostMapping("/dashboard/doFilter")
     public String doFilter(@ModelAttribute("filterData") UserRequestDto userRequestDto, Model model) {
         List<UserDto> userDtos = userService.returnUsersFiltering(userRequestDto);
         model.addAttribute("users", userDtos);
-        return "search";
+        return "manager/search";
     }
 
     @GetMapping("/dashboard/add_service")
     public String showAddNewService(Model model) {
         model.addAttribute("service", new ServiceDto());
-        return "add_service";
+        return "manager/add_service";
     }
 
     @PostMapping("/dashboard/add_new_service")
@@ -76,9 +75,9 @@ public class ManagerController {
             serviceService.addNewService(serviceDto);
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
-            return "add_service";
+            return "manager/add_service";
         }
         model.addAttribute("succ_massage", "successfuly added");
-        return "add_service";
+        return "manager/add_service";
     }
 }

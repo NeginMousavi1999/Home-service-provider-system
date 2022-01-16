@@ -53,11 +53,11 @@ public class SystemController {
                 case CUSTOMER:
                     CustomerDto customerDto = customerService.findByEmail(user.getEmail());
                     model.addAttribute("customer", customerDto);
-                    return "customer_dashboard";
+                    return "customer/customer_dashboard";
                 case EXPERT:
                     ExpertDto expertDto = expertService.findByEmail(user.getEmail());
                     model.addAttribute("expert", expertDto);
-                    return "expert_dashboard";
+                    return "expert/expert_dashboard";
                 default:
                     return "login";
             }
@@ -102,7 +102,7 @@ public class SystemController {
                 return "error";
             }
             model.addAttribute("expert", expertDto);
-            return "expert_dashboard";
+            return "expert/expert_dashboard";
         }
 
         CustomerDto customerDto;
@@ -114,6 +114,6 @@ public class SystemController {
             return "error";
         }
         model.addAttribute("customer", customerDto);
-        return "customer_dashboard";
+        return "customer/customer_dashboard";
     }
 }

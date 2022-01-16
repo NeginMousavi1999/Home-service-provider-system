@@ -23,7 +23,7 @@ public class CustomerController {
 
     @RequestMapping("/change_password")
     public String accessToChangePassword() {
-        return "customer_change_password";
+        return "customer/customer_change_password";
     }
 
     @GetMapping("/update_password")
@@ -43,7 +43,7 @@ public class CustomerController {
             customerDto.setPassword(newPassword);
             customerService.update(customerDto);
             model.addAttribute("customer", customerDto);
-            return "customer_dashboard";
+            return "customer/customer_dashboard";
         } catch (Exception e) {
             model.addAttribute("massage", e.getLocalizedMessage());
             return "error";
