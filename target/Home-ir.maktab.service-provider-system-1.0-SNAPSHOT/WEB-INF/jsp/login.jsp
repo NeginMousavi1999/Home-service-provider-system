@@ -10,7 +10,7 @@
 <form:form action="doLogin" modelAttribute="loginData">
     user name: <form:input path="username"/>
     <br><br>
-    password: <form:input path="password" type="password"/>
+    password: <form:password path="password"/>
     <br><br>
     <input type="submit" value="Submit"/>
 </form:form>

@@ -17,7 +17,7 @@
     <br><br>
     email: <form:input path="email"/>
     <br><br>
-    password: <form:input path="password" type="password"/>
+    password: <form:password path="password"/>
     <br><br>
     <div id="expert_info" style="display: none">
         picture: <input type="file" name="file">
