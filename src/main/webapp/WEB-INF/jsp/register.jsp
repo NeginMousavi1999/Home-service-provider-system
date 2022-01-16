@@ -23,7 +23,7 @@
                              title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
     <br><br>
     <div id="expert_info" style="display: none">
-        picture: <input type="file" name="file">
+        picture: <input id="file" type="file" name="file" accept="image/*" onchange="return fileValidation()">
         <br><br>
     </div>
     <input type="submit" value="Submit"/>
@@ -36,6 +36,19 @@
 
     function customerFunction() {
         document.getElementById("expert_info").style.display = "none";
+    }
+
+    function fileValidation() {
+        const fileInput =
+            document.getElementById("file");
+        const filePath = fileInput.value;
+        const allowedExtensions =
+            /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        }
     }
 </script>
 </body>
