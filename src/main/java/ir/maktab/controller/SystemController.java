@@ -10,6 +10,7 @@ import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.CustomerService;
 import ir.maktab.service.ExpertService;
 import ir.maktab.service.UserService;
+import ir.maktab.validation.Validation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,7 @@ public class SystemController {
     private final CustomerService customerService;
     private final ExpertService expertService;
     private final ModelMapper modelMapper = new ModelMapper();
+    private final Validation validation;
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -77,7 +79,16 @@ public class SystemController {
     public String doRegister(@RequestParam("file") MultipartFile file, @ModelAttribute("registerData") UserDto userDto,
                              Model model) {
 
+        try {
+            validation.validatePassword(userDto.getPassword());
+            validation.validateEmail(userDto.getEmail());
+        } catch (Exception e) {
+            model.addAttribute("massage", e.getLocalizedMessage());
+            return "error";
+        }
+
         userDto.setUserStatus(UserStatus.WAITING);
+
         if (userDto.getUserRole().equals(UserRole.EXPERT)) {
             byte[] pictureBytes;
             ExpertDto expertDto;
@@ -93,6 +104,7 @@ public class SystemController {
             model.addAttribute("expert", expertDto);
             return "expert_dashboard";
         }
+
         CustomerDto customerDto;
         try {
             customerDto = modelMapper.map(userDto, CustomerDto.class);

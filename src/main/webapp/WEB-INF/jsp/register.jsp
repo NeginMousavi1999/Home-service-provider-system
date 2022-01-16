@@ -15,9 +15,12 @@
     <br><br>
     last name: <form:input path="lastName"/>
     <br><br>
-    email: <form:input path="email"/>
+    email: <form:input path="email"
+                       pattern="[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$"
+                       title="invalid email!"/>
     <br><br>
-    password: <form:password path="password"/>
+    password: <form:password path="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
+                             title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
     <br><br>
     <div id="expert_info" style="display: none">
         picture: <input type="file" name="file">

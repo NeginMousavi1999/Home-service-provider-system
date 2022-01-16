@@ -11,10 +11,12 @@
     <input type="text" name="userName"/>
 </label><br><br>
     <label>old password:</label><label>
-    <input type="password" name="oldPass"/>
+    <input type="password" name="oldPass" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
+           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
 </label><br><br>
     <label>new password:</label><label>
-    <input type="password" name="newPass"/>
+    <input type="password" name="newPass" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
+           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
 </label><br><br>
     <input type="submit" value="update password">
 </form>
