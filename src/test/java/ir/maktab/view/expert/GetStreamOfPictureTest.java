@@ -24,14 +24,14 @@ public class GetStreamOfPictureTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"static-pictures/2.png", "static-pictures/6.png", "static-pictures/8.png"})
+    @CsvSource({"static/2.png", "static/6.png", "static/8.png"})
     void givenValidFileName_WhenGetStreamOfPictureCalls_ThenReturnTrueResponse(String fileName) {
         InputStream stream = view.getStreamOfPicture(fileName);
         assertNotNull(stream);
     }
 
     @ParameterizedTest
-    @CsvSource({"static-pictures/abc", "static-pictures/55.png", "static-pictures/12.png"})
+    @CsvSource({"static/abc", "static/55.png", "static/12.png"})
     void givenInvalidFileName_WhenGetStreamOfPictureCalls_ThenExceptionResponseReturn(String fileName) {
         Exception exception = assertThrows(RuntimeException.class, () -> view.getStreamOfPicture(fileName));
         assertEquals("unable to get resources", exception.getMessage());

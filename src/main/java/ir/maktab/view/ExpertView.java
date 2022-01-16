@@ -37,7 +37,7 @@ public class ExpertView {
     private final Validation validation;
 
     public User createExpert(User expert, String serviceName, String avatarName) {
-        String fileName = String.format("static-pictures/%s.png", avatarName);
+        String fileName = String.format("static/%s.png", avatarName);
         InputStream picStream = getStreamOfPicture(fileName);
 
         Service service /*= getService(serviceName)*/ = null;
