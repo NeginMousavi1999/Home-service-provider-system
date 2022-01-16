@@ -34,7 +34,7 @@ public class ManagerView {
         Service service = Service.builder()
                 .name(name)
                 .build();
-        return serviceService.addNewService(service);
+        return true/*serviceService.addNewService(service)*/;
     }
 
     public boolean addNewSubService(String name, String serviceName, double cost, String description) {
@@ -45,13 +45,13 @@ public class ManagerView {
             return false;
         }
 
-        Service service;
-        try {
+        Service service = null;
+       /* try {
             service = serviceService.findServiceByName(serviceName);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             return false;
-        }
+        }*/
 
         SubService subService = SubService.builder()
                 .name(name)

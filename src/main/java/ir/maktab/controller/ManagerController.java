@@ -1,10 +1,10 @@
 package ir.maktab.controller;
 
-import ir.maktab.data.dto.LoginDto;
-import ir.maktab.data.dto.ManagerDto;
-import ir.maktab.data.dto.UserDto;
-import ir.maktab.data.dto.UserRequestDto;
+import ir.maktab.data.dto.*;
+import ir.maktab.data.entity.services.Service;
 import ir.maktab.service.ManagerService;
+import ir.maktab.service.ServiceService;
+import ir.maktab.service.SubServiceService;
 import ir.maktab.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,8 @@ import java.util.List;
 public class ManagerController {
     private final ManagerService managerService;
     private final UserService userService;
+    private final ServiceService serviceService;
+    private final SubServiceService subServiceService;
 
     @RequestMapping("/login")
     public ModelAndView login() {
@@ -59,5 +61,24 @@ public class ManagerController {
         List<UserDto> userDtos = userService.returnUsersFiltering(userRequestDto);
         model.addAttribute("users", userDtos);
         return "search";
+    }
+
+    @GetMapping("/dashboard/add_service")
+    public String showAddNewService(Model model) {
+        model.addAttribute("service", new ServiceDto());
+        return "add_service";
+    }
+
+    @PostMapping("/dashboard/add_new_service")
+    public String addNewService(@ModelAttribute("service") ServiceDto serviceDto, Model model) {
+        try {
+            serviceService.validateNewName(serviceDto.getName());
+            serviceService.addNewService(serviceDto);
+        } catch (Exception e) {
+            model.addAttribute("error_massage", e.getLocalizedMessage());
+            return "add_service";
+        }
+        model.addAttribute("succ_massage", "successfuly added");
+        return "add_service";
     }
 }

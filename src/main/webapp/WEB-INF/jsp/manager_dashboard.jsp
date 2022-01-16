@@ -9,6 +9,8 @@
 <body>
 This is ${managerDto.email} dashboard
 <br/>
+<a href="/portal/admin/dashboard/add_service">Add new Service</a>
+<br/>
 <a href="/portal/admin/dashboard/search">Search</a>
 <br/>
 <a href="/">logout</a>

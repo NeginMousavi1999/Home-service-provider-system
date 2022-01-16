@@ -40,7 +40,7 @@ public class ExpertView {
         String fileName = String.format("static-pictures/%s.png", avatarName);
         InputStream picStream = getStreamOfPicture(fileName);
 
-        Service service = getService(serviceName);
+        Service service /*= getService(serviceName)*/ = null;
         if (service == null)
             return null;
         HashSet<Service> services = new HashSet<>();
@@ -66,7 +66,7 @@ public class ExpertView {
         return expert;
     }
 
-    private Service getService(String expert) {
+/*    private Service getService(String expert) {
         Service service;
         try {
             service = serviceService.findServiceByName(expert);
@@ -75,7 +75,7 @@ public class ExpertView {
             return null;
         }
         return service;
-    }
+    }*/
 
     public InputStream getStreamOfPicture(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();

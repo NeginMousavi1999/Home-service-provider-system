@@ -1,7 +1,9 @@
 package ir.maktab.data.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
@@ -10,8 +12,10 @@ import java.util.Set;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ServiceDto {
-    private Long identity;
+    private int identity;
     private String name;
     private Set<SubServiceDto> subServices;
 }

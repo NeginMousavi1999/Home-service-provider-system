@@ -1,6 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.data.entity.services.Service;
+import ir.maktab.data.dto.ServiceDto;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import java.util.List;
 
 public interface ServiceService {
 
-    Service getServiceById(int id);
+    ServiceDto getServiceById(int id);
 
     List<String> getAllServiceName();
 
     boolean validateNewName(String name);
 
-    boolean addNewService(Service service);
+    boolean addNewService(ServiceDto service);
 
-    Service findServiceByName(String name);
+    ServiceDto findServiceByName(String name);
 }
