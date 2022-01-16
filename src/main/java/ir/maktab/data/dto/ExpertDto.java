@@ -2,6 +2,7 @@ package ir.maktab.data.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
@@ -12,6 +13,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
+@NoArgsConstructor
 public class ExpertDto extends UserDto {
     /*private byte[] picture;*/
     private Set<ServiceDto> services;

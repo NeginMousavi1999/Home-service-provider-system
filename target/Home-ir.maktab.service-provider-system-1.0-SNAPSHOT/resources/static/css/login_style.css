@@ -181,24 +181,3 @@ h2 {
     background-color: #7e0cf5;
     opacity: .2;
 }
-input[type="file"],
-input[type="file"]:visited,
-input[type="file"]:hover,
-input[type="file"]:focus,
-input[type="file"]:active {
-    margin:0;
-    padding: 0 0;
-    overflow: hidden; /* long file names overflow so just hide the end */
-    background: #ffffff;
-    border-radius: .2rem;
-    outline: none;
-    border: 2px solid #bbb;
-    cursor: pointer;
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-}
-
-input[type="file"]:hover {
-    background: #f9f9ff; /* I am using a light blue to indicate an interaction */
-    border: 2px solid #999;
-}

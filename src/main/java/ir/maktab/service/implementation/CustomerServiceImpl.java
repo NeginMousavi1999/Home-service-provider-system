@@ -8,6 +8,7 @@ import ir.maktab.service.CustomerService;
 import ir.maktab.util.mapper.CustomerMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ import java.util.Optional;
 @Getter
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public void update(CustomerDto customerDto) {
         Customer customer = CustomerMapper.mapCustomerDtoToCustomer(customerDto);
@@ -27,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     public void save(CustomerDto customerDto) {
-        Customer customer = CustomerMapper.mapCustomerDtoToCustomer(customerDto);
+        Customer customer = modelMapper.map(customerDto, Customer.class);
         try {
             customerRepository.save(customer);
         } catch (Exception e) {
