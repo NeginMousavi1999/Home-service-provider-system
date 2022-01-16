@@ -85,13 +85,13 @@ public class CustomerView {
     }
 
     public SubService getSubServiceByName(String name) {
-        SubService subService;
-        try {
+        SubService subService = null;
+        /*try {
             subService = subServiceService.findSubServiceByName(name);
         } catch (Exception e) {
             System.out.println(e.getLocalizedMessage());
             subService = null;
-        }
+        }*/
         return subService;
     }
 

@@ -9,10 +9,12 @@
 <body>
 This is ${managerDto.email} dashboard
 <br/>
-<a href="/portal/admin/dashboard/add_service">Add new Service</a>
+<a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">Add new Service</a>
 <br/>
-<a href="/portal/admin/dashboard/search">Search</a>
+<a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new Sub Service</a>
 <br/>
-<a href="/">logout</a>
+<a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Search</a>
+<br/>
+<a href="${pageContext.request.contextPath}/">logout</a>
 </body>
 </html>

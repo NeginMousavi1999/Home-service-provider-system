@@ -18,7 +18,8 @@
 
                     <form:form action="doRegister" modelAttribute="registerData" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label>register as</label>
+                            <label>register as:</label>
+                            <br>
                             <label>customer</label>
                             <form:radiobutton id="customer" value="CUSTOMER" path="userRole" onclick="customerFunction()"/>
                             <label>expert</label>

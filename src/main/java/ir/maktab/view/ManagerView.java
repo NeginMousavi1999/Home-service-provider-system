@@ -60,7 +60,7 @@ public class ManagerView {
                 .description(description)
                 .build();
 
-        return subServiceService.addNewSubService(subService);
+        return /*subServiceService.addNewSubService(subService)*/true;
     }
 
     public void showPanel(User user) {

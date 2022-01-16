@@ -15,16 +15,6 @@
     <input type="submit" value="Submit"/>
 </form:form>
 <br/>
-<a href="/portal/admin/doLogin">back to dashboard</a>
-
-<script>
-    function expertFunction() {
-        document.getElementById("expert_info").style.display = "block";
-    }
-
-    function customerFunction() {
-        document.getElementById("expert_info").style.display = "none";
-    }
-</script>
+<a href="${pageContext.request.contextPath}/portal/admin/doLogin">back to dashboard</a>
 </body>
 </html>

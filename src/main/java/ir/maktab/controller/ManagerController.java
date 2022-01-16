@@ -80,4 +80,32 @@ public class ManagerController {
         model.addAttribute("succ_massage", "successfuly added");
         return "manager/add_service";
     }
+
+    @GetMapping("/dashboard/add_subservice")
+    public String showAddNewSubService(Model model) {
+        List<String> serviceNameList = serviceService.getAllServiceName();
+        model.addAttribute("subservice", new SubServiceRequestDto());
+        model.addAttribute("list", serviceNameList);
+        return "manager/add_subservice";
+    }
+
+    @PostMapping("/dashboard/add_new_subservice")
+    public String addNewSubService(@ModelAttribute("subservice") SubServiceRequestDto subServiceRequestDto, Model model) {
+        try {
+            subServiceService.validateNewName(subServiceRequestDto.getName());
+            ServiceDto serviceDto = serviceService.findServiceByName(subServiceRequestDto.getServiceName());
+            SubServiceDto subServiceDto = SubServiceDto.builder()
+                    .service(serviceDto)
+                    .cost(subServiceRequestDto.getCost())
+                    .description(subServiceRequestDto.getDescription())
+                    .name(subServiceRequestDto.getName())
+                    .build();
+            subServiceService.addNewSubService(subServiceDto);
+        } catch (Exception e) {
+            model.addAttribute("error_massage", e.getLocalizedMessage());
+            return showAddNewSubService(model);
+        }
+        model.addAttribute("succ_massage", "successfuly added");
+        return showAddNewSubService(model);
+    }
 }

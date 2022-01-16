@@ -1,5 +1,6 @@
 package ir.maktab.service;
 
+import ir.maktab.data.dto.SubServiceDto;
 import ir.maktab.data.entity.services.SubService;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface SubServiceService {
 
     boolean validateNewName(String name);
 
-    boolean addNewSubService(SubService subService);
+    boolean addNewSubService(SubServiceDto subService);
 
-    SubService findSubServiceByName(String name);
+    SubServiceDto findSubServiceByName(String name);
 }
