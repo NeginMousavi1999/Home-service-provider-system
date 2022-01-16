@@ -26,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper = new ModelMapper();
 
+    //TODO return dto
     public User findUserByUserNameAndPassword(LoginDto loginDto) {
         Optional<User> user = userRepository.findByEmailAndPassword(loginDto.getUsername(), loginDto.getPassword());
         if (user.isEmpty())

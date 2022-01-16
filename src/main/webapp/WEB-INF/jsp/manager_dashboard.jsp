@@ -7,7 +7,7 @@
 </head>
 
 <body>
-This is ${user.email} dashboard
+This is ${managerDto.email} dashboard
 <br/>
 <a href="/">logout</a>
 </body>

@@ -9,33 +9,33 @@ import ir.maktab.data.entity.members.Expert;
 public class ExpertMapper {
     private static final int suffix = 1000;
 
-    public static Expert mapExpertDtoToExpert(ExpertDto customerDto) {
+    public static Expert mapExpertDtoToExpert(ExpertDto expertDto) {
         return Expert.builder()
-                .id(customerDto.getIdentity() - suffix)
-                .firstName(customerDto.getFirstName())
-                .lastName(customerDto.getLastName())
-                .email(customerDto.getEmail())
-                .password(customerDto.getPassword())
-                .credit(customerDto.getCredit())
-                .userStatus(customerDto.getUserStatus())
-                .userRole(customerDto.getUserRole())
-                .registrationDate(customerDto.getRegistrationDate())
-                .picture(customerDto.getPicture())
+                .id(expertDto.getIdentity() - suffix)
+                .firstName(expertDto.getFirstName())
+                .lastName(expertDto.getLastName())
+                .email(expertDto.getEmail())
+                .password(expertDto.getPassword())
+                .credit(expertDto.getCredit())
+                .userStatus(expertDto.getUserStatus())
+                .userRole(expertDto.getUserRole())
+                .registrationDate(expertDto.getRegistrationDate())
+                .picture(expertDto.getPicture())
                 .build();
     }
 
-    public static ExpertDto mapExpertToExpertDto(Expert customer) {
+    public static ExpertDto mapExpertToExpertDto(Expert expert) {
         return ExpertDto.builder()
-                .identity(customer.getId() + suffix)
-                .firstName(customer.getFirstName())
-                .lastName(customer.getLastName())
-                .email(customer.getEmail())
-                .password(customer.getPassword())
-                .credit(customer.getCredit())
-                .userStatus(customer.getUserStatus())
-                .userRole(customer.getUserRole())
-                .registrationDate(customer.getRegistrationDate())
-                .picture(customer.getPicture())
+                .identity(expert.getId() + suffix)
+                .firstName(expert.getFirstName())
+                .lastName(expert.getLastName())
+                .email(expert.getEmail())
+                .password(expert.getPassword())
+                .credit(expert.getCredit())
+                .userStatus(expert.getUserStatus())
+                .userRole(expert.getUserRole())
+                .registrationDate(expert.getRegistrationDate())
+                .picture(expert.getPicture())
                 .build();
     }
 }
