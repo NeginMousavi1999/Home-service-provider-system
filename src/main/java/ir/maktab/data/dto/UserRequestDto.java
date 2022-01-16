@@ -1,14 +1,18 @@
 package ir.maktab.data.dto;
 
 import ir.maktab.data.enumuration.UserRole;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Negin Mousavi
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRequestDto {
     private Long identity;
     private String firstName;

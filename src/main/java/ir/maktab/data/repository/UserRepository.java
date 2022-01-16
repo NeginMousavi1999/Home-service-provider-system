@@ -21,11 +21,11 @@ public interface UserRepository extends CrudRepository<User, Integer>, JpaSpecif
     static Specification<User> selectByConditions(UserRequestDto request) {
         return (Specification<User>) (root, cq, cb) -> {
             List<Predicate> predicateList = new ArrayList<>();
-            if (request.getFirstName() != null)
+            if (request.getFirstName() != null && request.getFirstName().length() != 0)
                 predicateList.add(cb.equal(root.get("firstName"), request.getFirstName()));
-            if (request.getLastName() != null)
+            if (request.getLastName() != null && request.getLastName().length() != 0)
                 predicateList.add(cb.equal(root.get("lastName"), request.getLastName()));
-            if (request.getEmail() != null)
+            if (request.getEmail() != null && request.getEmail().length() != 0)
                 predicateList.add(cb.equal(root.get("email"), request.getEmail()));
             if (request.getUserRole() != null)
                 predicateList.add(cb.equal(root.get("userRole"), request.getUserRole()));
