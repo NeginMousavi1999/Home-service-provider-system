@@ -6,6 +6,7 @@
 </head>
 <h3>Login Form</h3>
 <body>
+<div id="massage" style="color: red">${massage}</div>
 <form:form action="doLogin" modelAttribute="loginData">
     user name: <form:input path="username"/>
     <br><br>

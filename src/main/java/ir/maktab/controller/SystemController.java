@@ -61,7 +61,7 @@ public class SystemController {
             }
         } catch (Exception e) {
             model.addAttribute("massage", e.getLocalizedMessage());
-            return "error";
+            return "login";
         }
     }
 
