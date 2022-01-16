@@ -5,7 +5,6 @@
     <title>Login</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/login_style.css">
-
 </head>
 <body>
 <div class="d-lg-flex half">
@@ -35,6 +34,7 @@
                                 <input type="checkbox" checked="checked"/>
                                 <div class="control__indicator"></div>
                             </label>
+
                         </div>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
                     </form:form>
