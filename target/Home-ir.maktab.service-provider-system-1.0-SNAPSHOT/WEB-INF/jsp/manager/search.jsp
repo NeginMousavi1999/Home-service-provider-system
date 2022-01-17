@@ -18,14 +18,6 @@
     customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole" onclick="customerFunction()"/>
     expert <form:radiobutton id="expert" value="EXPERT" path="userRole" onclick="expertFunction()"/>
     <br><br>
-
-<%--    <div id="expert_info" style="display: none">
-        <c:forEach var="meal" items="${loginData.food}">
-            ${service}<form:checkbox path="" value="${service}"/>
-        </c:forEach>
-    </div>--%>
-
-
     <input type="submit" value="Submit"/>
 </form:form>
 

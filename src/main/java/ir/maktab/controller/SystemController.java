@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 /**
  * @author Negin Mousavi
  */
@@ -45,7 +48,7 @@ public class SystemController {
     }
 
     @RequestMapping("/doLogin")
-    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model) {
+    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request) {
         User user;
         try {
             user = userService.findUserByUserNameAndPassword(loginDto);
@@ -57,6 +60,8 @@ public class SystemController {
                 case EXPERT:
                     ExpertDto expertDto = expertService.findByEmail(user.getEmail());
                     model.addAttribute("expert", expertDto);
+                    HttpSession session = request.getSession();
+                    session.setAttribute("expertDto", expertDto);
                     return "expert/expert_dashboard";
                 default:
                     return "login";
