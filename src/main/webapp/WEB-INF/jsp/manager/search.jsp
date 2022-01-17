@@ -8,11 +8,11 @@
 <h3>search and filter users Form</h3>
 <body>
 <form:form action="doFilter" modelAttribute="filterData" method="post">
-    first name: <form:input path="firstName"/>
+    <form:input path="firstName" placeholder='first name'/>
     <br><br>
-    last name: <form:input path="lastName"/>
+    <form:input path="lastName" placeholder='last name'/>
     <br><br>
-    email: <form:input path="email"/>
+    <form:input path="email" placeholder='email'/>
     <br><br>
     role:
     customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole" onclick="customerFunction()"/>

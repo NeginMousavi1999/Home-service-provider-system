@@ -10,7 +10,7 @@
 <div id="massage" style="color: green">${succ_massage}</div>
 <div id="massage" style="color: red">${error_massage}</div>
 <form:form action="add_new_service" modelAttribute="service" method="post">
-    service name: <form:input path="name"/>
+    <form:input path="name" placeholder='service name'/>
     <br><br>
     <input type="submit" value="Submit"/>
 </form:form>

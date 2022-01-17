@@ -20,13 +20,14 @@
 
                     <form:form action="doLogin" modelAttribute="loginData">
                         <div class="form-group first">
-                            <label for="username">username</label>
-                            <form:input path="username"/>
+<%--                            <label for="username">username</label>--%>
+                            <form:input path="username" placeholder='username'/>
                         </div>
                         <div class="form-group last mb-3">
-                            <label for="password">password</label>
+<%--                            <label for="password">password</label>--%>
                             <form:password path="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
-                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
+                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"
+                                           placeholder='password'/>
                         </div>
 
                         <div class="d-flex mb-5 align-items-center">

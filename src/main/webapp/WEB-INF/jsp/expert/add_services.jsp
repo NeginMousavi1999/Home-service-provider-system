@@ -20,6 +20,6 @@
     <input type="submit" value="Submit"/>
 </form:form>
 <br/>
-<a href="/expert/dashboard">Back to dashboard</a>
+<a href="${pageContext.request.contextPath}/expert/dashboard">Back to dashboard</a>
 </body>
 </html>

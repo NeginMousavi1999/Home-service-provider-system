@@ -10,15 +10,11 @@
 <div id="massage" style="color: green">${succ_massage}</div>
 <div id="massage" style="color: red">${error_massage}</div>
 <form:form action="add_new_subservice" modelAttribute="subservice" method="post">
-    sub service name: <form:input path="name"/>
+    <form:input path="name" placeholder='sub service name'/>
     <br><br>
-    description: <label>
-    <form:input path="description"/>
-</label>
+<label><form:input path="description" placeholder='description'/></label>
     <br><br>
-    cost: <label>
-    <form:input type="number" path="cost"/>
-</label>
+    <label><form:input type="number" path="cost" placeholder='cost'/></label>
     <br><br>
     <label>Choose a Service:</label>
     <form:select path="serviceName" items="${list}" />

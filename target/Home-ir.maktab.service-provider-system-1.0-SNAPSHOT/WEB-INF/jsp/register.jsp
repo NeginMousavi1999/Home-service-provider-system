@@ -1,4 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,30 +29,26 @@
                         </div>
 
                         <div class="form-group">
-                            <label>first name</label>
-                            <form:input path="firstName"/>
+                            <form:input path="firstName" placeholder='First Name'/>
                         </div>
 
                         <div class="form-group">
-                            <label>last name</label>
-                            <form:input path="lastName"/>
+                            <form:input path="lastName" placeholder='Last Name'/>
                         </div>
 
                         <div class="form-group">
-                            <label>email</label>
                             <form:input path="email"
                                         pattern="[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$"
-                                        title="invalid email!"/>
+                                        title="invalid email!" placeholder='Email'/>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="password">password </label>
                             <form:password path="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
-                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
+                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"
+                                           placeholder='Password'/>
                         </div>
 
                         <div id="expert_info" class="form-group mb-3" style="display: none">
-                            <label class="form-label">picture</label>
                             <input id="formFileSm" class="form-control form-control-sm" type="file" name="file" accept="image/*" onchange="return fileValidation()">
                         </div>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
