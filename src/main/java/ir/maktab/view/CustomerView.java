@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -81,7 +80,7 @@ public class CustomerView {
 
 //        customerService.update(customer);
 //        expertService.update(expert);
-        orderService.update(order);
+//        orderService.update(order);
     }
 
     public SubService getSubServiceByName(String name) {
@@ -113,7 +112,7 @@ public class CustomerView {
                 .subService(subService)
                 .orderStatus(OrderStatus.NEW)
                 .build();
-        return orderService.saveOrder(order);
+        return /*orderService.saveOrder(order)*/true;
     }
 
     public Customer getCustomerByEmail(String email) {//todo
@@ -152,14 +151,14 @@ public class CustomerView {
         order.setToBeDoneDate(suggestion.getStartTime());
         order.setSuggestions(new HashSet<>(suggestionList));
         suggestion.setOrder(order);
-        orderService.update(order);
+//        orderService.update(order);
         suggestionService.update(suggestion);
         return expert;
     }
 
     public List<Order> returnOrdersByCustomer(Customer customer) {
-        Set<Order> orders = orderService.getOrdersByCustomer(customer);
-        return new ArrayList<>(orders);
+//        Set<Order> orders = orderService.getOrdersByCustomer(customer);
+        return new ArrayList<>(/*orders*/);
     }
 
     public List<Suggestion> returnSortedSuggestionsByChosenOrder(List<Order> orderList, int index) {
@@ -199,7 +198,7 @@ public class CustomerView {
                 .collect(Collectors.toList());
     }
 
-    public List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus) {
+/*    public List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus) {
         return orderService.getOrdersByCustomerAndStatus(customer, orderStatus);
-    }
+    }*/
 }

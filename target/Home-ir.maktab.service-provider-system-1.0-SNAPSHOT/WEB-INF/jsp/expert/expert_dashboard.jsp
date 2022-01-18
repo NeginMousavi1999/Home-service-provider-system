@@ -8,7 +8,7 @@
 </head>
 
 <body>
-This is ${expert.email} dashboard
+This is ${expertDto.email} dashboard
 <br/>
 <a href="${pageContext.request.contextPath}/">logout</a>
 <br/>

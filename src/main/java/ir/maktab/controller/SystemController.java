@@ -50,17 +50,18 @@ public class SystemController {
     @RequestMapping("/doLogin")
     public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request) {
         User user;
+        HttpSession session;
         try {
             user = userService.findUserByUserNameAndPassword(loginDto);
             switch (user.getUserRole()) {
                 case CUSTOMER:
                     CustomerDto customerDto = customerService.findByEmail(user.getEmail());
-                    model.addAttribute("customer", customerDto);
+                    session = request.getSession();
+                    session.setAttribute("customerDto", customerDto);
                     return "customer/customer_dashboard";
                 case EXPERT:
                     ExpertDto expertDto = expertService.findByEmail(user.getEmail());
-                    model.addAttribute("expert", expertDto);
-                    HttpSession session = request.getSession();
+                    session = request.getSession();
                     session.setAttribute("expertDto", expertDto);
                     return "expert/expert_dashboard";
                 default:
@@ -82,8 +83,8 @@ public class SystemController {
 
     @PostMapping("/doRegister")
     public String doRegister(@RequestParam("file") MultipartFile file, @ModelAttribute("registerData") UserDto userDto,
-                             Model model) {
-
+                             Model model, HttpServletRequest request) {
+        HttpSession session;
         try {
             validation.validatePassword(userDto.getPassword());
             validation.validateEmail(userDto.getEmail());
@@ -106,7 +107,8 @@ public class SystemController {
                 model.addAttribute("massage", e.getLocalizedMessage());
                 return "error";
             }
-            model.addAttribute("expert", expertDto);
+            session = request.getSession();
+            session.setAttribute("expertDto", expertDto);
             return "expert/expert_dashboard";
         }
 
@@ -118,7 +120,8 @@ public class SystemController {
             model.addAttribute("massage", e.getLocalizedMessage());
             return "error";
         }
-        model.addAttribute("customer", customerDto);
+        session = request.getSession();
+        session.setAttribute("customerDto", customerDto);
         return "customer/customer_dashboard";
     }
 }

@@ -15,7 +15,6 @@ import java.util.Set;
 @SuperBuilder
 @NoArgsConstructor
 public class ExpertDto extends UserDto {
-    /*private byte[] picture;*/
     private Set<ServiceDto> services;
     private double score;
 }

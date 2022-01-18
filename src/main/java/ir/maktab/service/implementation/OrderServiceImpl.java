@@ -1,20 +1,26 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.dto.CustomerDto;
+import ir.maktab.data.dto.OrderDto;
+import ir.maktab.data.dto.SubServiceDto;
+import ir.maktab.data.entity.order.Address;
 import ir.maktab.data.entity.order.Order;
-import ir.maktab.data.entity.services.SubService;
 import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.repository.OrderRepository;
 import ir.maktab.exception.HomeServiceException;
+import ir.maktab.service.AddressService;
 import ir.maktab.service.OrderService;
+import ir.maktab.util.mapper.CustomerMapper;
+import ir.maktab.util.mapper.OrderMapper;
+import ir.maktab.util.mapper.SubServiceMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -24,41 +30,45 @@ import java.util.Set;
 @Getter
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final AddressService addressService;
 
-    public void update(Order order) {
-        orderRepository.save(order);
+    public void update(OrderDto orderDto) {
+        orderRepository.save(OrderMapper.mapOrderDtoToOrderForSaving(orderDto));
     }
 
-    public boolean saveOrder(Order order) {
+    public boolean saveOrder(OrderDto orderDto) {
+        Order order = OrderMapper.mapOrderDtoToOrderForSaving(orderDto);
+/*        addressService.save(orderDto.getAddress());*/
         orderRepository.save(order);
         return true;
     }
 
-    public Order findById(int id) {
+    public OrderDto findById(int id) {
         Optional<Order> order = orderRepository.findById(id);
         if (order.isEmpty())
             throw new HomeServiceException("we have not order with this id!");
-        return order.get();
+        return OrderMapper.mapOrderToOrderDto(order.get());
     }
 
-    public List<Order> findBySubService(SubService subService) {
-        Optional<List<Order>> orders = orderRepository.findBySubService(subService);
+    public List<OrderDto> findBySubService(SubServiceDto subServiceDto) {
+        Optional<List<Order>> orders = orderRepository.findBySubService(SubServiceMapper.mapSubServiceDtoToSubService(subServiceDto));
         if (orders.isEmpty())
             throw new HomeServiceException("we have not order with this sub service!");
-        return orders.get();
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDto).collect(Collectors.toList());
     }
 
-    public Set<Order> getOrdersByCustomer(Customer customer) {
-        Optional<List<Order>> orders = orderRepository.findByCustomer(customer);
+    public Set<OrderDto> getOrdersByCustomer(CustomerDto customerDto) {
+        Optional<List<Order>> orders = orderRepository.findByCustomer(CustomerMapper.mapCustomerDtoToCustomer(customerDto));
         if (orders.isEmpty())
             throw new HomeServiceException("we have not order with this customer!");
-        return new HashSet<>(orders.get());
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDto).collect(Collectors.toSet());
     }
 
-    public List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus) {
-        Optional<List<Order>> orders = orderRepository.findByCustomerAndOrderStatus(customer, orderStatus);
+    public List<OrderDto> getOrdersByCustomerAndStatus(CustomerDto customerDto, OrderStatus orderStatus) {
+        Optional<List<Order>> orders = orderRepository.findByCustomerAndOrderStatus(CustomerMapper.
+                mapCustomerDtoToCustomer(customerDto), orderStatus);
         if (orders.isEmpty())
             throw new HomeServiceException("we have not order with this conditions!");
-        return orders.get();
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDto).collect(Collectors.toList());
     }
 }

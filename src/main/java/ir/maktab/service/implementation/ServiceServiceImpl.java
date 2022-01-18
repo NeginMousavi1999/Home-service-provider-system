@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -49,5 +50,13 @@ public class ServiceServiceImpl implements ServiceService {
         if (service.isEmpty())
             throw new HomeServiceException("we have n't this service!");
         return ServiceMapper.mapServiceToServiceDto(service.get());
+    }
+
+    public Set<ServiceDto> getAllServiceIncludingSubService() {
+        Optional<List<Service>> optionalServices = serviceRepository.getAllIncludeSubService();
+        if (optionalServices.isEmpty())
+            throw new HomeServiceException("no service yet!");
+        return optionalServices.get().stream().map(ServiceMapper::mapServiceToServiceDtoIncludeSubService)
+                .collect(Collectors.toSet());
     }
 }

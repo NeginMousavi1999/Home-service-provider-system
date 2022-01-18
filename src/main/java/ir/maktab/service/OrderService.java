@@ -1,5 +1,8 @@
 package ir.maktab.service;
 
+import ir.maktab.data.dto.CustomerDto;
+import ir.maktab.data.dto.OrderDto;
+import ir.maktab.data.dto.SubServiceDto;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.services.SubService;
@@ -14,15 +17,15 @@ import java.util.Set;
 
 public interface OrderService {
 
-    void update(Order order);
+    void update(OrderDto order);
 
-    boolean saveOrder(Order order);
+    boolean saveOrder(OrderDto order);
 
-    Order findById(int id);
+    OrderDto findById(int id);
 
-    List<Order> findBySubService(SubService subService);
+    List<OrderDto> findBySubService(SubServiceDto subService);
 
-    Set<Order> getOrdersByCustomer(Customer customer);
+    Set<OrderDto> getOrdersByCustomer(CustomerDto customer);
 
-    List<Order> getOrdersByCustomerAndStatus(Customer customer, OrderStatus orderStatus);
+    List<OrderDto> getOrdersByCustomerAndStatus(CustomerDto customer, OrderStatus orderStatus);
 }

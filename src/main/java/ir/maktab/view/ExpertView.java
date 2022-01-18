@@ -92,8 +92,8 @@ public class ExpertView {
     public List<Order> returnOrdersWithSameServiceExpert(Expert expert) {
         Set<Service> services = expert.getServices();
         List<Order> orderList = new ArrayList<>();
-        services.forEach(service -> service.getSubServices().stream()
-                .map(orderService::findBySubService).forEach(orderList::addAll));
+       /* services.forEach(service -> service.getSubServices().stream()
+                .map(orderService::findBySubService).forEach(orderList::addAll));*/
         return orderList;
     }
 
@@ -123,7 +123,7 @@ public class ExpertView {
         List<Suggestion> suggestions = suggestionService.getByOrder(order);
         suggestions.add(suggestion);
         order.setSuggestions(new HashSet<>(suggestions));
-        orderService.update(order);
+//        orderService.update(order);
         suggestionService.saveSuggestion(suggestion);
     }
 
@@ -131,14 +131,14 @@ public class ExpertView {
         if (!order.getOrderStatus().equals(OrderStatus.STARTED))
             return;
         order.setOrderStatus(OrderStatus.DONE);
-        orderService.update(order);
+//        orderService.update(order);
     }
 
     public void startOrder(Order order) {
         if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE))
             return;
         order.setOrderStatus(OrderStatus.STARTED);
-        orderService.update(order);
+//        orderService.update(order);
     }
 
     public List<Suggestion> getExpertSuggestions(Expert expert) {

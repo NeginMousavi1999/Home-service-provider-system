@@ -1,6 +1,7 @@
 package ir.maktab.data.repository;
 
 import ir.maktab.data.entity.services.Service;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,4 +17,7 @@ public interface ServiceRepository extends CrudRepository<Service, Integer> {
     List<Service> findAll();
 
     Optional<Service> findByName(String name);
+
+    @Query(value = "from Service s join fetch s.subServices")
+    Optional<List<Service>> getAllIncludeSubService();
 }
