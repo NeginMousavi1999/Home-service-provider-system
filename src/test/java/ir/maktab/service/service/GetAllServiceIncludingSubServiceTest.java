@@ -6,8 +6,6 @@ import ir.maktab.service.ServiceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**

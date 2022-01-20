@@ -13,10 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -59,17 +57,22 @@ public class ExpertServiceImpl implements ExpertService {
 
     public void addServices(ExpertDto expertDto, List<ServiceDto> serviceDtos) {
         Expert expert = ExpertMapper.mapExpertDtoToExpert(expertDto);
-        Optional<List<ir.maktab.data.entity.services.Service>> optionalServices = expertRepository.customeGetServiceByExpertId(expert.getId());
+        Optional<List<ir.maktab.data.entity.services.Service>> optionalServices = expertRepository
+                .customeGetServiceByExpertId(expert.getId());
         List<ir.maktab.data.entity.services.Service> list;
         list = optionalServices.orElseGet(ArrayList::new);
-        for (ServiceDto serviceDto : serviceDtos) {
-            ir.maktab.data.entity.services.Service service = ServiceMapper.mapServiceDtoToService(serviceDto);
-            if (list.contains(service))
-                continue;
-            list.add(service);
-        }
+        serviceDtos.stream().map(ServiceMapper::mapServiceDtoToService)
+                .filter(service -> !list.contains(service)).forEach(list::add);
         expert.setServices(new HashSet<>(list));
         expertRepository.save(expert);
     }
 
+    @Override
+    public Set<ServiceDto> getIncludeServices(ExpertDto expertDto) {
+        Optional<List<ir.maktab.data.entity.services.Service>> services = expertRepository
+                .customeGetServiceByExpertId(ExpertMapper.mapExpertDtoToExpert(expertDto).getId());
+        if (services.isEmpty())
+            throw new HomeServiceException("no services!");
+        return services.get().stream().map(ServiceMapper::mapServiceToServiceDto).collect(Collectors.toSet());
+    }
 }

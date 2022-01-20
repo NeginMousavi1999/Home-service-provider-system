@@ -1,5 +1,7 @@
 package ir.maktab.view;
 
+import ir.maktab.data.dto.ExpertDto;
+import ir.maktab.data.dto.SuggestionDto;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.members.User;
 import ir.maktab.data.entity.order.Order;
@@ -120,11 +122,11 @@ public class ExpertView {
                 .suggestionStatus(SuggestionStatus.NEW)
                 .build();
         order.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
-        List<Suggestion> suggestions = suggestionService.getByOrder(order);
+        /*Set<Suggestion> suggestions = suggestionService.getByOrder(order);
         suggestions.add(suggestion);
-        order.setSuggestions(new HashSet<>(suggestions));
+        order.setSuggestions(suggestions);*/
 //        orderService.update(order);
-        suggestionService.saveSuggestion(suggestion);
+//        suggestionService.saveSuggestion(suggestion);
     }
 
     public void finishOrder(Order order) {
@@ -142,10 +144,10 @@ public class ExpertView {
     }
 
     public List<Suggestion> getExpertSuggestions(Expert expert) {
-        return suggestionService.getAllSuggestions(expert);
+        return null/*suggestionService.getAllSuggestions(expert)*/;
     }
 
-    public List<Suggestion> getAcceptedSuggestionsForStarting(Expert expert) {
+    public List<SuggestionDto> getAcceptedSuggestionsForStarting(ExpertDto expert) {
         return suggestionService.getByStatus(expert, SuggestionStatus.ACCEPTED);
     }
 }

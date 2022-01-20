@@ -4,6 +4,7 @@ import ir.maktab.data.dto.ExpertDto;
 import ir.maktab.data.dto.ServiceDto;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -20,4 +21,6 @@ public interface ExpertService {
     Long getCountOfRecords();
 
     void addServices(ExpertDto expertDto, List<ServiceDto> serviceDtos);
+
+    Set<ServiceDto> getIncludeServices(ExpertDto expertDto);
 }

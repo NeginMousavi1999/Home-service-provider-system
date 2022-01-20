@@ -1,7 +1,12 @@
 package ir.maktab.util.mapper;
 
 import ir.maktab.data.dto.OrderDto;
+import ir.maktab.data.dto.SuggestionDto;
 import ir.maktab.data.entity.order.Order;
+import ir.maktab.data.entity.order.Suggestion;
+
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -10,6 +15,9 @@ public class OrderMapper {
     private static final int suffix = 1000;
 
     public static Order mapOrderDtoToOrder(OrderDto orderDto) {
+        Set<Suggestion> suggestions = orderDto.getSuggestions().stream()
+                .map(SuggestionMapper::mapSuggestionDtoToSuggestionForSaving).collect(Collectors.toSet());
+
         return Order.builder()
                 .id(orderDto.getIdentity() - suffix)
                 .address(AddressMapper.mapAddressDtoToAddress(orderDto.getAddress()))
@@ -21,7 +29,13 @@ public class OrderMapper {
                 .expert(ExpertMapper.mapExpertDtoToExpert(orderDto.getExpert()))
                 .registrationDate(orderDto.getRegistrationDate())
                 .toBeDoneDate(orderDto.getToBeDoneDate())
-//                .suggestions() todo --> ????
+                .suggestions(suggestions)
+                .build();
+    }
+
+    public static Order mapOrderDtoToOrderForSavingSuggestion(OrderDto orderDto) {
+        return Order.builder()
+                .id(orderDto.getIdentity() - suffix)
                 .build();
     }
 
@@ -35,7 +49,20 @@ public class OrderMapper {
                 .build();
     }
 
+    public static Order mapOrderDtoToOrderWithId(OrderDto orderDto) {
+        return Order.builder()
+                .id(orderDto.getIdentity() - suffix)
+                .address(AddressMapper.mapAddressDtoToAddressForSaving(orderDto.getAddress()))
+                .customer(CustomerMapper.mapCustomerDtoToCustomer(orderDto.getCustomer()))
+                .description(orderDto.getDescription())
+                .orderStatus(orderDto.getOrderStatus())
+                .subService(SubServiceMapper.mapSubServiceDtoToSubService(orderDto.getSubService()))
+                .build();
+    }
+
     public static OrderDto mapOrderToOrderDto(Order order) {
+        Set<SuggestionDto> suggestionsDto = order.getSuggestions().stream()
+                .map(SuggestionMapper::mapSuggestionToSuggestionDto).collect(Collectors.toSet());
         return OrderDto.builder()
                 .identity(order.getId() + suffix)
                 .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
@@ -47,7 +74,19 @@ public class OrderMapper {
                 .expert(ExpertMapper.mapExpertToExpertDto(order.getExpert()))
                 .registrationDate(order.getRegistrationDate())
                 .toBeDoneDate(order.getToBeDoneDate())
-//                .suggestions() todo --> ????
+                .suggestions(suggestionsDto)
                 .build();
     }
+
+    public static OrderDto mapOrderToOrderDtoForToBeSuggestioned(Order order) {
+        return OrderDto.builder()
+                .identity(order.getId() + suffix)
+                .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
+                .customer(CustomerMapper.mapCustomerToCustomerDto(order.getCustomer()))
+                .description(order.getDescription())
+                .orderStatus(order.getOrderStatus())
+                .subService(SubServiceMapper.mapSubServiceToSubServiceDto(order.getSubService()))
+                .build();
+    }
+
 }

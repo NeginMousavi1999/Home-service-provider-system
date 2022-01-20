@@ -152,7 +152,7 @@ public class CustomerView {
         order.setSuggestions(new HashSet<>(suggestionList));
         suggestion.setOrder(order);
 //        orderService.update(order);
-        suggestionService.update(suggestion);
+//        suggestionService.update(suggestion);
         return expert;
     }
 
@@ -166,7 +166,7 @@ public class CustomerView {
             return null;
         Order order = orderList.get(index);
         assert order != null;
-        return suggestionService.getSortedByOrder(order);
+        return /*suggestionService.getSortedByOrder(order)*/null;
     }
 
     public void addFeedback(Order order, String customerComment, double score) {

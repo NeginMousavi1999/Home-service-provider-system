@@ -3,9 +3,7 @@ package ir.maktab.util.mapper;
 import ir.maktab.data.dto.ServiceDto;
 import ir.maktab.data.dto.SubServiceDto;
 import ir.maktab.data.entity.services.Service;
-import ir.maktab.data.entity.services.SubService;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 

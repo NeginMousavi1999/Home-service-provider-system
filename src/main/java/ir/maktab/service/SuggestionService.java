@@ -1,11 +1,12 @@
 package ir.maktab.service;
 
-import ir.maktab.data.entity.members.Expert;
-import ir.maktab.data.entity.order.Order;
-import ir.maktab.data.entity.order.Suggestion;
+import ir.maktab.data.dto.ExpertDto;
+import ir.maktab.data.dto.OrderDto;
+import ir.maktab.data.dto.SuggestionDto;
 import ir.maktab.data.enumuration.SuggestionStatus;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -14,17 +15,17 @@ import java.util.List;
 public interface SuggestionService {
 
 
-    void saveSuggestion(Suggestion suggestion);
+    void saveSuggestion(SuggestionDto suggestion);
 
-    List<Suggestion> getByStatus(Expert expert, SuggestionStatus suggestionStatus);
+    List<SuggestionDto> getByStatus(ExpertDto expert, SuggestionStatus suggestionStatus);
 
-    List<Suggestion> getAllSuggestions(Expert expert);
+    List<SuggestionDto> getAllSuggestions(ExpertDto expert);
 
-    void update(Suggestion suggestion);
+    void update(SuggestionDto suggestion);
 
-    List<Suggestion> getByOrder(Order order);
+    Set<SuggestionDto> getByOrder(OrderDto order);
 
     Long getCountOfRecords();
 
-    List<Suggestion> getSortedByOrder(Order order);
+    List<SuggestionDto> getSortedByOrder(OrderDto order);
 }

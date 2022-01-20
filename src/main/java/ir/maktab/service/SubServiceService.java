@@ -1,7 +1,6 @@
 package ir.maktab.service;
 
 import ir.maktab.data.dto.SubServiceDto;
-import ir.maktab.data.entity.services.SubService;
 
 import java.util.List;
 

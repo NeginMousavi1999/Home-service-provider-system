@@ -13,5 +13,7 @@ This is ${expertDto.email} dashboard
 <a href="${pageContext.request.contextPath}/">logout</a>
 <br/>
 <a href="${pageContext.request.contextPath}/expert/add_service">add new service</a>
+<br/>
+<a href="${pageContext.request.contextPath}/expert/add_suggestion">add new suggestion</a>
 </body>
 </html>

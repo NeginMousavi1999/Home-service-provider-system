@@ -6,9 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -28,5 +27,5 @@ public class OrderDto {
     private AddressDto address;
     private CustomerDto customer;
     private ExpertDto expert;
-    private List<SuggestionDto> suggestions;
+    private Set<SuggestionDto> suggestions;
 }

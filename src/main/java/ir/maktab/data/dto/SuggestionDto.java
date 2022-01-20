@@ -1,8 +1,10 @@
 package ir.maktab.data.dto;
 
 import ir.maktab.data.enumuration.SuggestionStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -11,8 +13,10 @@ import java.util.Date;
  */
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SuggestionDto {
-    private Long identity;
+    private int identity;
     private ExpertDto expert;
     private OrderDto order;
     private Date registrationDate;

@@ -1,15 +1,10 @@
 package ir.maktab.view.expert;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.data.entity.order.Order;
 import ir.maktab.view.ExpertView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author Negin Mousavi

@@ -1,13 +1,13 @@
 package ir.maktab.service.service;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.data.entity.services.Service;
 import ir.maktab.service.ServiceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * @author Negin Mousavi
