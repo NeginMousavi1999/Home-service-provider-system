@@ -149,7 +149,7 @@ h2 {
 }
 
 .control__indicator:after {
-  font-family: 'icomoon', cursive;
+    font-family: 'icomoon', cursive;
     content: '\e5ca';
     position: absolute;
     display: none;

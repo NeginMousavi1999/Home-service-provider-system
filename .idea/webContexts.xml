@@ -3,6 +3,7 @@
   <component name="WebContextManager">
     <option name="state">
       <map>
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/customer/choose_suggestion.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/add_services.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/expert_dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp" />

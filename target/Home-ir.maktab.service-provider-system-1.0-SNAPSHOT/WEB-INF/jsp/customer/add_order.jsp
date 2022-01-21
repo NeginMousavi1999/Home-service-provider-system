@@ -10,9 +10,9 @@
 <div id="massage" style="color: green">${succ_massage}</div>
 <div id="massage" style="color: red">${error_massage}</div>
 
-<form:form action="add_new_order" modelAttribute="order" method="post" >
-        <form:input path="country" placeholder='country'/>
-        <br><br>
+<form:form action="add_new_order" modelAttribute="order" method="post">
+    <form:input path="country" placeholder='country'/>
+    <br><br>
     <form:input path="city" placeholder='city'/>
     <br><br>
     <form:input path="state" placeholder='state'/>
@@ -29,9 +29,9 @@
             <ul>
                 <c:forEach var="subservice" items="${service.subServices}">
                     <li><form:radiobutton value="${subservice.name}" path="subServiceName"/>${subservice.name}
-                    ,
-                        ${subservice.description}
-                      ,
+                        ,
+                            ${subservice.description}
+                        ,
                             ${subservice.cost}
                     </li>
                 </c:forEach>

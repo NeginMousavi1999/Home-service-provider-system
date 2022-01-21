@@ -11,7 +11,7 @@ public class SuggestionMapper {
 
     public static Suggestion mapSuggestionDtoToSuggestionForUpdate(SuggestionDto suggestionDto) {
         return Suggestion.builder()
-
+                .suggestionStatus(suggestionDto.getSuggestionStatus())
                 .build();
     }
 
@@ -36,5 +36,11 @@ public class SuggestionMapper {
                 .registrationDate(suggestion.getRegistrationDate())
                 .suggestionStatus(suggestion.getSuggestionStatus())
                 .build();
+    }
+
+    public static SuggestionDto mapSuggestionToSuggestionDtoForSorting(Suggestion suggestion) {
+        SuggestionDto suggestionDto = mapSuggestionToSuggestionDto(suggestion);
+        suggestionDto.setOrder(OrderMapper.mapOrderToOrderDtoWithoutSuggestion(suggestion.getOrder()));
+        return suggestionDto;
     }
 }

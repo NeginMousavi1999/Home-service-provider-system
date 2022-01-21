@@ -33,6 +33,21 @@ public class OrderMapper {
                 .build();
     }
 
+    public static Order mapOrderDtoToOrderWithoutSuggestion(OrderDto orderDto) {
+        return Order.builder()
+                .id(orderDto.getIdentity() - suffix)
+                .address(AddressMapper.mapAddressDtoToAddress(orderDto.getAddress()))
+                .customer(CustomerMapper.mapCustomerDtoToCustomer(orderDto.getCustomer()))
+                .description(orderDto.getDescription())
+                .orderStatus(orderDto.getOrderStatus())
+                .subService(SubServiceMapper.mapSubServiceDtoToSubService(orderDto.getSubService()))
+                .finalPrice(orderDto.getFinalPrice())
+                .expert(ExpertMapper.mapExpertDtoToExpert(orderDto.getExpert()))
+                .registrationDate(orderDto.getRegistrationDate())
+                .toBeDoneDate(orderDto.getToBeDoneDate())
+                .build();
+    }
+
     public static Order mapOrderDtoToOrderForSavingSuggestion(OrderDto orderDto) {
         return Order.builder()
                 .id(orderDto.getIdentity() - suffix)
@@ -75,6 +90,18 @@ public class OrderMapper {
                 .registrationDate(order.getRegistrationDate())
                 .toBeDoneDate(order.getToBeDoneDate())
                 .suggestions(suggestionsDto)
+                .build();
+    }
+
+    public static OrderDto mapOrderToOrderDtoWithoutSuggestion(Order order) {
+        return OrderDto.builder()
+                .identity(order.getId() + suffix)
+                .customer(CustomerMapper.mapCustomerToCustomerDto(order.getCustomer()))
+                .description(order.getDescription())
+                .orderStatus(order.getOrderStatus())
+                .subService(SubServiceMapper.mapSubServiceToSubServiceDto(order.getSubService()))
+                .registrationDate(order.getRegistrationDate())
+                .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
                 .build();
     }
 

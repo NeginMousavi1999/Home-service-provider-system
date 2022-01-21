@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
                 mapCustomerDtoToCustomer(customerDto), orderStatus);
         if (orders.isEmpty())
             throw new HomeServiceException("we have not order with this conditions!");
-        return orders.get().stream().map(OrderMapper::mapOrderToOrderDto).collect(Collectors.toList());
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoWithoutSuggestion).collect(Collectors.toList());
     }
 
     public List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto) {
@@ -80,5 +80,9 @@ public class OrderServiceImpl implements OrderService {
                 .filter(service -> service.getName().equals(readyOrder.getSubService().getService().getName()))
                 .map(service -> readyOrder).forEach(finalList::add));
         return finalList.stream().map(OrderMapper::mapOrderToOrderDtoForToBeSuggestioned).collect(Collectors.toList());
+    }
+
+    public void update(OrderDto order) {
+        orderRepository.save(OrderMapper.mapOrderDtoToOrderWithoutSuggestion(order));
     }
 }

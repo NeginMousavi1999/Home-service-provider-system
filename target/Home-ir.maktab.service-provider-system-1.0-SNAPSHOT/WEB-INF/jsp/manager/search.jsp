@@ -23,9 +23,9 @@
 
 <div>
     <ul>
-    <c:forEach var="user" items="${users}">
-        <li>${user}</li>
-    </c:forEach>
+        <c:forEach var="user" items="${users}">
+            <li>${user}</li>
+        </c:forEach>
     </ul>
 </div>
 

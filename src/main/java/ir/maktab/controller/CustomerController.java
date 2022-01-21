@@ -2,12 +2,10 @@ package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
 import ir.maktab.data.enumuration.OrderStatus;
+import ir.maktab.data.enumuration.SuggestionStatus;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.enumuration.UserStatus;
-import ir.maktab.service.CustomerService;
-import ir.maktab.service.OrderService;
-import ir.maktab.service.ServiceService;
-import ir.maktab.service.SubServiceService;
+import ir.maktab.service.*;
 import ir.maktab.validation.Validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,6 +30,7 @@ public class CustomerController {
     private final ServiceService serviceService;
     private final SubServiceService subServiceService;
     private final OrderService orderService;
+    private final SuggestionService suggestionService;
 
     @RequestMapping("/change_password")
     public String accessToChangePassword() {
@@ -98,6 +99,66 @@ public class CustomerController {
             modelAndView.getModelMap().addAttribute("error_massage", e.getLocalizedMessage());
             modelAndView.setViewName("customer/add_order");
             return showAddNewOrder(modelAndView);
+        }
+    }
+
+    @RequestMapping("/show_orders")
+    public ModelAndView showOrders(ModelAndView modelAndView, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        CustomerDto customerDto = (CustomerDto) session.getAttribute("customerDto");
+        List<OrderDto> orders = orderService.getOrdersByCustomerAndStatus(customerDto, OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
+        modelAndView.setViewName("customer/show_orders");
+        modelAndView.getModelMap().addAttribute("orders", orders);
+        session.setAttribute("watingForSelectionOrders", orders);
+        return modelAndView;
+    }
+
+    @RequestMapping("/show_suggestions")
+    public ModelAndView showSuggestionsToChoose(@RequestParam("orderIdentity") int orderIdentity, ModelAndView modelAndView,
+                                                HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        List<OrderDto> orders = (List<OrderDto>) session.getAttribute("watingForSelectionOrders");
+        OrderDto selectedOrder = orders.stream().filter(dto -> dto.getIdentity() == orderIdentity).findFirst().orElse(null);
+        List<SuggestionDto> suggestions = suggestionService.getSortedByOrder(selectedOrder);
+        session.setAttribute("suggestions", suggestions);
+        modelAndView.getModelMap().addAttribute("suggestions", suggestions);
+        modelAndView.setViewName("customer/choose_suggestion");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/choose_suggestion", method = RequestMethod.POST)
+    public ModelAndView ChooseSuggestion(@RequestParam("suggestionIdentity") int suggestionIdentity, ModelAndView modelAndView,
+                                         HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        try {
+            List<SuggestionDto> suggestions = (List<SuggestionDto>) session.getAttribute("suggestions");
+            SuggestionDto suggestion = null;
+            for (SuggestionDto suggestionDto : suggestions) {
+                if (suggestionDto.getIdentity() == suggestionIdentity) {
+                    suggestion = suggestionDto;
+                    suggestion.setSuggestionStatus(SuggestionStatus.ACCEPTED);
+                } else
+                    suggestionDto.setSuggestionStatus(SuggestionStatus.REJECTED);
+            }
+            assert suggestion != null;
+            ExpertDto expert = suggestion.getExpert();
+            OrderDto order = suggestion.getOrder();
+            if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)) {
+                return null;//todo
+            }
+            order.setExpert(expert);
+            order.setFinalPrice(suggestion.getSuggestedPrice());
+            order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+            order.setToBeDoneDate(suggestion.getStartTime());
+            orderService.update(order);
+            suggestions.forEach(suggestionService::update);
+            modelAndView.getModelMap().addAttribute("succ_massage", "successfuly added");
+            modelAndView.setViewName("customer/choose_suggestion");
+            return showOrders(modelAndView, request);
+        } catch (Exception e) {
+            modelAndView.getModelMap().addAttribute("error_massage", e.getLocalizedMessage());
+            modelAndView.setViewName("customer/choose_suggestion");
+            return showOrders(modelAndView, request);
         }
     }
 }

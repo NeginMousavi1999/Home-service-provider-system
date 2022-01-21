@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 @Getter
 public class SuggestionServiceImpl implements SuggestionService {
     private final SuggestionRepository suggestionRepository;
+    private final int suffix = 1000;
 
     public void saveSuggestion(SuggestionDto suggestionDto) {
         suggestionRepository.save(SuggestionMapper.mapSuggestionDtoToSuggestionForSaving(suggestionDto));
@@ -50,7 +52,7 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     public void update(SuggestionDto suggestionDto) {
-        suggestionRepository.save(SuggestionMapper.mapSuggestionDtoToSuggestionForUpdate(suggestionDto));
+        suggestionRepository.updateStatus(suggestionDto.getIdentity() - suffix, suggestionDto.getSuggestionStatus());
     }
 
     public Set<SuggestionDto> getByOrder(OrderDto orderDto) {
@@ -66,7 +68,8 @@ public class SuggestionServiceImpl implements SuggestionService {
 
     @Override
     public List<SuggestionDto> getSortedByOrder(OrderDto orderDto) {
-        return suggestionRepository.findAll(Sort.by("suggestedPrice", "expert").descending())
-                .stream().map(SuggestionMapper::mapSuggestionToSuggestionDto).collect(Collectors.toList());
+        List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice", "expert").descending())
+                .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
+        return suggestionDtoList.stream().filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity()).collect(Collectors.toList());
     }
 }

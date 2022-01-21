@@ -18,12 +18,14 @@
                     <h3>Register to <strong>Home Service Provider System</strong></h3>
                     <p class="mb-4">Thanks for choosing us ^_^</p>
 
-                    <form:form action="doRegister" modelAttribute="registerData" method="post" enctype="multipart/form-data">
+                    <form:form action="doRegister" modelAttribute="registerData" method="post"
+                               enctype="multipart/form-data">
                         <div class="form-group">
                             <label>register as:</label>
                             <br>
                             <label>customer</label>
-                            <form:radiobutton id="customer" value="CUSTOMER" path="userRole" onclick="customerFunction()"/>
+                            <form:radiobutton id="customer" value="CUSTOMER" path="userRole"
+                                              onclick="customerFunction()"/>
                             <label>expert</label>
                             <form:radiobutton id="expert" value="EXPERT" path="userRole" onclick="expertFunction()"/>
                         </div>
@@ -49,7 +51,8 @@
                         </div>
 
                         <div id="expert_info" class="form-group mb-3" style="display: none">
-                            <input id="formFileSm" class="form-control form-control-sm" type="file" name="file" accept="image/*" onchange="return fileValidation()">
+                            <input id="formFileSm" class="form-control form-control-sm" type="file" name="file"
+                                   accept="image/*" onchange="return fileValidation()">
                         </div>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
                     </form:form>

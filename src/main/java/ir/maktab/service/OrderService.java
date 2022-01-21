@@ -28,4 +28,6 @@ public interface OrderService {
     List<OrderDto> getOrdersByCustomerAndStatus(CustomerDto customer, OrderStatus orderStatus);
 
     List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto);
+
+    void update(OrderDto order);
 }
