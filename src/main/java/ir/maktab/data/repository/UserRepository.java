@@ -2,12 +2,17 @@ package ir.maktab.data.repository;
 
 import ir.maktab.data.dto.UserRequestDto;
 import ir.maktab.data.entity.members.User;
+import ir.maktab.data.enumuration.UserStatus;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.Predicate;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -34,4 +39,11 @@ public interface UserRepository extends CrudRepository<User, Integer>, JpaSpecif
     }
 
     Optional<User> findByEmailAndPassword(String email, String password);
+
+    Optional<List<User>> findByUserStatus(UserStatus userStatus);
+
+    @Transactional
+    @Modifying
+    @Query(value = "update User u set u.userStatus=:userStatus where u.id=:id")
+    void updateStatus(@Param("id") long id, @Param("userStatus") UserStatus userStatus);
 }

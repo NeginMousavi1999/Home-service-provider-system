@@ -11,4 +11,6 @@ public interface ManagerService {
     void save(Manager manager);
 
     ManagerDto findByUserNameAndPassword(LoginDto loginDto);
+
+    void confirmUser(int identity);
 }

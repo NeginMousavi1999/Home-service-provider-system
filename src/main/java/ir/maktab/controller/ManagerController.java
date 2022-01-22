@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -107,5 +108,27 @@ public class ManagerController {
         }
         model.addAttribute("succ_massage", "successfuly added");
         return showAddNewSubService(model);
+    }
+
+    @RequestMapping("/dashboard/confirm_user")
+    public ModelAndView showUsersToConfirm() {
+        ModelAndView modelAndView = new ModelAndView();
+        List<UserDto> userDtos = userService.returnWaitingUsers();
+        modelAndView.setViewName("manager/confirm_user");
+        modelAndView.getModelMap().addAttribute("userDtos", userDtos)
+                .addAttribute("identity_list", new UsersDto());
+        return modelAndView;
+    }
+
+    @RequestMapping("/dashboard/confirm")
+    public String confirm(@ModelAttribute("identity_list") UsersDto usersDto, Model model) {
+        try {
+            Arrays.stream(usersDto.getIdentities()).forEach(managerService::confirmUser);
+            model.addAttribute("succ_massage", "confirmed successfuly");
+            return "manager/confirm_user";
+        } catch (Exception e) {
+            model.addAttribute("error_massage", e.getLocalizedMessage());
+            return "manager/confirm_user";
+        }
     }
 }
