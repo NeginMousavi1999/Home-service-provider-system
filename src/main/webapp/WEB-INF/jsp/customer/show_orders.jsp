@@ -43,21 +43,21 @@
                 <form action="show_suggestions" method="post">
                     <table class="table table-bordered table-striped text-dark">
                         <c:forEach var="order" items="${orders}">
-                        <tr>
-                            <td>
-                                <label>
-                                    <div class="form-group first">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <div class="form-group first">
 
-                                                <input type="radio" value="${order.identity}" name="orderIdentity"/>
+                                            <input type="radio" value="${order.identity}" name="orderIdentity"/>
                                             sub service name : ${order.subService.name}
-                                                ,
+                                            ,
                                             description : ${order.description}
                                             <br>
 
-                                    </div>
-                                </label>
-                            </td>
-                        </tr>
+                                        </div>
+                                    </label>
+                                </td>
+                            </tr>
                         </c:forEach>
                     </table>
                     <input type="submit" value="Submit" class="btn btn-block btn-primary"/>

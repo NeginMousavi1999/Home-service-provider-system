@@ -48,7 +48,7 @@
                             </td>
                             <td>
                                 <label>
-                                    <form:input path="country" placeholder='country'/>
+                                    <form:input path="country"/>
                                 </label>
                             </td>
                         </tr>
@@ -58,7 +58,7 @@
                             </td>
                             <td>
                                 <label>
-                                    <form:input path="city" placeholder='city'/>
+                                    <form:input path="city"/>
                                 </label>
                             </td>
                         </tr>
@@ -69,7 +69,7 @@
                             </td>
                             <td>
                                 <label>
-                                    <form:input path="state" placeholder='state'/>
+                                    <form:input path="state"/>
                                 </label>
                             </td>
                         </tr>
@@ -79,7 +79,7 @@
                             </td>
                             <td>
                                 <label>
-                                    <form:input path="postalCode" placeholder='postalCode'/>
+                                    <form:input path="postalCode"/>
                                 </label>
                             </td>
                         </tr>
@@ -89,7 +89,7 @@
                             </td>
                             <td>
                                 <label>
-                                    <form:input path="description" placeholder='description'/>
+                                    <form:input path="description"/>
                                 </label>
                             </td>
                         </tr>

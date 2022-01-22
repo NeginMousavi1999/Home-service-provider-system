@@ -23,10 +23,12 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change password</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change
+                        password</a>
                 </li>
                 <li>
-                    <a class="btn btn-outline-primary my-2 my-sm-0" href="${pageContext.request.contextPath}/">Logout</a>
+                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                       href="${pageContext.request.contextPath}/">Logout</a>
                 </li>
 
             </ul>
@@ -53,16 +55,16 @@
                     <div class="col-12 top-box">
                         <h3><a href="${pageContext.request.contextPath}/customer/add_order">Add Order</a></h3>
                     </div>
-<%--                    <div class="card-body d-flex flex-column bottom-box">
-                        <ul class="list-unstyled mt-3 mb-4">
-                            <li>10 users included</li>
-                            <li>2 GB of storage</li>
-                            <li>Email support</li>
-                            <li>Help center access</li>
-                        </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
-                            free</button>
-                    </div>--%>
+                    <%--                    <div class="card-body d-flex flex-column bottom-box">
+                                            <ul class="list-unstyled mt-3 mb-4">
+                                                <li>10 users included</li>
+                                                <li>2 GB of storage</li>
+                                                <li>Email support</li>
+                                                <li>Help center access</li>
+                                            </ul>
+                                            <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
+                                                free</button>
+                                        </div>--%>
                 </div>
             </div>
         </div>

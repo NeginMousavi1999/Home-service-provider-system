@@ -51,7 +51,8 @@
                                 <td>
                                     <label>
                                         <div class="form-group first">
-                                            <input type="radio" value="${suggestion.identity}" name="suggestionIdentity"/>
+                                            <input type="radio" value="${suggestion.identity}"
+                                                   name="suggestionIdentity"/>
                                             suggestedPrice : ${suggestion.suggestedPrice}
                                             ,
                                             durationOfWork : ${suggestion.durationOfWork}

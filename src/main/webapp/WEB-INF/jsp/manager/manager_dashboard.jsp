@@ -42,7 +42,8 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">add new Service to System</a></h4>
+                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">add new
+                            Service to System</a></h4>
                     </div>
                 </div>
             </div>
@@ -52,7 +53,8 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new Sub Service to System</a>
+                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new
+                            Sub Service to System</a>
                         </h4>
                     </div>
                 </div>
@@ -71,7 +73,8 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new users</a></h4>
+                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new
+                            users</a></h4>
                     </div>
                 </div>
             </div>

@@ -50,7 +50,8 @@
                                 <td>
                                     <label>
                                         <div class="form-group first">
-                                                ${user.email}, ${user.userRole} <form:checkbox path="identities" value="${user.identity}"/><br>
+                                                ${user.email}, ${user.userRole} <form:checkbox path="identities"
+                                                                                               value="${user.identity}"/><br>
 
                                         </div>
                                     </label>

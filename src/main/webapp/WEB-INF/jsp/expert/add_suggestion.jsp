@@ -78,10 +78,10 @@
                                 <label>
                                     <div class="form-group first">
                                         <c:forEach var="order" items="${list}">
-                                                <input type="radio" value="${order.identity}" name="orderDtoIdentity">
+                                            <input type="radio" value="${order.identity}" name="orderDtoIdentity">
                                             description : ${order.description}
                                             <br>
-                                                address : ${order.address.city}, ${order.address.state}, ${order.address.postalCode}
+                                            address : ${order.address.city}, ${order.address.state}, ${order.address.postalCode}
                                             <br>
                                             registrationDate : ${order.registrationDate}
                                             <br>
