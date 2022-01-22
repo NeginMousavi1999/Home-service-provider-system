@@ -13,10 +13,7 @@ import ir.maktab.validation.Validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,8 +36,7 @@ public class ExpertController {
     private final SuggestionService suggestionService;
 
     @RequestMapping("/dashboard")
-    public String showDashboard(HttpServletRequest request, Model model) {
-        // model.addAttribute("expert", request.getSession().getAttribute("expertDto"));
+    public String showDashboard() {
         return "expert/expert_dashboard";
     }
 
@@ -125,5 +121,39 @@ public class ExpertController {
             model.addAttribute("error_massage", e.getLocalizedMessage());
         }
         return "expert/add_services";
+    }
+
+    @GetMapping("/orders")
+    public ModelAndView showOrdersToUpdateStatus(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("expert/update_order");
+        HttpSession session = request.getSession();
+        ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
+        List<OrderDto> startingOrders = orderService.getOrdersToStartByExpert(expertDto);
+        List<OrderDto> finishingOrders = orderService.getOrdersToFinishByExpert(expertDto);
+        modelAndView.getModelMap().addAttribute("startingOrders", startingOrders)
+                .addAttribute("finishingOrders", finishingOrders)
+                .addAttribute("orderIdentityDto", new OrderIdentityDto());
+        session.setAttribute("startingOrders", startingOrders);
+        session.setAttribute("finishingOrders", finishingOrders);
+        return modelAndView;
+    }
+
+    @PostMapping("/update_orders")
+    public String updateStatus(HttpServletRequest request, @ModelAttribute OrderIdentityDto orderIdentityDto) {
+        HttpSession session = request.getSession();
+        List<OrderDto> startingOrders = (List<OrderDto>) session.getAttribute("startingOrders");
+        List<OrderDto> finishingOrders = (List<OrderDto>) session.getAttribute("finishingOrders");
+        int start = orderIdentityDto.getStart();
+        int finish = orderIdentityDto.getFinish();
+        if (start != Integer.MIN_VALUE)
+            startingOrders.stream().filter(startedOrder -> startedOrder.getIdentity() == start)
+                    .forEach(orderService::startOrder);
+
+        if (finish != Integer.MIN_VALUE)
+            finishingOrders.stream().filter(finishedOrder -> finishedOrder.getIdentity() == finish)
+                    .forEach(orderService::finishOrder);
+
+        return "redirect:/expert/orders";
     }
 }

@@ -30,4 +30,12 @@ public interface OrderService {
     List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto);
 
     void update(OrderDto order);
+
+    List<OrderDto> getOrdersToStartByExpert(ExpertDto expertDto);
+
+    List<OrderDto> getOrdersToFinishByExpert(ExpertDto expertDto);
+
+    void finishOrder(OrderDto orderDto);
+
+    void startOrder(OrderDto orderDto);
 }

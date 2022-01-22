@@ -36,19 +36,19 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-                <h3>Service Form</h3>
+                <h3>System Services</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-
                 <form:form action="add_to_services" modelAttribute="dto" method="post">
-                    <div class="form-group first">
-                        <label>System Services:</label><br>
-                        <ul>
-                            <c:forEach var="service" items="${dto.servicesName}">
-                                ${service}  <form:checkbox path="servicesName" value="${service}"/><br/>
-                            </c:forEach>
-                        </ul>
-                    </div>
+                    <table class="table table-bordered table-striped text-dark">
+                        <c:forEach var="service" items="${dto.servicesName}">
+                            <tr>
+                                <td>
+                                        <form:checkbox path="servicesName" value="${service}"/> ${service}
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
                     <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
                 </form:form>
             </div>

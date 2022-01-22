@@ -8,6 +8,7 @@ import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.AddressService;
 import ir.maktab.service.OrderService;
 import ir.maktab.util.mapper.CustomerMapper;
+import ir.maktab.util.mapper.ExpertMapper;
 import ir.maktab.util.mapper.OrderMapper;
 import ir.maktab.util.mapper.SubServiceMapper;
 import lombok.Getter;
@@ -86,5 +87,35 @@ public class OrderServiceImpl implements OrderService {
 
     public void update(OrderDto order) {
         orderRepository.save(OrderMapper.mapOrderDtoToOrderWithoutSuggestion(order));
+    }
+
+    @Override
+    public List<OrderDto> getOrdersToStartByExpert(ExpertDto expertDto) {
+        Optional<List<Order>> orders = orderRepository.findByExpertAndOrderStatus(ExpertMapper.mapExpertDtoToExpert(expertDto)
+                , OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+        if (orders.isEmpty())
+            throw new HomeServiceException("no order to start for you");
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToStart).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDto> getOrdersToFinishByExpert(ExpertDto expertDto) {
+        Optional<List<Order>> orders = orderRepository.findByExpertAndOrderStatus(ExpertMapper.mapExpertDtoToExpert(expertDto)
+                , OrderStatus.STARTED);
+        if (orders.isEmpty())
+            throw new HomeServiceException("no order to finish for you");
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoWithoutSuggestion).collect(Collectors.toList());
+    }
+
+    @Override
+    public void finishOrder(OrderDto orderDto) {
+        orderDto.setOrderStatus(OrderStatus.DONE);
+        updateStatus(orderDto);
+    }
+
+    @Override
+    public void startOrder(OrderDto orderDto) {
+        orderDto.setOrderStatus(OrderStatus.STARTED);
+        updateStatus(orderDto);
     }
 }

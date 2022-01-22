@@ -1,6 +1,7 @@
 package ir.maktab.data.repository;
 
 import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.services.SubService;
 import ir.maktab.data.enumuration.OrderStatus;
@@ -34,4 +35,6 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
     @Query(value = "from System_Order o where o.orderStatus=:orderStatus1 or o.orderStatus=:orderStatus2")
     Optional<List<Order>> findByOrderStatusAndOrderStatus(@Param("orderStatus1") OrderStatus orderStatus1,
                                                           @Param("orderStatus2") OrderStatus orderStatus2);
+
+    Optional<List<Order>> findByExpertAndOrderStatus(Expert expert, OrderStatus orderStatus);
 }
