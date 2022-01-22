@@ -19,7 +19,7 @@ public class ConfirmCustomerTest {
     }
 
     @Test
-    void givenCustomer_WhenConfirmCustomerCalls_ThenReturnTrueResponse() {//todo
+    void givenCustomer_WhenConfirmCustomerCalls_ThenReturnTrueResponse() {
  /*       Customer customer = managerView.getCustomerService().findByEmail("jack@gmail.com");
         boolean result = managerView.confirmCustomer(customer);
         Customer confirmedCustomer = managerView.getCustomerService().findByEmail("jack@gmail.com");

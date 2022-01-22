@@ -25,7 +25,7 @@ public class FindByEmailTest {
 
     @ParameterizedTest
     @CsvSource({"jack@gmail.com"})
-    void givenValidEmail_WhenFindSubServiceByNameCalls_ThenReturnTrueResponse(String email) {//todo
+    void givenValidEmail_WhenFindSubServiceByNameCalls_ThenReturnTrueResponse(String email) {
         CustomerDto customerDto = customerService.findByEmail(email);
         System.out.println(customerDto);
     }

@@ -48,7 +48,7 @@ public class CustomerView {
                 .userStatus(UserStatus.WAITING)
                 .userRole(UserRole.CUSTOMER)
                 .build();
-//todo
+
         /*try {
             customerService.save((Customer) customer);
         } catch (Exception e) {
@@ -115,7 +115,7 @@ public class CustomerView {
         return /*orderService.saveOrder(order)*/true;
     }
 
-    public Customer getCustomerByEmail(String email) {//todo
+    public Customer getCustomerByEmail(String email) {
         Customer customer = null;
         /*try {
             customer = customerService.findByEmail(email);

@@ -19,7 +19,7 @@ public class ChooseSuggestionAndExpertTest {
     }
 
     @Test
-    void giveValidInputs_WhenChooseSuggestionsForChoosingExpertCalls_ThenReturnTrueResponse() {//todo
+    void giveValidInputs_WhenChooseSuggestionsForChoosingExpertCalls_ThenReturnTrueResponse() {
         /*Customer customer = customerView.getCustomerService().findByEmail("jack@gmail.com");
         List<Order> orderList = customerView.getOrdersByCustomerAndStatus(customer,
                 OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);

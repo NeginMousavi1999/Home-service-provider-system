@@ -19,7 +19,7 @@ public class PayTest {
     }
 
     @Test
-    void givenExistCustomerAndValidOrder_WhenPayCalls_ThenReturnTrueResponse() {//todo
+    void givenExistCustomerAndValidOrder_WhenPayCalls_ThenReturnTrueResponse() {
 /*        Customer customer = customerView.getCustomerService().findByEmail("jack@gmail.com");
         List<Order> orders = customerView.getOrdersByCustomerAndStatus(customer, OrderStatus.DONE);
         customerView.pay(orders.get(0));
