@@ -84,6 +84,7 @@
                                                 address : ${order.address.city}, ${order.address.state}, ${order.address.postalCode}
                                             <br>
                                             registrationDate : ${order.registrationDate}
+                                            <br>
                                         </c:forEach>
                                     </div>
                                 </label>

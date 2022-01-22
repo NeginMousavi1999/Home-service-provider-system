@@ -22,5 +22,5 @@ public interface ExpertService {
 
     void addServices(ExpertDto expertDto, List<ServiceDto> serviceDtos);
 
-    Set<ServiceDto> getIncludeServices(ExpertDto expertDto);
+    Set<ServiceDto> getServices(ExpertDto expertDto);
 }

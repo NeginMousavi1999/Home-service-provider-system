@@ -68,7 +68,7 @@ public class ExpertServiceImpl implements ExpertService {
     }
 
     @Override
-    public Set<ServiceDto> getIncludeServices(ExpertDto expertDto) {
+    public Set<ServiceDto> getServices(ExpertDto expertDto) {
         Optional<List<ir.maktab.data.entity.services.Service>> services = expertRepository
                 .customeGetServiceByExpertId(ExpertMapper.mapExpertDtoToExpert(expertDto).getId());
         if (services.isEmpty())

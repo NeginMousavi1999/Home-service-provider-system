@@ -83,7 +83,7 @@ public class ExpertController {
         modelAndView.setViewName("expert/add_suggestion");
         HttpSession session = request.getSession();
         ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
-        Set<ServiceDto> services = expertService.getIncludeServices(expertDto);
+        Set<ServiceDto> services = expertService.getServices(expertDto);
         expertDto.setServices(services);
         List<OrderDto> ordersReadyForSuggestion = orderService.getOrdersReadyForSuggestion(expertDto);
         session.setAttribute("ordersReadyForSuggestion", ordersReadyForSuggestion);
