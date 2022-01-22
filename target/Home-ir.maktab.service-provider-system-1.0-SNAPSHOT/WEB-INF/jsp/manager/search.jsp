@@ -1,43 +1,122 @@
+<%--@elvariable id="error_massage" type="antlr"--%>
+<%--@elvariable id="succ_massage" type="antlr"--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>search and filter users</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/dashboard_style.css">
 </head>
-<h3>search and filter users Form</h3>
 <body>
-<form:form action="doFilter" modelAttribute="filterData" method="post">
-    <form:input path="firstName" placeholder='first name'/>
-    <br><br>
-    <form:input path="lastName" placeholder='last name'/>
-    <br><br>
-    <form:input path="email" placeholder='email'/>
-    <br><br>
-    role:
-    customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole" onclick="customerFunction()"/>
-    expert <form:radiobutton id="expert" value="EXPERT" path="userRole" onclick="expertFunction()"/>
-    <br><br>
-    <input type="submit" value="Submit"/>
-</form:form>
+<nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow-style">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Home Service Provider System</a>
 
-<div>
-    <ul>
-        <c:forEach var="user" items="${users}">
-            <li>${user}</li>
-        </c:forEach>
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        </ul>
+        <div class="d-flex align-items-center">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li>
+                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                       href="${pageContext.request.contextPath}/portal/admin/doLogin">Dashboard</a>
+                </li>
+
+                <li>
+                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                       href="${pageContext.request.contextPath}/">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br><br>
+<div class="contents order-2 order-md-1">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+                <h3>search and filter users Form</h3>
+                <div style="color: green">${succ_massage}</div>
+                <div style="color: red">${error_massage}</div>
+                <form:form action="doFilter" modelAttribute="filterData" method="post">
+                    <table class="table table-bordered table-striped text-dark">
+                        <tr>
+                            <td>
+                                <label>first name</label>
+                            </td>
+                            <td>
+                                <label>
+                                    <form:input path="firstName"/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>last name</label>
+                            </td>
+                            <td>
+                                <label>
+                                    <form:input path="lastName"/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>email</label>
+                            </td>
+                            <td>
+                                <label>
+                                    <form:input path="email"/>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>role</label>
+                            </td>
+                            <td>
+                                <label>
+                                    customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole"
+                                                               onclick="customerFunction()"/>
+                                    expert <form:radiobutton id="expert" value="EXPERT" path="userRole"
+                                                             onclick="expertFunction()"/>
+                                </label>
+                            </td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
+                </form:form>
+            </div>
+        </div>
+        <br><br>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-7">
+                <h3>Result</h3>
+                <table class="table table-bordered table-striped text-dark">
+                    <c:forEach var="user" items="${users}">
+                        <tr>
+                            <td>
+                                <label>
+                                    <div class="form-group first">
+                                            ${user.email} , ${user.userRole} , ${user.firstName} , ${user.lastName}
+                                        , ${user.registrationDate} <br>
+
+                                    </div>
+                                </label>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
-
-<script>
-    function expertFunction() {
-        document.getElementById("expert_info").style.display = "block";
-    }
-
-    function customerFunction() {
-        document.getElementById("expert_info").style.display = "none";
-    }
-</script>
+<script src="${pageContext.request.contextPath}/resources/static/js/register.js"></script>
 </body>
 </html>

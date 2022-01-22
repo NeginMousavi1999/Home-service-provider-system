@@ -42,10 +42,6 @@ public class CustomerController {
                                  @RequestParam(name = "oldPass") String oldPassword,
                                  @RequestParam(name = "newPass") String newPassword, Model model) {
 
-        System.out.println(email);
-        System.out.println(oldPassword);
-        System.out.println(newPassword);
-
         try {
             CustomerDto customerDto = customerService.findByEmail(email);
             validation.validateUserRole(UserRole.CUSTOMER, customerDto.getUserRole());

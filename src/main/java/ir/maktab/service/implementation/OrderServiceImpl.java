@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
         return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoWithoutSuggestion).collect(Collectors.toList());
     }
 
-    public List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto) {
+    public List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto) {//todo
         List<Order> orders = (List<Order>) orderRepository.findAll();
         List<Order> readyOrders = orders.stream().filter(order -> order.getOrderStatus().equals(OrderStatus.NEW)
                 || order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)).collect(Collectors.toList());

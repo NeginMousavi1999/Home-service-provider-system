@@ -10,7 +10,6 @@
 <div class="d-lg-flex half">
     <div class="bg order-1 order-md-2" style="background-image: url('../../resources/static/images/bg_1.jpg');"></div>
     <div class="contents order-2 order-md-1">
-
         <div class="container">
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-7">
@@ -37,6 +36,7 @@
                             </label>
 
                         </div>
+                        <p class="mb-4">Don't have an account yet? <a href="/service/register">Register!</a></p>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
                     </form:form>
                 </div>
