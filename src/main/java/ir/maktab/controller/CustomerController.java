@@ -46,7 +46,6 @@ public class CustomerController {
     public String changePassword(@RequestParam(name = "userName") String email,
                                  @RequestParam(name = "oldPass") String oldPassword,
                                  @RequestParam(name = "newPass") String newPassword, Model model) {
-
         try {
             CustomerDto customerDto = customerService.findByEmail(email);
             validation.validateUserRole(UserRole.CUSTOMER, customerDto.getUserRole());
@@ -55,10 +54,11 @@ public class CustomerController {
             customerDto.setPassword(newPassword);
             customerService.update(customerDto);
             model.addAttribute("customer", customerDto);
-            return "customer/customer_dashboard";
+            model.addAttribute("succ_massage", "successfuly changed");
+            return "customer/change_password";
         } catch (Exception e) {
-            model.addAttribute("massage", e.getLocalizedMessage());
-            return "error";
+            model.addAttribute("error_massage", e.getLocalizedMessage());
+            return "customer/change_password";
         }
     }
 
