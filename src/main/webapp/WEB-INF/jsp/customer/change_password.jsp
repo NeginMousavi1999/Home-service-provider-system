@@ -27,6 +27,10 @@
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
+                       href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
+                </li>
+                <li>
+                    <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/">Logout</a>
                 </li>
             </ul>
@@ -41,7 +45,7 @@
                 <h3>Changing Password Form</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="${pageContext.request.contextPath}/customer/update_password">
+                <form action="${pageContext.request.contextPath}/customer/update_password" method="post">
                     <table class="table table-bordered table-striped text-dark">
                         <tr>
                             <td>

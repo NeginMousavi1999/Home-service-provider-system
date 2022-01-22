@@ -26,7 +26,7 @@
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
-                       href="customer_dashboard.jsp">Dashboard</a>
+                       href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
@@ -51,7 +51,8 @@
                                 <td>
                                     <label>
                                         <div class="form-group first">
-                                            <input type="radio" value="${suggestion.identity}" name="suggestionIdentity"/>
+                                            <input type="radio" value="${suggestion.identity}"
+                                                   name="suggestionIdentity"/>
                                             suggestedPrice : ${suggestion.suggestedPrice}
                                             ,
                                             durationOfWork : ${suggestion.durationOfWork}

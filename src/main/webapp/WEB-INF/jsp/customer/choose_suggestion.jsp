@@ -26,7 +26,7 @@
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
-                       href="customer_dashboard.jsp">Dashboard</a>
+                       href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"

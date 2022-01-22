@@ -22,7 +22,12 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change password</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change
+                        password</a>
+                </li>
+                <li>
+                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                       href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
@@ -40,7 +45,7 @@
                 <h3>Changing Password Form</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="${pageContext.request.contextPath}/customer/update_password">
+                <form action="${pageContext.request.contextPath}/customer/update_password" method="post">
                     <table class="table table-bordered table-striped text-dark">
                         <tr>
                             <td>
@@ -58,7 +63,8 @@
                             </td>
                             <td>
                                 <label>
-                                    <input type="password" name="oldPass" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
+                                    <input type="password" name="oldPass"
+                                           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
                                            title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
                                 </label>
                             </td>
@@ -69,7 +75,8 @@
                             </td>
                             <td>
                                 <label>
-                                    <input type="password" name="newPass" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
+                                    <input type="password" name="newPass"
+                                           pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
                                            title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"/>
                                 </label>
                             </td>

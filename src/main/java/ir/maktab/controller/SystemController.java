@@ -58,12 +58,12 @@ public class SystemController {
                     CustomerDto customerDto = customerService.findByEmail(user.getEmail());
                     session = request.getSession();
                     session.setAttribute("customerDto", customerDto);
-                    return "customer/customer_dashboard";
+                    return "redirect:/customer/dashboard";
                 case EXPERT:
                     ExpertDto expertDto = expertService.findByEmail(user.getEmail());
                     session = request.getSession();
                     session.setAttribute("expertDto", expertDto);
-                    return "expert/expert_dashboard";
+                    return "redirect:/expert/dashboard";
                 default:
                     return "login";
             }

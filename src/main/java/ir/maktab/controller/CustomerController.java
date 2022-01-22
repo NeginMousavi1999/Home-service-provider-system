@@ -32,12 +32,17 @@ public class CustomerController {
     private final OrderService orderService;
     private final SuggestionService suggestionService;
 
-    @RequestMapping("/change_password")
-    public String accessToChangePassword() {
-        return "customer/customer_change_password";
+    @GetMapping("/dashboard")
+    public String showDashboard() {
+        return "/customer/customer_dashboard";
     }
 
-    @GetMapping("/update_password")
+    @RequestMapping("/change_password")//todo
+    public String accessToChangePassword() {
+        return "customer/change_password";
+    }
+
+    @PostMapping("/update_password")
     public String changePassword(@RequestParam(name = "userName") String email,
                                  @RequestParam(name = "oldPass") String oldPassword,
                                  @RequestParam(name = "newPass") String newPassword, Model model) {
@@ -140,7 +145,9 @@ public class CustomerController {
             ExpertDto expert = suggestion.getExpert();
             OrderDto order = suggestion.getOrder();
             if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)) {
-                return null;//todo
+                modelAndView.getModelMap().addAttribute("error_massage", "something is wrong!");
+                modelAndView.setViewName("customer/choose_suggestion");
+                return showOrders(modelAndView, request);
             }
             order.setExpert(expert);
             order.setFinalPrice(suggestion.getSuggestedPrice());

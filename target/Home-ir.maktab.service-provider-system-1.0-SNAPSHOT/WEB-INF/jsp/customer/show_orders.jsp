@@ -21,8 +21,11 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change
-                        password</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change password</a>
+                </li>
+                <li>
+                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                       href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
@@ -43,21 +46,21 @@
                 <form action="show_suggestions" method="post">
                     <table class="table table-bordered table-striped text-dark">
                         <c:forEach var="order" items="${orders}">
-                        <tr>
-                            <td>
-                                <label>
-                                    <div class="form-group first">
+                            <tr>
+                                <td>
+                                    <label>
+                                        <div class="form-group first">
 
-                                                <input type="radio" value="${order.identity}" name="orderIdentity"/>
+                                            <input type="radio" value="${order.identity}" name="orderIdentity"/>
                                             sub service name : ${order.subService.name}
-                                                ,
+                                            ,
                                             description : ${order.description}
                                             <br>
 
-                                    </div>
-                                </label>
-                            </td>
-                        </tr>
+                                        </div>
+                                    </label>
+                                </td>
+                            </tr>
                         </c:forEach>
                     </table>
                     <input type="submit" value="Submit" class="btn btn-block btn-primary"/>

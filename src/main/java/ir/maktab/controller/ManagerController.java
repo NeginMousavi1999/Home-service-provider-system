@@ -29,6 +29,11 @@ public class ManagerController {
     private final ServiceService serviceService;
     private final SubServiceService subServiceService;
 
+    @GetMapping("/dashboard")
+    public String showDashboard() {
+        return "/manager/manager_dashboard";
+    }
+
     @RequestMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();

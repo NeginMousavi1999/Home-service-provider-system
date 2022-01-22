@@ -24,7 +24,6 @@
                     <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/">Logout</a>
                 </li>
-
             </ul>
         </div>
 
@@ -42,8 +41,8 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">add new
-                            Service to System</a></h4>
+                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">add new
+                            Service to System</a></h5>
                     </div>
                 </div>
             </div>
@@ -53,9 +52,9 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new
+                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new
                             Sub Service to System</a>
-                        </h4>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -64,7 +63,7 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Search</a></h4>
+                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Search</a></h5>
                     </div>
                 </div>
             </div>
@@ -73,8 +72,8 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new
-                            users</a></h4>
+                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new
+                            users</a></h5>
                     </div>
                 </div>
             </div>
