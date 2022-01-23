@@ -41,6 +41,7 @@ public class ServiceServiceImpl implements ServiceService {
     }
 
     public boolean addNewService(ServiceDto serviceDto) {
+        validateNewName(serviceDto.getName());
         serviceRepository.save(ServiceMapper.mapServiceDtoToService(serviceDto));
         return true;
     }

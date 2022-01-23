@@ -77,7 +77,6 @@ public class ManagerController {
     @PostMapping("/dashboard/add_new_service")
     public String addNewService(@ModelAttribute("service") ServiceDto serviceDto, Model model) {
         try {
-            serviceService.validateNewName(serviceDto.getName());
             serviceService.addNewService(serviceDto);
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
@@ -98,20 +97,11 @@ public class ManagerController {
     @PostMapping("/dashboard/add_new_subservice")
     public String addNewSubService(@ModelAttribute("subservice") SubServiceRequestDto subServiceRequestDto, Model model) {
         try {
-            subServiceService.validateNewName(subServiceRequestDto.getName());
-            ServiceDto serviceDto = serviceService.findServiceByName(subServiceRequestDto.getServiceName());
-            SubServiceDto subServiceDto = SubServiceDto.builder()
-                    .service(serviceDto)
-                    .cost(subServiceRequestDto.getCost())
-                    .description(subServiceRequestDto.getDescription())
-                    .name(subServiceRequestDto.getName())
-                    .build();
-            subServiceService.addNewSubService(subServiceDto);
+            subServiceService.addNewSubService(subServiceRequestDto);
+            model.addAttribute("succ_massage", "successfuly added");
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
-            return showAddNewSubService(model);
         }
-        model.addAttribute("succ_massage", "successfuly added");
         return showAddNewSubService(model);
     }
 
