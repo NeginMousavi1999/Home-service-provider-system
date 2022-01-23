@@ -36,7 +36,6 @@
                 <h1>Admin Dashboard</h1>
             </div>
         </div>
-
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 p-5 w-100 h-100 rounded">
             <div class="row p-5">
                 <div class="outer-box w-100">
@@ -47,7 +46,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 p-5 w-100 h-100 rounded">
             <div class="row p-5">
                 <div class="outer-box w-100">
@@ -79,7 +77,6 @@
             </div>
         </div>
     </div>
-
 </div>
 </body>
 </html>

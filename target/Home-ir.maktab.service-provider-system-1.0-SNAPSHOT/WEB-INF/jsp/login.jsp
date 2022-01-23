@@ -36,7 +36,7 @@
                             </label>
 
                         </div>
-                        <p class="mb-4">Don't have an account yet? <a href="/service/register">Register!</a></p>
+                        <p class="mb-4">Don't have an account yet? <a href="/register">Register!</a></p>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
                     </form:form>
                 </div>

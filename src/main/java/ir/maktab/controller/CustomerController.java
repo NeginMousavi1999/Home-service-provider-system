@@ -31,6 +31,7 @@ public class CustomerController {
     private final SubServiceService subServiceService;
     private final OrderService orderService;
     private final SuggestionService suggestionService;
+    private final ExpertService expertService;
 
     @GetMapping("/dashboard")
     public String showDashboard() {
@@ -163,5 +164,73 @@ public class CustomerController {
             modelAndView.setViewName("customer/choose_suggestion");
             return showOrders(modelAndView, request);
         }
+    }
+
+    @GetMapping("/pay")
+    public String showOrdersToPay(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        CustomerDto customerDto = (CustomerDto) session.getAttribute("customerDto");
+        List<OrderDto> orders = orderService.getOrdersByCustomerAndStatus(customerDto, OrderStatus.DONE);
+        model.addAttribute("done_orders", orders);
+        session.setAttribute("done_orders", orders);
+        return "customer/pay_order";
+    }
+
+    @PostMapping("/paying")
+    public String pay(@RequestParam("orderIdentity") int orderIdentity, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
+        OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
+        try {
+            assert doneOrder != null;
+            double price = doneOrder.getFinalPrice();
+            CustomerDto customerDto = doneOrder.getCustomer();
+            validation.validateCustomerCredit(customerDto.getCredit(), price);
+            ExpertDto expertDto = doneOrder.getExpert();
+            customerDto.setCredit(customerDto.getCredit() - price);
+            expertDto.setCredit(expertDto.getCredit() + price);
+            doneOrder.setOrderStatus(OrderStatus.PAID);
+            customerService.update(customerDto);
+            expertService.update(expertDto);
+            orderService.updateStatus(doneOrder);
+            model.addAttribute("succ_massage", "successfuly paid");
+        } catch (Exception exception) {
+            model.addAttribute("error_massage", exception.getLocalizedMessage());
+        }
+        return showOrdersToPay(model, request);
+    }
+
+    @GetMapping("/order_feedback")
+    public String showOrdersToFeedback(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        CustomerDto customerDto = (CustomerDto) session.getAttribute("customerDto");
+        List<OrderDto> orders = orderService.getOrdersByCustomerAndStatus(customerDto, OrderStatus.PAID);
+        model.addAttribute("paid_orders", orders);
+        session.setAttribute("paid_orders", orders);
+        return "customer/add_feedback";
+    }
+
+    @PostMapping("/feedback")
+    public String feedback(@RequestParam("orderIdentity") int orderIdentity, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
+        OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
+        try {
+            assert doneOrder != null;
+            double price = doneOrder.getFinalPrice();
+            CustomerDto customerDto = doneOrder.getCustomer();
+            validation.validateCustomerCredit(customerDto.getCredit(), price);
+            ExpertDto expertDto = doneOrder.getExpert();
+            customerDto.setCredit(customerDto.getCredit() - price);
+            expertDto.setCredit(expertDto.getCredit() + price);
+            doneOrder.setOrderStatus(OrderStatus.PAID);
+            customerService.update(customerDto);
+            expertService.update(expertDto);
+            orderService.updateStatus(doneOrder);
+            model.addAttribute("succ_massage", "successfuly paid");
+        } catch (Exception exception) {
+            model.addAttribute("error_massage", exception.getLocalizedMessage());
+        }
+        return showOrdersToPay(model, request);
     }
 }

@@ -1,9 +1,11 @@
+<%--@elvariable id="error_massage" type="antlr"--%>
+<%--@elvariable id="succ_massage" type="antlr"--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>orders</title>
+    <title>Customer</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/dashboard_style.css">
 </head>
@@ -21,10 +23,6 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change
-                        password</a>
-                </li>
-                <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>
@@ -41,30 +39,31 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-                <h3>Choose one of your Order to see Suggestions</h3>
+                <h3>Pay For Your Done Order</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="show_suggestions" method="post">
+                <form action="${pageContext.request.contextPath}/customer/paying" method="post">
                     <table class="table table-bordered table-striped text-dark">
-                        <c:forEach var="order" items="${orders}">
+                        <c:forEach var="order" items="${done_orders}">
                             <tr>
                                 <td>
                                     <label>
                                         <div class="form-group first">
-
-                                            <input type="radio" value="${order.identity}" name="orderIdentity"/>
-                                            sub service name : ${order.subService.name}
-                                            ,
-                                            description : ${order.description}
+                                            <input type="radio" value="${order.identity}"
+                                                   name="orderIdentity"/>
+                                            sub service : ${order.subService.name}
                                             <br>
-
+                                            cost : ${order.finalPrice}
+                                            <br>
+                                            description : ${order.description}
                                         </div>
                                     </label>
                                 </td>
                             </tr>
                         </c:forEach>
                     </table>
-                    <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
+
+                    <input type="submit" value="Pay" class="btn btn-block btn-primary"/>
                 </form>
             </div>
         </div>

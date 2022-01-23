@@ -105,6 +105,20 @@ public class OrderMapper {
                 .build();
     }
 
+    public static OrderDto mapOrderToOrderDtoToPay(Order order) {
+        return OrderDto.builder()
+                .identity(order.getId() + suffix)
+                .customer(CustomerMapper.mapCustomerToCustomerDto(order.getCustomer()))
+                .description(order.getDescription())
+                .orderStatus(order.getOrderStatus())
+                .subService(SubServiceMapper.mapSubServiceToSubServiceDto(order.getSubService()))
+                .registrationDate(order.getRegistrationDate())
+                .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
+                .expert(ExpertMapper.mapExpertToExpertDto(order.getExpert()))
+                .finalPrice(order.getFinalPrice())
+                .build();
+    }
+
     public static OrderDto mapOrderToOrderDtoToStart(Order order) {
         return OrderDto.builder()
                 .identity(order.getId() + suffix)

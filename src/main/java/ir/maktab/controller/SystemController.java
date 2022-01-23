@@ -29,7 +29,6 @@ import javax.servlet.http.HttpSession;
  * @author Negin Mousavi
  */
 @Controller
-@RequestMapping("/service")
 @RequiredArgsConstructor
 public class SystemController {
 
@@ -39,7 +38,7 @@ public class SystemController {
     private final ModelMapper modelMapper = new ModelMapper();
     private final Validation validation;
 
-    @RequestMapping("/login")
+    @RequestMapping("/")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");

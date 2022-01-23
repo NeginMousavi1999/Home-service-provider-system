@@ -68,7 +68,7 @@ public class OrderServiceImpl implements OrderService {
                 mapCustomerDtoToCustomer(customerDto), orderStatus);
         if (orders.isEmpty())
             throw new HomeServiceException("we have not order with this conditions!");
-        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoWithoutSuggestion).collect(Collectors.toList());
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());
     }
 
     public List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto) {
