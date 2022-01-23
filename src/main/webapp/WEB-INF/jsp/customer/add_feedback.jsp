@@ -53,7 +53,8 @@
                                             <br>
                                             cost : ${order.finalPrice}
                                             <br>
-                                            expert : ${order.expert.firstName} ${order.expert.firstName} , score : ${order.expert.score}
+                                            expert : ${order.expert.firstName} ${order.expert.firstName} , score
+                                            : ${order.expert.score}
                                             <br>
                                             registration date : ${order.registrationDate}
                                             <br>
