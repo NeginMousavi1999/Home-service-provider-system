@@ -38,6 +38,12 @@ public class SystemController {
     private final ModelMapper modelMapper = new ModelMapper();
     private final Validation validation;
 
+/*    @ExceptionHandler(value = BindException.class)
+    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
+        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
+    }*/
+
     @RequestMapping("/")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
@@ -46,8 +52,13 @@ public class SystemController {
         return modelAndView;
     }
 
-    @RequestMapping("/doLogin")
-    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request) {
+    @PostMapping("/doLogin")
+    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request
+            /*,BindingResult bindingResult*/) {
+        /*if (bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getDefaultMessage()));
+            return "login";
+        }*/
         User user;
         HttpSession session;
         try {

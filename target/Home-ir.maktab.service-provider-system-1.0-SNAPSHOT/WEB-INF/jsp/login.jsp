@@ -17,16 +17,17 @@
                     <p class="mb-4">Thanks for choosing us ^_^</p>
                     <div id="massage" style="color: red">${massage}</div>
 
-                    <form:form action="doLogin" modelAttribute="loginData">
+                    <form:form action="doLogin" modelAttribute="loginData" method="post">
                         <div class="form-group first">
-                                <%--                            <label for="username">username</label>--%>
                             <form:input path="username" placeholder='username'/>
+                            <%--<form:errors path="username"/>--%>
                         </div>
                         <div class="form-group last mb-3">
-                                <%--                            <label for="password">password</label>--%>
-                            <form:password path="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
-                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"
-                                           placeholder='password'/>
+                                                            <form:password path="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
+                                                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"
+                                                                           placeholder='password'/>
+                            <%--<form:password path="password" placeholder='password'/>
+                            <form:errors path="password"/>--%>
                         </div>
 
                         <div class="d-flex mb-5 align-items-center">
@@ -36,7 +37,8 @@
                             </label>
 
                         </div>
-                        <p class="mb-4">Don't have an account yet? <a href="/register">Register!</a></p>
+                        <p class="mb-4">Don't have an account yet? <a
+                                href="${pageContext.request.contextPath}/register">Register!</a></p>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
                     </form:form>
                 </div>
