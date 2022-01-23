@@ -1,6 +1,7 @@
 package ir.maktab.service;
 
 import ir.maktab.data.dto.CustomerDto;
+import ir.maktab.data.dto.OrderDto;
 
 /**
  * @author Negin Mousavi
@@ -15,4 +16,8 @@ public interface CustomerService {
     Long getCountOfRecords();
 
     void increseCredit(CustomerDto customerDto, double amount);
+
+    void changePassword(CustomerDto customerDto, String oldPassword, String newPassword);
+
+    CustomerDto payForDoneOrder(OrderDto doneOrder);
 }

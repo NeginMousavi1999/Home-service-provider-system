@@ -14,7 +14,6 @@ import java.util.Set;
 
 public interface SuggestionService {
 
-
     void saveSuggestion(SuggestionDto suggestion);
 
     List<SuggestionDto> getByStatus(ExpertDto expert, SuggestionStatus suggestionStatus);
@@ -28,4 +27,6 @@ public interface SuggestionService {
     Long getCountOfRecords();
 
     List<SuggestionDto> getSortedByOrder(OrderDto order);
+
+    void chooseSuggestion(int suggestionIdentity, List<SuggestionDto> suggestions);
 }

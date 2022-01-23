@@ -2,11 +2,7 @@ package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
 import ir.maktab.data.enumuration.OrderStatus;
-import ir.maktab.data.enumuration.SuggestionStatus;
-import ir.maktab.data.enumuration.UserRole;
-import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.*;
-import ir.maktab.validation.Validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,13 +21,10 @@ import java.util.Set;
 @RequestMapping("/customer")
 @RequiredArgsConstructor
 public class CustomerController {
-    private final Validation validation;
     private final CustomerService customerService;
     private final ServiceService serviceService;
-    private final SubServiceService subServiceService;
     private final OrderService orderService;
     private final SuggestionService suggestionService;
-    private final ExpertService expertService;
     private final CommentService commentService;
 
     @GetMapping("/dashboard")
@@ -50,11 +43,7 @@ public class CustomerController {
                                  @RequestParam(name = "newPass") String newPassword, Model model) {
         try {
             CustomerDto customerDto = customerService.findByEmail(email);
-            validation.validateUserRole(UserRole.CUSTOMER, customerDto.getUserRole());
-            validation.validateCorrectPassword(oldPassword, customerDto.getPassword());
-            validation.validatePassword(newPassword);
-            customerDto.setPassword(newPassword);
-            customerService.update(customerDto);
+            customerService.changePassword(customerDto, oldPassword, newPassword);
             model.addAttribute("customer", customerDto);
             model.addAttribute("succ_massage", "successfuly changed");
             return "customer/change_password";
@@ -78,22 +67,7 @@ public class CustomerController {
                                     HttpServletRequest request) {
         try {
             CustomerDto customerDto = (CustomerDto) request.getSession().getAttribute("customerDto");
-            validation.validateUserStatus(UserStatus.CONFIRMED, customerDto.getUserStatus());
-            AddressDto addressDto = AddressDto.builder()
-                    .country(orderRequest.getCountry())
-                    .city(orderRequest.getCity())
-                    .state(orderRequest.getState())
-                    .postalCode(orderRequest.getPostalCode())
-                    .build();
-            SubServiceDto subServiceDto = subServiceService.findSubServiceByName(orderRequest.getSubServiceName());
-            OrderDto orderDto = OrderDto.builder()
-                    .address(addressDto)
-                    .customer(customerDto)
-                    .description(orderRequest.getDescription())
-                    .orderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)
-                    .subService(subServiceDto)
-                    .build();
-            orderService.saveOrder(orderDto);
+            OrderDto orderDto = orderService.addNewOrder(orderRequest, customerDto);
             modelAndView.getModelMap().addAttribute("order", orderDto);
             modelAndView.getModelMap().addAttribute("succ_massage", "successfuly added");
             modelAndView.setViewName("customer/add_order");
@@ -135,28 +109,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         try {
             List<SuggestionDto> suggestions = (List<SuggestionDto>) session.getAttribute("suggestions");
-            SuggestionDto suggestion = null;
-            for (SuggestionDto suggestionDto : suggestions) {
-                if (suggestionDto.getIdentity() == suggestionIdentity) {
-                    suggestion = suggestionDto;
-                    suggestion.setSuggestionStatus(SuggestionStatus.ACCEPTED);
-                } else
-                    suggestionDto.setSuggestionStatus(SuggestionStatus.REJECTED);
-            }
-            assert suggestion != null;
-            ExpertDto expert = suggestion.getExpert();
-            OrderDto order = suggestion.getOrder();
-            if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)) {
-                modelAndView.getModelMap().addAttribute("error_massage", "something is wrong!");
-                modelAndView.setViewName("customer/choose_suggestion");
-                return showOrders(modelAndView, request);
-            }
-            order.setExpert(expert);
-            order.setFinalPrice(suggestion.getSuggestedPrice());
-            order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
-            order.setToBeDoneDate(suggestion.getStartTime());
-            orderService.update(order);
-            suggestions.forEach(suggestionService::update);
+            suggestionService.chooseSuggestion(suggestionIdentity, suggestions);
             modelAndView.getModelMap().addAttribute("succ_massage", "successfuly added");
             modelAndView.setViewName("customer/choose_suggestion");
             return showOrders(modelAndView, request);
@@ -183,17 +136,8 @@ public class CustomerController {
         List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
         OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
         try {
-            assert doneOrder != null;
-            double price = doneOrder.getFinalPrice();
-            CustomerDto customerDto = doneOrder.getCustomer();
-            validation.validateCustomerCredit(customerDto.getCredit(), price);
-            ExpertDto expertDto = doneOrder.getExpert();
-            customerDto.setCredit(customerDto.getCredit() - price);
-            expertDto.setCredit(expertDto.getCredit() + price);
-            doneOrder.setOrderStatus(OrderStatus.PAID);
-            customerService.update(customerDto);
-            expertService.update(expertDto);
-            orderService.updateStatus(doneOrder);
+            CustomerDto customerDto = customerService.payForDoneOrder(doneOrder);
+            session.setAttribute("customerDto", customerDto);
             model.addAttribute("succ_massage", "successfuly paid");
         } catch (Exception exception) {
             model.addAttribute("error_massage", exception.getLocalizedMessage());

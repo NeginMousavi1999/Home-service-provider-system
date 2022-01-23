@@ -89,6 +89,10 @@
                                             <br>
                                             registrationDate : ${order.registrationDate}
                                             <br>
+                                            sub service name : ${order.subService.name}
+                                            <br>
+                                            base cost : ${order.subService.cost}
+                                            <br>
                                         </c:forEach>
                                     </div>
                                 </label>

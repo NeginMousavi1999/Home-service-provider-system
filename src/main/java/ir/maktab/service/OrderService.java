@@ -1,9 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.data.dto.CustomerDto;
-import ir.maktab.data.dto.ExpertDto;
-import ir.maktab.data.dto.OrderDto;
-import ir.maktab.data.dto.SubServiceDto;
+import ir.maktab.data.dto.*;
 import ir.maktab.data.enumuration.OrderStatus;
 
 import java.util.List;
@@ -38,4 +35,6 @@ public interface OrderService {
     void finishOrder(OrderDto orderDto);
 
     void startOrder(OrderDto orderDto);
+
+    OrderDto addNewOrder(OrderRequestDto orderRequest, CustomerDto customerDto);
 }

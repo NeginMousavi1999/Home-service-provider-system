@@ -3,14 +3,17 @@ package ir.maktab.service.implementation;
 import ir.maktab.data.dto.*;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.enumuration.OrderStatus;
+import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.data.repository.OrderRepository;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.AddressService;
 import ir.maktab.service.OrderService;
+import ir.maktab.service.SubServiceService;
 import ir.maktab.util.mapper.CustomerMapper;
 import ir.maktab.util.mapper.ExpertMapper;
 import ir.maktab.util.mapper.OrderMapper;
 import ir.maktab.util.mapper.SubServiceMapper;
+import ir.maktab.validation.Validation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,8 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final AddressService addressService;
+    private final SubServiceService subServiceService;
+    private final Validation validation;
     private final int suffix = 1000;
 
     public void updateStatus(OrderDto orderDto) {
@@ -117,5 +122,26 @@ public class OrderServiceImpl implements OrderService {
     public void startOrder(OrderDto orderDto) {
         orderDto.setOrderStatus(OrderStatus.STARTED);
         updateStatus(orderDto);
+    }
+
+    @Override
+    public OrderDto addNewOrder(OrderRequestDto orderRequest, CustomerDto customerDto) {
+        validation.validateUserStatus(UserStatus.CONFIRMED, customerDto.getUserStatus());
+        AddressDto addressDto = AddressDto.builder()
+                .country(orderRequest.getCountry())
+                .city(orderRequest.getCity())
+                .state(orderRequest.getState())
+                .postalCode(orderRequest.getPostalCode())
+                .build();
+        SubServiceDto subServiceDto = subServiceService.findSubServiceByName(orderRequest.getSubServiceName());
+        OrderDto orderDto = OrderDto.builder()
+                .address(addressDto)
+                .customer(customerDto)
+                .description(orderRequest.getDescription())
+                .orderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)
+                .subService(subServiceDto)
+                .build();
+        saveOrder(orderDto);
+        return orderDto;
     }
 }
