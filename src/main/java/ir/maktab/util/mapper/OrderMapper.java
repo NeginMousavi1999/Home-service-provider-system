@@ -106,7 +106,7 @@ public class OrderMapper {
     }
 
     public static OrderDto mapOrderToOrderDtoToPay(Order order) {
-        return OrderDto.builder()
+        OrderDto orderDto = OrderDto.builder()
                 .identity(order.getId() + suffix)
                 .customer(CustomerMapper.mapCustomerToCustomerDto(order.getCustomer()))
                 .description(order.getDescription())
@@ -114,10 +114,13 @@ public class OrderMapper {
                 .subService(SubServiceMapper.mapSubServiceToSubServiceDto(order.getSubService()))
                 .registrationDate(order.getRegistrationDate())
                 .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
-                .expert(ExpertMapper.mapExpertToExpertDto(order.getExpert()))
                 .finalPrice(order.getFinalPrice())
                 .toBeDoneDate(order.getToBeDoneDate())
                 .build();
+        if (order.getExpert() != null) {
+            orderDto.setExpert(ExpertMapper.mapExpertToExpertDto(order.getExpert()));
+        }
+        return orderDto;
     }
 
     public static OrderDto mapOrderToOrderDtoToStart(Order order) {
