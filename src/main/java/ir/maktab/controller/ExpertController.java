@@ -1,15 +1,9 @@
 package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
-import ir.maktab.data.enumuration.OrderStatus;
-import ir.maktab.data.enumuration.SuggestionStatus;
-import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.ExpertService;
 import ir.maktab.service.OrderService;
 import ir.maktab.service.ServiceService;
-import ir.maktab.service.SuggestionService;
-import ir.maktab.util.GenerateDate;
-import ir.maktab.validation.Validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +25,7 @@ import java.util.Set;
 public class ExpertController {
     private final ServiceService serviceService;
     private final ExpertService expertService;
-    private final Validation validation;
     private final OrderService orderService;
-    private final SuggestionService suggestionService;
 
     @RequestMapping("/dashboard")
     public String showDashboard() {
@@ -52,22 +44,22 @@ public class ExpertController {
 
 
     @PostMapping("/add_to_services")
-    public String addService(@ModelAttribute("dto") SystemServiceNameExpertDto dto, HttpServletRequest request,
+    public String addService(@ModelAttribute("dto") SystemServiceNameExpertDto serviceDto, HttpServletRequest request,
                              Model model) {
         try {
             ExpertDto expertDto = (ExpertDto) request.getSession().getAttribute("expertDto");
             List<ServiceDto> serviceDtos = new ArrayList<>();
-            for (String name : dto.getServicesName()) {
+            for (String name : serviceDto.getServicesName()) {
                 serviceDtos.add(serviceService.findServiceByName(name));
             }
             expertService.addServices(expertDto, serviceDtos);
-            dto.setServicesName(serviceService.getAllServiceName());
-            model.addAttribute("dto", dto);
+            serviceDto.setServicesName(serviceService.getAllServiceName());
+            model.addAttribute("dto", serviceDto);
             model.addAttribute("succ_massage", "successfuly added");
             return "expert/add_services";
         } catch (Exception e) {
-            dto.setServicesName(serviceService.getAllServiceName());
-            model.addAttribute("dto", dto);
+            serviceDto.setServicesName(serviceService.getAllServiceName());
+            model.addAttribute("dto", serviceDto);
             model.addAttribute("error_massage", e.getLocalizedMessage());
             return "expert/add_services";
         }
@@ -97,25 +89,8 @@ public class ExpertController {
         try {
             List<OrderDto> ordersReadyForSuggestion = (List<OrderDto>) session.getAttribute("ordersReadyForSuggestion");
             OrderDto orderDto = ordersReadyForSuggestion.stream().filter(dto -> dto.getIdentity() == orderDtoIdentity).findFirst().orElse(null);
-            Set<SuggestionDto> orderDtoSuggestions = suggestionService.getByOrder(orderDto);
-            assert orderDto != null;
-            orderDto.setSuggestions(orderDtoSuggestions);
             ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
-            validation.validateUserStatus(UserStatus.CONFIRMED, expertDto.getUserStatus());
-            orderDto.setSuggestions(orderDtoSuggestions);
-            SuggestionDto suggestionDto = SuggestionDto.builder()
-                    .expert(expertDto)
-                    .order(orderDto)
-                    .durationOfWork(durationOfWork)
-                    .suggestedPrice(suggestedPrice)
-                    .startTime(GenerateDate.generateByPattern("yyyy-MM-dd", date))
-                    .suggestionStatus(SuggestionStatus.NEW)
-                    .build();
-            orderDto.setOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION);
-            orderDtoSuggestions.add(suggestionDto);
-            orderDto.setSuggestions(orderDtoSuggestions);
-            orderService.updateStatus(orderDto);
-            suggestionService.saveSuggestion(suggestionDto);
+            expertService.addNewSuggestion(date, suggestedPrice, durationOfWork, orderDto, expertDto);
             model.addAttribute("succ_massage", "successfuly added");
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());

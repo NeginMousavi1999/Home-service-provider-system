@@ -1,6 +1,7 @@
 package ir.maktab.service;
 
 import ir.maktab.data.dto.ExpertDto;
+import ir.maktab.data.dto.OrderDto;
 import ir.maktab.data.dto.ServiceDto;
 
 import java.util.List;
@@ -25,4 +26,6 @@ public interface ExpertService {
     Set<ServiceDto> getServices(ExpertDto expertDto);
 
     void updateScore(ExpertDto expertDto, double score);
+
+    void addNewSuggestion(String date, double suggestedPrice, int durationOfWork, OrderDto orderDto, ExpertDto expertDto);
 }

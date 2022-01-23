@@ -29,4 +29,6 @@ public interface SuggestionService {
     List<SuggestionDto> getSortedByOrder(OrderDto order);
 
     void chooseSuggestion(int suggestionIdentity, List<SuggestionDto> suggestions);
+
+    void addNewSuggestion(SuggestionDto suggestionDto, OrderDto orderDto);
 }
