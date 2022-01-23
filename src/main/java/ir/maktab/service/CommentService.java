@@ -1,5 +1,6 @@
 package ir.maktab.service;
 
+import ir.maktab.data.dto.CommentDto;
 import ir.maktab.data.entity.order.Comment;
 
 /**
@@ -9,4 +10,6 @@ public interface CommentService {
     void save(Comment comment);
 
     Long getCountOfRecords();
+
+    void addComment(CommentDto commentDto);
 }

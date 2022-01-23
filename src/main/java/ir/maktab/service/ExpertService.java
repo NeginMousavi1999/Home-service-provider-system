@@ -23,4 +23,6 @@ public interface ExpertService {
     void addServices(ExpertDto expertDto, List<ServiceDto> serviceDtos);
 
     Set<ServiceDto> getServices(ExpertDto expertDto);
+
+    void updateScore(ExpertDto expertDto, double score);
 }

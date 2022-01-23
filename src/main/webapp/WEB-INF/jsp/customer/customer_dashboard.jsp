@@ -111,7 +111,7 @@
             <div class="row p-5">
                 <div class="outer-box w-100">
                     <div class="col-12 top-box">
-                        <h4><a href="#">Add Feedback</a></h4>
+                        <h4><a href="/customer/order_feedback">Add Feedback</a></h4>
                     </div>
                     <%--                    <div class="card-body d-flex flex-column bottom-box">
                                             <ul class="list-unstyled mt-3 mb-4">

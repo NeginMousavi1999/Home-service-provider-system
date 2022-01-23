@@ -21,6 +21,7 @@ public class ExpertMapper {
                 .userRole(expertDto.getUserRole())
                 .registrationDate(expertDto.getRegistrationDate())
                 .picture(expertDto.getPicture())
+                .score(expertDto.getScore())
                 .build();
     }
 
@@ -36,6 +37,7 @@ public class ExpertMapper {
                 .userRole(expert.getUserRole())
                 .registrationDate(expert.getRegistrationDate())
                 .picture(expert.getPicture())
+                .score(expert.getScore())
                 .build();
     }
 }

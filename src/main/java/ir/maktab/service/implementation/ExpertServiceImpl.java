@@ -75,4 +75,11 @@ public class ExpertServiceImpl implements ExpertService {
             throw new HomeServiceException("no services!");
         return services.get().stream().map(ServiceMapper::mapServiceToServiceDto).collect(Collectors.toSet());
     }
+
+    @Override
+    public void updateScore(ExpertDto expertDto, double score) {
+        double oldScore = expertDto.getScore();
+        expertDto.setScore((oldScore + score) / 2);
+        update(expertDto);
+    }
 }

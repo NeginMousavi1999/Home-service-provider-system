@@ -116,6 +116,7 @@ public class OrderMapper {
                 .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
                 .expert(ExpertMapper.mapExpertToExpertDto(order.getExpert()))
                 .finalPrice(order.getFinalPrice())
+                .toBeDoneDate(order.getToBeDoneDate())
                 .build();
     }
 

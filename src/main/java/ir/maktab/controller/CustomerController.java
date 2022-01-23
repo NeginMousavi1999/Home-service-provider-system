@@ -32,6 +32,7 @@ public class CustomerController {
     private final OrderService orderService;
     private final SuggestionService suggestionService;
     private final ExpertService expertService;
+    private final CommentService commentService;
 
     @GetMapping("/dashboard")
     public String showDashboard() {
@@ -210,27 +211,35 @@ public class CustomerController {
         return "customer/add_feedback";
     }
 
-    @PostMapping("/feedback")
-    public String feedback(@RequestParam("orderIdentity") int orderIdentity, Model model, HttpServletRequest request) {
+    @PostMapping("/feedback_page")
+    public String showfeedbackPage(@RequestParam("orderIdentity") int orderIdentity, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
-        OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
+        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("paid_orders");
+        OrderDto choosenOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
+        CustomerDto customerDto = (CustomerDto) session.getAttribute("customerDto");
+        assert choosenOrder != null;
+        CommentDto commentDto = CommentDto.builder()
+                .order(choosenOrder)
+                .customer(customerDto)
+                .expert(choosenOrder.getExpert())
+                .build();
+        model.addAttribute("commentDto", commentDto);
+        session.setAttribute("commentDto", commentDto);
+        return "customer/feedback_page";
+    }
+
+    @PostMapping("/feedback")
+    public String feedback(@ModelAttribute("commentDto") CommentDto commentDtoJsp, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
         try {
-            assert doneOrder != null;
-            double price = doneOrder.getFinalPrice();
-            CustomerDto customerDto = doneOrder.getCustomer();
-            validation.validateCustomerCredit(customerDto.getCredit(), price);
-            ExpertDto expertDto = doneOrder.getExpert();
-            customerDto.setCredit(customerDto.getCredit() - price);
-            expertDto.setCredit(expertDto.getCredit() + price);
-            doneOrder.setOrderStatus(OrderStatus.PAID);
-            customerService.update(customerDto);
-            expertService.update(expertDto);
-            orderService.updateStatus(doneOrder);
-            model.addAttribute("succ_massage", "successfuly paid");
+            CommentDto commentDto = (CommentDto) session.getAttribute("commentDto");
+            commentDto.setComment(commentDtoJsp.getComment());
+            commentDto.setScore(commentDtoJsp.getScore());
+            commentService.addComment(commentDto);
+            model.addAttribute("succ_massage", "feedback add successfuly");
         } catch (Exception exception) {
             model.addAttribute("error_massage", exception.getLocalizedMessage());
         }
-        return showOrdersToPay(model, request);
+        return showOrdersToFeedback(model, request);
     }
 }
