@@ -7,6 +7,43 @@
     <title>Customer Dashboard</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/dashboard_style.css">
+    <style>
+        .custome-sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+        .custome-sidebar a.active {
+            background-color: #fb771a;
+            color: white;
+        }
+
+        .custome-sidebar a:hover:not(.active) {
+            background-color: #fb771a;
+            color: white;
+        }
+
+        @media screen and (max-width: 700px) {
+            .custome-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .custome-sidebar a {
+                float: left;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .custome-sidebar a {
+                text-align: center;
+                float: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -23,6 +60,9 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/bank">Increase credit</a>
+                </li>
+                <li>
                     <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change
                         password</a>
                 </li>
@@ -36,114 +76,78 @@
 
     </div>
 </nav>
-<div class="main mt-5">
+
+<div class="main">
     <div class="row">
-        <div class="col-12">
-            <div class="w-100 h-100 rounded pricing-text">
-                <h1>Hi ${customerDto.firstName}</h1>
+        <div class="col-2">
+            <div class="custome-sidebar">
+                <div>
+                    <a href="${pageContext.request.contextPath}/customer/add_order">Add Order</a>
+                    <a href="${pageContext.request.contextPath}/customer/show_orders">Your Suggestions</a>
+                    <a href="${pageContext.request.contextPath}/customer/pay">Pay For Done Orders</a>
+                    <a href="${pageContext.request.contextPath}/customer/order_feedback">Add Feedback</a>
+                    <a href="#">See Your Orders Status</a>
+                </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="w-100 h-100 rounded Quickly-text">
-                <p>We are so glad to have you here.</p>
+        <div class="col-10">
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1></h1>
+                </div>
             </div>
-        </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1>Hi ${customerDto.firstName}</h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded Quickly-text">
+                    <p>We are so glad to have you here.</p>
+                </div>
+            </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/customer/add_order">Add Order</a></h4>
-                    </div>
-                    <%--                    <div class="card-body d-flex flex-column bottom-box">
-                                            <ul class="list-unstyled mt-3 mb-4">
-                                                <li>10 users included</li>
-                                                <li>2 GB of storage</li>
-                                                <li>Email support</li>
-                                                <li>Help center access</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
-                                                free</button>
-                                        </div>--%>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h4><a href="${pageContext.request.contextPath}/customer/show_orders">Your Suggestions</a></h4>
-                    </div>
-                    <%--                    <div class="card-body d-flex flex-column bottom-box">
-                                            <ul class="list-unstyled mt-3 mb-4">
-                                                <li>10 users included</li>
-                                                <li>2 GB of storage</li>
-                                                <li>Email support</li>
-                                                <li>Help center access</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
-                                                free</button>
-                                        </div>--%>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h4><a href="/customer/pay">Pay For Done Orders</a></h4>
-                    </div>
-                    <%--                    <div class="card-body d-flex flex-column bottom-box">
-                                            <ul class="list-unstyled mt-3 mb-4">
-                                                <li>10 users included</li>
-                                                <li>2 GB of storage</li>
-                                                <li>Email support</li>
-                                                <li>Help center access</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
-                                                free</button>
-                                        </div>--%>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h4><a href="/customer/order_feedback">Add Feedback</a></h4>
-                    </div>
-                    <%--                    <div class="card-body d-flex flex-column bottom-box">
-                                            <ul class="list-unstyled mt-3 mb-4">
-                                                <li>10 users included</li>
-                                                <li>2 GB of storage</li>
-                                                <li>Email support</li>
-                                                <li>Help center access</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
-                                                free</button>
-                                        </div>--%>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h4><a href="#">See Your Orders Status</a></h4>
-                    </div>
-                    <%--                    <div class="card-body d-flex flex-column bottom-box">
-                                            <ul class="list-unstyled mt-3 mb-4">
-                                                <li>10 users included</li>
-                                                <li>2 GB of storage</li>
-                                                <li>Email support</li>
-                                                <li>Help center access</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-lg btn-block btn-outline-primary mt-auto">Sign up for
-                                                free</button>
-                                        </div>--%>
-                </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8 p-5 w-100 h-100 rounded" style="margin-left: 17%">
+                <table class="table table-bordered table-striped text-dark">
+                    <thead>
+                    <tr>
+                        <th colspan="2" class="text-center" style="color: white; background-color: #fb771a">
+                            your information
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            first name : ${customerDto.firstName}
+                        </td>
+                        <td>
+                            last name : ${customerDto.lastName}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            email : ${customerDto.email}
+                        </td>
+                        <td>
+                            status : ${customerDto.userStatus}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            registration date : ${customerDto.registrationDate}
+                        </td>
+                        <td>
+                            credit : ${customerDto.credit}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
