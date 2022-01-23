@@ -11,5 +11,5 @@ public interface CommentService {
 
     Long getCountOfRecords();
 
-    void addComment(CommentDto commentDto);
+    void addComment(CommentDto commentDto, String commentDtoScore, String comment);
 }

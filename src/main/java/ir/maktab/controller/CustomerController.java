@@ -233,9 +233,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         try {
             CommentDto commentDto = (CommentDto) session.getAttribute("commentDto");
-            commentDto.setComment(commentDtoJsp.getComment());
-            commentDto.setScore(commentDtoJsp.getScore());
-            commentService.addComment(commentDto);
+            commentService.addComment(commentDto, commentDtoJsp.getScore(), commentDtoJsp.getComment());
             model.addAttribute("succ_massage", "feedback add successfuly");
         } catch (Exception exception) {
             model.addAttribute("error_massage", exception.getLocalizedMessage());
