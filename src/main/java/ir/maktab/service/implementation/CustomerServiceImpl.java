@@ -48,4 +48,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.count();
     }
 
+    @Override
+    public void increseCredit(CustomerDto customerDto, double amount) {
+        double oldCredit = customerDto.getCredit();
+        customerDto.setCredit(oldCredit + amount);
+        update(customerDto);
+    }
 }

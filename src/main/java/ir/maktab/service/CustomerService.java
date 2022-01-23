@@ -13,4 +13,6 @@ public interface CustomerService {
     CustomerDto findByEmail(String email);
 
     Long getCountOfRecords();
+
+    void increseCredit(CustomerDto customerDto, double amount);
 }

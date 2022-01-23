@@ -39,7 +39,7 @@ public class CustomerController {
         return "/customer/customer_dashboard";
     }
 
-    @RequestMapping("/change_password")//todo
+    @RequestMapping("/change_password")
     public String accessToChangePassword() {
         return "customer/change_password";
     }
@@ -239,5 +239,25 @@ public class CustomerController {
             model.addAttribute("error_massage", exception.getLocalizedMessage());
         }
         return showOrdersToFeedback(model, request);
+    }
+
+    @GetMapping("/bank")
+    public String showincreasePage() {
+        return "customer/increase_credit";
+    }
+
+    @PostMapping("/increase_credit")
+    public String increaseCredit(@RequestParam(value = "amount") String stringAmount, HttpServletRequest request,
+                                 Model model) {
+        HttpSession session = request.getSession();
+        try {
+            CustomerDto customerDto = (CustomerDto) session.getAttribute("customerDto");
+            double amount = Double.parseDouble(stringAmount);
+            customerService.increseCredit(customerDto, amount);
+            model.addAttribute("succ_massage", "successfuly increased");
+        } catch (Exception exception) {
+            model.addAttribute("error_massage", exception.getLocalizedMessage());
+        }
+        return "redirect:/customer/bank";
     }
 }
