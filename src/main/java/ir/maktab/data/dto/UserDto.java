@@ -20,11 +20,11 @@ public class UserDto {
     private Long identity;
 
     @NotBlank(message = "should not be empty")
-    @Size(max = 25)
+    @Size(max = 25, min = 2)
     private String firstName;
 
     @NotBlank(message = "should not be empty")
-    @Size(max = 25)
+    @Size(max = 25, min = 2)
     private String lastName;
 
     @NotBlank(message = "should not be empty")
@@ -37,10 +37,9 @@ public class UserDto {
 
     private UserStatus userStatus;
 
+    @NotNull(message = "you shoud register as customer or expert")
     private UserRole userRole;
 
-    @NotNull(message = "should not be null")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date registrationDate;
 
     private double credit;

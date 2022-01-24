@@ -10,15 +10,13 @@ import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.CustomerService;
 import ir.maktab.service.ExpertService;
 import ir.maktab.service.UserService;
-import ir.maktab.validation.Validation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindException;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,18 +29,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequiredArgsConstructor
 public class SystemController {
-
     private final UserService userService;
     private final CustomerService customerService;
     private final ExpertService expertService;
     private final ModelMapper modelMapper = new ModelMapper();
-    private final Validation validation;
 
-/*    @ExceptionHandler(value = BindException.class)
+    @ExceptionHandler(value = BindException.class)
     public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
         String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
         return new ModelAndView(lastView, bindException.getBindingResult().getModel());
-    }*/
+    }
 
     @RequestMapping("/")
     public ModelAndView login() {
@@ -53,7 +49,7 @@ public class SystemController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request) {
+    public String doLogin(@ModelAttribute("loginData") @Validated LoginDto loginDto, Model model, HttpServletRequest request) {
         User user;
         HttpSession session;
         try {
@@ -87,17 +83,9 @@ public class SystemController {
     }
 
     @PostMapping("/doRegister")
-    public String doRegister(@RequestParam("file") MultipartFile file, @ModelAttribute("registerData") UserDto userDto,
+    public String doRegister(@RequestParam("file") MultipartFile file, @ModelAttribute("registerData") @Validated UserDto userDto,
                              Model model, HttpServletRequest request) {
         HttpSession session;
-        try {
-            validation.validatePassword(userDto.getPassword());
-            validation.validateEmail(userDto.getEmail());
-        } catch (Exception e) {
-            model.addAttribute("massage", e.getLocalizedMessage());
-            return "error";
-        }
-
         userDto.setUserStatus(UserStatus.WAITING);
 
         if (userDto.getUserRole().equals(UserRole.EXPERT)) {

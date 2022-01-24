@@ -28,26 +28,32 @@
                                               onclick="customerFunction()"/>
                             <label>expert</label>
                             <form:radiobutton id="expert" value="EXPERT" path="userRole" onclick="expertFunction()"/>
+                            <br>
+                            <form:errors path="userRole" cssStyle="color: red"/>
                         </div>
 
                         <div class="form-group">
                             <form:input path="firstName" placeholder='First Name'/>
+                            <br>
+                            <form:errors path="firstName" cssStyle="color: red"/>
                         </div>
 
                         <div class="form-group">
                             <form:input path="lastName" placeholder='Last Name'/>
+                            <br>
+                            <form:errors path="lastName" cssStyle="color: red"/>
                         </div>
 
                         <div class="form-group">
-                            <form:input path="email"
-                                        pattern="[\w!#$%&'*+/=?`{|}~^-]+(?:\.[\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$"
-                                        title="invalid email!" placeholder='Email'/>
+                            <form:input path="email" placeholder='Email'/>
+                            <br>
+                            <form:errors path="email" cssStyle="color: red"/>
                         </div>
 
                         <div class="form-group mb-3">
-                            <form:password path="password" pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\S+$).{8}$"
-                                           title="the password must be at least 8 character, with a lower case, an upper case and no whitespace"
-                                           placeholder='Password'/>
+                            <form:password path="password" placeholder='password'/>
+                            <br>
+                            <form:errors path="password" cssStyle="color: red"/>
                         </div>
 
                         <div id="expert_info" class="form-group mb-3" style="display: none">
@@ -56,7 +62,7 @@
                         </div>
                         <p class="mb-4">Already have an account? <a
                                 href="${pageContext.request.contextPath}/">Login!</a></p>
-                        <input type="submit" value="Login" class="btn btn-block btn-primary"/>
+                        <input type="submit" value="Register" class="btn btn-block btn-primary"/>
                     </form:form>
                 </div>
             </div>

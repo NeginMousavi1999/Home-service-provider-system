@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
  * @author Negin Mousavi
  */
 public class LastViewInterceptor implements HandlerInterceptor {
-    public static final String LAST_VIEW_ATTRIBIUTE = LastViewInterceptor.class.getName() + ".lastView";
+    public static final String LAST_VIEW_ATTRIBIUTE = LastViewInterceptor.class.getName() + ".jsp";
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {

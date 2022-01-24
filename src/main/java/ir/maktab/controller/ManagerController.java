@@ -8,12 +8,12 @@ import ir.maktab.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindException;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,8 +42,14 @@ public class ManagerController {
         return modelAndView;
     }
 
+    @ExceptionHandler(value = BindException.class)
+    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
+        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
+    }
+
     @RequestMapping("/doLogin")
-    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model) {
+    public String doLogin(@ModelAttribute("loginData") @Validated LoginDto loginDto, Model model) {
         ManagerDto managerDto;
         try {
             managerDto = managerService.findByUserNameAndPassword(loginDto);
