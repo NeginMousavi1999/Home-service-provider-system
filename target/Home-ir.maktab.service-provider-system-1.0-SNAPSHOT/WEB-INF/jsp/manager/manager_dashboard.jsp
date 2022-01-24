@@ -29,50 +29,32 @@
 
     </div>
 </nav>
-<div class="main mt-5">
+<div class="main">
     <div class="row">
-        <div class="col-12">
-            <div class="w-100 h-100 rounded pricing-text">
-                <h1>Admin Dashboard</h1>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">add new
-                            Service to System</a></h5>
-                    </div>
+        <div class="col-2">
+            <div class="custome-sidebar">
+                <div>
+                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_service">Add new Service to System</a>
+                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new Sub Service to System</a>
+                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Search Users</a>
+                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new users</a>
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new
-                            Sub Service to System</a>
-                        </h5>
-                    </div>
+        <div class="col-10">
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1></h1>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Search</a></h5>
-                    </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1></h1>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h5><a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new
-                            users</a></h5>
-                    </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1>Admin Dashboard</h1>
                 </div>
             </div>
         </div>

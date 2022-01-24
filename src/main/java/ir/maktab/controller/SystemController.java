@@ -53,12 +53,7 @@ public class SystemController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request
-            /*,BindingResult bindingResult*/) {
-        /*if (bindingResult.hasErrors()) {
-            bindingResult.getFieldErrors().forEach(error -> model.addAttribute(error.getDefaultMessage()));
-            return "login";
-        }*/
+    public String doLogin(@ModelAttribute("loginData") LoginDto loginDto, Model model, HttpServletRequest request) {
         User user;
         HttpSession session;
         try {
