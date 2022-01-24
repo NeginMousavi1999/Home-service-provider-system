@@ -44,7 +44,7 @@
                         <c:forEach var="service" items="${dto.servicesName}">
                             <tr>
                                 <td>
-                                        <form:checkbox path="servicesName" value="${service}"/> ${service}
+                                    <form:checkbox path="servicesName" value="${service}"/> ${service}
                                 </td>
                             </tr>
                         </c:forEach>

@@ -23,6 +23,9 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/bank">Increase credit</a>
+                </li>
+                <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>

@@ -7,43 +7,6 @@
     <title>Customer Dashboard</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/dashboard_style.css">
-    <style>
-        .custome-sidebar a {
-            display: block;
-            color: black;
-            padding: 16px;
-            text-decoration: none;
-        }
-
-        .custome-sidebar a.active {
-            background-color: #fb771a;
-            color: white;
-        }
-
-        .custome-sidebar a:hover:not(.active) {
-            background-color: #fb771a;
-            color: white;
-        }
-
-        @media screen and (max-width: 700px) {
-            .custome-sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-
-            .custome-sidebar a {
-                float: left;
-            }
-        }
-
-        @media screen and (max-width: 400px) {
-            .custome-sidebar a {
-                text-align: center;
-                float: none;
-            }
-        }
-    </style>
 </head>
 
 <body>

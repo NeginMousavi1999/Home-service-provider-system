@@ -44,16 +44,16 @@
                 <div style="color: red">${error_massage}</div>
                 <form action="${pageContext.request.contextPath}/customer/increase_credit" method="post">
                     <table class="table table-bordered table-striped text-dark">
-                            <tr>
-                                <td>
-                                    your amount
-                                </td>
-                                <td>
-                                    <label>
-                                        <input type="text" name="amount"/>
-                                    </label>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                your amount
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="text" name="amount"/>
+                                </label>
+                            </td>
+                        </tr>
                     </table>
 
                     <input type="submit" value="Pay" class="btn btn-block btn-primary"/>
