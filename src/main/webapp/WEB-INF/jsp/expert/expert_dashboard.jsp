@@ -33,47 +33,75 @@
 
     </div>
 </nav>
-<div class="main mt-5">
+<div class="main">
     <div class="row">
-        <div class="col-12">
-            <div class="w-100 h-100 rounded pricing-text">
-                <h1>Hi ${expertDto.firstName}</h1>
+        <div class="col-2">
+            <div class="custome-sidebar">
+                <div>
+                    <a href="${pageContext.request.contextPath}/expert/add_service">add new service</a>
+                    <a href="${pageContext.request.contextPath}/expert/add_suggestion">add new suggestion</a>
+                    <a href="${pageContext.request.contextPath}/expert/orders">Update Your Orders Status</a>
+                </div>
             </div>
         </div>
-        <div class="col-12">
-            <div class="w-100 h-100 rounded Quickly-text">
-                <p>We are so glad to have you as our Expert.</p>
+        <div class="col-10">
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1></h1>
+                </div>
             </div>
-        </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1></h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded pricing-text">
+                    <h1>Hi ${expertDto.firstName}</h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="w-100 h-100 rounded Quickly-text">
+                    <p>We are so glad to have you as our Expert.</p>
+                </div>
+            </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h3><a href="${pageContext.request.contextPath}/expert/add_service">add new service</a></h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h3><a href="${pageContext.request.contextPath}/expert/add_suggestion">add new suggestion</a>
-                        </h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4 p-5 w-100 h-100 rounded">
-            <div class="row p-5">
-                <div class="outer-box w-100">
-                    <div class="col-12 top-box">
-                        <h3><a href="${pageContext.request.contextPath}/expert/orders">Update Your Orders Status</a>
-                        </h3>
-                    </div>
-                </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8 p-5 w-100 h-100 rounded" style="margin-left: 17%">
+                <table class="table table-bordered table-striped text-dark">
+                    <thead>
+                    <tr>
+                        <th colspan="2" class="text-center" style="color: white; background-color: #fb771a">
+                            your information
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            first name : ${expertDto.firstName}
+                        </td>
+                        <td>
+                            last name : ${expertDto.lastName}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            email : ${expertDto.email}
+                        </td>
+                        <td>
+                            status : ${expertDto.userStatus}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            registration date : ${expertDto.registrationDate}
+                        </td>
+                        <td>
+                            credit : ${expertDto.credit}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
