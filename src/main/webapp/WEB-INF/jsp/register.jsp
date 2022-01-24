@@ -54,7 +54,7 @@
                             <input id="formFileSm" class="form-control form-control-sm" type="file" name="file"
                                    accept="image/*" onchange="return fileValidation()">
                         </div>
-                        <p class="mb-4">Already have an account? <a href="/">Login!</a></p>
+                        <p class="mb-4">Already have an account? <a href="${pageContext.request.contextPath}/">Login!</a></p>
                         <input type="submit" value="Login" class="btn btn-block btn-primary"/>
                     </form:form>
                 </div>
