@@ -17,7 +17,7 @@ public interface UserService {
 
     UserDto createUserDto(User user);
 
-    User findUserByUserNameAndPassword(LoginDto loginDto);
+    UserDto findUserByUserNameAndPassword(LoginDto loginDto);
 
     List<UserDto> returnWaitingUsers();
 

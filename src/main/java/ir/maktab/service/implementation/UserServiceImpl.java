@@ -26,12 +26,11 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
-    //TODO return dto
-    public User findUserByUserNameAndPassword(LoginDto loginDto) {
+    public UserDto findUserByUserNameAndPassword(LoginDto loginDto) {
         Optional<User> user = userRepository.findByEmailAndPassword(loginDto.getUsername(), loginDto.getPassword());
         if (user.isEmpty())
             throw new HomeServiceException("username or password is incorrect");
-        return user.get();
+        return createUserDto(user.get());
     }
 
     public List<UserDto> returnUsersFiltering(UserRequestDto request) {

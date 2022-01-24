@@ -56,7 +56,7 @@
                         </tr>
                     </table>
 
-                    <input type="submit" value="Pay" class="btn btn-block btn-primary"/>
+                    <input type="submit" value="Increase" class="btn btn-block btn-primary"/>
                 </form>
             </div>
         </div>

@@ -4,7 +4,6 @@ import ir.maktab.data.dto.CustomerDto;
 import ir.maktab.data.dto.ExpertDto;
 import ir.maktab.data.dto.LoginDto;
 import ir.maktab.data.dto.UserDto;
-import ir.maktab.data.entity.members.User;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.service.CustomerService;
@@ -50,7 +49,7 @@ public class SystemController {
 
     @PostMapping("/doLogin")
     public String doLogin(@ModelAttribute("loginData") @Validated LoginDto loginDto, Model model, HttpServletRequest request) {
-        User user;
+        UserDto user;
         HttpSession session;
         try {
             user = userService.findUserByUserNameAndPassword(loginDto);

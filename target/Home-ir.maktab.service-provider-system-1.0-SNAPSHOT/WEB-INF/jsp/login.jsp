@@ -21,12 +21,12 @@
                         <div class="form-group first">
                             <form:input path="username" placeholder='username'/>
                             <br>
-                                <form:errors path="username" cssStyle="color: red"/>
+                            <form:errors path="username" cssStyle="color: red"/>
                         </div>
                         <div class="form-group last mb-3">
-                                <form:password path="password" placeholder='password'/>
-                               <br>
-                                <form:errors path="password" cssStyle="color: red"/>
+                            <form:password path="password" placeholder='password'/>
+                            <br>
+                            <form:errors path="password" cssStyle="color: red"/>
                         </div>
 
                         <div class="d-flex mb-5 align-items-center">
