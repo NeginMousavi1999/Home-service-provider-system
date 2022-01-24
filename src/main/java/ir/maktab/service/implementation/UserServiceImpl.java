@@ -8,6 +8,7 @@ import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.data.repository.UserRepository;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.UserService;
+import ir.maktab.util.mapper.UserMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -41,7 +42,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto createUserDto(User user) {
-        return modelMapper.map(user, UserDto.class);
+/*        UserDto userDto = modelMapper.map(user, UserDto.class);
+        userDto.setIdentity(user.getId() + 1000);*/
+        return UserMapper.mapServiceToServiceDto(user);
     }
 
     @Override
