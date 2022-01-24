@@ -5,7 +5,6 @@ import ir.maktab.data.enumuration.UserStatus;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.util.Date;

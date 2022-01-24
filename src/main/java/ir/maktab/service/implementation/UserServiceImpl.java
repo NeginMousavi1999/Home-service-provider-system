@@ -11,7 +11,6 @@ import ir.maktab.service.UserService;
 import ir.maktab.util.mapper.UserMapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +25,6 @@ import java.util.stream.Collectors;
 @Getter
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final ModelMapper modelMapper = new ModelMapper();
 
     //TODO return dto
     public User findUserByUserNameAndPassword(LoginDto loginDto) {
@@ -42,8 +40,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto createUserDto(User user) {
-/*        UserDto userDto = modelMapper.map(user, UserDto.class);
-        userDto.setIdentity(user.getId() + 1000);*/
         return UserMapper.mapServiceToServiceDto(user);
     }
 
