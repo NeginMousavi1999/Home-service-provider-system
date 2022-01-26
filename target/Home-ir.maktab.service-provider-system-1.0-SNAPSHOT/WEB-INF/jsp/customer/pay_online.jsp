@@ -44,55 +44,93 @@
             <div class="col-md-7">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
+                <form action="${pageContext.request.contextPath}/customer/pay_online/${order.identity}" method="post">
                     <table class="table table-bordered table-striped text-dark">
                         <thead>
                         <tr>
                             <th colspan="5" style="text-align: center">
-                                order information
+                                Bank
                             </th>
                         </tr>
                         <tr>
                             <th>
-                                subservice
-                            </th>
-                            <th>
                                 cost
                             </th>
                             <th>
-                                description
+                                card number
                             </th>
-                            <th colspan="2">
-                                payment method
+                            <th>
+                                cvv2
+                            </th>
+                            <th>
+                                expire
+                            </th>
+                            <th>
+                                password
                             </th>
                         </tr>
                         </thead>
-                        <c:forEach var="order" items="${done_orders}">
-                            <tr>
-                                <td>
-                                        ${order.subService.name}
-                                </td>
-                                <td>
-                                        ${order.finalPrice}
-                                </td>
-                                <td>
-                                        ${order.description}
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-primary my-2 my-sm-0"
-                                       href="${pageContext.request.contextPath}/customer/paying_from_credit/${order.identity}">from
-                                        your credit</a>
+                        <tr>
+                            <td>
+                                ${order.finalPrice}
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="text"/>
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="text"/>
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="date"/>
+                                </label>
+                            </td>
+                            <td>
+                                <label>
+                                    <input type="password"/>
+                                </label>
+                            </td>
+                        </tr>
 
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-primary my-2 my-sm-0"
-                                       href="${pageContext.request.contextPath}/customer/paying_online/${order.identity}">online</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
                     </table>
+                    <input type="submit" value="Pay" class="btn btn-block btn-primary"/>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    let IdealTimeOut = 100; //100 seconds
+    let idleSecondsTimer = null;
+    let idleSecondsCounter = 0;
+    document.onclick = function () {
+        idleSecondsCounter = 0;
+    };
+    document.onmousemove = function () {
+        idleSecondsCounter = 0;
+    };
+    document.onkeypress = function () {
+        idleSecondsCounter = 0;
+    };
+    idleSecondsTimer = window.setInterval(CheckIdleTime, 1000);
+
+    function CheckIdleTime() {
+        idleSecondsCounter++;
+        let oPanel = document.getElementById("timeOut");
+        if (oPanel) {
+            oPanel.innerHTML = (IdealTimeOut - idleSecondsCounter);
+        }
+        if (idleSecondsCounter >= IdealTimeOut) {
+            window.clearInterval(idleSecondsTimer);
+            alert("Your Session has expired. Please login again.");
+            window.location = "http://localhost:8080/";
+        }
+    }
+</script>
 </body>
 </html>

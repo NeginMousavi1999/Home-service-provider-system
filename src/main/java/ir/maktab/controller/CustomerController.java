@@ -130,13 +130,31 @@ public class CustomerController {
         return "customer/pay_order";
     }
 
-    @PostMapping("/paying")
-    public String pay(@RequestParam("orderIdentity") int orderIdentity, Model model, HttpServletRequest request) {
+    @GetMapping("/paying_from_credit/{identity}")
+    public String payFromCredit(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
+        return pay(identity, model, request, false);
+    }
+
+    @GetMapping("/paying_online/{identity}")
+    public String showOnlinePayPage(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
+        OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
+        model.addAttribute("order", doneOrder);
+        return "customer/pay_online";
+    }
+
+    @PostMapping("/pay_online/{identity}")
+    public String doOnlinePay(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
+        return pay(identity, model, request, true);
+    }
+
+    public String pay(int orderIdentity, Model model, HttpServletRequest request, boolean isOnline) {
         HttpSession session = request.getSession();
         List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
         OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
         try {
-            CustomerDto customerDto = customerService.payForDoneOrder(doneOrder);
+            CustomerDto customerDto = customerService.payForDoneOrder(doneOrder, isOnline);
             session.setAttribute("customerDto", customerDto);
             model.addAttribute("succ_massage", "successfuly paid");
         } catch (Exception exception) {

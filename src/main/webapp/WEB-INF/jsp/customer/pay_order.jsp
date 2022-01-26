@@ -42,32 +42,54 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-                <h3>Pay For Your Done Order</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="${pageContext.request.contextPath}/customer/paying" method="post">
                     <table class="table table-bordered table-striped text-dark">
+                        <thead>
+                        <tr>
+                            <th colspan="5" style="text-align: center">
+                                order information
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                subservice
+                            </th>
+                            <th>
+                                cost
+                            </th>
+                            <th>
+                                description
+                            </th>
+                            <th colspan="2">
+                                payment method
+                            </th>
+                        </tr>
+                        </thead>
                         <c:forEach var="order" items="${done_orders}">
                             <tr>
                                 <td>
-                                    <label>
-                                        <div class="form-group first">
-                                            <input type="radio" value="${order.identity}"
-                                                   name="orderIdentity"/>
-                                            sub service : ${order.subService.name}
-                                            <br>
-                                            cost : ${order.finalPrice}
-                                            <br>
-                                            description : ${order.description}
-                                        </div>
-                                    </label>
+                                        ${order.subService.name}
+                                </td>
+                                <td>
+                                        ${order.finalPrice}
+                                </td>
+                                <td>
+                                        ${order.description}
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                                       href="${pageContext.request.contextPath}/customer/paying_from_credit/${order.identity}">from
+                                        your credit</a>
+
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-primary my-2 my-sm-0"
+                                       href="${pageContext.request.contextPath}/customer/paying_online/${order.identity}">online</a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </table>
-
-                    <input type="submit" value="Pay" class="btn btn-block btn-primary"/>
-                </form>
             </div>
         </div>
     </div>

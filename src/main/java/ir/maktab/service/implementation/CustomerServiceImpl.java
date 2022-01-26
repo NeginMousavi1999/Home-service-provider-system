@@ -75,16 +75,19 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto payForDoneOrder(OrderDto doneOrder) {
+    public CustomerDto payForDoneOrder(OrderDto doneOrder, boolean isOnlineMethod) {
         assert doneOrder != null;
         double price = doneOrder.getFinalPrice();
         CustomerDto customerDto = doneOrder.getCustomer();
-        validation.validateCustomerCredit(customerDto.getCredit(), price);
+        if (!isOnlineMethod) {
+            validation.validateCustomerCredit(customerDto.getCredit(), price);
+            customerDto.setCredit(customerDto.getCredit() - price);
+            update(customerDto);
+        }
         ExpertDto expertDto = doneOrder.getExpert();
-        customerDto.setCredit(customerDto.getCredit() - price);
-        expertDto.setCredit(expertDto.getCredit() + price);
+        double expertFees = price * 0.7;
+        expertDto.setCredit(expertDto.getCredit() + expertFees);
         doneOrder.setOrderStatus(OrderStatus.PAID);
-        update(customerDto);
         expertService.update(expertDto);
         orderService.updateStatus(doneOrder);
         return customerDto;

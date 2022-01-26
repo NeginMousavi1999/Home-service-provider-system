@@ -19,5 +19,5 @@ public interface CustomerService {
 
     void changePassword(CustomerDto customerDto, String oldPassword, String newPassword);
 
-    CustomerDto payForDoneOrder(OrderDto doneOrder);
+    CustomerDto payForDoneOrder(OrderDto doneOrder, boolean isOnlineMethod);
 }
