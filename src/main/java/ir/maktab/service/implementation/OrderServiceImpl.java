@@ -144,4 +144,19 @@ public class OrderServiceImpl implements OrderService {
         saveOrder(orderDto);
         return orderDto;
     }
+
+    @Override
+    public List<OrderDto> getOrdersGivenByCustomer() {
+        List<Order> allOrders = (List<Order>) orderRepository.findAll();
+        return allOrders.stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDto> getOrdersDoneByExpert() {
+        Optional<List<Order>> orders = orderRepository.findByNotEqualsSatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION,
+                OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+        if (orders.isEmpty())
+            throw new HomeServiceException("no services done by experts!");
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());
+    }
 }

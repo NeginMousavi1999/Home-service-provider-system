@@ -37,4 +37,8 @@ public interface OrderService {
     void startOrder(OrderDto orderDto);
 
     OrderDto addNewOrder(OrderRequestDto orderRequest, CustomerDto customerDto);
+
+    List<OrderDto> getOrdersGivenByCustomer();
+
+    List<OrderDto> getOrdersDoneByExpert();
 }

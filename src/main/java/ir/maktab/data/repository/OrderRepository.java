@@ -56,4 +56,8 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
                                                           @Param("orderStatus2") OrderStatus orderStatus2);
 
     Optional<List<Order>> findByExpertAndOrderStatus(Expert expert, OrderStatus orderStatus);
+
+    @Query(value = "from System_Order o where o.orderStatus<>:orderStatus1 and o.orderStatus<>:orderStatus2")
+    Optional<List<Order>> findByNotEqualsSatus(@Param("orderStatus1") OrderStatus orderStatus1,
+                                               @Param("orderStatus2") OrderStatus orderStatus2);
 }
