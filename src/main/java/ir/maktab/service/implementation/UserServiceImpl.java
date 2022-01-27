@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDto createUserDto(User user) {
-        return UserMapper.mapServiceToServiceDto(user);
+        return UserMapper.mapUserToUserDto(user);
     }
 
     @Override

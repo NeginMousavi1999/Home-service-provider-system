@@ -1,9 +1,6 @@
 package ir.maktab.service.implementation;
 
-import ir.maktab.data.dto.ExpertDto;
-import ir.maktab.data.dto.OrderDto;
-import ir.maktab.data.dto.ServiceDto;
-import ir.maktab.data.dto.SuggestionDto;
+import ir.maktab.data.dto.*;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.enumuration.SuggestionStatus;
@@ -11,10 +8,12 @@ import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.data.repository.ExpertRepository;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.ExpertService;
+import ir.maktab.service.OrderService;
 import ir.maktab.service.SuggestionService;
 import ir.maktab.util.GenerateDate;
 import ir.maktab.util.mapper.ExpertMapper;
 import ir.maktab.util.mapper.ServiceMapper;
+import ir.maktab.util.mapper.UserMapper;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +32,7 @@ import java.util.stream.Collectors;
 public class ExpertServiceImpl implements ExpertService {
     private final ExpertRepository expertRepository;
     private final SuggestionService suggestionService;
+    private final OrderService orderService;
     private final Validation validation;
     private final ModelMapper modelMapper = new ModelMapper();
 
@@ -112,5 +112,22 @@ public class ExpertServiceImpl implements ExpertService {
         orderDtoSuggestions.add(suggestionDto);
         orderDto.setSuggestions(orderDtoSuggestions);
         suggestionService.addNewSuggestion(suggestionDto, orderDto);
+    }
+
+    @Override
+    public Map<UserDto, Integer> getExpertAndNumberOfRegisteredRequests() {
+        List<ExpertDto> experts = getAll();
+        Map<UserDto, Integer> map = new HashMap<>();
+        for (ExpertDto expert : experts) {
+            int count = orderService.findNumberOfOrdersPlacedByExpert(expert);
+            map.put(UserMapper.mapExpertToUserDto(expert), count);
+        }
+        return map;
+    }
+
+    @Override
+    public List<ExpertDto> getAll() {
+        List<Expert> experts = (List<Expert>) expertRepository.findAll();
+        return experts.stream().map(ExpertMapper::mapExpertToExpertDto).collect(Collectors.toList());
     }
 }

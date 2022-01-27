@@ -1,19 +1,26 @@
 package ir.maktab.service.implementation;
 
 import ir.maktab.data.dto.CustomerDto;
+import ir.maktab.data.dto.UserDto;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.repository.CustomerRepository;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.CustomerService;
+import ir.maktab.service.OrderService;
 import ir.maktab.util.mapper.CustomerMapper;
+import ir.maktab.util.mapper.UserMapper;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Negin Mousavi
@@ -25,6 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final Validation validation;
     private final ModelMapper modelMapper = new ModelMapper();
+    private final OrderService orderService;
 
     public void update(CustomerDto customerDto) {
         Customer customer = CustomerMapper.mapCustomerDtoToCustomer(customerDto);
@@ -73,5 +81,22 @@ public class CustomerServiceImpl implements CustomerService {
         customerDto.setCredit(customerDto.getCredit() - price);
         update(customerDto);
         return customerDto;
+    }
+
+    @Override
+    public Map<UserDto, Integer> getCustomerAndNumberOfRegisteredRequests() {
+        List<CustomerDto> customers = getAll();
+        Map<UserDto, Integer> map = new HashMap<>();
+        for (CustomerDto customer : customers) {
+            int count = orderService.findNumberOfRegisteredRequestsByCustomer(customer);
+            map.put(UserMapper.mapCustomerToUserDto(customer), count);
+        }
+        return map;
+    }
+
+    @Override
+    public List<CustomerDto> getAll() {
+        List<Customer> customers = (List<Customer>) customerRepository.findAll();
+        return customers.stream().map(CustomerMapper::mapCustomerToCustomerDto).collect(Collectors.toList());
     }
 }

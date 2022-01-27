@@ -43,4 +43,8 @@ public interface OrderService {
     List<OrderDto> getOrdersDoneByExpert();
 
     List<OrderDto> filteredOrders(OrdersHistoryDto conditions);
+
+    int findNumberOfRegisteredRequestsByCustomer(CustomerDto customer);
+
+    int findNumberOfOrdersPlacedByExpert(ExpertDto expert);
 }

@@ -1,6 +1,10 @@
 package ir.maktab.service;
 
 import ir.maktab.data.dto.CustomerDto;
+import ir.maktab.data.dto.UserDto;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Negin Mousavi
@@ -19,4 +23,8 @@ public interface CustomerService {
     void changePassword(CustomerDto customerDto, String oldPassword, String newPassword);
 
     CustomerDto payByCredit(CustomerDto customerDto, double price);
+
+    Map<UserDto, Integer> getCustomerAndNumberOfRegisteredRequests();
+
+    List<CustomerDto> getAll();
 }

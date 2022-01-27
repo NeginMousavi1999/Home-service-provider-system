@@ -79,4 +79,8 @@ public interface OrderRepository extends CrudRepository<Order, Integer>, JpaSpec
     @Query(value = "from System_Order o where o.orderStatus<>:orderStatus1 and o.orderStatus<>:orderStatus2")
     Optional<List<Order>> findByNotEqualsSatus(@Param("orderStatus1") OrderStatus orderStatus1,
                                                @Param("orderStatus2") OrderStatus orderStatus2);
+
+    int countByCustomer(Customer customer);
+
+    int countByExpert(Expert expert);
 }

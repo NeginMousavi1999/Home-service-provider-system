@@ -3,8 +3,10 @@ package ir.maktab.service;
 import ir.maktab.data.dto.ExpertDto;
 import ir.maktab.data.dto.OrderDto;
 import ir.maktab.data.dto.ServiceDto;
+import ir.maktab.data.dto.UserDto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -28,4 +30,8 @@ public interface ExpertService {
     void updateScore(ExpertDto expertDto, double score);
 
     void addNewSuggestion(String date, double suggestedPrice, int durationOfWork, OrderDto orderDto, ExpertDto expertDto);
+
+    Map<UserDto, Integer> getExpertAndNumberOfRegisteredRequests();
+
+    List<ExpertDto> getAll();
 }

@@ -167,4 +167,14 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAll(OrderRepository.selectByConditions(conditions))
                 .stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());
     }
+
+    @Override
+    public int findNumberOfRegisteredRequestsByCustomer(CustomerDto customer) {
+        return orderRepository.countByCustomer(CustomerMapper.mapCustomerDtoToCustomer(customer));
+    }
+
+    @Override
+    public int findNumberOfOrdersPlacedByExpert(ExpertDto expert) {
+        return orderRepository.countByExpert(ExpertMapper.mapExpertDtoToExpert(expert));
+    }
 }
