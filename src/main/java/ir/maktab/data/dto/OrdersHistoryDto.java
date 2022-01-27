@@ -8,8 +8,10 @@ import lombok.Data;
 @Data
 public class OrdersHistoryDto {
 
+    //    @Pattern(regexp = "yyyy-MM-dd", message = "date format is like: yyyy-MM-dd")
     private String fromDate;
 
+    //    @Pattern(regexp = "yyyy-MM-dd", message = "date format is like: yyyy-MM-dd")
     private String toDate;
 
     private String status;

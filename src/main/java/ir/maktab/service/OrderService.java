@@ -41,4 +41,6 @@ public interface OrderService {
     List<OrderDto> getOrdersGivenByCustomer();
 
     List<OrderDto> getOrdersDoneByExpert();
+
+    List<OrderDto> filteredOrders(OrdersHistoryDto conditions);
 }

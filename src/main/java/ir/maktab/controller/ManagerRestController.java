@@ -4,9 +4,13 @@ import ir.maktab.data.dto.OrderDto;
 import ir.maktab.data.dto.OrdersHistoryDto;
 import ir.maktab.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindException;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -17,6 +21,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ManagerRestController {
     private final OrderService orderService;
+
+    @ExceptionHandler(value = BindException.class)
+    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
+        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
+    }
 
     @GetMapping(value = "get_customers_services")
     @ResponseBody
@@ -30,15 +40,9 @@ public class ManagerRestController {
         return orderService.getOrdersDoneByExpert();
     }
 
-    @PostMapping(value = "/all")
+    @PostMapping(value = "get_by_conditions")
     @ResponseBody
-    public List<OrderDto> getAllOrders(@RequestBody OrdersHistoryDto ordersFilter) {
-        List<OrderDto> orderDtoList = new ArrayList<>();
-        OrderDto orderDto = OrderDto.builder()
-                .identity(1)
-                .finalPrice(20)
-                .build();
-        orderDtoList.add(orderDto);
-        return orderDtoList;
+    public List<OrderDto> getAllOrdersByConditions(@Validated @RequestBody OrdersHistoryDto conditions) {
+        return orderService.filteredOrders(conditions);
     }
 }

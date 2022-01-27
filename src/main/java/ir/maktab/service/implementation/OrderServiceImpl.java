@@ -8,6 +8,7 @@ import ir.maktab.data.repository.OrderRepository;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.AddressService;
 import ir.maktab.service.OrderService;
+import ir.maktab.service.ServiceService;
 import ir.maktab.service.SubServiceService;
 import ir.maktab.util.mapper.CustomerMapper;
 import ir.maktab.util.mapper.ExpertMapper;
@@ -34,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final AddressService addressService;
     private final SubServiceService subServiceService;
+    private final ServiceService serviceService;
     private final Validation validation;
     private final int suffix = 1000;
 
@@ -158,5 +160,11 @@ public class OrderServiceImpl implements OrderService {
         if (orders.isEmpty())
             throw new HomeServiceException("no services done by experts!");
         return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDto> filteredOrders(OrdersHistoryDto conditions) {
+        return orderRepository.findAll(OrderRepository.selectByConditions(conditions))
+                .stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());
     }
 }
