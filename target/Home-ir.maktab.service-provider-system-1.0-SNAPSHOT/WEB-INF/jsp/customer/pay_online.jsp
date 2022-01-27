@@ -44,7 +44,8 @@
             <div class="col-md-7">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="${pageContext.request.contextPath}/customer/pay_online/${order.identity}" method="post">
+                <form:form action="${pageContext.request.contextPath}/customer/pay_online" method="post"
+                           modelAttribute="paymentDto">
                     <table class="table table-bordered table-striped text-dark">
                         <thead>
                         <tr>
@@ -72,11 +73,11 @@
                         </thead>
                         <tr>
                             <td>
-                                ${order.finalPrice}
+                                    ${paymentDto.order.finalPrice}
                             </td>
                             <td>
                                 <label>
-                                    <input type="text"/>
+                                    <form:input type="text" path="cardNumber"/>
                                 </label>
                             </td>
                             <td>
@@ -98,7 +99,7 @@
 
                     </table>
                     <input type="submit" value="Pay" class="btn btn-block btn-primary"/>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>

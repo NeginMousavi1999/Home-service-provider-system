@@ -2,6 +2,7 @@ package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
 import ir.maktab.data.enumuration.OrderStatus;
+import ir.maktab.data.enumuration.PaymentMethod;
 import ir.maktab.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ public class CustomerController {
     private final OrderService orderService;
     private final SuggestionService suggestionService;
     private final CommentService commentService;
+    private final PaymentService paymantService;
 
     @GetMapping("/dashboard")
     public String showDashboard() {
@@ -132,29 +134,47 @@ public class CustomerController {
 
     @GetMapping("/paying_from_credit/{identity}")
     public String payFromCredit(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
-        return pay(identity, model, request, false);
+        HttpSession session = request.getSession();
+        OrderDto paymentOrder = getPaymentOrderDto(identity, session);
+        PaymentDto paymentDto = PaymentDto.builder()
+                .order(paymentOrder)
+                .paymentMethod(PaymentMethod.CREDIT)
+                .build();
+        try {
+            CustomerDto customerDto = paymantService.pay(paymentDto);
+            session.setAttribute("customerDto", customerDto);
+            model.addAttribute("succ_massage", "successfuly paid");
+        } catch (Exception exception) {
+            model.addAttribute("error_massage", exception.getLocalizedMessage());
+        }
+        return showOrdersToPay(model, request);
     }
 
     @GetMapping("/paying_online/{identity}")
     public String showOnlinePayPage(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
-        OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
-        model.addAttribute("order", doneOrder);
+        OrderDto paymentOrder = getPaymentOrderDto(identity, session);
+        PaymentDto paymentDto = PaymentDto.builder()
+                .order(paymentOrder)
+                .paymentMethod(PaymentMethod.ONLINE)
+                .build();
+        model.addAttribute("paymentDto", paymentDto);
+        session.setAttribute("paymentDto", paymentDto);
         return "customer/pay_online";
     }
 
-    @PostMapping("/pay_online/{identity}")
-    public String doOnlinePay(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
-        return pay(identity, model, request, true);
+    private OrderDto getPaymentOrderDto(int identity, HttpSession session) {
+        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
+        return doneOrders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
     }
 
-    public String pay(int orderIdentity, Model model, HttpServletRequest request, boolean isOnline) {
+    @PostMapping("/pay_online")
+    public String doOnlinePay(@ModelAttribute("paymentDto") PaymentDto donePaymentDto, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        List<OrderDto> doneOrders = (List<OrderDto>) session.getAttribute("done_orders");
-        OrderDto doneOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
         try {
-            CustomerDto customerDto = customerService.payForDoneOrder(doneOrder, isOnline);
+            PaymentDto paymentDto = (PaymentDto) session.getAttribute("paymentDto");
+            paymentDto.setCardNumber(donePaymentDto.getCardNumber());
+            CustomerDto customerDto = paymantService.pay(paymentDto);
             session.setAttribute("customerDto", customerDto);
             model.addAttribute("succ_massage", "successfuly paid");
         } catch (Exception exception) {

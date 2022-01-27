@@ -1,16 +1,11 @@
 package ir.maktab.service.implementation;
 
 import ir.maktab.data.dto.CustomerDto;
-import ir.maktab.data.dto.ExpertDto;
-import ir.maktab.data.dto.OrderDto;
 import ir.maktab.data.entity.members.Customer;
-import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.enumuration.UserRole;
 import ir.maktab.data.repository.CustomerRepository;
 import ir.maktab.exception.HomeServiceException;
 import ir.maktab.service.CustomerService;
-import ir.maktab.service.ExpertService;
-import ir.maktab.service.OrderService;
 import ir.maktab.util.mapper.CustomerMapper;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -29,8 +24,6 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository customerRepository;
     private final Validation validation;
-    private final ExpertService expertService;
-    private final OrderService orderService;
     private final ModelMapper modelMapper = new ModelMapper();
 
     public void update(CustomerDto customerDto) {
@@ -75,21 +68,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDto payForDoneOrder(OrderDto doneOrder, boolean isOnlineMethod) {
-        assert doneOrder != null;
-        double price = doneOrder.getFinalPrice();
-        CustomerDto customerDto = doneOrder.getCustomer();
-        if (!isOnlineMethod) {
-            validation.validateCustomerCredit(customerDto.getCredit(), price);
-            customerDto.setCredit(customerDto.getCredit() - price);
-            update(customerDto);
-        }
-        ExpertDto expertDto = doneOrder.getExpert();
-        double expertFees = price * 0.7;
-        expertDto.setCredit(expertDto.getCredit() + expertFees);
-        doneOrder.setOrderStatus(OrderStatus.PAID);
-        expertService.update(expertDto);
-        orderService.updateStatus(doneOrder);
+    public CustomerDto payByCredit(CustomerDto customerDto, double price) {
+        validation.validateCustomerCredit(customerDto.getCredit(), price);
+        customerDto.setCredit(customerDto.getCredit() - price);
+        update(customerDto);
         return customerDto;
     }
 }

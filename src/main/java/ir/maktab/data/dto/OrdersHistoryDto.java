@@ -1,9 +1,6 @@
 package ir.maktab.data.dto;
 
 import lombok.Data;
-import lombok.Getter;
-
-import javax.validation.constraints.Pattern;
 
 /**
  * @author Negin Mousavi

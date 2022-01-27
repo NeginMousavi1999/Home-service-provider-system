@@ -25,6 +25,21 @@ import java.util.Optional;
 @Repository
 public interface OrderRepository extends CrudRepository<Order, Integer> {
 
+    static Specification<Order> selectByConditions(OrdersHistoryDto request) {///TODO
+        return (Specification<Order>) (root, cq, cb) -> {
+            List<Predicate> predicateList = new ArrayList<>();
+            if (request.getFromDate() != null && request.getFromDate().length() != 0)
+                predicateList.add(cb.equal(root.get("firstName"), request.getFromDate()));
+            if (request.getToDate() != null && request.getToDate().length() != 0)
+                predicateList.add(cb.equal(root.get("lastName"), request.getToDate()));
+            if (request.getStatus() != null && request.getStatus().length() != 0)
+                predicateList.add(cb.equal(root.get("email"), request.getStatus()));
+            if (request.getService() != null && request.getService().length() != 0)
+                predicateList.add(cb.equal(root.get("userRole"), request.getService()));
+            return cb.and(predicateList.toArray(new Predicate[0]));
+        };
+    }
+
     Optional<List<Order>> findBySubService(SubService subService);
 
     Optional<List<Order>> findByCustomer(Customer customer);
@@ -41,19 +56,4 @@ public interface OrderRepository extends CrudRepository<Order, Integer> {
                                                           @Param("orderStatus2") OrderStatus orderStatus2);
 
     Optional<List<Order>> findByExpertAndOrderStatus(Expert expert, OrderStatus orderStatus);
-
-    static Specification<Order> selectByConditions(OrdersHistoryDto request) {///TODO
-        return (Specification<Order>) (root, cq, cb) -> {
-            List<Predicate> predicateList = new ArrayList<>();
-            if (request.getFromDate() != null && request.getFromDate().length() != 0)
-                predicateList.add(cb.equal(root.get("firstName"), request.getFromDate()));
-            if (request.getToDate() != null && request.getToDate().length() != 0)
-                predicateList.add(cb.equal(root.get("lastName"), request.getToDate()));
-            if (request.getStatus() != null && request.getStatus().length() != 0)
-                predicateList.add(cb.equal(root.get("email"), request.getStatus()));
-            if (request.getService() != null && request.getService().length() != 0)
-                predicateList.add(cb.equal(root.get("userRole"), request.getService()));
-            return cb.and(predicateList.toArray(new Predicate[0]));
-        };
-    }
 }

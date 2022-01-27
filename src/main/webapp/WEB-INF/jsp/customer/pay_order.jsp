@@ -44,52 +44,52 @@
             <div class="col-md-7">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                    <table class="table table-bordered table-striped text-dark">
-                        <thead>
+                <table class="table table-bordered table-striped text-dark">
+                    <thead>
+                    <tr>
+                        <th colspan="5" style="text-align: center">
+                            order information
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            subservice
+                        </th>
+                        <th>
+                            cost
+                        </th>
+                        <th>
+                            description
+                        </th>
+                        <th colspan="2" style="text-align: center">
+                            payment method
+                        </th>
+                    </tr>
+                    </thead>
+                    <c:forEach var="order" items="${done_orders}">
                         <tr>
-                            <th colspan="5" style="text-align: center">
-                                order information
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                subservice
-                            </th>
-                            <th>
-                                cost
-                            </th>
-                            <th>
-                                description
-                            </th>
-                            <th colspan="2">
-                                payment method
-                            </th>
-                        </tr>
-                        </thead>
-                        <c:forEach var="order" items="${done_orders}">
-                            <tr>
-                                <td>
-                                        ${order.subService.name}
-                                </td>
-                                <td>
-                                        ${order.finalPrice}
-                                </td>
-                                <td>
-                                        ${order.description}
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-primary my-2 my-sm-0"
-                                       href="${pageContext.request.contextPath}/customer/paying_from_credit/${order.identity}">from
-                                        your credit</a>
+                            <td>
+                                    ${order.subService.name}
+                            </td>
+                            <td>
+                                    ${order.finalPrice}
+                            </td>
+                            <td>
+                                    ${order.description}
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary my-2 my-sm-0"
+                                   href="${pageContext.request.contextPath}/customer/paying_from_credit/${order.identity}">from
+                                    your credit</a>
 
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-primary my-2 my-sm-0"
-                                       href="${pageContext.request.contextPath}/customer/paying_online/${order.identity}">online</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-primary my-2 my-sm-0"
+                                   href="${pageContext.request.contextPath}/customer/paying_online/${order.identity}">online</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
             </div>
         </div>
     </div>
