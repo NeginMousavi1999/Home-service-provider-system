@@ -43,15 +43,13 @@ public interface OrderRepository extends CrudRepository<Order, Integer>, JpaSpec
             if (conditions.getStatus() != null && conditions.getStatus().length() != 0)
                 predicateList.add(cb.equal(root.get("orderStatus"), OrderStatus.valueOf(conditions.getStatus().toUpperCase())));
 
-            //TODO: joining does not work --> 500 response code
-            // org.springframework.dao.InvalidDataAccessApiUsageException: Unable to locate Attribute  with the the given name [service] on this ManagedType [ir.maktab.data.entity.order.Order]; nested exception is java.lang.IllegalArgumentException: Unable to locate Attribute  with the the given name [service] on this ManagedType [ir.maktab.data.entity.order.Order]
             if (conditions.getService() != null && conditions.getService().length() != 0) {
-                Join<Service, Order> service = root.join("service");
+                Join<Order, Service> service = root.join("subService").join("service");
                 predicateList.add(cb.equal(service.get("name"), conditions.getService()));
             }
 
             if (conditions.getSubService() != null && conditions.getSubService().length() != 0) {
-                Join<SubService, Order> subService = root.join("subService");
+                Join<Order, SubService> subService = root.join("subService");
                 predicateList.add(cb.equal(subService.get("name"), conditions.getSubService()));
             }
 
