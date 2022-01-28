@@ -23,7 +23,7 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/bank">Increase credit</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/all_orders">Back</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
@@ -41,54 +41,72 @@
 <div class="contents order-2 order-md-1">
     <div class="container">
         <div class="row align-items-center justify-content-center">
-            <div class="col-md-7">
+            <div class="col-12">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <table class="table table-bordered table-striped text-dark">
+                <table class="table table-bordered table-striped text-dark text-center">
                     <thead>
                     <tr>
-                        <th colspan="5" style="text-align: center">
-                            order information
+                        <th colspan="6">
+                            suggestion informations
+                        </th>
+                        <th>
+                            action
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            subservice
+                            status
                         </th>
                         <th>
-                            cost
+                            expert score
                         </th>
                         <th>
-                            description
+                            suggested price
                         </th>
-                        <th colspan="2" style="text-align: center">
-                            payment method
+                        <th>
+                            duration of work
+                        </th>
+                        <th>
+                            start time
+                        </th>
+                        <th>
+                            registration date
+                        </th>
+                        <th>
+                            accept
                         </th>
                     </tr>
                     </thead>
-                    <c:forEach var="order" items="${done_orders}">
+                    <tbody>
+                    <c:forEach var="suggestion" items="${suggestions}">
                         <tr>
                             <td>
-                                    ${order.subService.name}
+                                    ${suggestion.suggestionStatus}
                             </td>
                             <td>
-                                    ${order.finalPrice}
+                                    ${suggestion.expert.score}
                             </td>
                             <td>
-                                    ${order.description}
+                                    ${suggestion.suggestedPrice}
                             </td>
                             <td>
-                                <a class="btn btn-outline-primary my-2 my-sm-0"
-                                   href="${pageContext.request.contextPath}/customer/paying_from_credit/${order.identity}">from
-                                    your credit</a>
-
+                                    ${suggestion.durationOfWork}
                             </td>
                             <td>
-                                <a class="btn btn-outline-primary my-2 my-sm-0"
-                                   href="${pageContext.request.contextPath}/customer/paying_online/${order.identity}">online</a>
+                                    ${suggestion.startTime}
+                            </td>
+                            <td>
+                                    ${suggestion.registrationDate}
+                            </td>
+                            <td>
+                                <c:if test="${suggestion.order.orderStatus.toString() eq 'WAITING_FOR_SPECIALIST_SELECTION'}">
+                                    <a href="/customer/accept_suggestion/${suggestion.identity}">click me</a>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>
+                    </tbody>
                 </table>
             </div>
         </div>

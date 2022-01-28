@@ -43,10 +43,9 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.updateStatus(orderDto.getIdentity() - suffix, orderDto.getOrderStatus());
     }
 
-    public boolean saveOrder(OrderDto orderDto) {
+    public void saveOrder(OrderDto orderDto) {
         Order order = OrderMapper.mapOrderDtoToOrderForSaving(orderDto);
         orderRepository.save(order);
-        return true;
     }
 
     public OrderDto findById(int id) {
@@ -67,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
         Optional<List<Order>> orders = orderRepository.findByCustomer(CustomerMapper.mapCustomerDtoToCustomer(customerDto));
         if (orders.isEmpty())
             throw new HomeServiceException("we have not order with this customer!");
-        return orders.get().stream().map(OrderMapper::mapOrderToOrderDto).collect(Collectors.toSet());
+        return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toSet());
     }
 
     public List<OrderDto> getOrdersByCustomerAndStatus(CustomerDto customerDto, OrderStatus orderStatus) {
@@ -99,7 +98,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getOrdersToStartByExpert(ExpertDto expertDto) {
         Optional<List<Order>> orders = orderRepository.findByExpertAndOrderStatus(ExpertMapper.mapExpertDtoToExpert(expertDto)
-                , OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+                , OrderStatus.SPECIALIST_COMING_YOUR_PLACE);
         if (orders.isEmpty())
             throw new HomeServiceException("no order to start for you");
         return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToStart).collect(Collectors.toList());
@@ -156,7 +155,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getOrdersDoneByExpert() {
         Optional<List<Order>> orders = orderRepository.findByNotEqualsSatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION,
-                OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+                OrderStatus.SPECIALIST_COMING_YOUR_PLACE);
         if (orders.isEmpty())
             throw new HomeServiceException("no services done by experts!");
         return orders.get().stream().map(OrderMapper::mapOrderToOrderDtoToPay).collect(Collectors.toList());

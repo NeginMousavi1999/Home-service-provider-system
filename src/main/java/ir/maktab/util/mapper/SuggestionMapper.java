@@ -1,6 +1,7 @@
 package ir.maktab.util.mapper;
 
 import ir.maktab.data.dto.SuggestionDto;
+import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.order.Suggestion;
 
 /**
@@ -27,7 +28,7 @@ public class SuggestionMapper {
     }
 
     public static SuggestionDto mapSuggestionToSuggestionDto(Suggestion suggestion) {
-        return SuggestionDto.builder()
+        SuggestionDto suggestionDto = SuggestionDto.builder()
                 .identity(suggestion.getId() + suffix)
                 .startTime(suggestion.getStartTime())
                 .suggestedPrice(suggestion.getSuggestedPrice())
@@ -36,6 +37,10 @@ public class SuggestionMapper {
                 .registrationDate(suggestion.getRegistrationDate())
                 .suggestionStatus(suggestion.getSuggestionStatus())
                 .build();
+        Order order = suggestion.getOrder();
+        if (order !=null)
+            suggestionDto.setOrder(OrderMapper.mapOrderToOrderDtoToPay(order));
+        return suggestionDto;
     }
 
     public static SuggestionDto mapSuggestionToSuggestionDtoForSorting(Suggestion suggestion) {

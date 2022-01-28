@@ -137,7 +137,7 @@ public class ExpertView {
     }
 
     public void startOrder(Order order) {
-        if (!order.getOrderStatus().equals(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE))
+        if (!order.getOrderStatus().equals(OrderStatus.SPECIALIST_COMING_YOUR_PLACE))
             return;
         order.setOrderStatus(OrderStatus.STARTED);
 //        orderService.update(order);

@@ -1,5 +1,3 @@
-<%--@elvariable id="error_massage" type="antlr"--%>
-<%--@elvariable id="succ_massage" type="antlr"--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>

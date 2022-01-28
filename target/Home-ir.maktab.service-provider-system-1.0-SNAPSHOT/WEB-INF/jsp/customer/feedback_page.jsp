@@ -23,6 +23,9 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/all_orders">Back</a>
+                </li>
+                <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
                 </li>
@@ -44,12 +47,14 @@
                 <div style="color: red">${error_massage}</div>
                 <form:form modelAttribute="commentDto"
                            action="feedback" method="post">
-                    <table class="table table-bordered table-striped text-dark">
+                    <table class="table table-bordered table-striped text-dark text-center">
                         <thead>
                         <tr>
-                            <th>
-                                order info
+                            <th colspan="2">
+                                Feedback
                             </th>
+                        </tr>
+                        <tr>
                             <th>
                                 comment
                             </th>
@@ -61,19 +66,7 @@
                         <tbody>
                         <tr>
                             <td>
-                                sub service name : ${commentDto.order.subService.name}
-                                <br>
-                                expert
-                                : ${commentDto.order.expert.firstName}, ${commentDto.order.expert.lastName}, ${commentDto.order.expert.score}
-                                <br>
-                                from ${commentDto.order.registrationDate} to ${commentDto.order.toBeDoneDate}
-                                <br>
-                                cost : ${commentDto.order.finalPrice}
-                                <br>
-                                your description : ${commentDto.order.description}
-                            </td>
-                            <td>
-                                <form:input path="comment"/>
+                                <form:textarea path="comment"/>
                             </td>
                             <td>
                                 <form:input path="score" requierd="requierd"/>

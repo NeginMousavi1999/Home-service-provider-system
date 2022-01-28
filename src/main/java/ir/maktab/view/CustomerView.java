@@ -147,7 +147,7 @@ public class CustomerView {
         }
         order.setExpert(expert);
         order.setFinalPrice(suggestion.getSuggestedPrice());
-        order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+        order.setOrderStatus(OrderStatus.SPECIALIST_COMING_YOUR_PLACE);
         order.setToBeDoneDate(suggestion.getStartTime());
         order.setSuggestions(new HashSet<>(suggestionList));
         suggestion.setOrder(order);

@@ -2,9 +2,11 @@ package ir.maktab.util.mapper;
 
 import ir.maktab.data.dto.OrderDto;
 import ir.maktab.data.dto.SuggestionDto;
+import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.order.Suggestion;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -115,11 +117,13 @@ public class OrderMapper {
                 .registrationDate(order.getRegistrationDate())
                 .address(AddressMapper.mapAddressToAddressDto(order.getAddress()))
                 .finalPrice(order.getFinalPrice())
-                .toBeDoneDate(order.getToBeDoneDate())
                 .build();
-        if (order.getExpert() != null) {
-            orderDto.setExpert(ExpertMapper.mapExpertToExpertDto(order.getExpert()));
-        }
+        Date toBeDoneDate = order.getToBeDoneDate();
+        Expert expert = order.getExpert();
+        if (expert != null)
+            orderDto.setExpert(ExpertMapper.mapExpertToExpertDto(expert));
+        if (toBeDoneDate !=null)
+            orderDto.setToBeDoneDate(toBeDoneDate);
         return orderDto;
     }
 

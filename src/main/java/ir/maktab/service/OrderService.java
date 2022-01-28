@@ -14,7 +14,7 @@ public interface OrderService {
 
     void updateStatus(OrderDto order);
 
-    boolean saveOrder(OrderDto order);
+    void saveOrder(OrderDto order);
 
     OrderDto findById(int id);
 

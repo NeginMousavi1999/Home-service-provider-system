@@ -77,7 +77,9 @@ public class SuggestionServiceImpl implements SuggestionService {
     public List<SuggestionDto> getSortedByOrder(OrderDto orderDto) {
         List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice", "expert").descending())
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
-        return suggestionDtoList.stream().filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity()).collect(Collectors.toList());
+        return suggestionDtoList.stream()
+                .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -97,7 +99,7 @@ public class SuggestionServiceImpl implements SuggestionService {
             throw new HomeServiceException("something is wrong!");
         order.setExpert(expert);
         order.setFinalPrice(suggestion.getSuggestedPrice());
-        order.setOrderStatus(OrderStatus.WAITING_FOR_THE_SPECIALIST_TO_COME_TO_YOUR_PLACE);
+        order.setOrderStatus(OrderStatus.SPECIALIST_COMING_YOUR_PLACE);
         order.setToBeDoneDate(suggestion.getStartTime());
         orderService.update(order);
         suggestions.forEach(this::update);

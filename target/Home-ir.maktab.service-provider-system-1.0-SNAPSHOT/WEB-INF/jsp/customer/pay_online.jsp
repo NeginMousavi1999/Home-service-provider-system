@@ -23,7 +23,7 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/bank">Increase credit</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/all_orders">Back</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
@@ -41,15 +41,15 @@
 <div class="contents order-2 order-md-1">
     <div class="container">
         <div class="row align-items-center justify-content-center">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
                 <form:form action="${pageContext.request.contextPath}/customer/pay_online" method="post"
                            modelAttribute="paymentDto">
-                    <table class="table table-bordered table-striped text-dark">
+                    <table class="table table-bordered table-striped text-dark text-center">
                         <thead>
                         <tr>
-                            <th colspan="5" style="text-align: center">
+                            <th colspan="5">
                                 Bank
                             </th>
                         </tr>

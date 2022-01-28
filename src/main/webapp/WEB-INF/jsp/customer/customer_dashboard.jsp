@@ -23,13 +23,6 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/bank">Increase credit</a>
-                </li>
-                <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/change_password">change
-                        password</a>
-                </li>
-                <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/">Logout</a>
                 </li>
@@ -45,11 +38,9 @@
         <div class="col-2">
             <div class="custome-sidebar">
                 <div>
-                    <a href="${pageContext.request.contextPath}/customer/add_order">Add Order</a>
-                    <a href="${pageContext.request.contextPath}/customer/show_orders">Your Suggestions</a>
-                    <a href="${pageContext.request.contextPath}/customer/pay">Pay For Done Orders</a>
-                    <a href="${pageContext.request.contextPath}/customer/order_feedback">Add Feedback</a>
-                    <a href="#">See Your Orders Status</a>
+                    <a href="${pageContext.request.contextPath}/customer/all_orders">Orders</a>
+                    <a href="${pageContext.request.contextPath}/customer/change_password">change password</a>
+                    <a href="${pageContext.request.contextPath}/customer/bank">Increase credit</a>
                 </div>
             </div>
         </div>
