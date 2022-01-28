@@ -130,4 +130,9 @@ public class ExpertServiceImpl implements ExpertService {
         List<Expert> experts = (List<Expert>) expertRepository.findAll();
         return experts.stream().map(ExpertMapper::mapExpertToExpertDto).collect(Collectors.toList());
     }
+
+    @Override
+    public List<SuggestionDto> getSuggestions(ExpertDto expertDto) {
+        return suggestionService.getAllSuggestions(expertDto);
+    }
 }

@@ -42,7 +42,6 @@ public class ExpertController {
         return modelAndView;
     }
 
-
     @PostMapping("/add_to_services")
     public String addService(@ModelAttribute("dto") SystemServiceNameExpertDto serviceDto, HttpServletRequest request,
                              Model model) {
@@ -98,37 +97,51 @@ public class ExpertController {
         return "expert/add_services";
     }
 
-    @GetMapping("/orders")
-    public ModelAndView showOrdersToUpdateStatus(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("expert/update_order");
+    @GetMapping("/show_tasks")
+    public String showExpertTasks(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
-        List<OrderDto> startingOrders = orderService.getOrdersToStartByExpert(expertDto);
-        List<OrderDto> finishingOrders = orderService.getOrdersToFinishByExpert(expertDto);
-        modelAndView.getModelMap().addAttribute("startingOrders", startingOrders)
-                .addAttribute("finishingOrders", finishingOrders)
-                .addAttribute("orderIdentityDto", new OrderIdentityDto());
-        session.setAttribute("startingOrders", startingOrders);
-        session.setAttribute("finishingOrders", finishingOrders);
-        return modelAndView;
+        List<SuggestionDto> suggestionsDto = expertService.getSuggestions(expertDto);
+        session.setAttribute("expert_suggestions", suggestionsDto);
+        model.addAttribute("expert_suggestions", suggestionsDto);
+        return "expert/tasks";
     }
 
-    @PostMapping("/update_orders")
-    public String updateStatus(HttpServletRequest request, @ModelAttribute OrderIdentityDto orderIdentityDto) {
+    @GetMapping("/start/{identity}")
+    public String startOrder(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        List<OrderDto> startingOrders = (List<OrderDto>) session.getAttribute("startingOrders");
-        List<OrderDto> finishingOrders = (List<OrderDto>) session.getAttribute("finishingOrders");
-        int start = orderIdentityDto.getStart();
-        int finish = orderIdentityDto.getFinish();
-        if (start != Integer.MIN_VALUE)
-            startingOrders.stream().filter(startedOrder -> startedOrder.getIdentity() == start)
-                    .forEach(orderService::startOrder);
+        try {
+            List<SuggestionDto> suggestions = (List<SuggestionDto>) session.getAttribute("expert_suggestions");
+            SuggestionDto suggestionDto = suggestions.stream().filter(dto -> dto.getIdentity() == identity).findFirst()
+                    .orElse(null);
+            assert suggestionDto != null;
+            orderService.startOrder(suggestionDto.getOrder());
+            model.addAttribute("succ_massage", "order started successfully");
+        } catch (Exception exception) {
+            model.addAttribute("error_massage", exception.getLocalizedMessage());
+        }
+        return "expert/tasks";
+    }
 
-        if (finish != Integer.MIN_VALUE)
-            finishingOrders.stream().filter(finishedOrder -> finishedOrder.getIdentity() == finish)
-                    .forEach(orderService::finishOrder);
+    @GetMapping("/finish/{identity}")
+    public String finishOrder(@PathVariable("identity") int identity, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        try {
+            List<SuggestionDto> suggestions = (List<SuggestionDto>) session.getAttribute("expert_suggestions");
+            SuggestionDto suggestionDto = suggestions.stream().filter(dto -> dto.getIdentity() == identity).findFirst()
+                    .orElse(null);
+            assert suggestionDto != null;
+            orderService.finishOrder(suggestionDto.getOrder());
+            model.addAttribute("succ_massage", "order finished successfully");
+        } catch (Exception exception) {
+            model.addAttribute("error_massage", exception.getLocalizedMessage());
+        }
+        return "expert/tasks";
+    }
 
-        return "redirect:/expert/orders";
+    @GetMapping("/show_feedback/{identity}")
+    public String showCustomerFeedback(@PathVariable("identity") int identity, Model model) {
+        //TODO
+        return null;
     }
 }

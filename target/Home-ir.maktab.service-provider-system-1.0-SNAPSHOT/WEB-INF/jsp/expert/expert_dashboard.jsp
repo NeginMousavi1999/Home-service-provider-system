@@ -40,7 +40,7 @@
                 <div>
                     <a href="${pageContext.request.contextPath}/expert/add_service">add new service</a>
                     <a href="${pageContext.request.contextPath}/expert/add_suggestion">add new suggestion</a>
-                    <a href="${pageContext.request.contextPath}/expert/orders">Update Your Orders Status</a>
+                    <a href="${pageContext.request.contextPath}/expert/show_tasks">Tasks</a>
                 </div>
             </div>
         </div>

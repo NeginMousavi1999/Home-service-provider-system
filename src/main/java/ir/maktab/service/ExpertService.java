@@ -1,9 +1,6 @@
 package ir.maktab.service;
 
-import ir.maktab.data.dto.ExpertDto;
-import ir.maktab.data.dto.OrderDto;
-import ir.maktab.data.dto.ServiceDto;
-import ir.maktab.data.dto.UserDto;
+import ir.maktab.data.dto.*;
 
 import java.util.List;
 import java.util.Map;
@@ -34,4 +31,6 @@ public interface ExpertService {
     Map<UserDto, Integer> getExpertAndNumberOfRegisteredRequests();
 
     List<ExpertDto> getAll();
+
+    List<SuggestionDto> getSuggestions(ExpertDto expertDto);
 }
