@@ -68,7 +68,7 @@ public class ExpertServiceImpl implements ExpertService {
 
     public void addSubServices(ExpertDto expertDto, SubServiceDto subServiceDto) {
         Expert expert = ExpertMapper.mapExpertDtoToExpert(expertDto);
-        Optional<List<SubService>> optionalServices = expertRepository.customeGetServiceByExpertId(expert.getId());
+        Optional<List<SubService>> optionalServices = expertRepository.customeGetSubServiceByExpertId(expert.getId());
         List<SubService> expertSubServices = optionalServices.orElseGet(ArrayList::new);
         expertSubServices.add(SubServiceMapper.mapSubServiceDtoToSubService(subServiceDto));
         expert.setSubServices(new HashSet<>(expertSubServices));
@@ -78,7 +78,7 @@ public class ExpertServiceImpl implements ExpertService {
     @Override
     public Set<SubServiceDto> getSubServices(ExpertDto expertDto) {
         Optional<List<SubService>> subServices = expertRepository
-                .customeGetServiceByExpertId(ExpertMapper.mapExpertDtoToExpert(expertDto).getId());
+                .customeGetSubServiceByExpertId(ExpertMapper.mapExpertDtoToExpert(expertDto).getId());
         if (subServices.isEmpty())
             throw new HomeServiceException("no sub services!");
         return subServices.get().stream().map(SubServiceMapper::mapSubServiceToSubServiceDto).collect(Collectors.toSet());

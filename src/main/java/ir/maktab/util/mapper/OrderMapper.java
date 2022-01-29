@@ -148,7 +148,7 @@ public class OrderMapper {
                 .description(order.getDescription())
                 .orderStatus(order.getOrderStatus())
                 .subService(SubServiceMapper.mapSubServiceToSubServiceDto(order.getSubService()))
+                .registrationDate(order.getRegistrationDate())
                 .build();
     }
-
 }

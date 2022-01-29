@@ -2,6 +2,7 @@ package ir.maktab.service.implementation;
 
 import ir.maktab.data.dto.*;
 import ir.maktab.data.entity.order.Order;
+import ir.maktab.data.entity.services.SubService;
 import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.data.repository.OrderRepository;
@@ -19,7 +20,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -78,17 +78,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public List<OrderDto> getOrdersReadyForSuggestion(ExpertDto expertDto) {
+        Set<SubService> subServices = expertDto.getSubServiceDtos().stream()
+                .map(SubServiceMapper::mapSubServiceDtoToSubService).collect(Collectors.toSet());
         Optional<List<Order>> filteredOrders = orderRepository
-                .findByOrderStatusAndOrderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION, OrderStatus.NEW);
+                .findReadyOrdersForExpert(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION, subServices);
         if (filteredOrders.isEmpty())
             throw new HomeServiceException("no ready orders!");
-        List<Order> readyOrders = filteredOrders.get();
-        Set<ServiceDto> services = expertDto.getServices();
-        List<Order> finalList = new ArrayList<>();
-        readyOrders.forEach(readyOrder -> services.stream()
-                .filter(service -> service.getName().equals(readyOrder.getSubService().getService().getName()))
-                .map(service -> readyOrder).forEach(finalList::add));
-        return finalList.stream().map(OrderMapper::mapOrderToOrderDtoForToBeSuggestioned).collect(Collectors.toList());
+        return filteredOrders.get().stream()
+                .map(OrderMapper::mapOrderToOrderDtoForToBeSuggestioned).collect(Collectors.toList());
     }
 
     public void update(OrderDto order) {

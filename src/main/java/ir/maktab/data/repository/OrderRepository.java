@@ -22,6 +22,7 @@ import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -68,9 +69,9 @@ public interface OrderRepository extends CrudRepository<Order, Integer>, JpaSpec
     @Query(value = "update System_Order o set o.orderStatus=:orderStatus where o.id=:id")
     void updateStatus(@Param("id") int id, @Param("orderStatus") OrderStatus orderStatus);
 
-    @Query(value = "from System_Order o where o.orderStatus=:orderStatus1 or o.orderStatus=:orderStatus2")
-    Optional<List<Order>> findByOrderStatusAndOrderStatus(@Param("orderStatus1") OrderStatus orderStatus1,
-                                                          @Param("orderStatus2") OrderStatus orderStatus2);
+    @Query(value = "from System_Order o where o.orderStatus=:orderStatus and o.subService in :subServices")
+    Optional<List<Order>> findReadyOrdersForExpert(@Param("orderStatus") OrderStatus orderStatus,
+                                                   @Param("subServices") Set<SubService> subServices);
 
     Optional<List<Order>> findByExpertAndOrderStatus(Expert expert, OrderStatus orderStatus);
 

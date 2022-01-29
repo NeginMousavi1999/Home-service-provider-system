@@ -55,8 +55,18 @@ public class ExpertController {
         return showAddSubService(request, model);
     }
 
+    @GetMapping("/show_orders")
+    public String showOrdersForSuggesting(HttpServletRequest request, Model model) {
+        ExpertDto expertDto = (ExpertDto) request.getSession().getAttribute("expertDto");
+        Set<SubServiceDto> subServices = expertService.getSubServices(expertDto);
+        expertDto.setSubServiceDtos(subServices);
+        List<OrderDto> ordersReadyForSuggestion = orderService.getOrdersReadyForSuggestion(expertDto);
+        model.addAttribute("orders", ordersReadyForSuggestion);
+        return "expert/show_orders";
+    }
+
     @RequestMapping("/add_suggestion")
-    public ModelAndView showAddSuggestion(HttpServletRequest request) {
+    public ModelAndView showAddNewSuggestion(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("expert/add_suggestion");
         HttpSession session = request.getSession();

@@ -15,6 +15,6 @@ import java.util.Set;
 @SuperBuilder
 @NoArgsConstructor
 public class ExpertDto extends UserDto {
-    private Set<ServiceDto> services;
+    private Set<SubServiceDto> subServiceDtos;
     private double score;
 }

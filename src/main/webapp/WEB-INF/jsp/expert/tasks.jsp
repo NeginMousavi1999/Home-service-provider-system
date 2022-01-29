@@ -21,7 +21,7 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="btn btn-outline-primary my-2 my-sm-0" href="#">xxx</a>
+                    <a class="btn btn-outline-primary my-2 my-sm-0" href="${pageContext.request.contextPath}/expert/show_orders">Add New Suggestion</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"

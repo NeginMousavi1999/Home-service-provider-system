@@ -18,16 +18,6 @@ public class SubServiceMapper {
                 .build();
     }
 
-/*    public static SubService mapSubServiceDtoToSubServiceToAddingExpert(SubServiceDto subServiceDto) {
-        return SubService.builder()
-                .id(subServiceDto.getIdentity() - suffix)
-                .cost(subServiceDto.getCost())
-                .description(subServiceDto.getDescription())
-                .name(subServiceDto.getName())
-                .service(ServiceMapper.mapServiceDtoToService(subServiceDto.getService()))
-                .build();
-    }*/
-
     public static SubService mapSubServiceDtoToSubServiceForSaving(SubServiceDto subServiceDto) {
         return SubService.builder()
                 .cost(subServiceDto.getCost())
