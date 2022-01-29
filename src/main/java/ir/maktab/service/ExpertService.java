@@ -20,9 +20,9 @@ public interface ExpertService {
 
     Long getCountOfRecords();
 
-    void addServices(ExpertDto expertDto, List<ServiceDto> serviceDtos);
+    void addSubServices(ExpertDto expertDto, SubServiceDto subServiceDto);
 
-    Set<ServiceDto> getServices(ExpertDto expertDto);
+    Set<SubServiceDto> getSubServices(ExpertDto expertDto);
 
     void updateScore(ExpertDto expertDto, double score);
 

@@ -38,7 +38,7 @@
         <div class="col-2">
             <div class="custome-sidebar">
                 <div>
-                    <a href="${pageContext.request.contextPath}/expert/add_service">add new service</a>
+                    <a href="${pageContext.request.contextPath}/expert/add_subservice">add new sub service</a>
                     <a href="${pageContext.request.contextPath}/expert/add_suggestion">add new suggestion</a>
                     <a href="${pageContext.request.contextPath}/expert/show_tasks">Tasks</a>
                 </div>

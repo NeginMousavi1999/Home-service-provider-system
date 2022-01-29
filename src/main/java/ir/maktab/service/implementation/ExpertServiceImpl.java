@@ -2,6 +2,7 @@ package ir.maktab.service.implementation;
 
 import ir.maktab.data.dto.*;
 import ir.maktab.data.entity.members.Expert;
+import ir.maktab.data.entity.services.SubService;
 import ir.maktab.data.enumuration.OrderStatus;
 import ir.maktab.data.enumuration.SuggestionStatus;
 import ir.maktab.data.enumuration.UserStatus;
@@ -12,7 +13,7 @@ import ir.maktab.service.OrderService;
 import ir.maktab.service.SuggestionService;
 import ir.maktab.util.GenerateDate;
 import ir.maktab.util.mapper.ExpertMapper;
-import ir.maktab.util.mapper.ServiceMapper;
+import ir.maktab.util.mapper.SubServiceMapper;
 import ir.maktab.util.mapper.UserMapper;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
@@ -65,25 +66,22 @@ public class ExpertServiceImpl implements ExpertService {
         return expertRepository.count();
     }
 
-    public void addServices(ExpertDto expertDto, List<ServiceDto> serviceDtos) {
+    public void addSubServices(ExpertDto expertDto, SubServiceDto subServiceDto) {
         Expert expert = ExpertMapper.mapExpertDtoToExpert(expertDto);
-        Optional<List<ir.maktab.data.entity.services.Service>> optionalServices = expertRepository
-                .customeGetServiceByExpertId(expert.getId());
-        List<ir.maktab.data.entity.services.Service> list;
-        list = optionalServices.orElseGet(ArrayList::new);
-        serviceDtos.stream().map(ServiceMapper::mapServiceDtoToService)
-                .filter(service -> !list.contains(service)).forEach(list::add);
-        expert.setServices(new HashSet<>(list));
+        Optional<List<SubService>> optionalServices = expertRepository.customeGetServiceByExpertId(expert.getId());
+        List<SubService> expertSubServices = optionalServices.orElseGet(ArrayList::new);
+        expertSubServices.add(SubServiceMapper.mapSubServiceDtoToSubService(subServiceDto));
+        expert.setSubServices(new HashSet<>(expertSubServices));
         expertRepository.save(expert);
     }
 
     @Override
-    public Set<ServiceDto> getServices(ExpertDto expertDto) {
-        Optional<List<ir.maktab.data.entity.services.Service>> services = expertRepository
+    public Set<SubServiceDto> getSubServices(ExpertDto expertDto) {
+        Optional<List<SubService>> subServices = expertRepository
                 .customeGetServiceByExpertId(ExpertMapper.mapExpertDtoToExpert(expertDto).getId());
-        if (services.isEmpty())
-            throw new HomeServiceException("no services!");
-        return services.get().stream().map(ServiceMapper::mapServiceToServiceDto).collect(Collectors.toSet());
+        if (subServices.isEmpty())
+            throw new HomeServiceException("no sub services!");
+        return subServices.get().stream().map(SubServiceMapper::mapSubServiceToSubServiceDto).collect(Collectors.toSet());
     }
 
     @Override

@@ -7,7 +7,9 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/customer/choose_suggestion.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/customer/customer_dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/customer" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/add_services.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/add_subservices.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/expert_dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/show_feedback.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert/tasks.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/expert" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/manager/manager_dashboard.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/manager" />

@@ -1,6 +1,7 @@
 package ir.maktab.data.entity.members;
 
 import ir.maktab.data.entity.services.Service;
+import ir.maktab.data.entity.services.SubService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class Expert extends User implements Comparable<Expert> {
     private byte[] picture;
 
     @ManyToMany
-    private Set<Service> services = new HashSet<>();
+    private Set<SubService> subServices = new HashSet<>();
 
     private double score;
 

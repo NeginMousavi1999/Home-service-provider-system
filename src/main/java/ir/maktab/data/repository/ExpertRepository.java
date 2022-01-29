@@ -2,6 +2,7 @@ package ir.maktab.data.repository;
 
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.services.Service;
+import ir.maktab.data.entity.services.SubService;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +19,6 @@ public interface ExpertRepository extends CrudRepository<Expert, Integer> {
 
     Optional<Expert> findByEmail(String email);
 
-    @Query(value = "select e.services from Expert e where e.id=:id")
-    Optional<List<Service>> customeGetServiceByExpertId(@Param("id") Long id);
+    @Query(value = "select e.subServices from Expert e where e.id=:id")
+    Optional<List<SubService>> customeGetServiceByExpertId(@Param("id") Long id);
 }

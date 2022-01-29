@@ -1,10 +1,7 @@
 package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
-import ir.maktab.service.ExpertService;
-import ir.maktab.service.FeedbackService;
-import ir.maktab.service.OrderService;
-import ir.maktab.service.ServiceService;
+import ir.maktab.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -25,6 +21,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ExpertController {
     private final ServiceService serviceService;
+    private final SubServiceService subServiceService;
     private final ExpertService expertService;
     private final OrderService orderService;
     private final FeedbackService feedbackService;
@@ -34,36 +31,28 @@ public class ExpertController {
         return "expert/expert_dashboard";
     }
 
-    @RequestMapping("/add_service")
-    public ModelAndView showAddService() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("expert/add_services");
-        SystemServiceNameExpertDto dto = new SystemServiceNameExpertDto();
-        dto.setServicesName(serviceService.getAllServiceName());
-        modelAndView.getModelMap().addAttribute("dto", dto);
-        return modelAndView;
+    @RequestMapping("/add_subservice")
+    public String showAddSubService(HttpServletRequest request, Model model) {
+        ExpertDto expertDto = (ExpertDto) request.getSession().getAttribute("expertDto");
+        Set<ServiceDto> services = serviceService.getAllServiceIncludingSubService();
+        Set<SubServiceDto> expertSubservices = expertService.getSubServices(expertDto);
+        model.addAttribute("services", services)
+                .addAttribute("expert_subservices", expertSubservices);
+        return "expert/add_subservices";
     }
 
     @PostMapping("/add_to_services")
-    public String addService(@ModelAttribute("dto") SystemServiceNameExpertDto serviceDto, HttpServletRequest request,
-                             Model model) {
+    public String addService(@RequestParam(name = "subservice_name") String subServiceName,
+                             HttpServletRequest request, Model model) {
         try {
             ExpertDto expertDto = (ExpertDto) request.getSession().getAttribute("expertDto");
-            List<ServiceDto> serviceDtos = new ArrayList<>();
-            for (String name : serviceDto.getServicesName()) {
-                serviceDtos.add(serviceService.findServiceByName(name));
-            }
-            expertService.addServices(expertDto, serviceDtos);
-            serviceDto.setServicesName(serviceService.getAllServiceName());
-            model.addAttribute("dto", serviceDto);
+            SubServiceDto subServiceDto = subServiceService.findSubServiceByName(subServiceName);
+            expertService.addSubServices(expertDto, subServiceDto);
             model.addAttribute("succ_massage", "successfuly added");
-            return "expert/add_services";
         } catch (Exception e) {
-            serviceDto.setServicesName(serviceService.getAllServiceName());
-            model.addAttribute("dto", serviceDto);
             model.addAttribute("error_massage", e.getLocalizedMessage());
-            return "expert/add_services";
         }
+        return showAddSubService(request, model);
     }
 
     @RequestMapping("/add_suggestion")
@@ -72,8 +61,8 @@ public class ExpertController {
         modelAndView.setViewName("expert/add_suggestion");
         HttpSession session = request.getSession();
         ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
-        Set<ServiceDto> services = expertService.getServices(expertDto);
-        expertDto.setServices(services);
+        Set<SubServiceDto> services = expertService.getSubServices(expertDto);
+        //expertDto.setServices(services); todo
         List<OrderDto> ordersReadyForSuggestion = orderService.getOrdersReadyForSuggestion(expertDto);
         session.setAttribute("ordersReadyForSuggestion", ordersReadyForSuggestion);
         modelAndView.getModelMap().addAttribute("list", ordersReadyForSuggestion);
@@ -96,7 +85,7 @@ public class ExpertController {
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
         }
-        return "expert/add_services";
+        return "expert/add_subservices";
     }
 
     @GetMapping("/show_tasks")

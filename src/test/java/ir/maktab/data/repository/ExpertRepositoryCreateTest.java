@@ -40,7 +40,7 @@ public class ExpertRepositoryCreateTest {
                 .lastName("rose")
                 .userRole(UserRole.EXPERT)
                 .userStatus(UserStatus.WAITING)
-                .services(services)
+                //.services(services)
                 .score(0)
                 .password("Rose1234")
                 .email("rose@gmail.com")
