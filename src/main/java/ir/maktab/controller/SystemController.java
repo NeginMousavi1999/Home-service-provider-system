@@ -97,7 +97,7 @@ public class SystemController {
                 expertService.save(expertDto);
             } catch (Exception e) {
                 model.addAttribute("massage", e.getLocalizedMessage());
-                return "error";
+                return "expert/expert_dashboard";
             }
             session = request.getSession();
             session.setAttribute("expertDto", expertDto);
@@ -110,7 +110,7 @@ public class SystemController {
             customerService.save(customerDto);
         } catch (Exception e) {
             model.addAttribute("massage", e.getLocalizedMessage());
-            return "error";
+            return "customer/customer_dashboard";
         }
         session = request.getSession();
         session.setAttribute("customerDto", customerDto);

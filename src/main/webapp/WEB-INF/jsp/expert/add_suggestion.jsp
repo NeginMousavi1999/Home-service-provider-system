@@ -38,68 +38,50 @@
 <div class="contents order-2 order-md-1">
     <div class="container">
         <div class="row align-items-center justify-content-center">
-            <div class="col-md-7">
-                <h3>Suggestion Form</h3>
+            <div class="col-12">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="add_new_suggestion" method="post">
-                    <table class="table table-bordered table-striped text-dark">
+                <form action="/expert/add_new_suggestion" method="post">
+                    <table class="table table-bordered table-striped text-dark text-center">
+                        <thead>
+                        <tr>
+                            <th colspan="3">
+                                suggestion form
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                to be done date
+                            </th>
+                            <th>
+                                suggested price
+                            </th>
+                            <th>
+                                duration of work
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td>
-                                <label>to be done date</label>
+                                <label>
+                                    <input type="date" name="date">
+                                </label>
                             </td>
                             <td>
                                 <label>
-                                    <input type="date" placeholder="to be done date" name="date">
+                                    <input type="number" name="suggestedPrice">
                                 </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>suggested price</label>
                             </td>
                             <td>
                                 <label>
-                                    <input type="number" placeholder="suggested price" name="suggestedPrice">
+                                    <input type="number" name="durationOfWork">
                                 </label>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <label>duration of work</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <input type="number" placeholder="duration of work" name="durationOfWork">
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>orders</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <div class="form-group first">
-                                        <c:forEach var="order" items="${list}">
-                                            <input type="radio" value="${order.identity}" name="orderDtoIdentity">
-                                            description : ${order.description}
-                                            <br>
-                                            address : ${order.address.city}, ${order.address.state}, ${order.address.postalCode}
-                                            <br>
-                                            registrationDate : ${order.registrationDate}
-                                            <br>
-                                            sub service name : ${order.subService.name}
-                                            <br>
-                                            base cost : ${order.subService.cost}
-                                            <br>
-                                        </c:forEach>
-                                    </div>
-                                </label>
-                            </td>
-                        </tr>
+                        </tbody>
                     </table>
-                    <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
+                    <input type="submit" value="Add my suggestion" class="btn btn-block btn-primary"/>
                 </form>
             </div>
         </div>

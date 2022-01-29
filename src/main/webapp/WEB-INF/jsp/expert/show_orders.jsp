@@ -89,10 +89,10 @@
                                     ${order.address.country}, ${order.address.city}, ${order.address.state}
                             </td>
                             <td>
-                                <a href="#">click me</a>
+                                <a href="/expert/show_order_suggestions/${order.identity}">click me</a>
                             </td>
                             <td>
-                                    <a href="#">click me</a>
+                                <a href="/expert/add_suggestion/${order.identity}">click me</a>
                             </td>
                         </tr>
                     </c:forEach>

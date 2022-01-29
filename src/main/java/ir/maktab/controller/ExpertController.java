@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,6 +23,7 @@ public class ExpertController {
     private final SubServiceService subServiceService;
     private final ExpertService expertService;
     private final OrderService orderService;
+    private final SuggestionService suggestionService;
     private final FeedbackService feedbackService;
 
     @RequestMapping("/dashboard")
@@ -57,45 +57,53 @@ public class ExpertController {
 
     @GetMapping("/show_orders")
     public String showOrdersForSuggesting(HttpServletRequest request, Model model) {
-        ExpertDto expertDto = (ExpertDto) request.getSession().getAttribute("expertDto");
+        HttpSession session = request.getSession();
+        ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
         Set<SubServiceDto> subServices = expertService.getSubServices(expertDto);
         expertDto.setSubServiceDtos(subServices);
         List<OrderDto> ordersReadyForSuggestion = orderService.getOrdersReadyForSuggestion(expertDto);
         model.addAttribute("orders", ordersReadyForSuggestion);
+        session.setAttribute("ordersReadyForSuggestion", ordersReadyForSuggestion);
         return "expert/show_orders";
     }
 
-    @RequestMapping("/add_suggestion")
-    public ModelAndView showAddNewSuggestion(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("expert/add_suggestion");
+    @GetMapping("/show_order_suggestions/{identity}")
+    public String showOrderSuggestions(@PathVariable("identity") int identity, HttpServletRequest request,
+                                       Model model) {
         HttpSession session = request.getSession();
-        ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
-        Set<SubServiceDto> services = expertService.getSubServices(expertDto);
-        //expertDto.setServices(services); todo
-        List<OrderDto> ordersReadyForSuggestion = orderService.getOrdersReadyForSuggestion(expertDto);
-        session.setAttribute("ordersReadyForSuggestion", ordersReadyForSuggestion);
-        modelAndView.getModelMap().addAttribute("list", ordersReadyForSuggestion);
-        return modelAndView;
+        List<OrderDto> ordersReadyForSuggestion = (List<OrderDto>) session.getAttribute("ordersReadyForSuggestion");
+        OrderDto orderDto = ordersReadyForSuggestion.stream().filter(dto -> dto.getIdentity() == identity)
+                .findFirst().orElse(null);
+        Set<SuggestionDto> suggestionDtoList = suggestionService.getByOrder(orderDto);
+        model.addAttribute("order_suggestions", suggestionDtoList);
+        return "expert/show_order_suggestions";
+    }
+
+    @RequestMapping("/add_suggestion/{identity}")
+    public String showAddNewSuggestion(HttpServletRequest request, @PathVariable("identity") int identity) {
+        HttpSession session = request.getSession();
+        session.setAttribute("orderSuggestedIdentity", identity);
+        return "expert/add_suggestion";
     }
 
     @PostMapping("/add_new_suggestion")
     public String addSuggestion(@RequestParam(name = "date") String date,
                                 @RequestParam(name = "suggestedPrice") double suggestedPrice,
                                 @RequestParam(name = "durationOfWork") int durationOfWork,
-                                @RequestParam(name = "orderDtoIdentity") int orderDtoIdentity, Model model,
-                                HttpServletRequest request) {
+                                Model model, HttpServletRequest request) { //TODO must be dto and add validations
         HttpSession session = request.getSession();
         try {
-            List<OrderDto> ordersReadyForSuggestion = (List<OrderDto>) session.getAttribute("ordersReadyForSuggestion");
-            OrderDto orderDto = ordersReadyForSuggestion.stream().filter(dto -> dto.getIdentity() == orderDtoIdentity).findFirst().orElse(null);
             ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
+            int identity = (int) session.getAttribute("orderSuggestedIdentity");
+            List<OrderDto> ordersReadyForSuggestion = (List<OrderDto>) session.getAttribute("ordersReadyForSuggestion");
+            OrderDto orderDto = ordersReadyForSuggestion.stream().filter(dto -> dto.getIdentity() == identity)
+                    .findFirst().orElse(null);
             expertService.addNewSuggestion(date, suggestedPrice, durationOfWork, orderDto, expertDto);
             model.addAttribute("succ_massage", "successfuly added");
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
         }
-        return "expert/add_subservices";
+        return showExpertTasks(request, model);
     }
 
     @GetMapping("/show_tasks")

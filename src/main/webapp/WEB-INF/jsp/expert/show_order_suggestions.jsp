@@ -21,9 +21,6 @@
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/expert/show_tasks">Back</a>
-                </li>
-                <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
                        href="${pageContext.request.contextPath}/expert/dashboard">Dashboard</a>
                 </li>
@@ -46,53 +43,47 @@
                     <thead>
                     <tr>
                         <th colspan="4">
-                            orders informations
+                            suggestions informations
                         </th>
-                        <th colspan="2">
+                        <th colspan="1">
                             actions
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            sub service
-                        </th>
-                        <th>
-                            description
+                            suggested price
                         </th>
                         <th>
                             registration date
                         </th>
                         <th>
-                            address
+                            start time
                         </th>
                         <th>
-                            show suggestions
+                            duration of work
                         </th>
                         <th>
-                            add suggestion
+                            add suggestion for this order
                         </th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="order" items="${orders}">
+                    <c:forEach var="suggestion" items="${order_suggestions}">
                         <tr>
                             <td>
-                                    ${order.subService.name}
+                                    ${suggestion.suggestedPrice}
                             </td>
                             <td>
-                                    ${order.description}
+                                    ${suggestion.registrationDate}
                             </td>
                             <td>
-                                    ${order.registrationDate}
+                                    ${suggestion.startTime}
                             </td>
                             <td>
-                                    ${order.address.country}, ${order.address.city}, ${order.address.state}
+                                    ${suggestion.durationOfWork}
                             </td>
                             <td>
-                                <a href="/expert/show_order_suggestions/${order.identity}">click me</a>
-                            </td>
-                            <td>
-                                <a href="/expert/add_suggestion/${order.identity}">click me</a>
+                                <a href="/expert/add_suggestion/${suggestion.order.identity}">click me</a>
                             </td>
                         </tr>
                     </c:forEach>
