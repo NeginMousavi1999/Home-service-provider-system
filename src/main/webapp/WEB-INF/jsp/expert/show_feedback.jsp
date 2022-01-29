@@ -1,11 +1,12 @@
 <%--@elvariable id="error_massage" type="antlr"--%>
 <%--@elvariable id="succ_massage" type="antlr"--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Customer</title>
+    <title>Add New Suggestion</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/static/css/dashboard_style.css">
 </head>
@@ -16,18 +17,17 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">Home Service Provider System</a>
-
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         </ul>
         <div class="d-flex align-items-center">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li>
-                    <a class="nav-link" href="${pageContext.request.contextPath}/customer/all_orders">Back</a>
+                    <a class="nav-link" href="/expert/show_tasks">Back</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
-                       href="${pageContext.request.contextPath}/customer/dashboard">Dashboard</a>
+                       href="${pageContext.request.contextPath}/expert/dashboard">Dashboard</a>
                 </li>
                 <li>
                     <a class="btn btn-outline-primary my-2 my-sm-0"
@@ -41,42 +41,31 @@
 <div class="contents order-2 order-md-1">
     <div class="container">
         <div class="row align-items-center justify-content-center">
-            <div class="col-md-10">
+            <div class="col-md-7">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form:form modelAttribute="feedbackDto"
-                           action="feedback" method="post">
-                    <table class="table table-bordered table-striped text-dark text-center">
-                        <thead>
-                        <tr>
-                            <th colspan="2">
-                                Feedback For Your Order
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>
-                                comment
-                            </th>
-                            <th>
-                                expert score
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <form:textarea path="comment"/>
-                            </td>
-                            <td>
-                                <form:input path="score" requierd="requierd"/>
-                                <form:errors path="score" cssStyle="color: red"/>
-                            </td>
-                        </tr>
-                        </tbody>
-
-                    </table>
-                    <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
-                </form:form>
+                <table class="table table-bordered table-striped text-dark">
+                    <thead>
+                    <tr>
+                        <th>
+                            comment
+                        </th>
+                        <th>
+                            score
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            ${feedback.comment}
+                        </td>
+                        <td>
+                            ${feedback.score}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

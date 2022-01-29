@@ -42,16 +42,15 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-10">
-                <h3>Feddback For Your Order</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form:form modelAttribute="commentDto"
+                <form:form modelAttribute="feedbackDto"
                            action="feedback" method="post">
                     <table class="table table-bordered table-striped text-dark text-center">
                         <thead>
                         <tr>
                             <th colspan="2">
-                                Feedback
+                                Feedback For Your Order
                             </th>
                         </tr>
                         <tr>
@@ -70,6 +69,7 @@
                             </td>
                             <td>
                                 <form:input path="score" requierd="requierd"/>
+                                <form:errors path="score" cssStyle="color: red"/>
                             </td>
                         </tr>
                         </tbody>

@@ -2,6 +2,7 @@ package ir.maktab.controller;
 
 import ir.maktab.data.dto.*;
 import ir.maktab.service.ExpertService;
+import ir.maktab.service.FeedbackService;
 import ir.maktab.service.OrderService;
 import ir.maktab.service.ServiceService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ public class ExpertController {
     private final ServiceService serviceService;
     private final ExpertService expertService;
     private final OrderService orderService;
+    private final FeedbackService feedbackService;
 
     @RequestMapping("/dashboard")
     public String showDashboard() {
@@ -140,8 +142,14 @@ public class ExpertController {
     }
 
     @GetMapping("/show_feedback/{identity}")
-    public String showCustomerFeedback(@PathVariable("identity") int identity, Model model) {
-        //TODO
-        return null;
+    public String showCustomerFeedback(@PathVariable("identity") int identity, HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        List<SuggestionDto> suggestions = (List<SuggestionDto>) session.getAttribute("expert_suggestions");
+        SuggestionDto suggestionDto = suggestions.stream().filter(dto -> dto.getIdentity() == identity).findFirst()
+                .orElse(null);
+        assert suggestionDto != null;
+        FeedbackDto feedbackDto = feedbackService.getByExpertAndOrder(suggestionDto.getExpert(), suggestionDto.getOrder());
+        model.addAttribute("feedback", feedbackDto);
+        return "expert/show_feedback";
     }
 }

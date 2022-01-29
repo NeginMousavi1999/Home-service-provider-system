@@ -4,7 +4,7 @@ import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.entity.members.Expert;
 import ir.maktab.data.entity.members.User;
 import ir.maktab.data.entity.order.Address;
-import ir.maktab.data.entity.order.Comment;
+import ir.maktab.data.entity.order.Feedback;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.order.Suggestion;
 import ir.maktab.data.entity.services.SubService;
@@ -35,7 +35,7 @@ public class CustomerView {
     private final ExpertService expertService;
     private final SubServiceService subServiceService;
     private final Validation validation;
-    private final CommentService commentService;
+    private final FeedbackService feedbackService;
     private final SuggestionService suggestionService;
 
     public User createCustomer(User customer, double credit) {
@@ -176,13 +176,13 @@ public class CustomerView {
         double oldScore = expert.getScore();
         expert.setScore((oldScore + score) / 2);
         if (customerComment.length() != 0) {
-            Comment comment = Comment.builder()
+            Feedback feedback = Feedback.builder()
                     .comment(customerComment)
                     .expert(expert)
                     .customer(order.getCustomer())
                     .order(order)
                     .build();
-            commentService.save(comment);
+            feedbackService.save(feedback);
         }
 //        expertService.update(expert);
     }

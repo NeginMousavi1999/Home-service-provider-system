@@ -138,7 +138,7 @@
                             </td>
                             <td>
                                 <c:if test="${suggestion.suggestionStatus.toString() eq 'ACCEPTED' and suggestion.order.orderStatus.toString() eq 'FEEDEDBACK'}">
-                                    <a href="#">click me</a>
+                                    <a href="/expert/show_feedback/${suggestion.identity}">click me</a>
                                 </c:if>
                             </td>
                         </tr>

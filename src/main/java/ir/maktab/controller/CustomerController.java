@@ -6,6 +6,8 @@ import ir.maktab.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindException;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +27,7 @@ public class CustomerController {
     private final ServiceService serviceService;
     private final OrderService orderService;
     private final SuggestionService suggestionService;
-    private final CommentService commentService;
+    private final FeedbackService feedbackService;
     private final PaymentService paymantService;
 
     @GetMapping("/dashboard")
@@ -138,22 +140,22 @@ public class CustomerController {
         OrderDto choosenOrder = doneOrders.stream().filter(order -> order.getIdentity() == orderIdentity).findFirst().orElse(null);
         CustomerDto customerDto = (CustomerDto) session.getAttribute("customerDto");
         assert choosenOrder != null;
-        CommentDto commentDto = CommentDto.builder()
+        FeedbackDto feedbackDto = FeedbackDto.builder()
                 .order(choosenOrder)
                 .customer(customerDto)
                 .expert(choosenOrder.getExpert())
                 .build();
-        model.addAttribute("commentDto", commentDto);
-        session.setAttribute("commentDto", commentDto);
+        model.addAttribute("feedbackDto", feedbackDto);
+        session.setAttribute("feedbackDto", feedbackDto);
         return "customer/feedback_page";
     }
 
     @PostMapping("/show_feedback_page/feedback")
-    public String feedback(@ModelAttribute("commentDto") CommentDto commentDtoJsp, Model model, HttpServletRequest request) {
+    public String feedback(@Validated @ModelAttribute("feedbackDto") FeedbackDto feedbackDtoJsp, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         try {
-            CommentDto commentDto = (CommentDto) session.getAttribute("commentDto");
-            commentService.addComment(commentDto, commentDtoJsp.getScore(), commentDtoJsp.getComment());
+            FeedbackDto feedbackDto = (FeedbackDto) session.getAttribute("feedbackDto");
+            feedbackService.addFeedback(feedbackDto, feedbackDtoJsp.getScore(), feedbackDtoJsp.getComment());
             model.addAttribute("succ_massage", "feedback added successfully");
         } catch (Exception exception) {
             model.addAttribute("error_massage", exception.getLocalizedMessage());
@@ -215,5 +217,11 @@ public class CustomerController {
         SuggestionDto suggestionDto = suggestions.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
         assert suggestionDto != null;
         return showOrderSuggestions(suggestionDto.getOrder().getIdentity(), request, model);
+    }
+
+    @ExceptionHandler(value = BindException.class)
+    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
+        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
+        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
     }
 }
