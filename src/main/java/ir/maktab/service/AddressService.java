@@ -7,4 +7,6 @@ import ir.maktab.data.dto.AddressDto;
  */
 public interface AddressService {
     void save(AddressDto addressDto);
+
+    AddressDto findAddress(String country, String city, String state, String postalCode);
 }

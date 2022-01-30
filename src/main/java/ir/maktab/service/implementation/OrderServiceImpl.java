@@ -125,12 +125,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto addNewOrder(OrderRequestDto orderRequest, CustomerDto customerDto) {
         validation.validateUserStatus(UserStatus.CONFIRMED, customerDto.getUserStatus());
-        AddressDto addressDto = AddressDto.builder()
-                .country(orderRequest.getCountry())
-                .city(orderRequest.getCity())
-                .state(orderRequest.getState())
-                .postalCode(orderRequest.getPostalCode())
-                .build();
+        String country = orderRequest.getCountry();
+        String city = orderRequest.getCity();
+        String state = orderRequest.getState();
+        String postalCode = orderRequest.getPostalCode();
+        AddressDto addressDto = addressService.findAddress(country, city, state, postalCode);
+        if (addressDto == null) {
+            addressDto = AddressDto.builder()
+                    .country(country)
+                    .city(city)
+                    .state(state)
+                    .postalCode(postalCode)
+                    .build();
+            addressService.save(addressDto);//TODO must be double check!!!
+        }
         SubServiceDto subServiceDto = subServiceService.findSubServiceByName(orderRequest.getSubServiceName());
         OrderDto orderDto = OrderDto.builder()
                 .address(addressDto)

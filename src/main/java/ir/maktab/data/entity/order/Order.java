@@ -48,7 +48,7 @@ public class Order {
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date toBeDoneDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Address address;
 
     @ManyToOne
