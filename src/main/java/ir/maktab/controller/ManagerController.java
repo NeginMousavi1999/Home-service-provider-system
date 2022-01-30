@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -74,6 +73,17 @@ public class ManagerController {
         return "manager/search";
     }
 
+    @RequestMapping("/dashboard/confirm/{identity}")
+    public String confirm(@PathVariable("identity") int identity, Model model) {
+        try {
+            managerService.confirmUser(identity);
+            model.addAttribute("succ_massage", "confirmed successfuly");
+        } catch (Exception e) {
+            model.addAttribute("error_massage", e.getLocalizedMessage());
+        }
+        return "redirect:/portal/admin/dashboard/search";
+    }
+
     @GetMapping("/dashboard/add_service")
     public String showAddNewService(Model model) {
         model.addAttribute("service", new ServiceDto());
@@ -111,7 +121,7 @@ public class ManagerController {
         return showAddNewSubService(model);
     }
 
-    @RequestMapping("/dashboard/confirm_user")
+/*    @RequestMapping("/dashboard/confirm_user")
     public ModelAndView showUsersToConfirm() {
         ModelAndView modelAndView = new ModelAndView();
         List<UserDto> userDtos = userService.returnWaitingUsers();
@@ -119,17 +129,5 @@ public class ManagerController {
         modelAndView.getModelMap().addAttribute("userDtos", userDtos)
                 .addAttribute("identity_list", new UsersDto());
         return modelAndView;
-    }
-
-    @RequestMapping("/dashboard/confirm")
-    public String confirm(@ModelAttribute("identity_list") UsersDto usersDto, Model model) {
-        try {
-            Arrays.stream(usersDto.getIdentities()).forEach(managerService::confirmUser);
-            model.addAttribute("succ_massage", "confirmed successfuly");
-            return "manager/confirm_user";
-        } catch (Exception e) {
-            model.addAttribute("error_massage", e.getLocalizedMessage());
-            return "manager/confirm_user";
-        }
-    }
+    }*/
 }

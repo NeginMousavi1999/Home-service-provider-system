@@ -38,9 +38,7 @@
                         System</a>
                     <a href="${pageContext.request.contextPath}/portal/admin/dashboard/add_subservice">Add new Sub
                         Service to System</a>
-                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Search Users</a>
-                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/confirm_user">Confirm new
-                        users</a>
+                    <a href="${pageContext.request.contextPath}/portal/admin/dashboard/search">Users</a>
                 </div>
             </div>
         </div>

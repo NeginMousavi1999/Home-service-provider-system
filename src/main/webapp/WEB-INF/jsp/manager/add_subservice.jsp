@@ -38,11 +38,18 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-                <h3>Sub Service Form</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
                 <form:form action="add_new_subservice" modelAttribute="subservice" method="post">
-                    <table class="table table-bordered table-striped text-dark">
+                    <table class="table table-bordered table-striped text-dark text-center">
+                        <thead>
+                        <tr>
+                            <th colspan="2">
+                                sub service informations
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td>
                                 <label>sub service name</label>
@@ -85,6 +92,7 @@
                                 </label>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
 
                     <input type="submit" value="Submit" class="btn btn-block btn-primary"/>

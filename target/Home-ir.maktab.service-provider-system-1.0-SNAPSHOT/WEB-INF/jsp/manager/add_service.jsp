@@ -38,11 +38,18 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-md-7">
-                <h3>Service Form</h3>
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
                 <form:form action="add_new_service" modelAttribute="service" method="post">
-                    <table class="table table-bordered table-striped text-dark">
+                    <table class="table table-bordered table-striped text-dark text-center">
+                        <thead>
+                        <tr>
+                            <th colspan="2">
+                                service information
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         <tr>
                             <td>
                                 <label>service name</label>
@@ -53,6 +60,7 @@
                                 </label>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
 
                     <input type="submit" value="Submit" class="btn btn-block btn-primary"/>

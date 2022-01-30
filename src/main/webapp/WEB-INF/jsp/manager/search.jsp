@@ -1,7 +1,6 @@
-<%--@elvariable id="error_massage" type="antlr"--%>
-<%--@elvariable id="succ_massage" type="antlr"--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,87 +35,137 @@
     </div>
 </nav>
 <br><br>
-<div class="contents order-2 order-md-1">
-    <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-7">
-                <h3>search and filter users Form</h3>
-                <div style="color: green">${succ_massage}</div>
-                <div style="color: red">${error_massage}</div>
-                <form:form action="doFilter" modelAttribute="filterData" method="post">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="col-12">
+        <form:form action="doFilter" modelAttribute="filterData" method="post">
+            <table class="table table-bordered table-striped text-dark">
+                <thead>
+                <tr>
+                    <th colspan="9" style="text-align: center; border: none">
+                        Filter Users
+                    </th>
+                </tr>
+                </thead>
+                <tr>
+                    <th>
+                        <label>first name</label>
+                    </th>
+                    <td>
+                        <label>
+                            <form:input path="firstName"/>
+                        </label>
+                    </td>
+                    <th>
+                        <label>last name</label>
+                    </th>
+                    <td>
+                        <label>
+                            <form:input path="lastName"/>
+                        </label>
+                    </td>
+                    <th>
+                        <label>email</label>
+                    </th>
+                    <td>
+                        <label>
+                            <form:input path="email"/>
+                        </label>
+                    </td>
+                    <th>
+                        <label>role</label>
+                    </th>
+                    <td>
+                        <label>
+                            customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole"
+                                                       onclick="customerFunction()"/>
+                            expert <form:radiobutton id="expert" value="EXPERT" path="userRole"
+                                                     onclick="expertFunction()"/>
+                        </label>
+                    </td>
+                    <td>
+                        <input id="submit_input" type="submit" value="Submit" class="btn btn-block btn-primary"/>
+                    </td>
+                </tr>
+            </table>
+        </form:form>
+    </div>
+</nav>
+<br><br>
+<c:if test="${users.size() gt 0}">
+    <div class="contents order-2 order-md-1">
+        <div class="container">
+            <div class="row align-items-center justify-content-center mb-5">
+                <div class="col-12">
                     <table class="table table-bordered table-striped text-dark">
+                        <thead>
                         <tr>
-                            <td>
-                                <label>first name</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <form:input path="firstName"/>
-                                </label>
-                            </td>
+                            <th colspan="7" style="text-align: center">
+                                result
+                            </th>
                         </tr>
                         <tr>
-                            <td>
-                                <label>last name</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <form:input path="lastName"/>
-                                </label>
-                            </td>
+                            <th>
+                                first name
+                            </th>
+                            <th>
+                                last name
+                            </th>
+                            <th>
+                                email
+                            </th>
+                            <th>
+                                role
+                            </th>
+                            <th>
+                                registration date
+                            </th>
+                            <th>
+                                status
+                            </th>
+                            <th>
+                                actions
+                            </th>
                         </tr>
-                        <tr>
-                            <td>
-                                <label>email</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <form:input path="email"/>
-                                </label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>role</label>
-                            </td>
-                            <td>
-                                <label>
-                                    customer <form:radiobutton id="customer" value="CUSTOMER" path="userRole"
-                                                               onclick="customerFunction()"/>
-                                    expert <form:radiobutton id="expert" value="EXPERT" path="userRole"
-                                                             onclick="expertFunction()"/>
-                                </label>
-                            </td>
-                        </tr>
-                    </table>
-                    <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
-                </form:form>
-            </div>
-        </div>
-        <br><br>
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-7">
-                <h3>Result</h3>
-                <table class="table table-bordered table-striped text-dark">
-                    <c:forEach var="user" items="${users}">
-                        <tr>
-                            <td>
-                                <label>
-                                    <div class="form-group first">
-                                            ${user.email} , ${user.userRole} , ${user.firstName} , ${user.lastName}
-                                        , ${user.registrationDate} <br>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="user" items="${users}">
+                            <tr>
+                                <td>
+                                        ${user.firstName}
+                                </td>
+                                <td>
+                                        ${user.lastName}
+                                </td>
+                                <td>
+                                        ${user.email}
+                                </td>
+                                <td>
+                                        ${user.userRole}
+                                </td>
+                                <td>
+                                        ${user.registrationDate}
+                                </td>
+                                <td>
+                                        ${user.userStatus}
+                                </td>
 
-                                    </div>
-                                </label>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                                <td>
+                                    <c:if test="${user.userStatus.toString() eq 'WAITING'}">
+                                        <a href="/portal/admin/dashboard/confirm/${user.identity}">confirm user</a>
+                                    </c:if>
+                                    <c:if test="${user.userStatus.toString() eq 'CONFIRMED' and user.userRole.toString() eq 'EXPERT'}">
+                                        <a href="#">add sub service</a>
+                                    </c:if>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
+</c:if>
 <script src="${pageContext.request.contextPath}/resources/static/js/register.js"></script>
 </body>
 </html>
