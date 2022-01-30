@@ -93,8 +93,9 @@ public class ExpertServiceImpl implements ExpertService {
 
     @Override
     public void addNewSuggestion(String date, double suggestedPrice, int durationOfWork, OrderDto orderDto, ExpertDto expertDto) {
+        if (suggestedPrice < orderDto.getSubService().getCost())
+            throw new HomeServiceException("suggested price can not be less than subservice price!");
         Set<SuggestionDto> orderDtoSuggestions = suggestionService.getByOrder(orderDto);
-        assert orderDto != null;
         orderDto.setSuggestions(orderDtoSuggestions);
         validation.validateUserStatus(UserStatus.CONFIRMED, expertDto.getUserStatus());
         orderDto.setSuggestions(orderDtoSuggestions);

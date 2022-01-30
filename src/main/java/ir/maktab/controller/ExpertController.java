@@ -102,6 +102,7 @@ public class ExpertController {
             model.addAttribute("succ_massage", "successfuly added");
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
+            return "expert/add_suggestion";
         }
         return showExpertTasks(request, model);
     }

@@ -45,7 +45,7 @@
                 <table class="table table-bordered table-striped text-dark text-center">
                     <thead>
                     <tr>
-                        <th colspan="4">
+                        <th colspan="5">
                             orders informations
                         </th>
                         <th colspan="2">
@@ -55,6 +55,9 @@
                     <tr>
                         <th>
                             sub service
+                        </th>
+                        <th>
+                            base cost
                         </th>
                         <th>
                             description
@@ -78,6 +81,9 @@
                         <tr>
                             <td>
                                     ${order.subService.name}
+                            </td>
+                            <td>
+                                    ${order.subService.cost}
                             </td>
                             <td>
                                     ${order.description}
