@@ -3,6 +3,7 @@ package ir.maktab.data.repository;
 import ir.maktab.data.dto.OrdersHistoryDto;
 import ir.maktab.data.entity.members.Customer;
 import ir.maktab.data.entity.members.Expert;
+import ir.maktab.data.entity.order.Address;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.services.Service;
 import ir.maktab.data.entity.services.SubService;
@@ -82,4 +83,7 @@ public interface OrderRepository extends CrudRepository<Order, Integer>, JpaSpec
     int countByCustomer(Customer customer);
 
     int countByExpert(Expert expert);
+
+    Optional<Order> findByAddressAndCustomerAndSubServiceAndDescription(Address address, Customer customer,
+                                                                        SubService subService, String description);
 }

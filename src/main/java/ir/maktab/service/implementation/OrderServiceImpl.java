@@ -1,6 +1,8 @@
 package ir.maktab.service.implementation;
 
 import ir.maktab.data.dto.*;
+import ir.maktab.data.entity.members.Customer;
+import ir.maktab.data.entity.order.Address;
 import ir.maktab.data.entity.order.Order;
 import ir.maktab.data.entity.services.SubService;
 import ir.maktab.data.enumuration.OrderStatus;
@@ -11,10 +13,7 @@ import ir.maktab.service.AddressService;
 import ir.maktab.service.OrderService;
 import ir.maktab.service.ServiceService;
 import ir.maktab.service.SubServiceService;
-import ir.maktab.util.mapper.CustomerMapper;
-import ir.maktab.util.mapper.ExpertMapper;
-import ir.maktab.util.mapper.OrderMapper;
-import ir.maktab.util.mapper.SubServiceMapper;
+import ir.maktab.util.mapper.*;
 import ir.maktab.validation.Validation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -125,30 +124,43 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderDto addNewOrder(OrderRequestDto orderRequest, CustomerDto customerDto) {
         validation.validateUserStatus(UserStatus.CONFIRMED, customerDto.getUserStatus());
+        SubServiceDto subServiceDto = subServiceService.findSubServiceByName(orderRequest.getSubServiceName());
         String country = orderRequest.getCountry();
         String city = orderRequest.getCity();
         String state = orderRequest.getState();
         String postalCode = orderRequest.getPostalCode();
+        String description = orderRequest.getDescription();
         AddressDto addressDto = addressService.findAddress(country, city, state, postalCode);
-        if (addressDto == null) {
+        if (addressDto != null) {
+            if (isDuplicateOrder(addressDto, customerDto, subServiceDto, description))
+                throw new HomeServiceException("Duplicate Order!!");
+        } else {
             addressDto = AddressDto.builder()
                     .country(country)
                     .city(city)
                     .state(state)
                     .postalCode(postalCode)
                     .build();
-            addressService.save(addressDto);//TODO must be double check!!!
+            addressService.save(addressDto);//TODO must be double check by creating teble az avval !!!
         }
-        SubServiceDto subServiceDto = subServiceService.findSubServiceByName(orderRequest.getSubServiceName());
         OrderDto orderDto = OrderDto.builder()
                 .address(addressDto)
                 .customer(customerDto)
-                .description(orderRequest.getDescription())
+                .description(description)
                 .orderStatus(OrderStatus.WAITING_FOR_SPECIALIST_SELECTION)
                 .subService(subServiceDto)
                 .build();
         saveOrder(orderDto);
         return orderDto;
+    }
+
+    private boolean isDuplicateOrder(AddressDto addressDto, CustomerDto customerDto, SubServiceDto subServiceDto, String description) {
+        Address address = AddressMapper.mapAddressDtoToAddress(addressDto);
+        Customer customer = CustomerMapper.mapCustomerDtoToCustomer(customerDto);
+        SubService subService = SubServiceMapper.mapSubServiceDtoToSubService(subServiceDto);
+        Optional<Order> optionalOrder = orderRepository
+                .findByAddressAndCustomerAndSubServiceAndDescription(address, customer, subService, description);
+        return optionalOrder.isPresent();
     }
 
     @Override
