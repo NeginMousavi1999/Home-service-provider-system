@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
@@ -24,5 +25,6 @@ public class PaymentDto {
 
     private Date paymantDate;
 
+    @Size(max = 12, min = 8, message = "invalid card number!")
     private String cardNumber;
 }

@@ -66,7 +66,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/add_new_order", method = RequestMethod.POST)
-    public ModelAndView addNewOrder(@ModelAttribute("order") OrderRequestDto orderRequest, ModelAndView modelAndView,
+    public ModelAndView addNewOrder(@Validated @ModelAttribute("order") OrderRequestDto orderRequest, ModelAndView modelAndView,
                                     HttpServletRequest request) {
         try {
             CustomerDto customerDto = (CustomerDto) request.getSession().getAttribute("customerDto");
@@ -119,7 +119,8 @@ public class CustomerController {
     }
 
     @PostMapping("/pay_online")
-    public String doOnlinePay(@ModelAttribute("paymentDto") PaymentDto donePaymentDto, Model model, HttpServletRequest request) {
+    public String doOnlinePay(@Validated @ModelAttribute("paymentDto") PaymentDto donePaymentDto, Model model,
+                              HttpServletRequest request) {
         HttpSession session = request.getSession();
         try {
             PaymentDto paymentDto = (PaymentDto) session.getAttribute("paymentDto");

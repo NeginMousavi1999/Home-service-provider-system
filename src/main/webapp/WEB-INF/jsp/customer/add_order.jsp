@@ -91,6 +91,7 @@
                                 <label>
                                     <form:input path="postalCode"/>
                                 </label>
+                                <form:errors path="postalCode" cssStyle="color: red"/>
                             </td>
                         </tr>
                         <tr>
@@ -152,6 +153,7 @@
                         <tr>
                             <td colspan="4">
                                 <form:textarea path="description" cssStyle="width: 100%"/>
+                                <form:errors path="description" cssStyle="color: red"/>
                             </td>
                         </tr>
                         </tbody>

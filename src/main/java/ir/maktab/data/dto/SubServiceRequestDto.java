@@ -2,6 +2,8 @@ package ir.maktab.data.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.Size;
+
 /**
  * @author Negin Mousavi
  */
@@ -10,5 +12,6 @@ public class SubServiceRequestDto {
     private String name;
     private String serviceName;
     private double cost;
+    @Size(max = 300, message = "it is too long!")
     private String description;
 }

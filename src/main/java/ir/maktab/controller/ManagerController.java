@@ -151,7 +151,7 @@ public class ManagerController {
     }
 
     @PostMapping("/dashboard/add_new_subservice")
-    public String addNewSubService(@ModelAttribute("subservice") SubServiceRequestDto subServiceRequestDto, Model model) {
+    public String addNewSubService(@Validated @ModelAttribute("subservice") SubServiceRequestDto subServiceRequestDto, Model model) {
         try {
             subServiceService.addNewSubService(subServiceRequestDto);
             model.addAttribute("succ_massage", "successfuly added");
@@ -160,14 +160,4 @@ public class ManagerController {
         }
         return showAddNewSubService(model);
     }
-
-/*    @RequestMapping("/dashboard/confirm_user")
-    public ModelAndView showUsersToConfirm() {
-        ModelAndView modelAndView = new ModelAndView();
-        List<UserDto> userDtos = userService.returnWaitingUsers();
-        modelAndView.setViewName("manager/confirm_user");
-        modelAndView.getModelMap().addAttribute("userDtos", userDtos)
-                .addAttribute("identity_list", new UsersDto());
-        return modelAndView;
-    }*/
 }

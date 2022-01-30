@@ -78,6 +78,7 @@
                             <td>
                                 <label>
                                     <form:input type="text" path="cardNumber"/>
+                                    <form:errors path="cardNumber" cssStyle="color: red"/>
                                 </label>
                             </td>
                             <td>
@@ -106,7 +107,7 @@
 </div>
 
 <script type="text/javascript">
-    let IdealTimeOut = 100; //100 seconds
+    let IdealTimeOut = 10; //10 seconds
     let idleSecondsTimer = null;
     let idleSecondsCounter = 0;
     document.onclick = function () {
@@ -129,7 +130,7 @@
         if (idleSecondsCounter >= IdealTimeOut) {
             window.clearInterval(idleSecondsTimer);
             alert("Your Session has expired. Please login again.");
-            window.location = "http://localhost:8080/";
+            window.location = "http://localhost:8080/customer/all_orders";
         }
     }
 </script>
