@@ -122,7 +122,7 @@ public class OrderMapper {
         Expert expert = order.getExpert();
         if (expert != null)
             orderDto.setExpert(ExpertMapper.mapExpertToExpertDto(expert));
-        if (toBeDoneDate !=null)
+        if (toBeDoneDate != null)
             orderDto.setToBeDoneDate(toBeDoneDate);
         return orderDto;
     }

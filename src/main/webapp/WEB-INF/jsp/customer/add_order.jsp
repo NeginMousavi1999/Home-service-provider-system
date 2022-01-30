@@ -38,48 +38,55 @@
 <br><br>
 <div class="contents order-2 order-md-1">
     <div class="container">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-md-7">
-                <h3>Order Form</h3>
+        <div class="row align-items-center justify-content-center mb-5">
+            <div class="col-12">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
                 <form:form action="add_new_order" modelAttribute="order" method="post">
-                    <table class="table table-bordered table-striped text-dark">
+                    <table class="table table-bordered text-dark text-center">
+                        <thead>
                         <tr>
-                            <td>
+                            <th colspan="4" style="background-color: #fb771a; color: white">
+                                Adding Order Form
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="4" style="background-color: #fb771a; color: white">
+                                your Address information
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>
                                 <label>country</label>
-                            </td>
+                            </th>
                             <td>
                                 <label>
                                     <form:input path="country"/>
                                 </label>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
+                            <th>
                                 <label>city</label>
-                            </td>
+                            </th>
                             <td>
                                 <label>
                                     <form:input path="city"/>
                                 </label>
                             </td>
                         </tr>
-
                         <tr>
-                            <td>
+                            <th>
                                 <label>state</label>
-                            </td>
+                            </th>
                             <td>
                                 <label>
                                     <form:input path="state"/>
                                 </label>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>
+                            <th>
                                 <label>Postal Code</label>
-                            </td>
+                            </th>
                             <td>
                                 <label>
                                     <form:input path="postalCode"/>
@@ -87,42 +94,67 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <label>Description</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <form:input path="description"/>
-                                </label>
-                            </td>
+                            <th colspan="4" style="background-color: #fb771a; color: white">
+                                sub service
+                            </th>
                         </tr>
+                        <tr>
+                            <th>
+                                select
+                            </th>
+                            <th>
+                                name
+                            </th>
+                            <th>
+                                description
+                            </th>
+                            <th>
+                                cost
+                            </th>
+                        </tr>
+                        <div class="form-group first">
+                            <c:forEach var="service" items="${set}">
+                                <tr>
+                                    <th style="background-color: white" colspan="4">
+                                        service
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="background-color:rgba(0, 0, 0, 0.05)">
+                                            ${service.name}
+                                    </td>
+                                </tr>
+                                <c:forEach var="subservice" items="${service.subServices}">
+                                    <tr style="background-color:rgba(0, 0, 0, 0.05)">
+                                        <td>
+                                            <form:radiobutton value="${subservice.name}"
+                                                              path="subServiceName"/>
+                                        </td>
+                                        <td>
+                                                ${subservice.name}
+                                        </td>
+                                        <td>
+                                                ${subservice.description}
+                                        </td>
+                                        <td>
+                                                ${subservice.cost}
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </c:forEach>
+                        </div>
 
                         <tr>
-                            <td>
-                                <label>Sub Services</label>
-                            </td>
-                            <td>
-                                <label>
-                                    <div class="form-group first">
-                                        <c:forEach var="service" items="${set}">
-                                            ${service.name}
-                                            <ul>
-                                                <c:forEach var="subservice" items="${service.subServices}">
-                                                    <li><form:radiobutton value="${subservice.name}"
-                                                                          path="subServiceName"/>
-                                                        name : ${subservice.name}
-                                                        <br>
-                                                        description : ${subservice.description}
-                                                        <br>
-                                                        cost : ${subservice.cost}
-                                                    </li>
-                                                </c:forEach>
-                                            </ul>
-                                        </c:forEach>
-                                    </div>
-                                </label>
+                            <th colspan="4" style="background-color: #fb771a; color: white">
+                                your Description
+                            </th>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <form:textarea path="description" cssStyle="width: 100%"/>
                             </td>
                         </tr>
+                        </tbody>
                     </table>
                     <input type="submit" value="Submit" class="btn btn-block btn-primary"/>
                 </form:form>

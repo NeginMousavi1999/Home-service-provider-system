@@ -38,7 +38,7 @@ public class SuggestionMapper {
                 .suggestionStatus(suggestion.getSuggestionStatus())
                 .build();
         Order order = suggestion.getOrder();
-        if (order !=null)
+        if (order != null)
             suggestionDto.setOrder(OrderMapper.mapOrderToOrderDtoToPay(order));
         return suggestionDto;
     }

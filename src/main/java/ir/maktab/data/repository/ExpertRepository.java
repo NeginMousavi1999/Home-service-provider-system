@@ -1,7 +1,6 @@
 package ir.maktab.data.repository;
 
 import ir.maktab.data.entity.members.Expert;
-import ir.maktab.data.entity.services.Service;
 import ir.maktab.data.entity.services.SubService;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

@@ -1,6 +1,5 @@
 package ir.maktab.data.entity.members;
 
-import ir.maktab.data.entity.services.Service;
 import ir.maktab.data.entity.services.SubService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
