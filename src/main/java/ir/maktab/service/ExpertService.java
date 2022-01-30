@@ -33,4 +33,6 @@ public interface ExpertService {
     List<ExpertDto> getAll();
 
     List<SuggestionDto> getSuggestions(ExpertDto expertDto);
+
+    ExpertDto findById(int identity);
 }

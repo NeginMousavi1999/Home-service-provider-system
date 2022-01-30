@@ -20,4 +20,6 @@ public interface ExpertRepository extends CrudRepository<Expert, Integer> {
 
     @Query(value = "select e.subServices from Expert e where e.id=:id")
     Optional<List<SubService>> customeGetSubServiceByExpertId(@Param("id") Long id);
+
+    Optional<Expert> findById(long id);
 }

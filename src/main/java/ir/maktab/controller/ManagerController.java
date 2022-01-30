@@ -14,7 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -78,6 +82,42 @@ public class ManagerController {
         try {
             managerService.confirmUser(identity);
             model.addAttribute("succ_massage", "confirmed successfuly");
+        } catch (Exception e) {
+            model.addAttribute("error_massage", e.getLocalizedMessage());
+        }
+        return "redirect:/portal/admin/dashboard/search";
+    }
+
+    @GetMapping("/dashboard/show_subservices_for_expert/{identity}")
+    public String showSubServiceForExpert(@PathVariable("identity") int identity, HttpServletRequest request, Model model) {
+        Set<ServiceDto> services = serviceService.getAllServiceIncludingSubService();
+        Map<ExpertDto, Set<SubServiceDto>> expertSubservices = managerService.getExpertAndSubServices(identity);
+        Collection<Set<SubServiceDto>> values = expertSubservices.values();
+        for (Set<SubServiceDto> subServiceDtos : values) {
+            model.addAttribute("services", services)
+                    .addAttribute("expert_subservices", subServiceDtos);
+        }
+        request.getSession().setAttribute("expert_and_subservices", expertSubservices);
+        return "manager/add_subservices";
+    }
+
+    @PostMapping("/dashboard/add_to_subservices")
+    public String addService(@RequestParam(name = "subservice_name") String subServiceName,
+                             HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        try {
+            Map<ExpertDto, Set<SubServiceDto>> expertAndSubservices = (Map<ExpertDto, Set<SubServiceDto>>) session
+                    .getAttribute("expert_and_subservices");
+            Set<ExpertDto> expertDtos = expertAndSubservices.keySet();
+            ExpertDto expertDto = null;
+            for (ExpertDto myExpertDto : expertDtos)
+                expertDto = myExpertDto;
+            Set<SubServiceDto> subServiceDtos = expertAndSubservices.get(expertDto);
+            assert expertDto != null;
+            expertDto.setSubServiceDtos(subServiceDtos);
+            SubServiceDto subServiceDto = subServiceService.findSubServiceByName(subServiceName);
+            managerService.addSubServices(expertDto, subServiceDto);
+            model.addAttribute("succ_massage", "successfuly added");
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
         }

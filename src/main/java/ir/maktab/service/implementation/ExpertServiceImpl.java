@@ -133,4 +133,12 @@ public class ExpertServiceImpl implements ExpertService {
     public List<SuggestionDto> getSuggestions(ExpertDto expertDto) {
         return suggestionService.getAllSuggestions(expertDto);
     }
+
+    @Override
+    public ExpertDto findById(int identity) {
+        Optional<Expert> expert = expertRepository.findById(identity - 1000);
+        if (expert.isEmpty())
+            throw new HomeServiceException("no such expert!");
+        return ExpertMapper.mapExpertToExpertDto(expert.get());
+    }
 }

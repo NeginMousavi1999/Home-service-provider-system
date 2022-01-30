@@ -1,11 +1,14 @@
 package ir.maktab.service.implementation;
 
+import ir.maktab.data.dto.ExpertDto;
 import ir.maktab.data.dto.LoginDto;
 import ir.maktab.data.dto.ManagerDto;
+import ir.maktab.data.dto.SubServiceDto;
 import ir.maktab.data.entity.members.Manager;
 import ir.maktab.data.enumuration.UserStatus;
 import ir.maktab.data.repository.ManagerRepository;
 import ir.maktab.exception.HomeServiceException;
+import ir.maktab.service.ExpertService;
 import ir.maktab.service.ManagerService;
 import ir.maktab.service.UserService;
 import ir.maktab.util.mapper.ManagerMapper;
@@ -13,7 +16,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Negin Mousavi
@@ -23,6 +29,7 @@ import java.util.Optional;
 @Getter
 public class ManagerServiceImpl implements ManagerService {
     private final ManagerRepository managerRepository;
+    private final ExpertService expertService;
     private final UserService userService;
 
     public void save(Manager manager) {
@@ -38,5 +45,19 @@ public class ManagerServiceImpl implements ManagerService {
 
     public void confirmUser(int identity) {
         userService.updateUserStatus(identity, UserStatus.CONFIRMED);
+    }
+
+    @Override
+    public Map<ExpertDto, Set<SubServiceDto>> getExpertAndSubServices(int identity) {
+        ExpertDto expertDto = expertService.findById(identity);
+        Set<SubServiceDto> subServices = expertService.getSubServices(expertDto);
+        Map<ExpertDto, Set<SubServiceDto>> result = new HashMap<>();
+        result.put(expertDto, subServices);
+        return result;
+    }
+
+    @Override
+    public void addSubServices(ExpertDto expertDto, SubServiceDto subServiceDto) {
+        expertService.addSubServices(expertDto, subServiceDto);
     }
 }
