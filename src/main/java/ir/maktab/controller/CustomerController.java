@@ -203,7 +203,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
         OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
-        Set<SuggestionDto> suggestions = suggestionService.getByOrder(orderDto);
+        Set<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceAndExpertByOrder(orderDto);
         model.addAttribute("suggestions", suggestions);
         session.setAttribute("customer_suggestions", suggestions);
         return "customer/suggestions";

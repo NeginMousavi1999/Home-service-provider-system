@@ -107,7 +107,7 @@
 </div>
 
 <script type="text/javascript">
-    let IdealTimeOut = 10; //10 seconds
+    let IdealTimeOut = 100; //10 seconds
     let idleSecondsTimer = null;
     let idleSecondsCounter = 0;
     document.onclick = function () {
@@ -129,7 +129,7 @@
         }
         if (idleSecondsCounter >= IdealTimeOut) {
             window.clearInterval(idleSecondsTimer);
-            alert("Your Session has expired. Please login again.");
+            alert("Your Session has expired. Please try again.");
             window.location = "http://localhost:8080/customer/all_orders";
         }
     }

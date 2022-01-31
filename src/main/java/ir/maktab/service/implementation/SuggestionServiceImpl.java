@@ -74,12 +74,31 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     @Override
-    public List<SuggestionDto> getSortedByOrder(OrderDto orderDto) {
-        List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice", "expert").descending())
+    public Set<SuggestionDto> getSortedBySuggestedPriceAndExpertByOrder(OrderDto orderDto) {
+        List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice").ascending().
+                and(Sort.by("expert").descending()))
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
         return suggestionDtoList.stream()
                 .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<SuggestionDto> getSortedByExpertByOrder(OrderDto orderDto) {
+        List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("expert").descending())
+                .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
+        return suggestionDtoList.stream()
+                .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
+                .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<SuggestionDto> getSortedBySuggestedPriceByOrder(OrderDto orderDto) {
+        List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice").ascending())
+                .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
+        return suggestionDtoList.stream()
+                .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
+                .collect(Collectors.toSet());
     }
 
     @Override
