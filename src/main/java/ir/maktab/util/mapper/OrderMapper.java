@@ -58,7 +58,7 @@ public class OrderMapper {
 
     public static Order mapOrderDtoToOrderForSaving(OrderDto orderDto) {
         return Order.builder()
-                .address(AddressMapper.mapAddressDtoToAddressForSaving(orderDto.getAddress()))
+                .address(AddressMapper.mapAddressDtoToAddress(orderDto.getAddress()))
                 .customer(CustomerMapper.mapCustomerDtoToCustomer(orderDto.getCustomer()))
                 .description(orderDto.getDescription())
                 .orderStatus(orderDto.getOrderStatus())
