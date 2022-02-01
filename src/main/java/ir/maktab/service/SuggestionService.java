@@ -26,11 +26,11 @@ public interface SuggestionService {
 
     Long getCountOfRecords();
 
-    Set<SuggestionDto> getSortedBySuggestedPriceAndExpertByOrder(OrderDto order);
+    List<SuggestionDto> getSortedBySuggestedPriceAndExpertByOrder(OrderDto order);
 
-    Set<SuggestionDto> getSortedByExpertByOrder(OrderDto orderDto);
+    List<SuggestionDto> getSortedByExpertByOrder(OrderDto orderDto);
 
-    Set<SuggestionDto> getSortedBySuggestedPriceByOrder(OrderDto orderDto);
+    List<SuggestionDto> getSortedBySuggestedPriceByOrder(OrderDto orderDto);
 
     void chooseSuggestion(int suggestionIdentity, List<SuggestionDto> suggestions);
 

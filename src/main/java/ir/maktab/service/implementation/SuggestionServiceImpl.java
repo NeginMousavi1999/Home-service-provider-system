@@ -74,33 +74,33 @@ public class SuggestionServiceImpl implements SuggestionService {
     }
 
     @Override
-    public Set<SuggestionDto> getSortedBySuggestedPriceAndExpertByOrder(OrderDto orderDto) {
+    public List<SuggestionDto> getSortedBySuggestedPriceAndExpertByOrder(OrderDto orderDto) {
         List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice").ascending().
                 and(Sort.by("expert").descending()))
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
         return suggestionDtoList.stream()
                 .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<SuggestionDto> getSortedByExpertByOrder(OrderDto orderDto) {
+    public List<SuggestionDto> getSortedByExpertByOrder(OrderDto orderDto) {
         List<Suggestion> suggestions = suggestionRepository.findAll(Sort.by("expert").descending());
         List<SuggestionDto> suggestionDtoList = suggestions
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
         return suggestionDtoList.stream()
                 .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Set<SuggestionDto> getSortedBySuggestedPriceByOrder(OrderDto orderDto) {
+    public List<SuggestionDto> getSortedBySuggestedPriceByOrder(OrderDto orderDto) {
         List<Suggestion> suggestedPrice = suggestionRepository.findAll(Sort.by("suggestedPrice").ascending());
         List<SuggestionDto> suggestionDtoList = suggestedPrice
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
         return suggestionDtoList.stream()
                 .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     @Override

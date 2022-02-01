@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -203,7 +204,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
         OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
-        Set<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceAndExpertByOrder(orderDto);
+        List<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceAndExpertByOrder(orderDto);
         model.addAttribute("suggestions", suggestions);
         session.setAttribute("customer_suggestions", suggestions);
         return "customer/suggestions";
@@ -215,7 +216,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
         OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
-        Set<SuggestionDto> suggestions = suggestionService.getSortedByExpertByOrder(orderDto);
+        List<SuggestionDto> suggestions = suggestionService.getSortedByExpertByOrder(orderDto);
         model.addAttribute("suggestions", suggestions);
         session.setAttribute("customer_suggestions", suggestions);
         return "customer/suggestions";
@@ -227,7 +228,7 @@ public class CustomerController {
         HttpSession session = request.getSession();
         Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
         OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
-        Set<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceByOrder(orderDto);
+        List<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceByOrder(orderDto);
         model.addAttribute("suggestions", suggestions);
         session.setAttribute("customer_suggestions", suggestions);
         return "customer/suggestions";
