@@ -76,7 +76,7 @@ public class SuggestionServiceImpl implements SuggestionService {
     @Override
     public List<SuggestionDto> getSortedBySuggestedPriceAndExpertByOrder(OrderDto orderDto) {
         List<SuggestionDto> suggestionDtoList = suggestionRepository.findAll(Sort.by("suggestedPrice").ascending().
-                and(Sort.by("expert").descending()))
+                and(Sort.by("expert.score").descending()))
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
         return suggestionDtoList.stream()
                 .filter(suggestionDto -> suggestionDto.getOrder().getIdentity() == orderDto.getIdentity())
@@ -85,7 +85,7 @@ public class SuggestionServiceImpl implements SuggestionService {
 
     @Override
     public List<SuggestionDto> getSortedByExpertByOrder(OrderDto orderDto) {
-        List<Suggestion> suggestions = suggestionRepository.findAll(Sort.by("expert").descending());
+        List<Suggestion> suggestions = suggestionRepository.findAll(Sort.by("expert.score").descending());
         List<SuggestionDto> suggestionDtoList = suggestions
                 .stream().map(SuggestionMapper::mapSuggestionToSuggestionDtoForSorting).collect(Collectors.toList());
         return suggestionDtoList.stream()
