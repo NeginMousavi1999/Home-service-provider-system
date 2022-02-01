@@ -198,12 +198,36 @@ public class CustomerController {
         return "customer/orders";
     }
 
-    @GetMapping("/show_order_suggestions/{identity}")
+    @GetMapping("/show_order_suggestions_sortedByExpertAndPrice/{identity}")
     public String showOrderSuggestions(@PathVariable("identity") int identity, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
         Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
         OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
         Set<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceAndExpertByOrder(orderDto);
+        model.addAttribute("suggestions", suggestions);
+        session.setAttribute("customer_suggestions", suggestions);
+        return "customer/suggestions";
+    }
+
+    @GetMapping("/show_order_suggestions_sortedByExper/{identity}")
+    public String showOrderSuggestionsWithExpertScore(@PathVariable("identity") int identity, HttpServletRequest request,
+                                                      Model model) {
+        HttpSession session = request.getSession();
+        Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
+        OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
+        Set<SuggestionDto> suggestions = suggestionService.getSortedByExpertByOrder(orderDto);
+        model.addAttribute("suggestions", suggestions);
+        session.setAttribute("customer_suggestions", suggestions);
+        return "customer/suggestions";
+    }
+
+    @GetMapping("/show_order_suggestions_sortedByPrice/{identity}")
+    public String showOrderSuggestionsWithSuggestedPrice(@PathVariable("identity") int identity, HttpServletRequest request,
+                                                         Model model) {
+        HttpSession session = request.getSession();
+        Set<OrderDto> orders = (Set<OrderDto>) session.getAttribute("customer_orders");
+        OrderDto orderDto = orders.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
+        Set<SuggestionDto> suggestions = suggestionService.getSortedBySuggestedPriceByOrder(orderDto);
         model.addAttribute("suggestions", suggestions);
         session.setAttribute("customer_suggestions", suggestions);
         return "customer/suggestions";

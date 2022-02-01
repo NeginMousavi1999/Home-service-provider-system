@@ -42,6 +42,18 @@
     <div class="container">
         <div class="row align-items-center justify-content-center">
             <div class="col-12">
+                <div class="d-flex justify-content-center mb-5">
+                    <a class="border p-3 mr-3"
+                       href="/customer/show_order_suggestions_sortedByExpertAndPrice/${identity}">sort by expert score
+                        and suggested price</a>
+                    <a class="border p-3 mr-3"
+                       href="/customer/show_order_suggestions_sortedByExper/${identity}">sort by expert
+                        score</a>
+                    <a class="border p-3" href="/customer/show_order_suggestions_sortedByPrice/${identity}">sort
+                        by suggested price</a>
+                </div>
+            </div>
+            <div class=" col-12">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
                 <table class="table table-bordered table-striped text-dark text-center">
