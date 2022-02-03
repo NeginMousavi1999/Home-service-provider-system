@@ -80,28 +80,30 @@ public class ExpertController {
     }
 
     @GetMapping("/add_suggestion/{identity}")
-    public String showAddNewSuggestion(HttpServletRequest request, @PathVariable("identity") int identity) {
+    public String showAddNewSuggestion(HttpServletRequest request, @PathVariable("identity") int identity, Model model) {
         HttpSession session = request.getSession();
         session.setAttribute("orderSuggestedIdentity", identity);
+        model.addAttribute("suggestion_request", new SuggestionRequestDto());
         return "expert/add_suggestion";
     }
 
     @PostMapping("/add_new_suggestion")
-    public String addSuggestion(@RequestParam(name = "date") String date,
-                                @RequestParam(name = "suggestedPrice") double suggestedPrice,
-                                @RequestParam(name = "durationOfWork") int durationOfWork,
-                                Model model, HttpServletRequest request) { //TODO must be dto and add validations
+    public String addSuggestion(@ModelAttribute SuggestionRequestDto suggestionRequest, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
+        OrderDto orderDto = null;
         try {
             ExpertDto expertDto = (ExpertDto) session.getAttribute("expertDto");
             int identity = (int) session.getAttribute("orderSuggestedIdentity");
             List<OrderDto> ordersReadyForSuggestion = (List<OrderDto>) session.getAttribute("ordersReadyForSuggestion");
-            OrderDto orderDto = ordersReadyForSuggestion.stream().filter(dto -> dto.getIdentity() == identity)
+            orderDto = ordersReadyForSuggestion.stream().filter(dto -> dto.getIdentity() == identity)
                     .findFirst().orElse(null);
-            expertService.addNewSuggestion(date, suggestedPrice, durationOfWork, orderDto, expertDto);
+            expertService.addNewSuggestion(suggestionRequest.getStartTime(),
+                    suggestionRequest.getSuggestedPrice(), suggestionRequest.getDurationOfWork(), orderDto, expertDto);
             model.addAttribute("succ_massage", "successfuly added");
         } catch (Exception e) {
             model.addAttribute("error_massage", e.getLocalizedMessage());
+            assert orderDto != null;
+            showAddNewSuggestion(request, orderDto.getIdentity(), model);
             return "expert/add_suggestion";
         }
         return showExpertTasks(request, model);

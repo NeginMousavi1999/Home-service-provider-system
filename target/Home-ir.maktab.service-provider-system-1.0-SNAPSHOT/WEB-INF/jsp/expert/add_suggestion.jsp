@@ -41,7 +41,7 @@
             <div class="col-12">
                 <div style="color: green">${succ_massage}</div>
                 <div style="color: red">${error_massage}</div>
-                <form action="/expert/add_new_suggestion" method="post">
+                <form:form action="/expert/add_new_suggestion" method="post" modelAttribute="suggestion_request">
                     <table class="table table-bordered table-striped text-dark text-center">
                         <thead>
                         <tr>
@@ -65,24 +65,24 @@
                         <tr>
                             <td>
                                 <label>
-                                    <input type="date" name="date">
+                                    <form:input path="startTime" type="date" name="date"/>
                                 </label>
                             </td>
                             <td>
                                 <label>
-                                    <input type="number" name="suggestedPrice">
+                                    <form:input path="suggestedPrice" type="number" name="suggestedPrice"/>
                                 </label>
                             </td>
                             <td>
                                 <label>
-                                    <input type="number" name="durationOfWork">
+                                    <form:input path="durationOfWork" type="number" name="durationOfWork"/>
                                 </label>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                     <input type="submit" value="Add my suggestion" class="btn btn-block btn-primary"/>
-                </form>
+                </form:form>
             </div>
         </div>
     </div>

@@ -2,15 +2,20 @@ package ir.maktab.data.dto;
 
 import lombok.Data;
 
-import java.util.Date;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author Negin Mousavi
  */
 @Data
 public class SuggestionRequestDto {
-    private Date registrationDate;
+    @Min(1)
     private double suggestedPrice;
+
+    @Min(1)
     private int durationOfWork;
-    private Date startTime;
+
+    @NotBlank
+    private String startTime;
 }
