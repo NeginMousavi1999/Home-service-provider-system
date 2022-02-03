@@ -236,7 +236,7 @@ public class CustomerController {
     @GetMapping("/accept_suggestion/{identity}")
     public String acceptSuggestion(@PathVariable("identity") int identity, HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        Set<SuggestionDto> suggestions = (Set<SuggestionDto>) session.getAttribute("customer_suggestions");
+        List<SuggestionDto> suggestions = (List<SuggestionDto>) session.getAttribute("customer_suggestions");
         suggestionService.chooseSuggestion(identity, new ArrayList<>(suggestions));
         model.addAttribute("succ_massage", "successfuly added");
         SuggestionDto suggestionDto = suggestions.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
