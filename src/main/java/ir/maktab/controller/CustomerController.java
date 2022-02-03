@@ -6,7 +6,6 @@ import ir.maktab.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -243,11 +242,5 @@ public class CustomerController {
         SuggestionDto suggestionDto = suggestions.stream().filter(order -> order.getIdentity() == identity).findFirst().orElse(null);
         assert suggestionDto != null;
         return showOrderSuggestions(suggestionDto.getOrder().getIdentity(), request, model);
-    }
-
-    @ExceptionHandler(value = BindException.class)
-    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
-        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
-        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
     }
 }

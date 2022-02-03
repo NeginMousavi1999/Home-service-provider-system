@@ -8,7 +8,6 @@ import ir.maktab.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,12 +42,6 @@ public class ManagerController {
         modelAndView.setViewName("login");
         modelAndView.getModelMap().addAttribute("loginData", new LoginDto());
         return modelAndView;
-    }
-
-    @ExceptionHandler(value = BindException.class)
-    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
-        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
-        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
     }
 
     @PostMapping("/doLogin")

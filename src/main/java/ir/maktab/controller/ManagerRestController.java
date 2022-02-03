@@ -7,12 +7,9 @@ import ir.maktab.service.CustomerService;
 import ir.maktab.service.ExpertService;
 import ir.maktab.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,12 +24,6 @@ public class ManagerRestController {
     private final OrderService orderService;
     private final CustomerService customerService;
     private final ExpertService expertService;
-
-    @ExceptionHandler(value = BindException.class)
-    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
-        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
-        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
-    }
 
     @GetMapping(value = "get_customers_services")
     @ResponseBody

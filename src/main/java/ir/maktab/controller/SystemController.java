@@ -13,9 +13,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,12 +34,6 @@ public class SystemController {
     private final CustomerService customerService;
     private final ExpertService expertService;
     private final ModelMapper modelMapper = new ModelMapper();
-
-    @ExceptionHandler(value = BindException.class)
-    public ModelAndView bindExceptionHandler(BindException bindException, HttpServletRequest request) {
-        String lastView = (String) request.getSession().getAttribute(LastViewInterceptor.LAST_VIEW_ATTRIBIUTE);
-        return new ModelAndView(lastView, bindException.getBindingResult().getModel());
-    }
 
     @GetMapping("/")
     public ModelAndView login() {
