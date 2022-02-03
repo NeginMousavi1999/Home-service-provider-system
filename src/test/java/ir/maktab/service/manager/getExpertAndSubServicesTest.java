@@ -28,10 +28,6 @@ public class getExpertAndSubServicesTest {
     void test() {
         Map<ExpertDto, Set<SubServiceDto>> expertAndSubServices = managerService.getExpertAndSubServices(1003);
         Collection<Set<SubServiceDto>> values = expertAndSubServices.values();
-        for (Set<SubServiceDto> subServiceDtos : values) {
-            for (SubServiceDto subServiceDto : subServiceDtos) {
-                System.out.println(subServiceDto.getName());
-            }
-        }
+        values.forEach(subServiceDtos -> subServiceDtos.stream().map(SubServiceDto::getName).forEach(System.out::println));
     }
 }

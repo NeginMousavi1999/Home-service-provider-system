@@ -1,14 +1,14 @@
 package ir.maktab.service.subservice;
 
 import ir.maktab.config.SpringConfig;
+import ir.maktab.data.dto.SubServiceDto;
 import ir.maktab.service.SubServiceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author Negin Mousavi
@@ -23,10 +23,10 @@ public class FindSubServiceByNameTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"Kitchen appliances"})
+    @CsvSource({"Laundry"})
     void givenValidName_WhenFindSubServiceByNameCalls_ThenReturnTrueResponse(String name) {
-/*        SubService result = subServiceService.findSubServiceByName(name);
-        assertNotNull(result);*/
+        SubServiceDto subServiceByName = subServiceService.findSubServiceByName(name);
+        assertNull(subServiceByName);
     }
 
     @ParameterizedTest
