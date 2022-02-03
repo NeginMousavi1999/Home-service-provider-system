@@ -39,7 +39,7 @@ public class SystemController {
         return new ModelAndView(lastView, bindException.getBindingResult().getModel());
     }
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -73,7 +73,7 @@ public class SystemController {
         }
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public ModelAndView register() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("register");

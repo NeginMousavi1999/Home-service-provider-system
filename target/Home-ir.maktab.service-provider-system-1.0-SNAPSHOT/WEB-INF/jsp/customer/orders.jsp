@@ -113,7 +113,8 @@
                                     ${order.address.country}, ${order.address.city}, ${order.address.state}
                             </td>
                             <td>
-                                <a href="/customer/show_order_suggestions_sortedByExpertAndPrice/${order.identity}">click me</a>
+                                <a href="/customer/show_order_suggestions_sortedByExpertAndPrice/${order.identity}">click
+                                    me</a>
                             </td>
                             <td>
                                 <c:if test="${order.orderStatus.toString() eq 'DONE'}">

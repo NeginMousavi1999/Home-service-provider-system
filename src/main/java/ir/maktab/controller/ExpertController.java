@@ -26,12 +26,12 @@ public class ExpertController {
     private final SuggestionService suggestionService;
     private final FeedbackService feedbackService;
 
-    @RequestMapping("/dashboard")
+    @GetMapping("/dashboard")
     public String showDashboard() {
         return "expert/expert_dashboard";
     }
 
-    @RequestMapping("/add_subservice")
+    @GetMapping("/add_subservice")
     public String showAddSubService(HttpServletRequest request, Model model) {
         ExpertDto expertDto = (ExpertDto) request.getSession().getAttribute("expertDto");
         Set<ServiceDto> services = serviceService.getAllServiceIncludingSubService();
@@ -79,7 +79,7 @@ public class ExpertController {
         return "expert/show_order_suggestions";
     }
 
-    @RequestMapping("/add_suggestion/{identity}")
+    @GetMapping("/add_suggestion/{identity}")
     public String showAddNewSuggestion(HttpServletRequest request, @PathVariable("identity") int identity) {
         HttpSession session = request.getSession();
         session.setAttribute("orderSuggestedIdentity", identity);

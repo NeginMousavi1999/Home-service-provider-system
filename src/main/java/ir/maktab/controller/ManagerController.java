@@ -37,7 +37,7 @@ public class ManagerController {
         return "/manager/manager_dashboard";
     }
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("login");
@@ -51,7 +51,7 @@ public class ManagerController {
         return new ModelAndView(lastView, bindException.getBindingResult().getModel());
     }
 
-    @RequestMapping("/doLogin")
+    @PostMapping("/doLogin")
     public String doLogin(@ModelAttribute("loginData") @Validated LoginDto loginDto, Model model) {
         ManagerDto managerDto;
         try {
@@ -77,7 +77,7 @@ public class ManagerController {
         return "manager/search";
     }
 
-    @RequestMapping("/dashboard/confirm/{identity}")
+    @GetMapping("/dashboard/confirm/{identity}")
     public String confirm(@PathVariable("identity") int identity, Model model) {
         try {
             managerService.confirmUser(identity);

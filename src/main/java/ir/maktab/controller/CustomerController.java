@@ -36,7 +36,7 @@ public class CustomerController {
         return "/customer/customer_dashboard";
     }
 
-    @RequestMapping("/change_password")
+    @GetMapping("/change_password")
     public String accessToChangePassword() {
         return "customer/change_password";
     }
@@ -57,7 +57,7 @@ public class CustomerController {
         }
     }
 
-    @RequestMapping("/add_order")
+    @GetMapping("/add_order")
     public ModelAndView showAddNewOrder(ModelAndView modelAndView) {
         Set<ServiceDto> services = serviceService.getAllServiceIncludingSubService();
         modelAndView.setViewName("customer/add_order");
@@ -66,7 +66,7 @@ public class CustomerController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/add_new_order", method = RequestMethod.POST)
+    @PostMapping(value = "/add_new_order")
     public ModelAndView addNewOrder(@Validated @ModelAttribute("order") OrderRequestDto orderRequest, ModelAndView modelAndView,
                                     HttpServletRequest request) {
         try {
