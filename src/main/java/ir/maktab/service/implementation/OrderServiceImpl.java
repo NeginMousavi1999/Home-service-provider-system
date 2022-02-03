@@ -141,7 +141,8 @@ public class OrderServiceImpl implements OrderService {
                     .state(state)
                     .postalCode(postalCode)
                     .build();
-            addressService.save(addressDto);//TODO must be double check by creating teble az avval !!!
+            addressService.save(addressDto);
+            addressDto = addressService.findAddress(country, city, state, postalCode);
         }
         OrderDto orderDto = OrderDto.builder()
                 .address(addressDto)
